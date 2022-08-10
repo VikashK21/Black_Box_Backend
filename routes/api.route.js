@@ -9,4 +9,6 @@ router.get("/", async (req, res, next) => {
 router.post("/signup", Users.signup);
 router.post("/login", Users.login);
 
+//Classes:
+
 module.exports = router;

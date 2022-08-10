@@ -6,7 +6,8 @@ require("dotenv").config();
 // console.log(secrete);
 
 authenticationToken = (data) => {
-  return jwt.sign(data.id, process.env.SECRET_KEY);
+  const result = jwt.sign(`${data.id}`, process.env.SECRET_KEY);
+  return result
 };
 
 authorizationToken = (req, res, next) => {
