@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 app.get("/", async (req, res, next) => {
-  res.send({ message: "Awesome it works 🐻" });
+  res.send({ message: "You are successfully standing on to the root page, please go to /api page to view details." });
 });
 
 app.use("/api", require("./routes/api.route"));
