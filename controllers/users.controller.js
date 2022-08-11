@@ -13,13 +13,14 @@ class User_Ctrl {
 
   login = async (req, res) => {
     try {
+      let token;
       if (req.body.hasOwnProperty("email")) {
         const result = await Users.loginWithEmailPass(
           req.body.email,
           req.body.password
         );
-        const token = await authenticationToken(req.body);
-        res.status(202).cookie("token_key", token).json(result);
+        token = await authenticationToken(req.body);
+        res.status(202).cookie("token_key", token).json(result, token);
       }
     } catch (err) {
       console.log(err);

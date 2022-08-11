@@ -35,6 +35,8 @@ class Users {
       return err.message;
     }
   }
+
+  async 
 }
 
 module.exports = Users;
