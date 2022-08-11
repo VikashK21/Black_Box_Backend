@@ -3,7 +3,6 @@ const prisma = new PrismaClient();
 const bcrypt = require("bcrypt");
 const { authenticationToken } = require("../auth/user.auth");
 const phoneConfig = require("../config/twilio.cofig");
-console.log(phoneConfig.accountSID, phoneConfig.authToken);
 const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
@@ -26,7 +25,6 @@ class Users {
 
   async loginWithEmailPass(email, password) {
     try {
-      console.log(password, email);
       const result = await prisma.users.findUnique({
         where: { email },
       });
@@ -45,27 +43,34 @@ class Users {
     }
   }
 
-  async loginWithPhoneOTP(phone_num) {
+  async loginWithPhoneOTP(body) {
     try {
-      // console.log(phone_num);
-      // const result = await prisma.users.findUnique({
-      //   where: { phone_num },
-      // });
-      // console.log('there is no issue...');
-      // if (!result) {
-      //   console.log("The user does not exits!!");
-      //   return "The user does not exits!!";
-      // }
-      const data = await twilio.verify
-        .services(phoneConfig.serviceID)
-        .verifications.create({
-          to: `+91${phone_num}`,
-          channel: "sms",
-        });
-      console.log(data);
-      return data;
+      const result = await prisma.users.findUnique({
+        where: { phone_num: body.phone_num },
+      });
+      if (!result) {
+        return "The user does not exits!!";
+      }
+      if (body.hasOwnProperty("phone_num") && body.hasOwnProperty("otp")) {
+        const verifying = await twilio.verify
+          .services(phoneConfig.serviceID)
+          .verificationChecks.create({
+            to: `+${body.phone_num}`,
+            code: body.otp,
+          });
+        console.log(verifying, "verifying...");
+        return verifying;
+      } else {
+        const sending = await twilio.verify
+          .services(phoneConfig.serviceID)
+          .verifications.create({
+            to: `+${body.phone_num}`,
+            channel: "sms",
+          });
+        console.log(sending, "creating and seding...");
+        return sending;
+      }
     } catch (err) {
-      console.log("accha to ye hai...");
       return err.message;
     }
   }

@@ -22,9 +22,16 @@ class User_Ctrl {
         }
         res.status(404).send(result);
       } else if (req.body.hasOwnProperty("phone_num")) {
-        const result = await Users.loginWithPhoneOTP(req.body.phone_num);
-        console.log(result);
-        res.json(result);
+        const result = await Users.loginWithPhoneOTP(req.body);
+        if (typeof result === "object") {
+          return res.status(200).json({
+            to: result.to,
+            channel: result.channel,
+            status: result.status,
+            dateCreated: result.dateCreated,
+          });
+        }
+        res.status(404).send(result);
       }
     } catch (err) {
       console.log(err);
