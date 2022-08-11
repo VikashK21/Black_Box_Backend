@@ -13,7 +13,6 @@ class User_Ctrl {
 
   login = async (req, res) => {
     try {
-      console.log('what happened???', req.body);
       if (req.body.hasOwnProperty("email")) {
         const result = await Users.loginWithEmailPass(
           req.body.email,
