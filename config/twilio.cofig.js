@@ -1,5 +1,4 @@
 require('dotenv').config();
-console.log(process.env.SERVICE_ID);
 
 module.exports = {
     serviceID: process.env.SERVICE_ID,

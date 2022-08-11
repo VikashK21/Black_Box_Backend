@@ -1,5 +1,4 @@
 const Users = new (require("../services/users.service"))();
-const { authenticationToken } = require("../auth/user.auth");
 
 class User_Ctrl {
   signup = async (req, res) => {
@@ -13,14 +12,19 @@ class User_Ctrl {
 
   login = async (req, res) => {
     try {
-      let token;
       if (req.body.hasOwnProperty("email")) {
         const result = await Users.loginWithEmailPass(
           req.body.email,
           req.body.password
         );
-        token = await authenticationToken(req.body);
-        res.status(202).cookie("token_key", token).json(result, token);
+        if (typeof result === "object") {
+          return res.status(202).cookie("token_key", result.token).json(result);
+        }
+        res.status(404).send(result);
+      } else if (req.body.hasOwnProperty("phone_num")) {
+        const result = await Users.loginWithPhoneOTP(req.body.phone_num);
+        console.log(result);
+        res.json(result);
       }
     } catch (err) {
       console.log(err);
