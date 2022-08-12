@@ -6,15 +6,15 @@ require("dotenv").config();
 // console.log(secrete);
 
 authenticationToken = (data) => {
-  const result = jwt.sign(`${data.id}`, process.env.SECRET_KEY);
-  return result
+  const result = jwt.sign(`${data.id}`, process.env.SECRET_KEY_TOKEN);
+  return result;
 };
 
 authorizationToken = (req, res, next) => {
   const cookie = req.headers.cookie;
   if (cookie) {
     let token = cookie.split("=")[1];
-    const id = jwt.verify(token, process.env.SECRET_KEY);
+    const id = jwt.verify(token, process.env.SECRET_KEY_TOKEN);
     req.user_id = Number(id);
     next();
   } else {
@@ -22,8 +22,16 @@ authorizationToken = (req, res, next) => {
   }
 };
 
+forLogout = (req, res, next) => {
+  const cookie = req.headers.cookie;
+  if (cookie) {
+    return res.status(406).send("Already logged in with an account!!");
+  }
+  next();
+};
 
 module.exports = {
-    authenticationToken,
-    authorizationToken
-}
+  authenticationToken,
+  authorizationToken,
+  forLogout
+};
