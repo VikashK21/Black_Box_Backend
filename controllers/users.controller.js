@@ -10,6 +10,13 @@ class User_Ctrl {
     }
   };
 
+  logout = async (req, res) => {
+    res
+      .status(200)
+      .clearCookie("token_key")
+      .send("The user is logged out now.");
+  };
+
   login = async (req, res) => {
     try {
       if (req.body.hasOwnProperty("email")) {
