@@ -55,7 +55,7 @@ class Users {
         const verifying = await twilio.verify
           .services(phoneConfig.serviceID)
           .verificationChecks.create({
-            to: `+${body.phone_num}`,
+            to: body.phone_num,
             code: body.otp,
           });
         console.log(verifying, "verifying...");
@@ -64,7 +64,7 @@ class Users {
         const sending = await twilio.verify
           .services(phoneConfig.serviceID)
           .verifications.create({
-            to: `+${body.phone_num}`,
+            to: body.phone_num,
             channel: "sms",
           });
         console.log(sending, "creating and seding...");
