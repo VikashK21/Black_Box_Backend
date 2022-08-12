@@ -1,4 +1,5 @@
 require('dotenv').config();
+// console.log(process.env.TWILIO_ACCOUTN_SID);
 
 module.exports = {
     serviceID: process.env.TWILIO_SERVICE_ID,
