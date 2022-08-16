@@ -33,5 +33,5 @@ forLogout = (req, res, next) => {
 module.exports = {
   authenticationToken,
   authorizationToken,
-  forLogout
+  forLogout,
 };
