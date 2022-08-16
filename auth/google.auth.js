@@ -11,18 +11,18 @@ passport.use(
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
-      console.log(profile, ">>>", done);
+      // console.log(profile, ">>>", done);
       return done(null, profile);
     }
   )
 );
 
 passport.serializeUser((user, done) => {
-  console.log(user);
+  // console.log(user);
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log(user);
+  // console.log(user);
   done(null, user);
 });
