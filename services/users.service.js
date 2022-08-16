@@ -67,7 +67,7 @@ class Users {
             code: body.otp,
           });
         const token = await authenticationToken(result);
-        console.log(verifying, "verifying...");
+        // console.log(verifying, "verifying...");
         return (verifying["token"] = token);
       } else {
         const sending = await twilio.verify
@@ -76,7 +76,7 @@ class Users {
             to: `+${body.phone_num}`,
             channel: "sms",
           });
-        console.log(sending, "creating and seding...");
+        // console.log(sending, "creating and seding...");
         return sending;
       }
     } catch (err) {
