@@ -6,13 +6,21 @@ const phoneConfig = require("../config/twilio.cofig");
 const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
+  async googleSignup() {}
+
   async signup(data) {
     try {
+      console.log(data, 'data');
       const result = await prisma.users.findUnique({
         where: { email: data.email },
       });
       if (result) {
-        return "The user already exits!!";
+        if (data.hasOwnProperty("provider")) {
+          return this.loginWithEmailPass(data.email, data.password);
+        }
+        else {
+          return "The user already exits!!";
+        }
       }
       data.password = await bcrypt.hash(data.password, 12);
       return await prisma.users.create({
@@ -58,8 +66,9 @@ class Users {
             to: `+${body.phone_num}`,
             code: body.otp,
           });
+        const token = await authenticationToken(result);
         console.log(verifying, "verifying...");
-        return verifying;
+        return (verifying["token"] = token);
       } else {
         const sending = await twilio.verify
           .services(phoneConfig.serviceID)
