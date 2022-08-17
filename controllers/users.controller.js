@@ -23,7 +23,12 @@ class User_Ctrl {
   };
 
   logout = async (req, res) => {
-    req.logout();
+    try {
+      req.logout();
+      console.log("print");
+    } catch (error) {
+      //only for the passport was...
+    }
     res
       .status(200)
       .clearCookie("token_key")
@@ -44,8 +49,11 @@ class User_Ctrl {
       } else if (req.body.hasOwnProperty("phone_num")) {
         // console.log("The phone number login...");
         const result = await Users.loginWithPhoneOTP(req.body);
-        console.log(result, "result");
+        // console.log(result, "result");
         if (typeof result === "object") {
+          if (result.hasOwnProperty("token")) {
+            res.cookie("token_key", result.token);
+          }
           return res.status(200).json({
             to: result.to,
             channel: result.channel,

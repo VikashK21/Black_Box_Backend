@@ -23,9 +23,12 @@ authorizationToken = (req, res, next) => {
 };
 
 forLogout = (req, res, next) => {
-  const cookie = req.headers.cookie;
+  let cookie = req.headers.cookie;
   if (cookie) {
-    return res.status(406).send("Already logged in with an account!!");
+    cookie = cookie.split("=");
+    if (cookie[cookie.length - 2].includes("token_key")) {
+      return res.status(406).send("Already logged in with an account!!");
+    }
   }
   next();
 };

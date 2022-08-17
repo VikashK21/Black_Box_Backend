@@ -10,15 +10,14 @@ class Users {
 
   async signup(data) {
     try {
-      console.log(data, 'data');
+      console.log(data, "data");
       const result = await prisma.users.findUnique({
         where: { email: data.email },
       });
       if (result) {
         if (data.hasOwnProperty("provider")) {
           return this.loginWithEmailPass(data.email, data.password);
-        }
-        else {
+        } else {
           return "The user already exits!!";
         }
       }
@@ -66,9 +65,12 @@ class Users {
             to: `+${body.phone_num}`,
             code: body.otp,
           });
-        const token = await authenticationToken(result);
+        if (verifying.status === "approved") {
+          const token = await authenticationToken(result);
+          return { ...verifying, token };
+        }
+        return 'Something went wrong, please try again.'
         // console.log(verifying, "verifying...");
-        return (verifying["token"] = token);
       } else {
         const sending = await twilio.verify
           .services(phoneConfig.serviceID)
