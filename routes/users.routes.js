@@ -7,15 +7,17 @@ const passport = require("passport");
 router.get("/", async (req, res, next) => {
   res.send({
     message: "Ok api is working 🚀",
-    login: "https://black-box-backend.herokuapp.com/api/login",
-    signup: "https://black-box-backend.herokuapp.com/api/signup",
-    logout: "https://black-box-backend.herokuapp.com/api/logout",
+    login: "/api/login",
+    signup: "/api/signup",
+    logout: "/api/logout",
+    signup_google: "/api/signup/google",
+    signup_facebook: "/api/signup/facebook",
   });
 });
 
 //Users:
-router.get('/profile', authorizationToken, Users.profile)
-router.patch('/profile', authorizationToken, Users.editProfile)
+router.get("/profile", authorizationToken, Users.profile);
+router.patch("/profile", authorizationToken, Users.editProfile);
 router.post("/signup", forLogout, Users.signup);
 router.post("/login", forLogout, Users.login);
 router.post("/logout", Users.logout);
@@ -49,6 +51,4 @@ router.get("/failure", (req, res) => {
   res.send("Failed to authenticate..");
 });
 
-
 module.exports = router;
-
