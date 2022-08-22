@@ -35,7 +35,8 @@ app.get("/", async (req, res, next) => {
   );
 });
 
-app.use("/api", require("./routes/api.route"));
+app.use("/api", require("./routes/users.routes"));
+app.use("/api", require("./routes/courses.routes"));
 
 app.use((req, res, next) => {
   next(createError.NotFound());
