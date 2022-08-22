@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "build": "prisma generate"
+    "build": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
