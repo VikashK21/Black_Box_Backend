@@ -1,12 +1,18 @@
+const router = require("express").Router();
+const Course_inf = new (require("../controllers/courses.controller"))();
 const { authorizationToken } = require("../auth/user.auth");
+
 const {
   uploadVideoFile,
   oAuth,
   uploadVideoToYouTube,
 } = require("../utils/youtube");
-const router = require("express").Router();
-const Course_inf = new (require("../controllers/courses.controller"))();
+const {
+  uploaddImgFile,
+  uploaddImgToCloudinary,
+} = require("../utils/cloudinary");
 const open = require("open");
+
 //Classes:
 router.post("/host/course", authorizationToken, Course_inf.hostCourse);
 router.post("/host/structure", authorizationToken, Course_inf.courseStructure);
@@ -51,6 +57,16 @@ router.get("/oauth2callback", (req, res) => {
     oAuth.setCredentials(token);
     uploadVideoToYouTube(filename, title, description);
   });
+});
+
+router.post("/imgupload", uploaddImgFile, async (req, res) => {
+  try {
+    console.log(req.file.path);
+    const result = await uploaddImgToCloudinary(req.file.path);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json(err.message);
+  }
 });
 
 module.exports = router;

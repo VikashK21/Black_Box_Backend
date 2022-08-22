@@ -14,7 +14,7 @@ const oAuth = youtube.authenticate({
 
 // 2nd process..
 const storage = multer.diskStorage({
-  destination: "~/Desktop/BASK/black_box/videos",
+  destination: "./videos",
   filename(req, file, cb) {
     const newFileName = `${uuid()}-${file.originalname}`;
     cb(null, newFileName);
@@ -37,7 +37,7 @@ const uploadVideoToYouTube = (filename, title, description) => {
       part: "snippet,status",
       media: {
         body: fs.createReadStream(
-          "~/Desktop/BASK/black_box/videos/" + filename
+          "./videos/" + filename
         ),
       },
     },
