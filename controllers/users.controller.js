@@ -1,6 +1,33 @@
 const Users = new (require("../services/users.service"))();
 
 class User_Ctrl {
+  profile = async (req, res) => {
+    try {
+      const result = await Users.profile(req.user_id);
+      if (typeof result === "object") {
+        return res.status(200).json(result);
+      }
+      res.status(400).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
+  editProfile = async (req, res) => {
+    try {
+      if (
+        req.body.hasOwnProperty("about") ||
+        req.body.hasOwnProperty("phone_num") ||
+        req.body.hasOwnProperty("img_thumbnail")
+      ) {
+        const result = await Users.editProfile(req.body, req.user_id);
+        return res.status(202).json(result);
+      }
+      res.status(406).send("Cannot edit the credential/s directly!!");
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
   signup = async (req, res) => {
     try {
       let data = req.body;
@@ -16,7 +43,10 @@ class User_Ctrl {
         };
       }
       const result = await Users.signup(data);
-      res.status(201).json(result);
+      if (typeof result === "object") {
+        return res.status(201).json(result);
+      }
+      res.status(404).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }
