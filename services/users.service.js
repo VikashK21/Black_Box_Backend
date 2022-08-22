@@ -6,7 +6,26 @@ const phoneConfig = require("../config/twilio.cofig");
 const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
-  async googleSignup() {}
+  async profile(id) {
+    try {
+      const result = await prisma.users.findUnique({ where: { id } });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async editProfile(data, id) {
+    try {
+      const result = await prisma.users.update({
+        where: { id },
+        data,
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
 
   async signup(data) {
     try {
@@ -69,7 +88,7 @@ class Users {
           const token = await authenticationToken(result);
           return { ...verifying, token };
         }
-        return 'Something went wrong, please try again.'
+        return "Something went wrong, please try again.";
         // console.log(verifying, "verifying...");
       } else {
         const sending = await twilio.verify
