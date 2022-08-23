@@ -1,3 +1,6 @@
+const { oAuth } = require("../utils/youtube");
+const open = require("open");
+
 const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
 
@@ -8,43 +11,7 @@ class Course_inf {
       if (typeof result === "object") {
         return res.status(201).json(result);
       }
-      res.status(404).json(result);
-    } catch (err) {
-      res.status(400).json(err.message);
-    }
-  };
-
-  courseStructure = async (req, res) => {
-    try {
-      const result = await Courses.courseStructure(req.body);
-      if (typeof result === "object") {
-        return res.status(201).json(result);
-      }
-      res.status(404).json(result);
-    } catch (err) {
-      res.status(400).json(err.message);
-    }
-  };
-
-  courseMethodology = async (req, res) => {
-    try {
-      const result = await Courses.courseMethodology(req.body);
-      if (typeof result === "object") {
-        return res.status(201).json(result);
-      }
-      res.status(404).json(result);
-    } catch (err) {
-      return res.status(400).json(err.message);
-    }
-  };
-
-  courseContent = async (req, res) => {
-    try {
-      const result = await Courses.courseContent(req.body);
-      if (typeof result === "object") {
-        return res.status(201).json(result);
-      }
-      res.status(404).json(result);
+      res.status(400).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }
@@ -53,26 +20,32 @@ class Course_inf {
   course_Classes = async (req, res) => {
     try {
       const result = await Courses.course_Classes(req.body);
-      /// don't forget about the link of the classes....
+      /// only the link part...the class (google-meet)
       if (typeof result === "object") {
         return res.status(201).json(result);
       }
-      res.status(404).json(result);
+      res.status(400).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }
   };
 
-  course_Video = async (req, res) => {
-    try {
-      /// remember before pushing into the database we need the link....
-      const result = await Courses.course_Video(req.body);
-      if (typeof result === "object") {
-        return res.status(201).json(result);
-      }
-      res.status(404).json(result);
-    } catch (err) {
-      res.status(400).json(err.message);
+  uploadVideo = async (req, res) => {
+    console.log(req.file, "files");
+    if (req.file) {
+      const filename = req.file.filename;
+      const { title, description } = req.body;
+      open(
+        oAuth.generateAuthUrl({
+          access_type: "offline",
+          scope: "https://www.googleapis.com/auth/youtube.upload", // https://www.googleapis.com/auth/userinfo.profile
+          state: JSON.stringify({
+            filename,
+            title,
+            description,
+          }),
+        })
+      );
     }
   };
 }

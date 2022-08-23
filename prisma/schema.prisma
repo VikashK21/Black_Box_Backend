@@ -49,19 +49,22 @@ model Users {
 model Course {
   id              Int            @id @default(autoincrement())
   name            String
-  fee             String
+  fee             String?
   description     String
   host_details    Users          @relation(fields: [host], references: [id])
   host            Int            @unique
   max_paticipants Int
   imgages         String[]
-  video           String?
   hosted          Boolean        @default(false)
+  duration_type   String
   Classes         Classes[]
-  Structure       Structure[]
+  link            String?
+  class_structure String
+  structure       Json?
   Vid_Classes     Vid_Classes[]
-  Methodology     Methodology[]
-  Content         Content[]
+  methodology     Json?
+  content         Json?
+  requirements    Json?
   Participants    Participants[]
   Gift            Gift?
   Suggest         Suggest?
@@ -69,39 +72,17 @@ model Course {
 
 model Classes {
   id          Int     @id @default(autoincrement())
-  name        String
+  title       String
   date        String
   duration    String
   time        String
   description String
-  link        String
   course      Course  @relation(fields: [course_id], references: [id])
   course_id   Int     @unique
   fee         String?
 }
 
-model Structure {
-  id        Int    @id @default(autoincrement())
-  name      String
-  course    Course @relation(fields: [course_id], references: [id])
-  course_id Int
-}
-
 model Vid_Classes {
-  id        Int    @id @default(autoincrement())
-  name      String
-  course    Course @relation(fields: [course_id], references: [id])
-  course_id Int
-}
-
-model Methodology {
-  id        Int    @id @default(autoincrement())
-  name      String
-  course    Course @relation(fields: [course_id], references: [id])
-  course_id Int
-}
-
-model Content {
   id        Int    @id @default(autoincrement())
   name      String
   course    Course @relation(fields: [course_id], references: [id])

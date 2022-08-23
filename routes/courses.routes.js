@@ -15,37 +15,16 @@ const open = require("open");
 
 //Classes:
 router.post("/host/course", authorizationToken, Course_inf.hostCourse);
-router.post("/host/structure", authorizationToken, Course_inf.courseStructure);
-router.post(
-  "/host/methodology",
-  authorizationToken,
-  Course_inf.courseMethodology
-);
-router.post("/host/content", authorizationToken, Course_inf.courseContent);
 //the video stuff
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
 
-router.post("/upload", uploadVideoFile, (req, res) => {
-  console.log(req.file, "files");
-  if (req.file) {
-    const filename = req.file.filename;
-    const { title, description } = req.body;
-    open(
-      oAuth.generateAuthUrl({
-        access_type: "offline",
-        scope: "https://www.googleapis.com/auth/youtube.upload", // https://www.googleapis.com/auth/userinfo.profile
-        state: JSON.stringify({
-          filename,
-          title,
-          description,
-        }),
-      })
-    );
-  }
-});
+router.post("/upload", uploadVideoFile, Course_inf.uploadVideo);
 
 router.get("/oauth2callback", (req, res) => {
   console.log("google");
+  res.send('<h4 align="center">Successfully video uploaded!! Please go back to continue procedure : )</h4>')
+  console.log(req.query.state, "state");
+  console.log(req.query.code, "token");
   // res.redirect("http://localhost:3000/success");
   const { filename, title, description } = JSON.parse(req.query.state);
   console.log(req.query.state, "accha");
@@ -73,4 +52,3 @@ router.post("/imgupload", uploaddImgFile, async (req, res) => {
 //
 
 module.exports = router;
-

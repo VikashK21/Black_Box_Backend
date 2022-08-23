@@ -44,9 +44,10 @@ class User_Ctrl {
       }
       const result = await Users.signup(data);
       if (typeof result === "object") {
+        console.log(result, 'vikash');
         return res.status(201).json(result);
       }
-      res.status(404).json(result);
+      res.status(400).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }
@@ -75,7 +76,7 @@ class User_Ctrl {
         if (typeof result === "object") {
           return res.status(202).cookie("token_key", result.token).json(result);
         }
-        res.status(404).send(result);
+        res.status(400).send(result);
       } else if (req.body.hasOwnProperty("phone_num")) {
         // console.log("The phone number login...");
         const result = await Users.loginWithPhoneOTP(req.body);
@@ -92,7 +93,7 @@ class User_Ctrl {
             token: result.token || null,
           });
         }
-        res.status(404).send(result);
+        res.status(400).send(result);
       }
     } catch (err) {
       console.log(err);

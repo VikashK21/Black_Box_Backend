@@ -28,6 +28,7 @@ class Users {
   }
 
   async signup(data) {
+    // manual registration worked : )
     try {
       console.log(data, "data");
       const result = await prisma.users.findUnique({
@@ -37,6 +38,7 @@ class Users {
         if (data.hasOwnProperty("provider")) {
           return this.loginWithEmailPass(data.email, data.password);
         } else {
+          console.log("okay the aready there...");
           return "The user already exits!!";
         }
       }
@@ -45,11 +47,13 @@ class Users {
         data,
       });
     } catch (err) {
+      console.log(err.message);
       return err.message;
     }
   }
 
   async loginWithEmailPass(email, password) {
+    // manual login worked : )
     try {
       const result = await prisma.users.findUnique({
         where: { email },

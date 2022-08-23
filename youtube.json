@@ -1,0 +1,42 @@
+{
+    "kind": "youtube#video",
+    "etag": "brk7g2Dbd6RWIRvrj0eEywxLLh4",
+    "id": "6srGUVpgVYI",
+    "snippet": {
+        "publishedAt": "2022-08-23T07:24:53Z",
+        "channelId": "UCiBfEIx2KaRnf6oKvl3W5ew",
+        "title": "okay",
+        "description": "ajaa dekh le",
+        "thumbnails": {
+            "default": {
+                "url": "https://i.ytimg.com/vi/6srGUVpgVYI/default.jpg",
+                "width": 120,
+                "height": 90
+            },
+            "medium": {
+                "url": "https://i.ytimg.com/vi/6srGUVpgVYI/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+            },
+            "high": {
+                "url": "https://i.ytimg.com/vi/6srGUVpgVYI/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+            }
+        },
+        "channelTitle": "Black Box",
+        "categoryId": "22",
+        "liveBroadcastContent": "none",
+        "localized": {
+            "title": "okay",
+            "description": "ajaa dekh le"
+        }
+    },
+    "status": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "unlisted",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true
+    }
+}

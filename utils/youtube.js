@@ -36,14 +36,13 @@ const uploadVideoToYouTube = (filename, title, description) => {
       },
       part: "snippet,status",
       media: {
-        body: fs.createReadStream(
-          "./videos/" + filename
-        ),
+        body: fs.createReadStream("./videos/" + filename),
       },
     },
     (err, data) => {
       if (err) throw err;
-      console.log(data, "done...");
+      console.log(data.data, "done...");
+      fs.writeFileSync("./youtube.json", JSON.stringify(data.data, null, 4));
       process.exit();
     }
   );

@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const fs = require("fs");
 
 class Courses_Classes {
   async hostCourse(data) {
@@ -57,7 +58,16 @@ class Courses_Classes {
     }
   }
 
-  async course_Video(data) {}
+  async course_Video(course_id) {
+    try {
+      const name = fs.readFileSync("/youtube.json", "utf-8");
+      const result = await prisma.vid_Classes.create({
+        data: { name, course_id },
+      });
+    } catch (err) {
+      return err.message;
+    }
+  }
 }
 
 module.exports = Courses_Classes;
