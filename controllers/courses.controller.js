@@ -1,4 +1,4 @@
-const { oAuth } = require("../utils/youtube");
+const { oAuth, uploadVideoToYouTube } = require("../utils/youtube");
 const open = require("open");
 
 const Courses = new (require("../services/courses.service"))();
@@ -7,7 +7,7 @@ const Courses = new (require("../services/courses.service"))();
 class Course_inf {
   hostCourse = async (req, res) => {
     try {
-      const result = await Courses.hostCourse(req.body);
+      const result = await Courses.hostCourse(req.body, req.user_id);
       if (typeof result === "object") {
         return res.status(201).json(result);
       }
@@ -20,7 +20,6 @@ class Course_inf {
   course_Classes = async (req, res) => {
     try {
       const result = await Courses.course_Classes(req.body);
-      /// only the link part...the class (google-meet)
       if (typeof result === "object") {
         return res.status(201).json(result);
       }
@@ -47,6 +46,26 @@ class Course_inf {
         })
       );
     }
+  };
+
+  uploadVideoWithAuth = (req, res) => {
+    console.log("google");
+    res.send(
+      '<h4 align="center">Successfully video uploaded!! Please go back to continue procedure : )</h4>'
+    );
+    console.log(req.query.state, "state");
+    console.log(req.query.code, "token");
+    // res.redirect("http://localhost:3000/success");
+    const { filename, title, description } = JSON.parse(req.query.state);
+    console.log(req.query.state, "accha");
+    console.log(req.query.code, "dekha maine");
+
+    oAuth.getToken(req.query.code, (err, token) => {
+      if (err) throw err;
+      console.log(token, "from get token...");
+      oAuth.setCredentials(token);
+      uploadVideoToYouTube(filename, title, description);
+    });
   };
 }
 

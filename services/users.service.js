@@ -59,6 +59,7 @@ class Users {
         where: { email },
       });
       if (!result) {
+        console.log(result);
         return "The user does not exits!!";
       }
       password = await bcrypt.compare(password, result.password);
@@ -66,6 +67,7 @@ class Users {
         const token = await authenticationToken(result);
         return { token, result };
       } else if (!password) {
+        console.log(password);
         return "The password is invalid!!";
       }
     } catch (err) {

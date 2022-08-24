@@ -48,18 +48,18 @@ model Users {
 
 model Course {
   id              Int            @id @default(autoincrement())
-  name            String
-  fee             String?
+  title           String
+  price           String?
   description     String
   host_details    Users          @relation(fields: [host], references: [id])
   host            Int            @unique
-  max_paticipants Int
+  max_paticipants Int //
   imgages         String[]
   hosted          Boolean        @default(false)
-  duration_type   String
+  duration_type   String //
   Classes         Classes[]
   link            String?
-  class_structure String
+  class_structure String //
   structure       Json?
   Vid_Classes     Vid_Classes[]
   methodology     Json?
