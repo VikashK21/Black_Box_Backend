@@ -11,20 +11,20 @@ datasource db {
 }
 
 model Users {
-  id            Int           @id @default(autoincrement())
-  provider      String        @default("email/phone")
+  id            Int            @id @default(autoincrement())
+  provider      String         @default("email/phone")
   img_thumbnail String?
   first_name    String
   last_name     String
-  email         String        @unique
-  phone_num     String?       @unique
+  email         String         @unique
+  phone_num     String?        @unique
   password      String
   about         String?
-  admin         Boolean       @default(false)
-  created_at    DateTime      @default(now())
+  admin         Boolean        @default(false)
+  created_at    DateTime       @default(now())
   // program       Program[]
-  Course        Course?
-  Participants  Participants?
+  Course        Course[]
+  Participants  Participants[]
   Gift          Gift?
   Suggest       Suggest?
 }
@@ -52,9 +52,9 @@ model Course {
   price           String?
   description     String
   host_details    Users          @relation(fields: [host], references: [id])
-  host            Int            @unique
+  host            Int
   max_paticipants Int //
-  imgages         String[]
+  images          String[]
   hosted          Boolean        @default(false)
   duration_type   String //
   Classes         Classes[]
@@ -66,8 +66,8 @@ model Course {
   content         Json?
   requirements    Json?
   Participants    Participants[]
-  Gift            Gift?
-  Suggest         Suggest?
+  Gift            Gift[]
+  Suggest         Suggest[]
 }
 
 model Classes {
@@ -78,7 +78,7 @@ model Classes {
   time        String
   description String
   course      Course  @relation(fields: [course_id], references: [id])
-  course_id   Int     @unique
+  course_id   Int
   fee         String?
 }
 
@@ -94,7 +94,7 @@ model Participants {
   course         Course @relation(fields: [course_id], references: [id])
   course_id      Int
   participant    Users  @relation(fields: [participant_id], references: [id])
-  participant_id Int    @unique
+  participant_id Int
 }
 
 model Gift {
@@ -102,7 +102,7 @@ model Gift {
   gifted    Users  @relation(fields: [email_id], references: [email])
   email_id  String @unique
   course    Course @relation(fields: [course_id], references: [id])
-  course_id Int    @unique
+  course_id Int
 }
 
 model Suggest {
@@ -110,5 +110,5 @@ model Suggest {
   suggested Users  @relation(fields: [email_id], references: [email])
   email_id  String @unique
   course    Course @relation(fields: [course_id], references: [id])
-  course_id Int    @unique
+  course_id Int
 }

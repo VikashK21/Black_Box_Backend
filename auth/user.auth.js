@@ -11,10 +11,14 @@ authenticationToken = (data) => {
 };
 
 authorizationToken = (req, res, next) => {
-  const cookie = req.headers.cookie;
+  console.log(req.headers);
+  const cookie = req.headers.authorization;
+  console.log(cookie, 'cookie');
   if (cookie) {
-    let token = cookie.split("=")[1];
+    let token = cookie.split(" ")[1];
+    console.log(token, 'token');
     const id = jwt.verify(token, process.env.SECRET_KEY_TOKEN);
+    console.log(id, 'id');
     req.user_id = Number(id);
     next();
   } else {
