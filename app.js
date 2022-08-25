@@ -26,13 +26,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/", async (req, res, next) => {
-  // res.send({
-  //   message:
-  //     "You are successfully standing on to the root page, please go to /api page to view details.",
-  // });
-  res.send(
-    '<a href="http://localhost:3001/api/signup/google">Authenticate with Google</a>'
-  );
+  res.send({
+    message:
+      "You are successfully standing on to the root page, please go to /api page to view details.",
+  });
+  // res.send(
+  //   '<a href="http://localhost:3001/api/signup/google">Authenticate with Google</a>'
+  // );
 });
 
 app.use("/api", require("./routes/users.routes"));
