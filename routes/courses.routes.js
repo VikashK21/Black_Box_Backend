@@ -13,8 +13,12 @@ const {
 } = require("../utils/cloudinary");
 const open = require("open");
 
-//Classes:
+//Courses with Classes:
 router.post("/host/course", authorizationToken, Course_inf.hostCourse);
+router.get("/courses", Course_inf.getAllCourses);
+router.get("/courses/:id", Course_inf.getCourseById);
+router.patch("/courses/:id", authorizationToken, Course_inf.editCourseById);
+
 //the video stuff
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
 

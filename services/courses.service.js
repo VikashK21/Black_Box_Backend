@@ -3,6 +3,45 @@ const prisma = new PrismaClient();
 const fs = require("fs");
 
 class Courses_Classes {
+  async editCourseById(id, data, host) {
+    try {
+      const result = await prisma.course.update({ where: { id, host }, data });
+      return result;
+    } catch (err) {
+      console.log(err.message, "the editCourse by id");
+      return err.message;
+    }
+  }
+
+  async courseById(id) {
+    try {
+      const result = await prisma.course.findUnique({
+        where: { id },
+        include: { host_details: true, Classes: true, Vid_Classes: true },
+      });
+      return result;
+    } catch (err) {
+      console.log(err.message, "id by courses");
+      return err.message;
+    }
+  }
+
+  async allCourses() {
+    try {
+      const result = await prisma.course.findMany({
+        include: {
+          host_details: true,
+          Classes: true,
+          Vid_Classes: true,
+        },
+      });
+      return result;
+    } catch (err) {
+      console.log(err.message, "all courses");
+      return err.message;
+    }
+  }
+
   //working fine : )
   async hostCourse(data, id) {
     data = {
