@@ -50,9 +50,6 @@ class Course_inf {
 
   uploadVideoWithAuth = (req, res) => {
     console.log("google");
-    res.send(
-      '<h4 align="center">Successfully video uploaded!! Please go back to continue procedure : )</h4>'
-    );
     console.log(req.query.state, "state");
     console.log(req.query.code, "token");
     // res.redirect("http://localhost:3000/success");
@@ -66,6 +63,9 @@ class Course_inf {
       oAuth.setCredentials(token);
       uploadVideoToYouTube(filename, title, description);
     });
+    res.send(
+      '<h4 align="center">Successfully video uploaded!! Please go back to continue procedure : )</h4>'
+    );
   };
 }
 
