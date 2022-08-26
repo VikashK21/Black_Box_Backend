@@ -13,6 +13,18 @@ const {
 } = require("../utils/cloudinary");
 const open = require("open");
 
+router.get("/course", (req, res) => {
+  res.send({
+    hostCourse: "/api/host/course",
+    getAllCourses: "/api/courses",
+    getCourseById: "/api/courses/:id",
+    editCourseById: "/api/courses/:id",
+    course_Classes: "/api/host/classes",
+    uploadVideoFile: "/api/upload",
+    uploaddImgFile: "/api/imgupload",
+  });
+});
+
 //Courses with Classes:
 router.post("/host/course", authorizationToken, Course_inf.hostCourse);
 router.get("/courses", Course_inf.getAllCourses);
