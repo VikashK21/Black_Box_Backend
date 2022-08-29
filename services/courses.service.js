@@ -1,6 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const fs = require("fs");
+const fs2 = require('fs-extra')
 
 // const date = new Date().getTime();
 // const date = new Date().getMonth();
@@ -181,7 +182,7 @@ class Courses_Classes {
       });
       console.log(result, "course data");
       await this.course_Video(result.id);
-      return { id: 5 };
+      return { id: result.id };
     } catch (err) {
       console.log(err.message, "the course erroro");
       return err.message;
@@ -209,6 +210,7 @@ class Courses_Classes {
       await prisma.vid_Classes.create({
         data: { name: name.id, course_id },
       });
+      fs2.removeSync('./videos')
       fs.writeFileSync("./youtube.json", JSON.stringify({ id: null }, null, 4));
     } catch (err) {
       console.log(err.message);

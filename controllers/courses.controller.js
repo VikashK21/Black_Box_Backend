@@ -80,6 +80,7 @@ class Course_inf {
   };
   hostCourse = async (req, res) => {
     try {
+      console.log(req.body, 'the body');
       const result = await Courses.hostCourse(req.body, req.user_id);
       if (typeof result === "object") {
         return res.status(201).json(result);
