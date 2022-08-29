@@ -22,32 +22,15 @@ model Users {
   about         String?
   admin         Boolean        @default(false)
   created_at    DateTime       @default(now())
-  // program       Program[]
   Course        Course[]
   Participants  Participants[]
-  Gift          Gift?
-  Suggest       Suggest?
+  Gift          Gift[]
+  Suggest       Suggest[]
 }
-
-// model Program {
-//   id               Int    @id @default(autoincrement())
-//   host_details     Users  @relation(fields: [host], references: [id])
-//   host             Int    @unique
-//   participants     Json?
-//   classes          Json?
-//   gifted           Json?
-//   suggested        Json?
-//   title            String
-//   duration_type    String
-//   duration         String
-//   timings          String
-//   course_structure Json
-//   thumbnail        String
-//   fee              Json
-// }
 
 model Course {
   id              Int            @id @default(autoincrement())
+  completion      Boolean        @default(false)
   title           String
   price           String?
   description     String
@@ -73,9 +56,10 @@ model Course {
 model Classes {
   id          Int     @id @default(autoincrement())
   title       String
-  date        String
+  date        String ///*I have to get the date time attached in formal dates
+  over        Boolean @default(false)
   duration    String
-  time        String
+  time        String ///*Then this field should not be there
   description String
   course      Course  @relation(fields: [course_id], references: [id])
   course_id   Int
@@ -89,26 +73,33 @@ model Vid_Classes {
   course_id Int
 }
 
+//A user will only be part of participant when paid is successfully verified.
 model Participants {
-  id             Int    @id @default(autoincrement())
-  course         Course @relation(fields: [course_id], references: [id])
-  course_id      Int
-  participant    Users  @relation(fields: [participant_id], references: [id])
-  participant_id Int
+  id              Int       @id @default(autoincrement())
+  course          Course    @relation(fields: [course_id], references: [id])
+  course_id       Int
+  participant     Users     @relation(fields: [participant_id], references: [id])
+  participant_id  Int
+  suggested_parti Suggest[]
+  gifted_parti    Gift[]
 }
 
 model Gift {
-  id        Int    @id @default(autoincrement())
-  gifted    Users  @relation(fields: [email_id], references: [email])
-  email_id  String @unique
-  course    Course @relation(fields: [course_id], references: [id])
-  course_id Int
+  id           Int          @id @default(autoincrement())
+  gifted_by    Int
+  gifted       Users        @relation(fields: [email_id], references: [email])
+  email_id     String
+  course       Course       @relation(fields: [course_id], references: [id])
+  course_id    Int
+  paticipant_d Participants @relation(fields: [id], references: [id])
 }
 
 model Suggest {
-  id        Int    @id @default(autoincrement())
-  suggested Users  @relation(fields: [email_id], references: [email])
-  email_id  String @unique
-  course    Course @relation(fields: [course_id], references: [id])
-  course_id Int
+  id             Int          @id @default(autoincrement())
+  suggested_by   Int
+  suggested      Users        @relation(fields: [email_id], references: [email])
+  email_id       String
+  course         Course       @relation(fields: [course_id], references: [id])
+  course_id      Int
+  approved_parti Participants @relation(fields: [id], references: [id])
 }

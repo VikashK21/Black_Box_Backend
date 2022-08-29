@@ -5,6 +5,51 @@ const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
 
 class Course_inf {
+  addToSuggested = async (req, res) => {
+    try {
+      const result = await Courses.addSuggested(
+        req.user_id,
+        req.body.email,
+        req.body.course_id
+      );
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+  addToGifted = async (req, res) => {
+    try {
+      const result = await Courses.addToGifted(
+        req.user_id,
+        req.body.email,
+        req.body.course_id
+      );
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
+  addParticipant = async (req, res) => {
+    try {
+      const result = await Courses.addParticipants(
+        req.user_id,
+        Number(req.params.courseID)
+      );
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
+  getClassLink = async (req, res) => {
+    try {
+      const result = await Courses.ClassLink(req.user_id);
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
   editCourseById = async (req, res) => {
     try {
       const result = await Courses.editCourseById(

@@ -31,6 +31,11 @@ router.get("/courses", Course_inf.getAllCourses);
 router.get("/courses/:id", Course_inf.getCourseById);
 router.patch("/courses/:id", authorizationToken, Course_inf.editCourseById);
 
+router.post("/participant/:courseID", authorizationToken, Course_inf.addParticipant);
+router.get("/classlink", authorizationToken, Course_inf.getClassLink);
+router.post("/gift", authorizationToken, Course_inf.addToGifted);
+router.post("/suggest", authorizationToken, Course_inf.addToSuggested);
+
 //the video stuff
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
 
