@@ -31,7 +31,12 @@ router.get("/courses", Course_inf.getAllCourses);
 router.get("/courses/:id", Course_inf.getCourseById);
 router.patch("/courses/:id", authorizationToken, Course_inf.editCourseById);
 
-router.post("/participant/:courseID", authorizationToken, Course_inf.addParticipant);
+router.post(
+  "/participant/:courseID",
+  authorizationToken,
+  Course_inf.addParticipant
+);
+router.get("/nextclass", Course_inf.nextClass);
 router.get("/classlink", authorizationToken, Course_inf.getClassLink);
 router.post("/gift", authorizationToken, Course_inf.addToGifted);
 router.post("/suggest", authorizationToken, Course_inf.addToSuggested);

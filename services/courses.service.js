@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const fs = require("fs");
-const fs2 = require('fs-extra')
+const fs2 = require("fs-extra");
 
 // const date = new Date().getTime();
 // const date = new Date().getMonth();
@@ -13,22 +13,24 @@ const fs2 = require('fs-extra')
 // console.log();
 
 class Courses_Classes {
-  // async nextClass(id) {
-  //   try {
-  //     const result = await prisma.course.findMany({
-  //       where: { completion: false },
-  //       include: {
-  //         Participants: {
-  //           where: {
-  //             participant_id: id,
-  //           },
-  //         },
-  //       },
-  //     });
-  //   } catch (err) {
-  //     return err.message;
-  //   }
-  // }
+  ///still in progress...
+  async nextClass(id) {
+    try {
+      const result = await prisma.course.findMany({
+        where: { completion: false },
+        include: {
+          Participants: {
+            where: {
+              participant_id: id,
+            },
+          },
+        },
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
 
   async addParticipants(participant_id, course_id) {
     try {
@@ -151,6 +153,9 @@ class Courses_Classes {
           Classes: true,
           Vid_Classes: true,
         },
+        orderBy: {
+          id: "desc",
+        },
       });
       return result;
     } catch (err) {
@@ -210,8 +215,11 @@ class Courses_Classes {
       await prisma.vid_Classes.create({
         data: { name: name.id, course_id },
       });
-      fs2.removeSync('./videos')
-      fs.writeFileSync("./youtube.json", JSON.stringify({ id: null }, null, 4));
+      fs2.removeSync("./videos");
+      fs.writeFileSync(
+        "./youtube.json",
+        JSON.stringify({ id: "vZB3D3ykAsY" }, null, 4)
+      );
     } catch (err) {
       console.log(err.message);
       return err.message;
