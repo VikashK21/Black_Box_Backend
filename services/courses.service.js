@@ -138,7 +138,7 @@ class Courses_Classes {
         where: { id },
         include: { host_details: true, Classes: true, Vid_Classes: true },
       });
-      if (result.images.length > 0) {
+      if (result && result.images.length > 0) {
         result.images = JSON.parse(result.images[0]);
       }
       return result;
