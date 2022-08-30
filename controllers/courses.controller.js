@@ -5,6 +5,15 @@ const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
 
 class Course_inf {
+  nextClass = async (req, res) => {
+    try {
+      const result = await Courses.nextClass(Number(req.params.id));
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   addToSuggested = async (req, res) => {
     try {
       const result = await Courses.addSuggested(
@@ -80,7 +89,7 @@ class Course_inf {
   };
   hostCourse = async (req, res) => {
     try {
-      console.log(req.body, 'the body');
+      console.log(req.body, "the body");
       const result = await Courses.hostCourse(req.body, req.user_id);
       if (typeof result === "object") {
         return res.status(201).json(result);
