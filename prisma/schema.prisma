@@ -55,12 +55,12 @@ model Course {
 
 model Classes {
   id          Int     @id @default(autoincrement())
-  title       String
+  title       String?
   date        String ///*I have to get the date time attached in formal dates
   over        Boolean @default(false)
   duration    String
   time        String ///*Then this field should not be there
-  description String
+  description String?
   course      Course  @relation(fields: [course_id], references: [id])
   course_id   Int
   fee         String?
@@ -75,13 +75,13 @@ model Vid_Classes {
 
 //A user will only be part of participant when paid is successfully verified.
 model Participants {
-  id              Int       @id @default(autoincrement())
-  course          Course    @relation(fields: [course_id], references: [id])
+  id              Int      @id @default(autoincrement())
+  course          Course   @relation(fields: [course_id], references: [id])
   course_id       Int
-  participant     Users     @relation(fields: [participant_id], references: [id])
+  participant     Users    @relation(fields: [participant_id], references: [id])
   participant_id  Int
-  suggested_parti Suggest[]
-  gifted_parti    Gift[]
+  suggested_parti Suggest?
+  gifted_parti    Gift?
 }
 
 model Gift {
