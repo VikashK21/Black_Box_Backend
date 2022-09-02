@@ -36,12 +36,12 @@ router.post(
   authorizationToken,
   Course_inf.addParticipant
 );
-router.get("/nextclass", Course_inf.nextClass);
+router.get("/nextclass/:id", Course_inf.nextClass);
 router.get("/classlink", authorizationToken, Course_inf.getClassLink);
 router.post("/gift", authorizationToken, Course_inf.addToGifted);
 router.post("/suggest", authorizationToken, Course_inf.addToSuggested);
 
-//the video stuff
+
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
 
 router.post("/upload", uploadVideoFile, Course_inf.uploadVideo);

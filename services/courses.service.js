@@ -2,38 +2,183 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const fs = require("fs");
 const fs2 = require("fs-extra");
-
-// const date = new Date().getTime();
-// const date = new Date().getMonth();
-// console.log(date);
-// // console.log(date2.toLocaleTimeString(), "current");
-// const update = new Date(date + 15 * 60 * 60 * 1000);
-// console.log(update.toLocaleTimeString());
-// const day = new Date().getMonth();
-// console.log();
+// const date = new Date();
+// console.log(date.getHours());
+// let day = new Date().getDate();
+// console.log(day, "day");
+// let month = new Date().getMonth() + 1;
+// console.log(month, "month");
+// const year = date.getFullYear();
+// console.log(year, "year");
+// if (day.toString().length === 1) {
+//   day = "0" + day;
+// }
+// if (month.toString().length === 1) {
+//   month = "0" + month;
+// }
+// const fullDate = `${year}-${month}-${day}`;
+// console.log(fullDate);
 
 class Courses_Classes {
   ///still in progress...
-  async nextClass(id) {
+  async nextClass(id, check = true) {
     try {
-      const result = await prisma.course.findMany({
-        where: { completion: false },
-        include: {
-          Participants: {
-            where: {
-              participant_id: id,
+      const result2 = await prisma.participants.findFirst({
+        where: { participant_id: id },
+      });
+      if (result2) {
+        const result = await prisma.participants.findMany({
+          where: { participant_id: id },
+          select: {
+            course: {
+              select: {
+                id: true,
+                link: true,
+                completion: true,
+                Classes: {
+                  orderBy: {
+                    id: "desc",
+                  },
+                },
+              },
             },
           },
-        },
-      });
-      return result;
+        });
+        const nextClassGroupt = {};
+        for (let crs of result) {
+          if (
+            crs.course.link.length > 0 &&
+            crs.course.completion === false &&
+            crs.course.Classes.length > 0
+          ) {
+            let Cls = crs.course.Classes;
+            function addingCls(
+              date,
+              time,
+              duration,
+              class_id,
+              course_id,
+              link
+            ) {
+              // This is just to bring the values in the sorting order.
+              let num = date;
+              //check will used while participants registration.
+              if (check) {
+                if (Number(date.split("-")[1]) === new Date().getMonth() + 1) {
+                  num = Number(date.split("-")[1]) + Number(date.split("-")[2]);
+                } else if (
+                  Number(date.split("-")[1]) ===
+                  new Date().getMonth() + 2
+                ) {
+                  num =
+                    Number(date.split("-")[1]) +
+                    Number(date.split("-")[2]) +
+                    31;
+                  console.log("coming here right????");
+                }
+              }
+              if (nextClassGroupt.hasOwnProperty(num)) {
+                let savedTime = nextClassGroupt[num];
+                const M_STime = time.split(":");
+                // if (Number(M_STime[0]) < Number(savedTime.time.split(":")[0])) {
+                nextClassGroupt[num] = {
+                  ...nextClassGroupt[num],
+                  [Number(M_STime[0])]: {
+                    date,
+                    time,
+                    duration,
+                    class_id,
+                    course_id,
+                    link,
+                  },
+                };
+                // }
+              } else if (
+                new Date().getMonth() + 1 <= Number(date.split("-")[1]) &&
+                new Date().getDate() <= Number(date.split("-")[2])
+              ) {
+                console.log(new Date().getMonth() + 1,'--- the month', Number(date.split("-")[1]), date);
+                nextClassGroupt[num] = {
+                  [Number(time.split(":")[0])]: {
+                    date,
+                    time,
+                    duration,
+                    class_id,
+                    course_id,
+                    link,
+                  },
+                };
+              }
+            }
+            ///function ending...
+            if (Cls.length === 1 && Cls[0].over === false) {
+              addingCls(
+                Cls[0].date,
+                Cls[0].time,
+                Cls[0].duration,
+                Cls[0].id,
+                crs.course.id,
+                crs.course.link
+              );
+            } else if (Cls.length > 1) {
+              for (let clsSq of Cls) {
+                if (clsSq.over === false) {
+                  addingCls(
+                    clsSq.date,
+                    clsSq.time,
+                    clsSq.duration,
+                    clsSq.id,
+                    crs.course.id,
+                    crs.course.link
+                  );
+                }
+              }
+            }
+          }
+        }
+        //for the participants registrations...
+        if (!check) {
+          return nextClassGroupt;
+        }
+        return nextClassGroupt;
+        // return nextClassGroupt
+        // The locha of TIME...but gave Success.
+        const sendingClass = Object.values(nextClassGroupt)[0];
+        let gTime = sendingClass.time.split(":");
+        const d = new Date(sendingClass.date).getTime();
+        let gTime2 = (Number(gTime[1]) + Number(sendingClass.duration)) / 60;
+        gTime = gTime2 + Number(gTime[0]);
+        let update = new Date(d + gTime * 60 * 60 * 1000);
+        sendingClass.time = `${update}`;
+        // for the front-end..
+        return {
+          link: sendingClass.link,
+          time: sendingClass.time,
+          class_id: sendingClass.class_id,
+          course_id: sendingClass.course_id,
+        };
+      }
+      return result2;
     } catch (err) {
+      console.log(err);
       return err.message;
     }
   }
 
   async addParticipants(participant_id, course_id) {
     try {
+      const result2 = await this.nextClass(participant_id, false);
+      const result3 = await prisma.course.findUnique({
+        where: { id: course_id },
+        include: { Classes: true },
+      });
+      if (result3 && result.Classes.length > 0) {
+        for (let cls of result3) {
+          if (result2.hasOwnProperty(cls.date)) {
+          }
+        }
+      }
+      // if (result2 && result2.hasOwnProperty())
       const result = await prisma.participants.create({
         data: { participant_id, course_id },
       });
