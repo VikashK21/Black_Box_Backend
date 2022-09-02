@@ -2,25 +2,29 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const fs = require("fs");
 const fs2 = require("fs-extra");
-// const date = new Date();
-// console.log(date.getHours());
-// let day = new Date().getDate();
-// console.log(day, "day");
-// let month = new Date().getMonth() + 1;
-// console.log(month, "month");
-// const year = date.getFullYear();
-// console.log(year, "year");
-// if (day.toString().length === 1) {
-//   day = "0" + day;
-// }
-// if (month.toString().length === 1) {
-//   month = "0" + month;
-// }
-// const fullDate = `${year}-${month}-${day}`;
-// console.log(fullDate);
 
 class Courses_Classes {
-  ///still in progress...
+  async attendingCls(data) {
+    try {
+      // {
+      //   link: sendingClass.link,
+      //   time: sendingClass.time,
+      //   class_id: sendingClass.class_id,
+      //   course_id: sendingClass.course_id,
+      // };
+
+      ///if you have time, just look, you can add some effect.
+      const result = await prisma.classes.update({
+        where: { id: data.class_id },
+        data: { over: true },
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  ///Perfect : )
   async nextClass(id, check = true) {
     try {
       const result2 = await prisma.participants.findFirst({
@@ -74,11 +78,11 @@ class Courses_Classes {
                     Number(date.split("-")[1]) +
                     Number(date.split("-")[2]) +
                     31;
-                  console.log("coming here right????");
+                  console.log("coming here right????", num);
                 }
               }
               if (nextClassGroupt.hasOwnProperty(num)) {
-                let savedTime = nextClassGroupt[num];
+                // let savedTime = nextClassGroupt[num];
                 const M_STime = time.split(":");
                 // if (Number(M_STime[0]) < Number(savedTime.time.split(":")[0])) {
                 nextClassGroupt[num] = {
@@ -94,10 +98,17 @@ class Courses_Classes {
                 };
                 // }
               } else if (
-                new Date().getMonth() + 1 <= Number(date.split("-")[1]) &&
-                new Date().getDate() <= Number(date.split("-")[2])
+                num > 31 ||
+                new Date().getMonth() + 2 === Number(date.split("-")[1]) ||
+                (new Date().getMonth() + 1 <= Number(date.split("-")[1]) &&
+                  new Date().getDate() <= Number(date.split("-")[2]))
               ) {
-                console.log(new Date().getMonth() + 1,'--- the month', Number(date.split("-")[1]), date);
+                console.log(
+                  new Date().getMonth() + 2,
+                  "--- the month",
+                  Number(date.split("-")[1]),
+                  date
+                );
                 nextClassGroupt[num] = {
                   [Number(time.split(":")[0])]: {
                     date,
@@ -140,10 +151,11 @@ class Courses_Classes {
         if (!check) {
           return nextClassGroupt;
         }
-        return nextClassGroupt;
-        // return nextClassGroupt
         // The locha of TIME...but gave Success.
-        const sendingClass = Object.values(nextClassGroupt)[0];
+        const sendingClass = Object.values(
+          Object.values(nextClassGroupt)[0]
+        )[0];
+
         let gTime = sendingClass.time.split(":");
         const d = new Date(sendingClass.date).getTime();
         let gTime2 = (Number(gTime[1]) + Number(sendingClass.duration)) / 60;
@@ -165,20 +177,35 @@ class Courses_Classes {
     }
   }
 
-  async addParticipants(participant_id, course_id) {
+  //Checking the participant has the parallel classes or not...
+  async parallelClasses(participant_id, course_id) {
     try {
       const result2 = await this.nextClass(participant_id, false);
       const result3 = await prisma.course.findUnique({
         where: { id: course_id },
         include: { Classes: true },
       });
-      if (result3 && result.Classes.length > 0) {
-        for (let cls of result3) {
+      const parallelCls = [];
+      if (result3 && result3.Classes.length > 0) {
+        for (let cls of result3.Classes) {
           if (result2.hasOwnProperty(cls.date)) {
+            if (
+              result2[cls.date].hasOwnProperty(Number(cls.time.split(":")[0]))
+            ) {
+              parallelCls.push(cls);
+            }
           }
         }
       }
-      // if (result2 && result2.hasOwnProperty())
+      return parallelCls;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  //As confirm, it will be proceed to add the ....
+  async addParticipants(participant_id, course_id) {
+    try {
       const result = await prisma.participants.create({
         data: { participant_id, course_id },
       });

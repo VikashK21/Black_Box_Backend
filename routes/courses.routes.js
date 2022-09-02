@@ -36,11 +36,15 @@ router.post(
   authorizationToken,
   Course_inf.addParticipant
 );
-router.get("/nextclass/:id", Course_inf.nextClass);
-router.get("/classlink", authorizationToken, Course_inf.getClassLink);
+router.get(
+  "/parallelclasses/:courseID",
+  authorizationToken,
+  Course_inf.parallelClasses
+);
+router.patch("/attending", authorizationToken, Course_inf.attendingCls);
+router.get("/nextclass", authorizationToken, Course_inf.nextClass);
 router.post("/gift", authorizationToken, Course_inf.addToGifted);
 router.post("/suggest", authorizationToken, Course_inf.addToSuggested);
-
 
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
 
