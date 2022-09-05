@@ -1,10 +1,14 @@
 import { Button, InputAdornment, TextField } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
+// eslint-disable-next-line
 import Footer from "../../Components/Common/Footer";
+// eslint-disable-next-line
 import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
+// eslint-disable-next-line
 import Default from "../../Images/defualtProPic.jpg";
+// eslint-disable-next-line
 import ProfilePic from "../../Components/Common/Crop";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,18 +17,22 @@ import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
 
 import CropImage from "../../Components/Common/CropImage";
+// eslint-disable-next-line
 import axios from "axios";
 import FormDialog from "../../Components/Common/FormDialog";
 import MeetLink from "./MeetLink";
 
 const Host = () => {
   const {
+    // eslint-disable-next-line
     backendUpdate,
+    // eslint-disable-next-line
     signupUser,
     setCourse,
     course,
     image,
     setImage,
+    // eslint-disable-next-line
     uploadImage,
   } = useContext(AuthContext);
 
@@ -32,6 +40,7 @@ const Host = () => {
   const [showCropper, setShowCropper] = useState(false);
   const [cropImage, setCropImage] = useState(false);
 
+  // eslint-disable-next-line
   const navigate = useNavigate();
 
   // const uploadImage = () => {
@@ -55,6 +64,7 @@ const Host = () => {
   //     });
   // };
 
+  // eslint-disable-next-line
   const handleMethodologyChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...course.methodology];
@@ -62,6 +72,7 @@ const Host = () => {
     setCourse({ ...course, index: list });
   };
 
+  // eslint-disable-next-line
   const handleRemove = (index) => {
     const list = [...course.content];
     list.splice(index, 1);

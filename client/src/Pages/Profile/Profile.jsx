@@ -13,6 +13,7 @@ const Profile = () => {
 
   useEffect(() => {
     getCoursesList();
+    // eslint-disable-next-line
   }, []);
 
   const [timer, setTimer] = useState(true);
@@ -126,7 +127,7 @@ const Profile = () => {
                     <h4 className="p-0">The wait is over. Join the class!</h4>
                     <a
                       href="http://localhost:3000/hosting"
-                      target="_blank"
+                      target="#"
                       className="w-50 p-0"
                     >
                       <Button

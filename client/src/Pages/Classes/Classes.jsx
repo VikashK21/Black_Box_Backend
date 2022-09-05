@@ -11,6 +11,7 @@ const Classes = () => {
   useEffect(() => {
     goToTop();
     getCoursesList();
+    // eslint-disable-next-line
   }, []);
   return (
     <Container fluid className=" p-0 m-0 bggrey">

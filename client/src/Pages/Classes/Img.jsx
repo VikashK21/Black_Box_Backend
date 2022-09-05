@@ -1,6 +1,7 @@
 import * as React from "react";
 import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
+// eslint-disable-next-line
 import Class1 from "../../Images/Classes/class2.jpg";
 
 const Transition = React.forwardRef(function Transition(props, ref) {

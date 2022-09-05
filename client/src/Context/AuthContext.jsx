@@ -81,13 +81,15 @@ export const AuthProvider = ({ children }) => {
     description: "",
     file: null,
   });
+  // eslint-disable-next-line
   const [cldimages, setCldimages] = useState([]);
   const [courseList, setCourseList] = useState([]);
   const [courseDetails, setCourseDetails] = useState([]);
   const [courseId, setCourseId] = useState();
   const [name, setName] = useState();
-
+  // eslint-disable-next-line
   const [signUpBatch, setSignUpBatch] = useState(null);
+  // eslint-disable-next-line
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const signupUser = async () => {
