@@ -13,10 +13,10 @@ export default AuthContext;
 // export const BaseUrl = "https://black-box-backend.herokuapp.com";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl =
-  process.env.NODE_ENV === "production"
-    ? "/api"
-    : "http://localhost:3001/api";
+// export const BaseUrl =
+//   process.env.NODE_ENV === "production"
+//     ? "/api"
+//     : "http://localhost:3001/api";
 
 // export const BaseLink = "http://localhost:3000/";
 
@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }) => {
 
   const signupUser = async () => {
     await axios
-      .post(BaseUrl + "/signup", {
+      .post("/api/signup", {
         first_name: values.firstname,
         last_name: values.lastname,
         email: values.email,
@@ -124,7 +124,7 @@ export const AuthProvider = ({ children }) => {
 
   const standingData = async (email, password) => {
     await axios
-      .post(BaseUrl + "/login", {
+      .post("/api/login", {
         email: email,
         password: password,
       })
@@ -178,7 +178,7 @@ export const AuthProvider = ({ children }) => {
     console.log(values.mobile, "Heyyy");
     e.preventDefault();
     await axios
-      .post(BaseUrl + "/login", {
+      .post( "/api/login", {
         phone_num: values.mobile,
       })
       .then((res) => {
@@ -193,7 +193,7 @@ export const AuthProvider = ({ children }) => {
   const OtpVerify = async (e) => {
     e.preventDefault();
     await axios
-      .post(BaseUrl + "/login", {
+      .post("/api/login", {
         phone_num: values.mobile,
         otp: values.otp,
       })
@@ -208,7 +208,7 @@ export const AuthProvider = ({ children }) => {
   const getMyProfile = async () => {
     await axios
       .post(
-        BaseUrl + "user/view/profile",
+        "api/user/view/profile",
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
@@ -225,7 +225,7 @@ export const AuthProvider = ({ children }) => {
 
   const backendUpdate = async (data) => {
     await axios
-      .post(BaseUrl + "user/update/profilephoto", data, {
+      .post("api/user/update/profilephoto", data, {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
@@ -269,7 +269,7 @@ export const AuthProvider = ({ children }) => {
       );
       console.log(uploaders, "res is here.");
       const res = await axios.post(
-        BaseUrl + "/host/course",
+        "/api/host/course",
         {
           course: { ...course, images: uploaders },
         },
@@ -288,7 +288,7 @@ export const AuthProvider = ({ children }) => {
   const HostClasses = async (e) => {
     try {
       const res = await axios.post(
-        BaseUrl + "/host/classes",
+        "/api/host/classes",
         {
           classes: classes,
           course_id: courseId.id,
@@ -311,7 +311,7 @@ export const AuthProvider = ({ children }) => {
     videoData.append("description", form.description);
 
     axios
-      .post(BaseUrl + "/upload", videoData)
+      .post("/api/upload", videoData)
       .then((res) => {
         console.log(res.data);
       })
@@ -321,7 +321,7 @@ export const AuthProvider = ({ children }) => {
 
   const getCoursesList = async () => {
     await axios
-      .get(BaseUrl + "/courses")
+      .get("/api/courses")
       .then((res) => {
         setCourseList(res.data);
       })
@@ -332,7 +332,7 @@ export const AuthProvider = ({ children }) => {
 
   const getCourseDetails = async (id) => {
     await axios
-      .get(BaseUrl + "/courses/" + id)
+      .get("/api/courses/" + id)
       .then((res) => {
         console.log(res.data);
         setCourseDetails(res.data);
@@ -384,7 +384,7 @@ export const AuthProvider = ({ children }) => {
     courseList,
     getCourseDetails,
     courseDetails,
-    BaseUrl,
+    // BaseUrl,
     userDetails,
   };
 
