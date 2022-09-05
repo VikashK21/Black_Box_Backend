@@ -6,14 +6,13 @@ import Whatsnew from "../../Components/Feeds/Whatsnew";
 import Classes from "../../Images/Classes/classes.jpg";
 import Class2 from "../../Images/Classes/class2.jpg";
 import AuthContext from "../../Context/AuthContext";
-import Default from "../../Images/defualtProPic.jpg";
+import DefaultPic from "../../Images/defualtProPic.jpg";
 
 const Profile = () => {
   const { getCoursesList, courseList } = useContext(AuthContext);
 
   useEffect(() => {
     getCoursesList();
-    // eslint-disable-next-line
   }, []);
 
   const [timer, setTimer] = useState(true);
@@ -127,7 +126,7 @@ const Profile = () => {
                     <h4 className="p-0">The wait is over. Join the class!</h4>
                     <a
                       href="http://localhost:3000/hosting"
-                      target="#"
+                      target="_blank"
                       className="w-50 p-0"
                     >
                       <Button
@@ -196,19 +195,26 @@ const Profile = () => {
                           : null
                         : null;
                       const a = JSON.parse(course.images);
-                      return (
+                      if (a.length!==0) {
+                        console.log(a);
+                        return (
+                          
                         <div className="my-2 bggrey rounded-5 p-3" key={index}>
                           <Row className=" pt-2">
                             <Col md={8}>
                               <p className="gl ps-2">{course.description}</p>
                             </Col>
-                            <Col md={4} className="d-flex justify-content-end pe-4">
+                            <Col
+                              md={4}
+                              className="d-flex justify-content-end pe-4"
+                            >
                               <div className="d-flex">
                                 <h6
-                                className="pe-2"
-                                style={{
-                                  margin:'auto',
-                                }}>
+                                  className="pe-2"
+                                  style={{
+                                    margin: "auto",
+                                  }}
+                                >
                                   <b>
                                     {course.host_details.first_name}{" "}
                                     {course.host_details.last_name}
@@ -216,11 +222,15 @@ const Profile = () => {
                                 </h6>
                                 <img
                                   src={
-                                    host
-                                      ? host.secure_url
-                                        ? host.secure_url
-                                        : <Default />
-                                      : <Default />
+                                    host ? (
+                                      host.secure_url ? (
+                                        host.secure_url
+                                      ) : (
+                                        DefaultPic
+                                      )
+                                    ) : (
+                                      DefaultPic
+                                    )
                                   }
                                   alt="classes"
                                   className="ic"
@@ -255,6 +265,8 @@ const Profile = () => {
                           </Row>
                         </div>
                       );
+                      }
+                      
                     })
                   : null}
               </div>

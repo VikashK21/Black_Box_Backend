@@ -44,7 +44,6 @@ const LinearStepper2 = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
-  // eslint-disable-next-line
   const { HostCourse, HostClasses, image, course } = useContext(AuthContext);
   const { errorToast } = useContext(StyleContext);
   const navigate = useNavigate();

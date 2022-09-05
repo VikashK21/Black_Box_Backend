@@ -3,13 +3,10 @@ import { Col, Container, Row } from "react-bootstrap";
 // import { BsSearch } from "react-icons/bs";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
-// eslint-disable-next-line
 import Class1 from "../../Images/Classes/class2.jpg";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Button from "@mui/material/Button";
-// eslint-disable-next-line
 import { BsCalendarDate } from "react-icons/bs";
-// eslint-disable-next-line
 import Icon2 from "../../Images/Classes/icon2.png";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -26,7 +23,6 @@ const Join = () => {
   const { id } = useParams();
 
   const { BaseUrl } = useContext(AuthContext);
-  // eslint-disable-next-line
   const name = localStorage.getItem("name");
   const [course, setCourse] = useState({
     host_details: {
@@ -61,7 +57,6 @@ const Join = () => {
         });
     };
     fetchData();
-    // eslint-disable-next-line
   }, []);
 
   const loadScript = (src) => {

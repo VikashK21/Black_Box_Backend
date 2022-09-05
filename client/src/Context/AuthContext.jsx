@@ -1,23 +1,22 @@
-// eslint-disable-next-line
 import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
-// eslint-disable-next-line
 import { imageListItemClasses } from "@mui/material";
 
 const AuthContext = createContext();
 export default AuthContext;
 
+// export const BaseUrl = "http://localhost:3001/api/";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://black-box-backend.herokuapp.com";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api";
-// process.env.NODE_ENV === "production"
-//   ? "/api"
-//   : "http://localhost:3001/api";
+export const BaseUrl = "/api"
+  // process.env.NODE_ENV === "production"
+  //   ? "/api"
+  //   : "http://localhost:3001/api";
 
 // export const BaseLink = "http://localhost:3000/";
 
@@ -35,7 +34,8 @@ export const AuthProvider = ({ children }) => {
       : null
   );
 
-  // eslint-disable-next-line
+  
+
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
   const [cloud, setCloud] = useState("");
@@ -81,15 +81,13 @@ export const AuthProvider = ({ children }) => {
     description: "",
     file: null,
   });
-  // eslint-disable-next-line
   const [cldimages, setCldimages] = useState([]);
   const [courseList, setCourseList] = useState([]);
   const [courseDetails, setCourseDetails] = useState([]);
   const [courseId, setCourseId] = useState();
   const [name, setName] = useState();
-  // eslint-disable-next-line
+
   const [signUpBatch, setSignUpBatch] = useState(null);
-  // eslint-disable-next-line
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const signupUser = async () => {

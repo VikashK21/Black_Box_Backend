@@ -24,10 +24,14 @@ const YtVid = (props) => {
   return (
     <div>
     
-     
+      <div className="video" onClick={handleClickOpen}>
       <img src={props.img} alt="" className="w-100 classimage my-4 cp"  
       onClick={handleClickOpen}
       />
+      <button onClick={handleClickOpen}></button>
+
+      </div>
+     
       <Dialog
         open={open}
         TransitionComponent={Transition}

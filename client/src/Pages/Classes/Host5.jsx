@@ -1,41 +1,25 @@
-// eslint-disable-next-line
 import { Box, Button, ButtonBase, TextField } from "@mui/material";
-// eslint-disable-next-line
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-// eslint-disable-next-line
 import React, { useContext, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-// eslint-disable-next-line
 import Footer from "../../Components/Common/Footer";
-// eslint-disable-next-line
 import Header from "../../Components/Common/Header";
-// eslint-disable-next-line
 import Default from "../../Images/defualtProPic.jpg";
-// eslint-disable-next-line
 import ProfilePic from "../../Components/Common/Crop";
-// eslint-disable-next-line
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
-// eslint-disable-next-line
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-// eslint-disable-next-line
 import { Link } from "react-router-dom";
-// eslint-disable-next-line
 import { useForm } from "react-hook-form";
-// eslint-disable-next-line
 import { yupResolver } from "@hookform/resolvers/yup";
-// eslint-disable-next-line
 import * as yup from "yup";
-// eslint-disable-next-line
 import { FacebookLoginButton } from "react-social-login-buttons";
-// eslint-disable-next-line
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useNavigate } from "react-router-dom";
 
 const Host5 = () => {
     const { course, setCourse } = useContext(AuthContext);
-    // eslint-disable-next-line
     const navigate = useNavigate();
   
     const handleContentChange = (e, index) => {

@@ -1,16 +1,11 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-// eslint-disable-next-line
 import DialogActions from "@mui/material/DialogActions";
-// eslint-disable-next-line
 import DialogContent from "@mui/material/DialogContent";
-// eslint-disable-next-line
 import DialogContentText from "@mui/material/DialogContentText";
-// eslint-disable-next-line
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-// eslint-disable-next-line
 import { useState } from "react";
 
 const Transition = React.forwardRef(function Transition(props, ref) {

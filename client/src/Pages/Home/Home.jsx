@@ -6,14 +6,11 @@ import AuthContext from "../../Context/AuthContext";
 
 const Home = () => {
   let navigate = useNavigate();
-  // eslint-disable-next-line
   const {user } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-
-    // user ? navigate("/profile") : navigate("/");
 
     setShow(true);
 
@@ -24,7 +21,7 @@ const Home = () => {
     setTimeout(() => {
       navigate("/enter");
     }, 4000);
-    // eslint-disable-next-line
+    
   }, []);
 
   return (
