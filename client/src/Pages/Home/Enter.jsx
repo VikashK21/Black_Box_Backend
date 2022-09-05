@@ -21,7 +21,7 @@ const Enter = () => {
 
   
     useEffect(() => {
-    user ? navigate("/profile") : navigate("/");
+    // user ? navigate("/profile") : navigate("/");
 
         setShow(true);
         onkeyup = (e) => {
