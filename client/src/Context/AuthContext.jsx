@@ -1,7 +1,8 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
+// eslint-disable-next-line
 import { imageListItemClasses } from "@mui/material";
 
 const AuthContext = createContext();
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }) => {
       ? jwt_decode(localStorage.getItem("authTokens"))
       : null
   );
-
+// eslint-disable-next-line
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
   const [cloud, setCloud] = useState("");
@@ -78,13 +79,16 @@ export const AuthProvider = ({ children }) => {
     description: "",
     file: null,
   });
+  // eslint-disable-next-line
   const [cldimages, setCldimages] = useState([]);
   const [courseList, setCourseList] = useState([]);
   const [courseDetails, setCourseDetails] = useState([]);
   const [courseId, setCourseId] = useState();
+  // eslint-disable-next-line
   const [name, setName] = useState();
-
+// eslint-disable-next-line
   const [signUpBatch, setSignUpBatch] = useState(null);
+  // eslint-disable-next-line
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const signupUser = async () => {
@@ -389,6 +393,3 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-{
-  /* <iframe width="1520" height="553" src="https://www.youtube.com/embed/zE-a5eqvlv8" title="Dua Lipa, Coldplay, Martin Garrix & Kygo, The Chainsmokers Style - Feeling Me" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */
-}
