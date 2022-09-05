@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-// eslint-disable-next-line
 import Class1 from "../../Images/Classes/class2.jpg";
 import Img from "./Img";
 
 const Splider = (props) => {
   useEffect(() => {
     console.log(props);
-    // eslint-disable-next-line
   }, []);
 
   return (

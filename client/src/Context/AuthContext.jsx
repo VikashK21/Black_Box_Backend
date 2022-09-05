@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+// eslint-disable-next-line
+import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -13,10 +14,10 @@ export default AuthContext;
 // export const BaseUrl = "https://black-box-backend.herokuapp.com";
 // export const BaseLink = "http://localhost:3000/";
 
-// export const BaseUrl =
-//   process.env.NODE_ENV === "production"
-//     ? "/api"
-//     : "http://localhost:3001/api";
+export const BaseUrl = "/api";
+// process.env.NODE_ENV === "production"
+//   ? "/api"
+//   : "http://localhost:3001/api";
 
 // export const BaseLink = "http://localhost:3000/";
 
@@ -33,7 +34,8 @@ export const AuthProvider = ({ children }) => {
       ? jwt_decode(localStorage.getItem("authTokens"))
       : null
   );
-// eslint-disable-next-line
+
+  // eslint-disable-next-line
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
   const [cloud, setCloud] = useState("");
@@ -79,21 +81,18 @@ export const AuthProvider = ({ children }) => {
     description: "",
     file: null,
   });
-  // eslint-disable-next-line
   const [cldimages, setCldimages] = useState([]);
   const [courseList, setCourseList] = useState([]);
   const [courseDetails, setCourseDetails] = useState([]);
   const [courseId, setCourseId] = useState();
-  // eslint-disable-next-line
   const [name, setName] = useState();
-// eslint-disable-next-line
+
   const [signUpBatch, setSignUpBatch] = useState(null);
-  // eslint-disable-next-line
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const signupUser = async () => {
     await axios
-      .post("/api/signup", {
+      .post(BaseUrl + "/signup", {
         first_name: values.firstname,
         last_name: values.lastname,
         email: values.email,
@@ -124,7 +123,7 @@ export const AuthProvider = ({ children }) => {
 
   const standingData = async (email, password) => {
     await axios
-      .post("/api/login", {
+      .post(BaseUrl + "/login", {
         email: email,
         password: password,
       })
@@ -178,7 +177,7 @@ export const AuthProvider = ({ children }) => {
     console.log(values.mobile, "Heyyy");
     e.preventDefault();
     await axios
-      .post( "/api/login", {
+      .post(BaseUrl + "/login", {
         phone_num: values.mobile,
       })
       .then((res) => {
@@ -193,7 +192,7 @@ export const AuthProvider = ({ children }) => {
   const OtpVerify = async (e) => {
     e.preventDefault();
     await axios
-      .post("/api/login", {
+      .post(BaseUrl + "/login", {
         phone_num: values.mobile,
         otp: values.otp,
       })
@@ -208,7 +207,7 @@ export const AuthProvider = ({ children }) => {
   const getMyProfile = async () => {
     await axios
       .post(
-        "api/user/view/profile",
+        BaseUrl + "user/view/profile",
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
@@ -225,7 +224,7 @@ export const AuthProvider = ({ children }) => {
 
   const backendUpdate = async (data) => {
     await axios
-      .post("api/user/update/profilephoto", data, {
+      .post(BaseUrl + "user/update/profilephoto", data, {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
@@ -269,7 +268,7 @@ export const AuthProvider = ({ children }) => {
       );
       console.log(uploaders, "res is here.");
       const res = await axios.post(
-        "/api/host/course",
+        BaseUrl + "/host/course",
         {
           course: { ...course, images: uploaders },
         },
@@ -288,7 +287,7 @@ export const AuthProvider = ({ children }) => {
   const HostClasses = async (e) => {
     try {
       const res = await axios.post(
-        "/api/host/classes",
+        BaseUrl + "/host/classes",
         {
           classes: classes,
           course_id: courseId.id,
@@ -311,7 +310,7 @@ export const AuthProvider = ({ children }) => {
     videoData.append("description", form.description);
 
     axios
-      .post("/api/upload", videoData)
+      .post(BaseUrl + "/upload", videoData)
       .then((res) => {
         console.log(res.data);
       })
@@ -321,7 +320,7 @@ export const AuthProvider = ({ children }) => {
 
   const getCoursesList = async () => {
     await axios
-      .get("/api/courses")
+      .get(BaseUrl + "/courses")
       .then((res) => {
         setCourseList(res.data);
       })
@@ -332,7 +331,7 @@ export const AuthProvider = ({ children }) => {
 
   const getCourseDetails = async (id) => {
     await axios
-      .get("/api/courses/" + id)
+      .get(BaseUrl + "/courses/" + id)
       .then((res) => {
         console.log(res.data);
         setCourseDetails(res.data);
@@ -384,7 +383,7 @@ export const AuthProvider = ({ children }) => {
     courseList,
     getCourseDetails,
     courseDetails,
-    // BaseUrl,
+    BaseUrl,
     userDetails,
   };
 
@@ -393,3 +392,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+{
+  /* <iframe width="1520" height="553" src="https://www.youtube.com/embed/zE-a5eqvlv8" title="Dua Lipa, Coldplay, Martin Garrix & Kygo, The Chainsmokers Style - Feeling Me" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */
+}

@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-// eslint-disable-next-line
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Footer from "../../Components/Common/Footer";
-import AuthContext from "../../Context/AuthContext";
+import AuthContext, { BaseUrl } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
@@ -14,7 +13,7 @@ const Login = () => {
   const { loginUser, setValues, values } = useContext(AuthContext);
 
   const google = () => {
-    window.open("api/signup/google", "_self");
+    window.open(BaseUrl + "/signup/google", "_self");
   };
 
   const changeHandler = (e) => {

@@ -1,19 +1,15 @@
 import { Box, Button, TextField } from "@mui/material";
-// eslint-disable-next-line
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-// eslint-disable-next-line
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import Default from "../../Images/defualtProPic.jpg";
-// eslint-disable-next-line
 import ProfilePic from "../../Components/Common/Crop";
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-// eslint-disable-next-line
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -51,18 +47,14 @@ const Registration = () => {
   const [image, setImage] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
   const [cropImage, setCropImage] = useState(false);
-  // eslint-disable-next-line
   const [thumbnail, setThumbnail] = useState("");
 
   const {
-    // eslint-disable-next-line
     backendUpdate,
     signupUser,
     setValues,
     values,
-    // eslint-disable-next-line
     profile,
-    // eslint-disable-next-line
     cloud,
     setCloud,
   } = useContext(AuthContext);
