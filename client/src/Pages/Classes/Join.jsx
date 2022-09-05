@@ -41,7 +41,7 @@ const Join = () => {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get(BaseUrl + "/api/courses/" + id)
+        .get(BaseUrl + "/courses/" + id)
         .then((res) => {
           const data = res.data;
           console.log(data);
