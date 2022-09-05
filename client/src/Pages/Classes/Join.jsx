@@ -1,16 +1,21 @@
+// eslint-disable-next-line
 import React, { useContext, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 // import { BsSearch } from "react-icons/bs";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
+// eslint-disable-next-line
 import Class1 from "../../Images/Classes/class2.jpg";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Button from "@mui/material/Button";
+// eslint-disable-next-line
 import { BsCalendarDate } from "react-icons/bs";
+// eslint-disable-next-line
 import Icon2 from "../../Images/Classes/icon2.png";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import YtVid from "./YtVid";
+// eslint-disable-next-line
 import AuthContext from "../../Context/AuthContext";
 // import Splide from "./Splider";
 import axios from "axios";
@@ -21,8 +26,7 @@ import Img from "./Img";
 
 const Join = () => {
   const { id } = useParams();
-
-  const { BaseUrl } = useContext(AuthContext);
+// eslint-disable-next-line
   const name = localStorage.getItem("name");
   const [course, setCourse] = useState({
     host_details: {
@@ -41,7 +45,7 @@ const Join = () => {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get(BaseUrl + "/api/courses/" + id)
+        .get("/api/courses/" + id)
         .then((res) => {
           const data = res.data;
           console.log(data);
@@ -57,6 +61,7 @@ const Join = () => {
         });
     };
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const loadScript = (src) => {
