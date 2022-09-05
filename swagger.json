@@ -1,0 +1,15 @@
+{
+  "swaggerDefinition": {
+    "info": {
+      "version": "1.0.0",
+      "title": "Black Box APIs",
+      "description": "The page defines the APIs of Black Box in a structural way. Which makes you and me easy to go through the documentation to being surrounded by the code!!",
+      "contact": {
+        "name": "Black Box",
+        "email": "blackboxdigital22@gmail.com"
+      },
+      "servers": ["http://localhost:3001"]
+    }
+  },
+  "apis": ["./routes/*.js"]
+}

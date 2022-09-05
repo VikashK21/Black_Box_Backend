@@ -1,16 +1,25 @@
+//Remeber the errors can be from here also, when without .evn...
 require("dotenv").config();
 require("./auth/google.auth");
 require("./auth/facebook.auth");
+//Modules : ) ...
 const express = require("express");
 const createError = require("http-errors");
 const passport = require("passport");
 const session = require("express-session");
 
+//Helping to understand APIs...
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
+const swaggerDocs = swaggerJSDoc(require("./swagger.json"));
+
+//The status to the console, when triggered an API...
 const morgan = require("morgan");
 const cors = require("cors");
 
 const app = express();
 
+//Middlewares Section...
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +34,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Home page
 app.get("/", async (req, res, next) => {
   res.send({
     message:
@@ -35,9 +45,12 @@ app.get("/", async (req, res, next) => {
   // );
 });
 
+//The APIs sections...
 app.use("/api", require("./routes/users.routes"));
 app.use("/api", require("./routes/courses.routes"));
+app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
+//Error Handlings...
 app.use((req, res, next) => {
   next(createError.NotFound());
 });
@@ -50,5 +63,6 @@ app.use((err, req, res, next) => {
   });
 });
 
+//The listner...
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 @ http://localhost:${PORT}`));

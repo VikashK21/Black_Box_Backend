@@ -21,6 +21,9 @@ router.get("/users", async (req, res, next) => {
 });
 
 //Users:
+/**
+ * 
+ */
 router.get("/profile", authorizationToken, Users.profile);
 router.patch("/profile", authorizationToken, Users.editProfile);
 router.post("/signup", forLogout, Users.signup);

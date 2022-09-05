@@ -2,16 +2,11 @@ const router = require("express").Router();
 const Course_inf = new (require("../controllers/courses.controller"))();
 const { authorizationToken } = require("../auth/user.auth");
 
-const {
-  uploadVideoFile,
-  oAuth,
-  uploadVideoToYouTube,
-} = require("../utils/youtube");
+const { uploadVideoFile } = require("../utils/youtube");
 const {
   uploaddImgFile,
   uploaddImgToCloudinary,
 } = require("../utils/cloudinary");
-const open = require("open");
 
 router.get("/course", (req, res) => {
   res.send({
@@ -47,8 +42,80 @@ router.post("/gift", authorizationToken, Course_inf.addToGifted);
 router.post("/suggest", authorizationToken, Course_inf.addToSuggested);
 
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
+/**
+ * @swagger
+ * /api/host/classes:
+ *  post:
+ *    description: Takes all the information about the classes, designed by the trainner.
+ *    security: 
+ *      - bearerAuth: []
+ *    responses:
+ *      '201': 
+ *        Description: Object 
+ *      '400': 
+ *        Description: Error msg/ Error msg of db
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - name: title
+ *        in: formData
+ *        required: false
+ *        type: string
+ *      - name: date
+ *        in: formData
+ *        required: true
+ *        type: string
+ *      - name: over
+ *        in: formData
+ *        require: false
+ *        type: boolean
+ *      - name: duration
+ *        in: formData
+ *        required: true
+ *        type: string
+ *      - name: time
+ *        in: formData
+ *        required: true
+ *        type: string
+ *      - name: description
+ *        in: formData
+ *        required: false
+ *        type: string
+ *      - name: course_id
+ *        in: formData
+ *        required: true
+ *        type: integer
+ *      - name: fee
+ *        in: formData
+ *        required: false
+ *        type: string
+ */
 
 router.post("/upload", uploadVideoFile, Course_inf.uploadVideo);
+/**
+ * @swagger
+ * /api/upload:
+ *  post:
+ *    description: Takes the input from the file directory, body and saves to youtube storage as unlisted.
+ *    responses:
+ *      '200': 
+ *        Description: Redirects to the successfull page.
+ *    produces: 
+ *      - application/json
+ *    parameters:
+ *      - name: videoFile
+ *        in: videoFile
+ *        required: true
+ *        type: file
+ *      - name: title
+ *        in: formData
+ *        required: true
+ *        type: string
+ *      - name: description
+ *        in: formData
+ *        required: true
+ *        type: string
+ */
 
 router.get("/oauth2callback", Course_inf.uploadVideoWithAuth);
 
