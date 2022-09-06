@@ -9,9 +9,9 @@ const passport = require("passport");
 const session = require("express-session");
 
 //Helping to understand APIs...
-const swaggerJSDoc = require("swagger-jsdoc");
-const swaggerUI = require("swagger-ui-express");
-const swaggerDocs = swaggerJSDoc(require("./swagger.json"));
+// const swaggerJSDoc = require("swagger-jsdoc");
+// const swaggerUI = require("swagger-ui-express");
+// const swaggerDocs = swaggerJSDoc(require("./swagger.json"));
 
 //The status to the console, when triggered an API...
 const morgan = require("morgan");
@@ -35,20 +35,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Home page
-app.get("/", async (req, res, next) => {
-  res.send({
-    message:
-      "You are successfully standing on to the root page, please go to /api page to view details.",
-  });
-  // res.send(
-  //   '<a href="http://localhost:3001/api/signup/google">Authenticate with Google</a>'
-  // );
-});
+
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+}
+// app.get("/", async (req, res, next) => {
+//   res.send({
+//     message:
+//       "You are successfully standing on to the root page, please go to /api page to view details.",
+//   });
+//   // res.send(
+//   //   '<a href="http://localhost:3001/api/signup/google">Authenticate with Google</a>'
+//   // );
+// });
 
 //The APIs sections...
 app.use("/api", require("./routes/users.routes"));
 app.use("/api", require("./routes/courses.routes"));
-app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+// app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 //Error Handlings...
 app.use((req, res, next) => {
