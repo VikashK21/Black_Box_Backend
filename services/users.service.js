@@ -6,6 +6,23 @@ const phoneConfig = require("../config/twilio.cofig");
 const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
+  async forgetPass(email, password) {
+    try {
+      const result2 = await prisma.users.findUnique({
+        where: { email },
+      });
+      if (!result2) {
+        return "The email does not exist!!";
+      }
+      const result = await prisma.users.update({
+        where: { email },
+        data: { password },
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
   async profile(id) {
     try {
       const result = await prisma.users.findUnique({ where: { id } });
@@ -17,6 +34,14 @@ class Users {
 
   async editProfile(data, id) {
     try {
+      if (data.hasOwnProperty("email")) {
+        const result2 = await prisma.users.findUnique({
+          where: { id },
+        });
+        if (result2.provider === "google" || result2.provider === "facebook") {
+          return `Please edit the email from your ${result2.provider} account!!`;
+        }
+      }
       const result = await prisma.users.update({
         where: { id },
         data,

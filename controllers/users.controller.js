@@ -1,6 +1,17 @@
 const Users = new (require("../services/users.service"))();
 
 class User_Ctrl {
+  forgetPass = async (req, res) => {
+    try {
+      const result = await Users.forgetPass(req.body.email, req.body.password);
+      if (typeof result === "object") {
+        return res.status(202).json(result);
+      }
+      return res.status(404).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
   profile = async (req, res) => {
     try {
       const result = await Users.profile(req.user_id);
@@ -15,15 +26,11 @@ class User_Ctrl {
 
   editProfile = async (req, res) => {
     try {
-      if (
-        req.body.hasOwnProperty("about") ||
-        req.body.hasOwnProperty("phone_num") ||
-        req.body.hasOwnProperty("img_thumbnail")
-      ) {
-        const result = await Users.editProfile(req.body, req.user_id);
+      const result = await Users.editProfile(req.body, req.user_id);
+      if (typeof result === "object") {
         return res.status(202).json(result);
       }
-      res.status(406).send("Cannot edit the credential/s directly!!");
+      res.status(406).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }
@@ -44,7 +51,10 @@ class User_Ctrl {
       }
       const result = await Users.signup(data);
       if (typeof result === "object") {
-        console.log(result, 'vikash');
+        if (result.provider === "google" || result.provider === "facebook") {
+          res.redirect("https://creative-black-box.herokuapp.com/profile");
+        }
+        console.log(result, "vikash");
         return res.status(201).json(result);
       }
       res.status(400).json(result);
