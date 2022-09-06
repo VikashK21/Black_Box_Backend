@@ -14,6 +14,13 @@ class Users {
       if (!result2) {
         return "The email does not exist!!";
       }
+      if (
+        (result2 && result2.provider === "google") ||
+        result.provider === "facebook"
+      ) {
+        return `Please login with ${result2.provider} Account!!`;
+      }
+      password = await bcrypt.hash(password, 12);
       const result = await prisma.users.update({
         where: { email },
         data: { password },
@@ -41,6 +48,9 @@ class Users {
         if (result2.provider === "google" || result2.provider === "facebook") {
           return `Please edit the email from your ${result2.provider} account!!`;
         }
+      }
+      if (data.hasOwnProperty("password")) {
+        data.password = await bcrypt.hash(data.password, 12);
       }
       const result = await prisma.users.update({
         where: { id },

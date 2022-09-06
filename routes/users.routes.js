@@ -28,11 +28,33 @@ router.get("/users", async (req, res, next) => {
           },
         },
       },
-      logout: { POST: { route: "/api/logout", parameters: {} } },
-      signup_google: "/api/signup/google",
-      signup_facebook: "/api/signup/facebook",
-      profile: "/api/profile",
-      editProfile: "/api/profile",
+      logout: { POST: { route: "/api/logout" } },
+      signup_google: { GET: { route: "/api/signup/google" } },
+      signup_facebook: { GET: { route: "/api/signup/facebook" } },
+      profile: { GET: { route: "/api/profile", parameters: "token" } },
+      editProfile: {
+        PATCH: {
+          route: "/api/profile",
+          parameters: {
+            img_thumbnail: "string",
+            first_name: "string",
+            last_name: "string",
+            email: "string",
+            phone_num: "string",
+            password: "string",
+          },
+        },
+      },
+      forgetPass: {
+        PATCH: {
+          route: "/api/forgetpass",
+          parameters: {
+            email: "string",
+            password: "string",
+          },
+        },
+      },
+      
     },
   });
 });
