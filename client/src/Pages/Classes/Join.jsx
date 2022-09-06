@@ -169,13 +169,13 @@ const Join = () => {
       </Container>
 
       <Container fluid className="p-0 m-0 bgw ">
-        <Container className="p-5 position-relative mt-1">
+        <Container className="p-5 pt-0 position-relative mt-1">
           <Row className="top-0">
             <Col md={4}></Col>
             <Col md={8} style={{
               height: 'fitContent',
           }}>
-              <div className="position-absolute top-0" >
+              <div className=" top-0" >
                 {course.host_details.about
                   ? course.host_details.about
                   : "Loading"}

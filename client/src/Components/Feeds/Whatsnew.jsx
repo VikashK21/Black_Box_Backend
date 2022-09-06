@@ -90,6 +90,8 @@ const Whatsnew = () => {
                         key={index}
                         style={{ height: "320px" }}
                       >
+                      <Link to={`/classes/join/${course.id}`} className="cp"> 
+
                         <div className="profileclassesimg">
                           <img src={a[0]} className="classesimg" />
                         </div>
@@ -115,6 +117,7 @@ const Whatsnew = () => {
                             </p>
                           </Col>
                         </Row>
+                      </Link>
                       </Col>
                     );
                   })

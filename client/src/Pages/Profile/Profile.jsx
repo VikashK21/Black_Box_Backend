@@ -9,6 +9,7 @@ import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
 import { AiOutlineHeart } from "react-icons/ai";
 import ReadMoreReact from "read-more-react";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { getCoursesList, courseList, setCourseList } = useContext(AuthContext);
@@ -205,6 +206,9 @@ const Profile = () => {
                           >
                             <Row className=" pt-2">
                               <Col md={8}>
+                                <h5 className="ps-2">
+                                  {course.title}
+                                </h5>
                                 <p className="gl ps-2">
                                   <ReadMoreReact
                                     text={course.description}
@@ -213,18 +217,20 @@ const Profile = () => {
                                     max={500}
                                     readMoreText=".. read more"
                                   />
-                                </p>
+                                  </p>
                               </Col>
                               <Col
                                 md={4}
                                 className="d-flex justify-content-end pe-4"
                               >
-                                <div className="d-flex">
+                                <div className="d-flex"
+                                
+                                 style={{
+                                      margin: "auto",
+                                    }}>
                                   <h6
                                     className="pe-2"
-                                    style={{
-                                      margin: "auto",
-                                    }}
+                                   
                                   >
                                     <b>
                                       {course.host_details.first_name}{" "}
@@ -232,6 +238,7 @@ const Profile = () => {
                                     </b>
                                   </h6>
                                   <img
+                                  
                                     src={
                                       host
                                         ? host.secure_url
@@ -242,10 +249,13 @@ const Profile = () => {
                                     alt="classes"
                                     className="ic"
                                   />
+                                  
                                 </div>
                               </Col>
                             </Row>
-                            <Row className="d-flex justify-content-center">
+                        <Link to={`/classes/join/${course.id}`}>
+
+                            <Row className="d-flex justify-content-center bgw">
                               <img
                                 src={a[0]}
                                 alt=""
@@ -255,21 +265,22 @@ const Profile = () => {
                                 }}
                               />
                             </Row>
+                            </Link>
                             <Row className="mt-2">
                               <Col md={1}></Col>
                               <Col
                                 md={5}
                                 className="d-flex justify-content-start"
                               >
-                                <button className="btn btn-outline-primary">
+                                <Button className="bgdark text-white">
                                   Share
-                                </button>
+                                </Button>
                               </Col>
                               <Col
                                 md={5}
                                 className="d-flex justify-content-end"
                               >
-                                <AiOutlineHeart />
+                                <AiOutlineHeart size={30} />
                               </Col>
                               <Col md={1}></Col>
                             </Row>
