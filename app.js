@@ -39,15 +39,15 @@ app.use(passport.session());
 if (process.env.NODE_ENV == "production") {
   app.use(express.static("client/build"));
 }
-// app.get("/", async (req, res, next) => {
-//   res.send({
-//     message:
-//       "You are successfully standing on to the root page, please go to /api page to view details.",
-//   });
-//   // res.send(
-//   //   '<a href="http://localhost:3001/api/signup/google">Authenticate with Google</a>'
-//   // );
-// });
+app.get("/", async (req, res, next) => {
+  res.send({
+    message:
+      "You are successfully standing on to the root page, please go to /api page to view details.",
+  });
+  // res.send(
+  //   '<a href="http://localhost:3001/api/signup/google">Authenticate with Google</a>'
+  // );
+});
 
 //The APIs sections...
 app.use("/api", require("./routes/users.routes"));
