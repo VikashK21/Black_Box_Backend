@@ -13,7 +13,7 @@ export default AuthContext;
 // export const BaseUrl = "https://black-box-backend.herokuapp.com";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api"
+export const BaseUrl ="/api"
   // process.env.NODE_ENV === "production"
   //   ? "/api"
   //   : "http://localhost:3001/api";
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       : null
   );
 
-  
+
 
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
@@ -322,6 +322,7 @@ export const AuthProvider = ({ children }) => {
     await axios
       .get(BaseUrl + "/courses")
       .then((res) => {
+        console.log(res.data);
         setCourseList(res.data);
       })
       .catch((err) => {
@@ -385,6 +386,7 @@ export const AuthProvider = ({ children }) => {
     courseDetails,
     BaseUrl,
     userDetails,
+    setCourseList,
   };
 
   return (

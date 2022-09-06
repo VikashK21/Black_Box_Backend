@@ -7,9 +7,11 @@ import Classes from "../../Images/Classes/classes.jpg";
 import Class2 from "../../Images/Classes/class2.jpg";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
+import { AiOutlineHeart } from "react-icons/ai";
+import ReadMoreReact from "read-more-react";
 
 const Profile = () => {
-  const { getCoursesList, courseList } = useContext(AuthContext);
+  const { getCoursesList, courseList, setCourseList } = useContext(AuthContext);
 
   useEffect(() => {
     getCoursesList();
@@ -195,78 +197,85 @@ const Profile = () => {
                           : null
                         : null;
                       const a = JSON.parse(course.images);
-                      if (a.length!==0) {
-                        console.log(a);
+                      if (a.length !== 0) {
                         return (
-                          
-                        <div className="my-2 bggrey rounded-5 p-3" key={index}>
-                          <Row className=" pt-2">
-                            <Col md={8}>
-                              <p className="gl ps-2">{course.description}</p>
-                            </Col>
-                            <Col
-                              md={4}
-                              className="d-flex justify-content-end pe-4"
-                            >
-                              <div className="d-flex">
-                                <h6
-                                  className="pe-2"
-                                  style={{
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <b>
-                                    {course.host_details.first_name}{" "}
-                                    {course.host_details.last_name}
-                                  </b>
-                                </h6>
-                                <img
-                                  src={
-                                    host ? (
-                                      host.secure_url ? (
-                                        host.secure_url
-                                      ) : (
-                                        DefaultPic
-                                      )
-                                    ) : (
-                                      DefaultPic
-                                    )
-                                  }
-                                  alt="classes"
-                                  className="ic"
-                                />
-                              </div>
-                            </Col>
-                          </Row>
-                          <Row className="d-flex justify-content-center">
-                            <img
-                              src={a[0]}
-                              alt=""
-                              className=""
-                              style={{
-                                width: "40%",
-                              }}
-                            />
-                          </Row>
-                          <Row className="mt-2">
-                            <Col md={1}></Col>
-                            <Col
-                              md={5}
-                              className="d-flex justify-content-start"
-                            >
-                              <button className="btn btn-outline-primary">
-                                Share
-                              </button>
-                            </Col>
-                            <Col md={5} className="d-flex justify-content-end">
-                              Love
-                            </Col>
-                            <Col md={1}></Col>
-                          </Row>
-                        </div>
-                      );
+                          <div
+                            className="my-2 bggrey rounded-5 p-3"
+                            key={index}
+                          >
+                            <Row className=" pt-2">
+                              <Col md={8}>
+                                <p className="gl ps-2">
+                                  <ReadMoreReact
+                                    text={course.description}
+                                    min={150}
+                                    ideal={200}
+                                    max={500}
+                                    readMoreText=".. read more"
+                                  />
+                                </p>
+                              </Col>
+                              <Col
+                                md={4}
+                                className="d-flex justify-content-end pe-4"
+                              >
+                                <div className="d-flex">
+                                  <h6
+                                    className="pe-2"
+                                    style={{
+                                      margin: "auto",
+                                    }}
+                                  >
+                                    <b>
+                                      {course.host_details.first_name}{" "}
+                                      {course.host_details.last_name}
+                                    </b>
+                                  </h6>
+                                  <img
+                                    src={
+                                      host
+                                        ? host.secure_url
+                                          ? host.secure_url
+                                          : DefaultPic
+                                        : DefaultPic
+                                    }
+                                    alt="classes"
+                                    className="ic"
+                                  />
+                                </div>
+                              </Col>
+                            </Row>
+                            <Row className="d-flex justify-content-center">
+                              <img
+                                src={a[0]}
+                                alt=""
+                                className=""
+                                style={{
+                                  width: "40%",
+                                }}
+                              />
+                            </Row>
+                            <Row className="mt-2">
+                              <Col md={1}></Col>
+                              <Col
+                                md={5}
+                                className="d-flex justify-content-start"
+                              >
+                                <button className="btn btn-outline-primary">
+                                  Share
+                                </button>
+                              </Col>
+                              <Col
+                                md={5}
+                                className="d-flex justify-content-end"
+                              >
+                                <AiOutlineHeart />
+                              </Col>
+                              <Col md={1}></Col>
+                            </Row>
+                          </div>
+                        );
                       }
-                      
                     })
                   : null}
               </div>

@@ -77,16 +77,42 @@ const Burger = () => {
               {show === "classes" && (
                 <>
                   <div className="py-2 ">
-                    <h5 className="underline cp ">YOGA</h5>
+                    <h5
+                      className="underline cp "
+                      onClick={() => {
+                        navigate("/classes");
+                      }}
+                    >
+                      YOGA
+                    </h5>
                   </div>
                   <div className="py-2">
-                    <h5 className="underline cp">ZUMBA</h5>
+                    <h5
+                      className="underline cp"
+                      onClick={() => {
+                        navigate("/classes");
+                      }}
+                    >
+                      ZUMBA
+                    </h5>
                   </div>
-                  <div className="py-2">
+                  <div
+                    className="py-2"
+                    onClick={() => {
+                      navigate("/classes");
+                    }}
+                  >
                     <h5 className="underline cp">GUITAR</h5>
                   </div>
                   <div className="py-2">
-                    <h5 className="underline cp">FITNESS</h5>
+                    <h5
+                      className="underline cp"
+                      onClick={() => {
+                        navigate("/classes");
+                      }}
+                    >
+                      FITNESS
+                    </h5>
                   </div>
                 </>
               )}
@@ -154,7 +180,12 @@ const Burger = () => {
                   HOME
                 </h4>
               </div>
-              <div className="py-2">
+              <div
+                className="py-2"
+                onClick={() => {
+                  navigate("/classes");
+                }}
+              >
                 <h4
                   className={
                     show === "classes"
@@ -168,7 +199,7 @@ const Burger = () => {
                   CLASSES
                 </h4>
               </div>
-              <div className="py-2">
+              {/* <div className="py-2">
                 <h4
                   className={
                     show === "live"
@@ -223,7 +254,7 @@ const Burger = () => {
                 >
                   STREAMING
                 </h4>
-              </div>
+              </div> */}
             </Col>
           </Row>
         </Container>

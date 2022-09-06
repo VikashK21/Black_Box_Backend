@@ -9,7 +9,7 @@ const passport = require("passport");
 // })
 router.get("/users", async (req, res, next) => {
   res.send({
-    message: "Ok api is working 🚀",
+    msg: "After login you have to send the auth token axcept /api/upload - video",
     login: {
       POST: {
         route: "/api/login",
@@ -54,7 +54,6 @@ router.get("/users", async (req, res, next) => {
           },
         },
       },
-      
     },
   });
 });

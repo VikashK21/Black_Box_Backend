@@ -28,6 +28,7 @@
     "react-scripts": "5.0.1",
     "react-social-login-buttons": "^3.6.1",
     "react-toastify": "^9.0.8",
+    "read-more-react": "^1.0.10",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

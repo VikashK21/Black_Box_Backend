@@ -18,6 +18,8 @@ import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import Img from "./Img";
+import DefaultPic from "../../Images/defualtProPic.jpg";
+
 
 const Join = () => {
   const { id } = useParams();
@@ -131,7 +133,7 @@ const Join = () => {
                   src={
                     course.host_details.img_thumbnail
                       ? course.host_details.img_thumbnail.secure_url
-                      : null
+                      : DefaultPic
                   }
                   alt="class1"
                   className="img-fluid iconpic my-5 icon1"
@@ -142,7 +144,7 @@ const Join = () => {
                   src={
                     course.host_details.img_thumbnail
                       ? course.host_details.img_thumbnail.secure_url
-                      : null
+                      : DefaultPic
                   }
                   alt="class1"
                   className="img-fluid iconpic icon2 "
@@ -170,8 +172,10 @@ const Join = () => {
         <Container className="p-5 position-relative mt-1">
           <Row className="top-0">
             <Col md={4}></Col>
-            <Col md={8}>
-              <div className="position-absolute top-0">
+            <Col md={8} style={{
+              height: 'fitContent',
+          }}>
+              <div className="position-absolute top-0" >
                 {course.host_details.about
                   ? course.host_details.about
                   : "Loading"}

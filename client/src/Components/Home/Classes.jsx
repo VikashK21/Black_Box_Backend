@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
+import ReadMoreReact from 'read-more-react';
+
 
 // import HoverVideoPlayer from 'react-hover-video-player';
 // import Class2 from "../../Images/Classes/class2.jpg";
@@ -55,7 +57,13 @@ const Classes = () => {
                             </div>
                             <Row className="profile m-0 p-2 pt-4">
                               <h6 className="gx classtitlee">{course.title}</h6>
-                              <p className="clsdesc">{course.description}</p>
+                              <p className="clsdesc"><ReadMoreReact
+                                    text={course.description}
+                                    min={150}
+                                    ideal={200}
+                                    max={500}
+                                    readMoreText=".. read more"
+                                  /></p>
 
                               <Col xs={8} className="p-2 pt-2 pb-0">
                                 <h6 className="gx tutorname">

@@ -10,7 +10,8 @@ const {
 
 router.get("/course", (req, res) => {
   res.send({
-    hostCourse: "/api/host/course",
+    msg: "After login you have to send the auth token axcept upload video",
+    hostCourse: { POST: { route: "/api/host/course", parameters: {} } },
     getAllCourses: "/api/courses",
     getCourseById: "/api/courses/:id",
     editCourseById: "/api/courses/:id",
@@ -47,12 +48,12 @@ router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
  * /api/host/classes:
  *  post:
  *    description: Takes all the information about the classes, designed by the trainner.
- *    security: 
+ *    security:
  *      - bearerAuth: []
  *    responses:
- *      '201': 
- *        Description: Object 
- *      '400': 
+ *      '201':
+ *        Description: Object
+ *      '400':
  *        Description: Error msg/ Error msg of db
  *    produces:
  *      - application/json
@@ -98,9 +99,9 @@ router.post("/upload", uploadVideoFile, Course_inf.uploadVideo);
  *  post:
  *    description: Takes the input from the file directory, body and saves to youtube storage as unlisted.
  *    responses:
- *      '200': 
+ *      '200':
  *        Description: Redirects to the successfull page.
- *    produces: 
+ *    produces:
  *      - application/json
  *    parameters:
  *      - name: videoFile
