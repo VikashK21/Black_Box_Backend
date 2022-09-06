@@ -11,13 +11,81 @@ const {
 router.get("/course", (req, res) => {
   res.send({
     msg: "After login you have to send the auth token axcept upload video",
-    hostCourse: { POST: { route: "/api/host/course", parameters: {} } },
-    getAllCourses: "/api/courses",
-    getCourseById: "/api/courses/:id",
-    editCourseById: "/api/courses/:id",
-    course_Classes: "/api/host/classes",
-    uploadVideoFile: "/api/upload",
-    uploaddImgFile: "/api/imgupload",
+    hostCourse: {
+      POST: {
+        route: "/api/host/course",
+        parameters: "you already have it..",
+      },
+    },
+    getAllCourses: { GET: { route: "/api/courses" } },
+    getCourseById: {
+      GET: {
+        route: "/api/courses/:id",
+        parameters: "you already have it..",
+      },
+    },
+    editCourseById: {
+      PATCH: {
+        route: "/api/courses/:id",
+        parameters: "you already have it..",
+      },
+    },
+    course_Classes: {
+      POST: {
+        route: "/api/host/classes",
+        parameters: "you already have it..",
+      },
+    },
+    uploadVideoFile: {
+      POST: { route: "/api/upload", parameters: "you already have it.." },
+    },
+    uploaddImgFile: {
+      POST: {
+        route: "/api/imgupload",
+        parameters: "you don't need to even try!!",
+      },
+    },
+    beforeCallingAddParticipant: {
+      POST: {
+        route: "/api/parallelclasses/:courseID",
+        parameters: "just fill the params",
+      },
+    },
+    addParticipant: {
+      POST: {
+        route: "/api/participant/:courseID",
+        parameters: "just fill the params",
+      },
+    },
+    giftFriends: {
+      POST: {
+        route: "/api/gift",
+        parameters: {
+          email: "string",
+          course_id: "int",
+        },
+      },
+    },
+    suggestFriends: {
+      POST: {
+        route: "/api/suggest",
+        parameters: {
+          email: "string",
+          course_id: "int",
+        },
+      },
+    },
+    nextClass: {
+      GET: {
+        route: "/api/nextclass",
+      },
+    },
+    whileJoiningTheLink: {
+      PATCH: {
+        route: "/api/attending",
+        parameters: "send the same parameters, sent by nextClass",
+      },
+    },
   });
 });
 

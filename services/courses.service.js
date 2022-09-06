@@ -391,10 +391,7 @@ class Courses_Classes {
         data: { name: name.id, course_id },
       });
       fs2.removeSync("./videos");
-      fs.writeFileSync(
-        "./youtube.json",
-        JSON.stringify({ id: "vZB3D3ykAsY" }, null, 4)
-      );
+      fs.writeFileSync("./youtube.json", JSON.stringify({ id: null }, null, 4));
     } catch (err) {
       console.log(err.message);
       return err.message;

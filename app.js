@@ -42,7 +42,7 @@ if (process.env.NODE_ENV == "production") {
 app.get("/", async (req, res, next) => {
   res.send({
     message:
-      "You are successfully standing on to the root page, please go to /api page to view details.",
+      "You are successfully standing on to the root page, please go to /api/users || /api/course page to view details.",
   });
   // res.send(
   //   '<a href="http://localhost:3001/api/signup/google">Authenticate with Google</a>'
