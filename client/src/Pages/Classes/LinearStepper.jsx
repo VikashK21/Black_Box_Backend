@@ -1,7 +1,6 @@
 import { Container } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
 
-
 import CssBaseline from "@mui/material/CssBaseline";
 // import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -104,7 +103,7 @@ const LinearStepper = () => {
           className="d-flex bggrey justify-content-center py-5 mb-5"
         >
           <div>
-            <h1 className="regtitle">Host your class</h1>
+            <h1 className="regtitle">Host your course</h1>
           </div>
         </Container>
         <Container component={Box} p={4} className="mb-5">
@@ -196,22 +195,46 @@ const LinearStepper = () => {
                         if (activeStep === 0) {
                           console.log(course);
                           if (course) {
-                            var count = 0;
-                            var err=false;
-                            for (let i in course) {
-                              if (course[i] === "" && count <= 5) {
-                                err=true;
-                                const a = capitalizeFirstLetter(i);
-                                errorToast(a + " is required");
-                              }
+                            // var count = 0;
+                            // var err = false;
+                            // for (let i in course) {
+                            //   console.log(i);
+                            //   if (course[i] === "" && count <= 4) {
+                            //     err = true;
+                            //     const a = capitalizeFirstLetter(i);
+                            //     errorToast(a + " is required");
+                            //   }
 
-                              count++;
-                            }
-                            if(err===false){
+                            //   count++;
+                            // }
+                            // if (err === false) {
+                            //   if (image) {
+                            //     HandleNext();
+                            //   } else {
+                            //     errorToast("Image is required");
+                            //   }
+                            // } else {
+                            //   console.log("error");
+                            // }
+                            if (course.title === "") {
+                              errorToast("Course name is required");
+                            } else if (course.description === "") {
+                              errorToast("Course description is required");
+                            } else if (course.price === "") {
+                              errorToast("Course price is required");
+                            } else if (course.max_students === "") {
+                              errorToast("Max_students is required");
+                            } else if (course.link === "") {
+                              errorToast("Link is required");
+                            } else if (image.length === 0) {
+                              errorToast(
+                                "Upload any one image. It is required"
+                              );
+                            } else {
                               HandleNext();
                             }
                           } else {
-                            HandleNext();
+                            errorToast("Course data is required");
                           }
                         } else {
                           HandleNext();

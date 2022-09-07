@@ -17,49 +17,43 @@ import axios from "axios";
 import FormDialog from "../../Components/Common/FormDialog";
 import MeetLink from "./MeetLink";
 
-
 const Host4 = () => {
-    const {
-        setCourse,
-        course,
-        image,
-        setImage,
-      } = useContext(AuthContext);
-    
-      const [name, setName] = useState(false);
-      const [email, setEmail] = useState(false);
-      const [password, setPassword] = useState(false);
-      const [profile, setProfile] = useState(false);
-      const [showCropper, setShowCropper] = useState(false);
-      // const [cropImage, setCropImage] = useState([]);
-      const [cropImage, setCropImage] = useState(false);
-      const [thumbnail, setThumbnail] = useState(true);
-    
-      const navigate = useNavigate();
-    
-      
-    
-      const handleMethodologyChange = (e, index) => {
-        const { name, value } = e.target;
-        const list = [...course.methodology];
-        list[index][name] = value;
-        setCourse({ ...course, index: list });
-      };
-    
-      const handleRemove = (index) => {
-        const list = [...course.content];
-        list.splice(index, 1);
-        setCourse({ ...course, content: list });
-      };
-    
-      useEffect(() => {
-        console.log(image);
-      }, [image]);
-    
-      const changeHandler = (e) => {
-        setCourse({ ...course, [e.target.name]: e.target.value });
-        console.log(course);
-      };
+  const { setCourse, course, image, setImage } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (course.type === "") {
+      navigate("/host");
+    }
+  }, []);
+
+  const [name, setName] = useState(false);
+  const [email, setEmail] = useState(false);
+  const [password, setPassword] = useState(false);
+  const [profile, setProfile] = useState(false);
+  const [showCropper, setShowCropper] = useState(false);
+  // const [cropImage, setCropImage] = useState([]);
+  const [cropImage, setCropImage] = useState(false);
+  const [thumbnail, setThumbnail] = useState(true);
+
+  const navigate = useNavigate();
+
+  const handleMethodologyChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...course.methodology];
+    list[index][name] = value;
+    setCourse({ ...course, index: list });
+  };
+
+  const handleRemove = (index) => {
+    const list = [...course.content];
+    list.splice(index, 1);
+    setCourse({ ...course, content: list });
+  };
+
+  const changeHandler = (e) => {
+    setCourse({ ...course, [e.target.name]: e.target.value });
+    console.log(course);
+  };
   return (
     <Container fluid className="p-0 m-0 ">
       {/* <Header /> */}
@@ -86,7 +80,7 @@ const Host4 = () => {
                     required
                   />
                 </Col>
-                
+
                 <Col md={12} className="mx-0">
                   <TextField
                     className="my-2 w-100"
@@ -118,7 +112,7 @@ const Host4 = () => {
                   <TextField
                     className="my-2 w-100"
                     label="Price"
-                    name="price" 
+                    name="price"
                     placeholder="Fee e.g. 1400"
                     defaultValue={course.price}
                     onChange={changeHandler}
@@ -234,7 +228,7 @@ const Host4 = () => {
       </Container>
       {/* <Footer /> */}
     </Container>
-  )
-}
+  );
+};
 
-export default Host4
+export default Host4;

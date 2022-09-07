@@ -88,7 +88,7 @@ router.get("/course", (req, res) => {
     },
     deleteCourse: {
       DELETE: {
-        route: "/api/delete/course:id",
+        route: "/api/delete/course/:id",
       },
     },
   });

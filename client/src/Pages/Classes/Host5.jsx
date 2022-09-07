@@ -1,6 +1,6 @@
 import { Box, Button, ButtonBase, TextField } from "@mui/material";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
@@ -19,72 +19,78 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import { useNavigate } from "react-router-dom";
 
 const Host5 = () => {
-    const { course, setCourse } = useContext(AuthContext);
-    const navigate = useNavigate();
-  
-    const handleContentChange = (e, index) => {
-      const { name, value } = e.target;
-      const list = [...course.content];
-      list[index][name] = value;
-      setCourse({ ...course, content: list });
-    };
-  
-    const handleContentRemove = (index) => {
-      const list = [...course.content];
-      list.splice(index, 1);
-      setCourse({ ...course, content: list });
-    };
-  
-    const handleContentAdd = () => {
-      setCourse({ ...course, content: [...course.content, { content: "" }] });
-      console.log(course);
-    };
-  
-    const handleMethodologyChange = (e, index) => {
-      const { name, value } = e.target;
-      const list = [...course.methodology];
-      list[index][name] = value;
-      setCourse({ ...course, index: list });
-    };
-  
-    const handleMethodologyRemove = (index) => {
-      const list = [...course.methodology];
-      list.splice(index, 1);
-      setCourse({ ...course, methodology: list });
-    };
-  
-    const handleMethodologyAdd = () => {
-      setCourse({
-        ...course,
-        methodology: [...course.methodology, { methodology: "" }],
-      });
-      console.log(course);
-    };
-  
-    const handleRequirementChange = (e, index) => {
-      const { name, value } = e.target;
-      const list = [...course.requirements];
-      list[index][name] = value;
-      setCourse({ ...course, requirements: list });
-    };
-  
-    const changeHandler = (e) => {
-      setCourse({ ...course, [e.target.name]: e.target.value });
-      console.log(course);
-    };
-  
-    const handleRequirementRemove = (index) => {
-      const list = [...course.requirements];
-      list.splice(index, 1);
-      setCourse({ ...course, requirements: list });
-    };
-    const handleRequirementAdd = () => {
-      setCourse({
-        ...course,
-        requirements: [...course.requirements, { requirements: "" }],
-      });
-      console.log(course);
-    };
+  const { course, setCourse } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (course.type === "") {
+      navigate("/host");
+    }
+  }, []);
+
+  const handleContentChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...course.content];
+    list[index][name] = value;
+    setCourse({ ...course, content: list });
+  };
+
+  const handleContentRemove = (index) => {
+    const list = [...course.content];
+    list.splice(index, 1);
+    setCourse({ ...course, content: list });
+  };
+
+  const handleContentAdd = () => {
+    setCourse({ ...course, content: [...course.content, { content: "" }] });
+    console.log(course);
+  };
+
+  const handleMethodologyChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...course.methodology];
+    list[index][name] = value;
+    setCourse({ ...course, index: list });
+  };
+
+  const handleMethodologyRemove = (index) => {
+    const list = [...course.methodology];
+    list.splice(index, 1);
+    setCourse({ ...course, methodology: list });
+  };
+
+  const handleMethodologyAdd = () => {
+    setCourse({
+      ...course,
+      methodology: [...course.methodology, { methodology: "" }],
+    });
+    console.log(course);
+  };
+
+  const handleRequirementChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...course.requirements];
+    list[index][name] = value;
+    setCourse({ ...course, requirements: list });
+  };
+
+  const changeHandler = (e) => {
+    setCourse({ ...course, [e.target.name]: e.target.value });
+    console.log(course);
+  };
+
+  const handleRequirementRemove = (index) => {
+    const list = [...course.requirements];
+    list.splice(index, 1);
+    setCourse({ ...course, requirements: list });
+  };
+  const handleRequirementAdd = () => {
+    setCourse({
+      ...course,
+      requirements: [...course.requirements, { requirements: "" }],
+    });
+    console.log(course);
+  };
   return (
     <div>
       {" "}

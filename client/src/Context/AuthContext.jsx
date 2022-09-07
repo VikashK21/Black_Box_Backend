@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { imageListItemClasses } from "@mui/material";
+import StyleContext from "./StyleContext";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -13,10 +14,10 @@ export default AuthContext;
 // export const BaseUrl = "https://black-box-backend.herokuapp.com";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl =
-  process.env.NODE_ENV === "production"
-    ? "/api"
-    : "http://localhost:3001/api";
+export const BaseUrl = "/api";
+// process.env.NODE_ENV === "production"
+//   ? "/api"
+//   : "http://localhost:3001/api";
 
 // export const BaseLink = "http://localhost:3000/";
 
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       : null
   );
 
-
+  const { errorToast, successToast } = useContext(StyleContext);
 
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
@@ -57,9 +58,9 @@ export const AuthProvider = ({ children }) => {
     description: "",
     price: "",
     max_students: "",
-    type: "",
     link: "",
     images: [""],
+    type: "",
     structure: "",
     classes: "",
     methodology: [{}],
@@ -148,10 +149,12 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err.data);
-        // setErrUser("Username or Password is incorrect");
-        // setTimeout(() => {
-        //   setErrUser("");
-        // }, 1500);
+        if (err.response.status === 400) {
+          errorToast("Invalid Username or password");
+          // setTimeout(() => {
+          //   errorToast("");
+          // }, 1500);
+        }
       });
   };
 

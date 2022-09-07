@@ -69,7 +69,9 @@ const Host = () => {
   };
 
   useEffect(() => {
-    console.log(image);
+    if (course.type === "") {
+      navigate("/host");
+    }
   }, [image]);
 
   const changeHandler = (e) => {
@@ -91,7 +93,7 @@ const Host = () => {
           <form className="d-flex justify-content-center flex-column w-100  m-2 ">
             <div className="d-flex justify-content-center w-100 mb-5">
               <Row className=" w-100" style={{ maxWidth: "700px" }}>
-                <Col md={6}>
+                <Col md={12}>
                   <TextField
                     className="my-2 w-100"
                     label="Title"
@@ -103,23 +105,7 @@ const Host = () => {
                     required
                   />
                 </Col>
-                <Col md={6} className="d-flex">
-                  <TextField
-                    className="my-2 w-100"
-                    label="Price"
-                    name="price" 
-                    placeholder="Fee e.g. 1400"
-                    defaultValue={course.price}
-                    onChange={changeHandler}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">₹</InputAdornment>
-                      ),
-                    }}
-                    variant="outlined"
-                    required
-                  />
-                </Col>
+                
                 <Col md={12} className="mx-0">
                   <TextField
                     className="my-2 w-100"
@@ -147,28 +133,29 @@ const Host = () => {
                     required
                   />
                 </Col>
-                <Col md={6}>
-                  <FormControll fullWidth className="my-2">
-                    <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      defaultValue={course.type}
-                      name="type"
-                      onChange={changeHandler}
-                      label="Type"
-                    >
-                      <MenuItem value="Course">Course</MenuItem>
-                      <MenuItem value="Classes">Classes</MenuItem>
-                    </Select>
-                  </FormControll>
+                <Col md={6} className="d-flex">
+                  <TextField
+                    className="my-2 w-100"
+                    label="Price"
+                    name="price" 
+                    placeholder="Fee e.g. 1400"
+                    defaultValue={course.price}
+                    onChange={changeHandler}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">₹</InputAdornment>
+                      ),
+                    }}
+                    variant="outlined"
+                    required
+                  />
                 </Col>
                 <Col md={12} className="mx-0 d-flex ">
                   <TextField
                     className="my-2 w-100"
                     label="Google meet"
                     name="link"
-                    defaultValue={course.meet}
+                    defaultValue={course.link}
                     placeholder="To get the google meet link, click on Link button"
                     onChange={changeHandler}
                     variant="outlined"

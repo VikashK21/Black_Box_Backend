@@ -2,7 +2,7 @@
 // import AuthContext from "../../Context/AuthContext";
 import { Box, Button, ButtonBase, TextField } from "@mui/material";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
@@ -23,8 +23,15 @@ import { useNavigate } from "react-router-dom";
 const Host2 = () => {
   //   const [serviceList, setServiceList] = useState([{ service: "" }]);
 
-  const { course, setCourse } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (course.type === "") {
+      navigate("/host");
+    }
+  }, []);
+
+  const { course, setCourse } = useContext(AuthContext);
 
   const handleContentChange = (e, index) => {
     const { name, value } = e.target;

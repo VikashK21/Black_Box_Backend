@@ -19,9 +19,9 @@ import StyleContext from "../../Context/StyleContext";
 
 function getSteps() {
   return [
-    "Course details",
-    "Course description",
-    "Class timings and description",
+    "Class details",
+    "Class description",
+    "Class timings",
   ];
 }
 
@@ -96,7 +96,7 @@ const LinearStepper2 = () => {
           className="d-flex bggrey justify-content-center py-5 mb-5"
         >
           <div>
-            <h1 className="regtitle">Host your course</h1>
+            <h1 className="regtitle">Host your class</h1>
           </div>
         </Container>
         <Container component={Box} p={4} className="mb-5">

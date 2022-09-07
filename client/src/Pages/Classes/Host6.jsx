@@ -6,20 +6,28 @@ import {
   TextField,
 } from "@mui/material";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
 import "react-phone-input-2/lib/bootstrap.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DatePicker from "react-multi-date-picker";
 
 const Host6 = () => {
-  const { classes, setClasses, HostClasses } = useContext(AuthContext);
+  const { classes, setClasses, HostClasses,course } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (course.type === "") {
+      navigate("/host");
+    }
+  }, []);
 
   return (
     <Container fluid className=" p-0 m-0 ">

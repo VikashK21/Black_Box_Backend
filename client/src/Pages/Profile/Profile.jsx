@@ -7,7 +7,7 @@ import Classes from "../../Images/Classes/classes.jpg";
 import Class2 from "../../Images/Classes/class2.jpg";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import ReadMoreReact from "read-more-react";
 import { Link } from "react-router-dom";
 
@@ -281,6 +281,7 @@ const Profile = () => {
                                 className="d-flex justify-content-end"
                               >
                                 <AiOutlineHeart size={30} />
+                                <AiFillHeart size={30} />
                               </Col>
                               <Col md={1}></Col>
                             </Row>
