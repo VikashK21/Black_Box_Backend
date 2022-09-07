@@ -2,8 +2,8 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcrypt = require("bcrypt");
 const { authenticationToken } = require("../auth/user.auth");
-const phoneConfig = require("../config/twilio.cofig");
-const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
+// const phoneConfig = require("../config/twilio.cofig");
+// const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
   async forgetPass(email, password) {
