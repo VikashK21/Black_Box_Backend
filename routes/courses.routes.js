@@ -86,8 +86,16 @@ router.get("/course", (req, res) => {
         parameters: "send the same parameters, sent by nextClass",
       },
     },
+    deleteCourse: {
+      DELETE: {
+        route: "/api/delete/course:id",
+      },
+    },
   });
 });
+
+//Use very carefully!!
+router.delete("/delete/course/:id", Course_inf.deleteCourse);
 
 //Courses with Classes:
 router.post("/host/course", authorizationToken, Course_inf.hostCourse);

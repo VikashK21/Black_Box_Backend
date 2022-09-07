@@ -4,6 +4,57 @@ const fs = require("fs");
 const fs2 = require("fs-extra");
 
 class Courses_Classes {
+  async deleteCourse(id) {
+    try {
+      const result = await prisma.course.findUnique({
+        where: { id },
+        include: {
+          Classes: true,
+          Vid_Classes: true,
+          Participants: true,
+          Gift: true,
+          Suggest: true,
+        },
+      });
+      //1
+      if (result && result.Classes.length > 0) {
+        await prisma.classes.deleteMany({
+          where: { course_id: id },
+        });
+      }
+      //2
+      if (result && result.Vid_Classes.length > 0) {
+        await prisma.vid_Classes.deleteMany({
+          where: { course_id: id },
+        });
+      }
+      //3
+      if (result && result.Participants.length > 0) {
+        await prisma.participants.deleteMany({
+          where: { course_id: id },
+        });
+      }
+      //4
+      if (result && result.Gift.length > 0) {
+        await prisma.gift.deleteMany({
+          where: { course_id: id },
+        });
+      }
+      //5
+      if (result && result.Suggest.length > 0) {
+        await prisma.suggest.deleteMany({
+          where: { course_id: id },
+        });
+      }
+      if (result) {
+        await prisma.course.delete({ where: { id } });
+        return "Successfully the course details deleted.";
+      }
+      return "The course does not exist!!";
+    } catch (err) {
+      return err.message;
+    }
+  }
   async attendingCls(data) {
     try {
       // {

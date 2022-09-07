@@ -5,6 +5,14 @@ const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
 
 class Course_inf {
+  deleteCourse = async (req, res) => {
+    try {
+      const result = await Courses.deleteCourse(Number(req.params.id));
+      res.status(200).send(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
   attendingCls = async (req, res) => {
     try {
       const result = await Courses.attendingCls(req.body);
@@ -13,7 +21,7 @@ class Course_inf {
       res.status(400).json(err.message);
     }
   };
-  
+
   nextClass = async (req, res) => {
     try {
       const result = await Courses.nextClass(req.user_id);
