@@ -1,6 +1,6 @@
 //Remeber the errors can be from here also, when without .evn...
 require("dotenv").config();
-require("./auth/google.auth");
+// require("./auth/google.auth");
 // require("./auth/facebook.auth");
 //Modules : ) ...
 const express = require("express");
