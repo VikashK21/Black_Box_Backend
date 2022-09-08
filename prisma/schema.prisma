@@ -52,6 +52,7 @@ model Course {
   Participants    Participants[]
   Gift            Gift[]
   Suggest         Suggest[]
+  Reactions       Reactions[]
 }
 
 model Classes {
@@ -103,4 +104,10 @@ model Suggest {
   course         Course       @relation(fields: [course_id], references: [id])
   course_id      Int
   approved_parti Participants @relation(fields: [id], references: [id])
+}
+
+model Reactions {
+  id        Int    @id @default(autoincrement())
+  course_id Int
+  courses   Course @relation(fields: [course_id], references: [id])
 }
