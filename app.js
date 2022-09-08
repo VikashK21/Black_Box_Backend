@@ -1,6 +1,6 @@
 //Remeber the errors can be from here also, when without .evn...
 require("dotenv").config();
-// require("./auth/google.auth");
+require("./auth/google.auth");
 // require("./auth/facebook.auth");
 //Modules : ) ...
 const express = require("express");
@@ -36,9 +36,9 @@ app.use(passport.session());
 
 //Home page
 
-// if (process.env.NODE_ENV == "production") {
-//   app.use(express.static("client/build"));
-// }
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+}
 // app.get("/", async (req, res, next) => {
 //   res.send({
 //     message:
