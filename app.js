@@ -37,11 +37,7 @@ app.use(passport.session());
 
 //Home page
 if (process.env.NODE_ENV == "production") {
-  app.get("*", (req, res) => {
-    express.static("client/build")
-    // app.use(express.static("client/build"));
-    // res.sendFile(path.resolve(__dirname, "client/build", "index.html"))
-  })
+  app.use(express.static("client/build"));
 }
 // app.get("/", async (req, res, next) => {
 //   res.send({
