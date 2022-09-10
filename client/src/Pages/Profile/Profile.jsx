@@ -206,39 +206,25 @@ const Profile = () => {
                           >
                             <Row className=" pt-2">
                               <Col md={8}>
-                                <h5 className="ps-2">
-                                  {course.title}
-                                </h5>
-                                <p className="gl ps-2">
-                                  <ReadMoreReact
-                                    text={course.description}
-                                    min={150}
-                                    ideal={200}
-                                    max={500}
-                                    readMoreText=".. read more"
-                                  />
-                                  </p>
+                                <h5 className="ps-2">{course.title}</h5>
                               </Col>
                               <Col
                                 md={4}
                                 className="d-flex justify-content-end pe-4"
                               >
-                                <div className="d-flex"
-                                
-                                 style={{
-                                      margin: "auto",
-                                    }}>
-                                  <h6
-                                    className="pe-2"
-                                   
-                                  >
+                                <div
+                                  className="d-flex"
+                                  style={{
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <h6 className="pe-2">
                                     <b>
                                       {course.host_details.first_name}{" "}
                                       {course.host_details.last_name}
                                     </b>
                                   </h6>
                                   <img
-                                  
                                     src={
                                       host
                                         ? host.secure_url
@@ -249,22 +235,20 @@ const Profile = () => {
                                     alt="classes"
                                     className="ic"
                                   />
-                                  
                                 </div>
                               </Col>
                             </Row>
-                        <Link to={`/classes/join/${course.id}`}>
-
-                            <Row className="d-flex justify-content-center bgw">
-                              <img
-                                src={a[0]}
-                                alt=""
-                                className=""
-                                style={{
-                                  width: "40%",
-                                }}
-                              />
-                            </Row>
+                            <Link to={`/classes/join/${course.id}`}>
+                              <Row className="d-flex justify-content-center bgw">
+                                <img
+                                  src={a[0]}
+                                  alt=""
+                                  className=""
+                                  style={{
+                                    width: "40%",
+                                  }}
+                                />
+                              </Row>
                             </Link>
                             <Row className="mt-2">
                               <Col md={1}></Col>

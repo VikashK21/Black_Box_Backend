@@ -46,13 +46,13 @@ function App() {
                 <Route path="/hosting" element={<LinearStepper />} />
                 <Route path="/hosting2" element={<LinearStepper2 />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/host" element={<Host />} />
-                <Route path="/host/2" element={<Host2 />} />
-                <Route path="/host/3" element={<Host3 />} />
-                <Route path="/host/4" element={<Host4 />} />
-                <Route path="/host/5" element={<Host5 />} />
-                <Route path="/host/6" element={<Host6 />} />
               </Route>
+              <Route path="/host" element={<Host />} />
+              <Route path="/host/2" element={<Host2 />} />
+              <Route path="/host/3" element={<Host3 />} />
+              <Route path="/host/4" element={<Host4 />} />
+              <Route path="/host/5" element={<Host5 />} />
+              <Route path="/host/6" element={<Host6 />} />
               <Route path="/main" element={<Main />} />
               <Route path="/nav" element={<Burger />} />
               <Route path="/classes" element={<Classes />} />

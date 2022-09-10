@@ -272,7 +272,7 @@ const Host2 = () => {
 
                   <h5 className="text-start">Classes</h5>
 
-                  <Col md={12}>
+                  {/* <Col md={12}>
                     <TextField
                       
                       label="Enter class timings"
@@ -283,7 +283,7 @@ const Host2 = () => {
                       variant="outlined"
                       className=" mb-3 w-100"
                     />
-                  </Col>
+                  </Col> */}
                 </Row>
               </Box>
             </form>

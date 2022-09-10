@@ -265,7 +265,7 @@ const Host5 = () => {
 
                     <h5 className="text-start">Classes</h5>
 
-                    <Col md={12}>
+                    {/* <Col md={12}>
                       <TextField
                         label="Enter class timings"
                         placeholder="e.g. 2 hours per week on every Saturday 9 pm – 10 pm"
@@ -275,7 +275,7 @@ const Host5 = () => {
                         variant="outlined"
                         className=" mb-3 w-100"
                       />
-                    </Col>
+                    </Col> */}
                   </Row>
                 </Box>
               </form>

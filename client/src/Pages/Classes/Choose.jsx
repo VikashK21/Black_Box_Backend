@@ -37,7 +37,7 @@ const Choose = () => {
           className="d-flex bggrey justify-content-center py-5 mb-5"
         >
           <div>
-            <h1 className="regtitle">Choose your type</h1>
+            <h1 className="regtitle">Course type</h1>
           </div>
         </Container>
       <Container
@@ -64,7 +64,7 @@ const Choose = () => {
                 where you can teach one course on the same subject by taking
                 multiple days to complete the whole topic. You will have to mention what topics you will be convering in different days.
               </p>
-              <p className="gl ">E.g. </p>
+              {/* <p className="gl ">E.g. </p> */}
             </b>
           </div>
           <div className="w-100 ps-5">
@@ -85,7 +85,7 @@ const Choose = () => {
                 different days. You can set different days as the students will
                 feel flexible to choose any class they are available to.
               </p>
-              <p className="gl ">E.g. </p>
+              {/* <p className="gl ">E.g. </p> */}
             </b>
           </div>
         </div>

@@ -95,8 +95,14 @@ const Whatsnew = () => {
                         <div className="profileclassesimg">
                           <img src={a[0]} className="classesimg" />
                         </div>
-                        <Row className="profilest bw m-0 p-2">
-                          <Col xs={4} className="">
+                        <Row className="profilest bw m-0 p-2" 
+                        style={{
+                          overflowY: "hidden",
+                        }}
+                        >
+                          <Col xs={4} className="" 
+                          
+                          >
                             <img
                               src={
                                 host

@@ -48,16 +48,16 @@ const Header = () => {
                       HOST A CLASS
                     </Link>
                   </li>
-                  <li>
-                    {/* <Link to='/enter' className='link px-2 '> */}
+                  {/* <li>
+                    <Link to='/enter' className='link px-2 '>
                     <BsSearch className="" size={25} />
-                    {/* </Link> */}
-                  </li>
-                  <li>
+                    </Link>
+                  </li> */}
+                  {/* <li>
                     <Link to="/login" className="link px-2 ">
                       <BsGlobe className="" size={25} />
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     {/* <Link to="/profile" className="link px-2 ">
                       <FaRegUser className="" size={25} />

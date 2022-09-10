@@ -120,6 +120,8 @@ code {
   overflow: hidden !important;
   position: absolute !important;
   border-radius: 15px !important;
+  transition: 0s !important;
+
 }
 
 .zoom:hover {
@@ -128,6 +130,7 @@ code {
 
   height: fit-content !important;
   transform: scale(1.1);
+  transition-delay: 1s !important;
   transition: transform 0.3s;
   background-color: hsla(0, 100%, 100%, 0.16);
   box-shadow:
@@ -171,7 +174,7 @@ code {
   width: 100% !important;
 }
 
-.video button{
+.video button {
   position: absolute !important;
   display: block;
   background: url(http://www.slatecube.com/images/play-btn.png);
@@ -185,5 +188,8 @@ code {
   border: none;
   opacity: 0.5;
   cursor: pointer;
-  
+}
+
+.read-more-button{
+  cursor: pointer !important;
 }

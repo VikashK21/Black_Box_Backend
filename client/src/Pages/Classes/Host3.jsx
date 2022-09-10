@@ -72,7 +72,6 @@ const Host3 = () => {
                   <div className="d-flex">
                     {/* ₹ */}
                     <TextField
-                      
                       label="Fee"
                       name="fee"
                       value={classes.fee}
@@ -93,7 +92,6 @@ const Host3 = () => {
                 <Col md={12} className="my-2">
                   <div className="d-flex">
                     <TextField
-                      
                       label="Description"
                       name="description"
                       multiline

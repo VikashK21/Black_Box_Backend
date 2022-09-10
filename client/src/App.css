@@ -566,7 +566,7 @@ ul{
   font-size: clamp(0.9rem, 4vw, 1.2rem);
   font-family: Gilroy-ExtraBold !important;
   color: rgb(85, 85, 85) !important;
-  line-height: 0.5;
+  line-height: 1;
 }
 
 .tutorname{

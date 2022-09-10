@@ -14,9 +14,10 @@ export default AuthContext;
 // export const BaseUrl = "https://black-box-backend.herokuapp.com";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api";
-// export const BaseUrl = 'http://localhost:3001/api'
-  // process.env.NODE_ENV === "production" ? "/api" : "http://localhost:3001/api";
+export const BaseUrl = "/api"
+  // process.env.NODE_ENV === "production"
+  //   ? "/api"
+  //   : "http://localhost:3001/api";
 
 // export const BaseLink = "http://localhost:3000/";
 
@@ -34,7 +35,9 @@ export const AuthProvider = ({ children }) => {
       : null
   );
 
-  const { errorToast, successToast } = useContext(StyleContext);
+  const {errorToast, successToast} = useContext(StyleContext)
+
+
 
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
@@ -153,7 +156,9 @@ export const AuthProvider = ({ children }) => {
           // setTimeout(() => {
           //   errorToast("");
           // }, 1500);
+
         }
+
       });
   };
 
