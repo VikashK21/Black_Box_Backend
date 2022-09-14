@@ -4,6 +4,28 @@ const fs = require("fs");
 const fs2 = require("fs-extra");
 
 class Courses_Classes {
+  async courseReaction(reactor_id, course_id) {
+    try {
+      const result = await prisma.reactions.findFirst({
+        where: { reactor_id, course_id },
+      });
+      if (result && result.heartful === 1) {
+        return await prisma.reactions.delete({
+          where: { id: result.id },
+        });
+      } else if (!result) {
+        return await prisma.reactions.create({
+          data: {
+            course_id,
+            reactor_id,
+          },
+        });
+      }
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   async deleteCourse(id) {
     try {
       const result = await prisma.course.findUnique({
@@ -359,7 +381,12 @@ class Courses_Classes {
     try {
       const result = await prisma.course.findUnique({
         where: { id },
-        include: { host_details: true, Classes: true, Vid_Classes: true },
+        include: {
+          host_details: true,
+          Classes: true,
+          Vid_Classes: true,
+          Reactions: true,
+        },
       });
       if (result && result.images.length > 0) {
         result.images = JSON.parse(result.images[0]);
@@ -378,6 +405,12 @@ class Courses_Classes {
           host_details: true,
           Classes: true,
           Vid_Classes: true,
+          Reactions: true,
+          _count: {
+            select: {
+              Reactions: true,
+            },
+          },
         },
         orderBy: {
           id: "desc",

@@ -57,6 +57,7 @@ router.get("/course", (req, res) => {
         parameters: "just fill the params",
       },
     },
+    //only for single
     giftFriends: {
       POST: {
         route: "/api/gift",
@@ -66,6 +67,7 @@ router.get("/course", (req, res) => {
         },
       },
     },
+    //only for single
     suggestFriends: {
       POST: {
         route: "/api/suggest",
@@ -91,14 +93,23 @@ router.get("/course", (req, res) => {
         route: "/api/delete/course/:id",
       },
     },
+    reactCourse: {
+      POST: {
+        route: "/api/react/:courseID",
+      },
+    },
   });
 });
+
+//reactions...
+router.post("/react/:courseID", authorizationToken, Course_inf.courseReaction);
 
 //Use very carefully!!
 router.delete("/delete/course/:id", Course_inf.deleteCourse);
 
 //Courses with Classes:
 router.post("/host/course", authorizationToken, Course_inf.hostCourse);
+//also adding the reaction...
 router.get("/courses", Course_inf.getAllCourses);
 router.get("/courses/:id", Course_inf.getCourseById);
 router.patch("/courses/:id", authorizationToken, Course_inf.editCourseById);

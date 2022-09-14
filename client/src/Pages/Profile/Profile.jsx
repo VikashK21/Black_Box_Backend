@@ -7,15 +7,24 @@ import Classes from "../../Images/Classes/classes.jpg";
 import Class2 from "../../Images/Classes/class2.jpg";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import ReadMoreReact from "read-more-react";
+import { AiFillHeart } from "react-icons/ai";
+// import ReadMoreReact from "read-more-react";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { getCoursesList, courseList, setCourseList } = useContext(AuthContext);
+  const {
+    getCoursesList,
+    courseList,
+    // setCourseList,
+    reaction,
+    triggerReaction,
+  } = useContext(AuthContext);
+  // const [reaction, setReaction] = useState([]);
 
   useEffect(() => {
+    ////
     getCoursesList();
+    // eslint-disable-next-line
   }, []);
 
   const [timer, setTimer] = useState(true);
@@ -190,90 +199,99 @@ const Profile = () => {
             </Col>
             <Col md={8} className="p-0 ">
               <div className="feeds">
-                {courseList
-                  ? courseList.map((course, index) => {
-                      const host = course.host_details.img_thumbnail
-                        ? course.host_details.img_thumbnail.secure_url !== null
-                          ? JSON.parse(course.host_details.img_thumbnail)
-                          : null
-                        : null;
-                      const a = JSON.parse(course.images);
-                      if (a.length !== 0) {
-                        return (
-                          <div
-                            className="my-2 bggrey rounded-5 p-3"
-                            key={index}
-                          >
-                            <Row className=" pt-2">
-                              <Col md={8}>
-                                <h5 className="ps-2">{course.title}</h5>
-                              </Col>
-                              <Col
-                                md={4}
-                                className="d-flex justify-content-end pe-4"
+                {courseList.length > 0 &&
+                  courseList.map((course, index) => {
+                    const host = course.host_details.img_thumbnail
+                      ? course.host_details.img_thumbnail.secure_url !== null
+                        ? JSON.parse(course.host_details.img_thumbnail)
+                        : null
+                      : null;
+                    const a = JSON.parse(course.images);
+                    if (a.length !== 0) {
+                      return (
+                        <div className="my-2 bggrey rounded-5 p-3" key={index}>
+                          <Row className=" pt-2">
+                            <Col md={8}>
+                              <h5 className="ps-2">{course.title}</h5>
+                            </Col>
+                            <Col
+                              md={4}
+                              className="d-flex justify-content-end pe-4"
+                            >
+                              <div
+                                className="d-flex"
+                                style={{
+                                  margin: "auto",
+                                }}
                               >
-                                <div
-                                  className="d-flex"
-                                  style={{
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <h6 className="pe-2">
-                                    <b>
-                                      {course.host_details.first_name}{" "}
-                                      {course.host_details.last_name}
-                                    </b>
-                                  </h6>
-                                  <img
-                                    src={
-                                      host
-                                        ? host.secure_url
-                                          ? host.secure_url
-                                          : DefaultPic
-                                        : DefaultPic
-                                    }
-                                    alt="classes"
-                                    className="ic"
-                                  />
-                                </div>
-                              </Col>
-                            </Row>
-                            <Link to={`/classes/join/${course.id}`}>
-                              <Row className="d-flex justify-content-center bgw">
+                                <h6 className="pe-2">
+                                  <b>
+                                    {course.host_details.first_name}{" "}
+                                    {course.host_details.last_name}
+                                  </b>
+                                </h6>
                                 <img
-                                  src={a[0]}
-                                  alt=""
-                                  className=""
-                                  style={{
-                                    width: "40%",
-                                  }}
+                                  src={
+                                    host
+                                      ? host.secure_url
+                                        ? host.secure_url
+                                        : DefaultPic
+                                      : DefaultPic
+                                  }
+                                  alt="classes"
+                                  className="ic"
                                 />
-                              </Row>
-                            </Link>
-                            <Row className="mt-2">
-                              <Col md={1}></Col>
-                              <Col
-                                md={5}
-                                className="d-flex justify-content-start"
-                              >
-                                <Button className="bgdark text-white">
-                                  Share
-                                </Button>
-                              </Col>
-                              <Col
-                                md={5}
-                                className="d-flex justify-content-end"
-                              >
-                                <AiOutlineHeart size={30} />
-                                <AiFillHeart size={30} />
-                              </Col>
-                              <Col md={1}></Col>
+                              </div>
+                            </Col>
+                          </Row>
+                          <Link to={`/classes/join/${course.id}`}>
+                            <Row className="d-flex justify-content-center bgw">
+                              <img
+                                src={a[0]}
+                                alt=""
+                                className=""
+                                style={{
+                                  width: "40%",
+                                }}
+                              />
                             </Row>
-                          </div>
-                        );
-                      }
-                    })
-                  : null}
+                          </Link>
+                          <Row className="mt-2">
+                            <Col md={1}></Col>
+                            <Col
+                              md={5}
+                              className="d-flex justify-content-start"
+                            >
+                              <Button className="bgdark text-white">
+                                Share
+                              </Button>
+                            </Col>
+                            <Col md={5} className="d-flex justify-content-end">
+                              <div>
+                                {reaction.length > 0 &&
+                                reaction[index].count > 0
+                                  ? reaction[index].count
+                                  : " "}
+                              </div>
+                              <AiFillHeart
+                                onClick={() => {
+                                  triggerReaction(index, course.id);
+                                }}
+                                size={30}
+                                style={{
+                                  color:
+                                    reaction.length > 0 && reaction[index].heart
+                                      ? "orange"
+                                      : "gray",
+                                }}
+                              />
+                            </Col>
+                            <Col md={1}></Col>
+                          </Row>
+                        </div>
+                      );
+                    }
+                  })}
               </div>
             </Col>
           </Row>

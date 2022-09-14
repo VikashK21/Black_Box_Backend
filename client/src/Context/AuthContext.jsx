@@ -2,22 +2,22 @@ import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { imageListItemClasses } from "@mui/material";
+// import { imageListItemClasses } from "@mui/material";
 import StyleContext from "./StyleContext";
 
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api/";
+export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://black-box-backend.herokuapp.com";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api"
-  // process.env.NODE_ENV === "production"
-  //   ? "/api"
-  //   : "http://localhost:3001/api";
+// export const BaseUrl = "/api"
+// process.env.NODE_ENV === "production"
+//   ? "/api"
+//   : "http://localhost:3001/api";
 
 // export const BaseLink = "http://localhost:3000/";
 
@@ -29,15 +29,14 @@ export const AuthProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("authTokens"))
       : null
   );
+
   const [user, setUser] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwt_decode(localStorage.getItem("authTokens"))
       : null
   );
 
-  const {errorToast, successToast} = useContext(StyleContext)
-
-
+  const { errorToast, successToast } = useContext(StyleContext);
 
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
@@ -54,6 +53,9 @@ export const AuthProvider = ({ children }) => {
     about: "",
     otp: "",
   });
+
+  ///reactions...
+  const [reaction, setReaction] = useState([]);
 
   const [course, setCourse] = useState({
     title: "",
@@ -132,8 +134,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         var details = res.data.result;
-        delete details.id;
-        localStorage.setItem("User", JSON.stringify(details));
+        localStorage.setItem("User", JSON.stringify(details.id));
         const propic =
           res.data.result.img_thumbnail.length > 0
             ? JSON.parse(res.data.result.img_thumbnail)
@@ -156,9 +157,7 @@ export const AuthProvider = ({ children }) => {
           // setTimeout(() => {
           //   errorToast("");
           // }, 1500);
-
         }
-
       });
   };
 
@@ -331,10 +330,55 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         console.log(res.data);
         setCourseList(res.data);
+        let reactArray = [];
+        let heart = false;
+        for (let course of res.data) {
+          heart = false;
+          if (course.Reactions.length > 0) {
+            for (let reactors of course.Reactions) {
+              let userID = localStorage.getItem("User");
+              if (reactors.reactor_id === Number(userID)) {
+                heart = true;
+                break;
+              }
+            }
+          }
+          reactArray.push({
+            count: course._count.Reactions,
+            heart,
+          });
+        }
+        console.log(reactArray);
+        setReaction(reactArray);
       })
       .catch((err) => {
         console.log(err.message);
       });
+  };
+
+  const triggerReaction = async (i, course_id) => {
+    let update = reaction;
+    console.log(reaction);
+    if (update[i].heart) {
+      update[i].heart = false;
+      update[i].count -= 1;
+    } else {
+      update[i].heart = true;
+      update[i].count += 1;
+    }
+    try {
+      setReaction(update);
+      const result = await axios.post(
+        BaseUrl + "/react/" + course_id,
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        }
+      );
+      console.log(result, "result");
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const getCourseDetails = async (id) => {
@@ -394,6 +438,8 @@ export const AuthProvider = ({ children }) => {
     BaseUrl,
     userDetails,
     setCourseList,
+    reaction,
+    triggerReaction,
   };
 
   return (

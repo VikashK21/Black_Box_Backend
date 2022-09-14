@@ -5,6 +5,18 @@ const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
 
 class Course_inf {
+  courseReaction = async (req, res) => {
+    try {
+      const result = await Courses.courseReaction(
+        req.user_id,
+        Number(req.params.courseID)
+      );
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   deleteCourse = async (req, res) => {
     try {
       const result = await Courses.deleteCourse(Number(req.params.id));

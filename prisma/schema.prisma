@@ -26,6 +26,7 @@ model Users {
   Participants  Participants[]
   Gift          Gift[]
   Suggest       Suggest[]
+  Reactions     Reactions[]
 }
 
 model Course {
@@ -107,7 +108,10 @@ model Suggest {
 }
 
 model Reactions {
-  id        Int    @id @default(autoincrement())
-  course_id Int
-  courses   Course @relation(fields: [course_id], references: [id])
+  id         Int    @id @default(autoincrement())
+  course_id  Int
+  courses    Course @relation(fields: [course_id], references: [id])
+  reactor_id Int
+  reactor    Users  @relation(fields: [reactor_id], references: [id])
+  heartful   Int    @default(1)
 }
