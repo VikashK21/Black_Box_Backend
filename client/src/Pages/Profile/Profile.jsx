@@ -272,6 +272,7 @@ const Profile = () => {
                                   : " "}
                               </div>
                               <AiFillHeart
+                                className="cp"
                                 onClick={() => {
                                   triggerReaction(index, course.id);
                                 }}

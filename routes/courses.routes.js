@@ -46,7 +46,7 @@ router.get("/course", (req, res) => {
       },
     },
     beforeCallingAddParticipant: {
-      POST: {
+      GET: {
         route: "/api/parallelclasses/:courseID",
         parameters: "just fill the params",
       },
