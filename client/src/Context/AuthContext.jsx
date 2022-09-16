@@ -8,13 +8,13 @@ import StyleContext from "./StyleContext";
 const AuthContext = createContext();
 export default AuthContext;
 
-export const BaseUrl = "http://localhost:3001/api";
+// export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-// export const BaseUrl = "/api"
+export const BaseUrl = "/api"
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -228,63 +228,61 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const editProfile = async (pro,propic) => {
+  const editProfile = async (pro, propic) => {
     console.log(pro);
     console.log(cloud);
     console.log("Heyyyy");
     if (propic === "") {
       await axios
-        .patch(BaseUrl + "/profile", 
-        {
-          
-          first_name: pro.first_name,
-          last_name: pro.last_name,
-          email: pro.email,
-          phone_num: pro.phone_num,
-          about: pro.about,
-        },
-         {
+        .patch(
+          BaseUrl + "/profile",
+          {
+            first_name: pro.first_name,
+            last_name: pro.last_name,
+            email: pro.email,
+            phone_num: pro.phone_num,
+            about: pro.about,
+          },
+          {
             headers: { Authorization: `Bearer ${authTokens}` },
-        })
+          }
+        )
         .then((res) => {
-            console.log(res.data);
-            console.log("Successs");
-            setProfile(res.data.result);
-            navigate("/profile");
+          console.log(res.data);
+          console.log("Successs");
+          setProfile(res.data.result);
+          navigate("/profile");
         })
         .catch((err) => {
-            console.log(err.data);
+          console.log(err.data);
         });
-    }
-    else{
+    } else {
       await axios
-        .patch(BaseUrl + "/profile", 
-        {
-          img_thumbnail: propic,
-          first_name: pro.first_name,
-          last_name: pro.last_name,
-          email: pro.email,
-          phone_num: pro.phone_num,
-          about: pro.about,
-        },
-         {
+        .patch(
+          BaseUrl + "/profile",
+          {
+            img_thumbnail: propic,
+            first_name: pro.first_name,
+            last_name: pro.last_name,
+            email: pro.email,
+            phone_num: pro.phone_num,
+            about: pro.about,
+          },
+          {
             headers: { Authorization: `Bearer ${authTokens}` },
-        })
+          }
+        )
         .then((res) => {
-            console.log(res.data);
-            console.log("Successs");
-            setProfile(res.data.result);
-            navigate("/profile");
+          console.log(res.data);
+          console.log("Successs");
+          setProfile(res.data.result);
+          navigate("/profile");
         })
         .catch((err) => {
-            console.log(err.data);
+          console.log(err.data);
         });
-
     }
-    
-};
-
-  
+  };
 
   const backendUpdate = async (data) => {
     await axios
@@ -462,7 +460,7 @@ export const AuthProvider = ({ children }) => {
     signupUser,
     profile,
     setProfile,
-    
+
     loginUser,
     logoutUser,
     setValues,

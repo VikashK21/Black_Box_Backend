@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d67a658a.css",
-    "main.js": "/static/js/main.21b2473a.js",
+    "main.css": "/static/css/main.72a3a171.css",
+    "main.js": "/static/js/main.8e0f7585.js",
     "static/js/787.f0e26221.chunk.js": "/static/js/787.f0e26221.chunk.js",
     "static/media/carousel1.jpg": "/static/media/carousel1.0e0f21373b31fd224268.jpg",
     "static/media/carousel4.jpg": "/static/media/carousel4.8e6b6b69a2b5d9a251e2.jpg",
@@ -10,20 +10,18 @@
     "static/media/carousel3.jpg": "/static/media/carousel3.5a0fa49aafdc8a07369e.jpg",
     "static/media/classes.jpg": "/static/media/classes.75a573a1be112015b3dc.jpg",
     "static/media/carousel2.jpg": "/static/media/carousel2.f5b0129f625748168009.jpg",
-    "static/media/class4.jpeg": "/static/media/class4.b4ca709411a4aca301ff.jpeg",
     "static/media/blackbox-logo-01.png": "/static/media/blackbox-logo-01.86234ed62aef14383960.png",
     "static/media/pradeesh.jpeg": "/static/media/pradeesh.093ce396f4e787ed9883.jpeg",
     "static/media/gilroy-extrabold.otf": "/static/media/gilroy-extrabold.0094146a0505298ed06a.otf",
     "static/media/Gilroy-Light.otf": "/static/media/Gilroy-Light.cc7ab55d27205bd64001.otf",
-    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "static/media/youtube.svg": "/static/media/youtube.32d95c8d3ccf859b2c3dc9315b7786ca.svg",
     "index.html": "/index.html",
-    "main.d67a658a.css.map": "/static/css/main.d67a658a.css.map",
-    "main.21b2473a.js.map": "/static/js/main.21b2473a.js.map",
+    "main.72a3a171.css.map": "/static/css/main.72a3a171.css.map",
+    "main.8e0f7585.js.map": "/static/js/main.8e0f7585.js.map",
     "787.f0e26221.chunk.js.map": "/static/js/787.f0e26221.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d67a658a.css",
-    "static/js/main.21b2473a.js"
+    "static/css/main.72a3a171.css",
+    "static/js/main.8e0f7585.js"
   ]
 }
