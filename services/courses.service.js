@@ -4,6 +4,50 @@ const fs = require("fs");
 const fs2 = require("fs-extra");
 
 class Courses_Classes {
+  async studentsDetail(participant_id) {
+    try {
+      const result = await prisma.participants.findMany({
+        where: { participant_id },
+        include: {
+          course: {
+            include: {
+              Classes: true,
+              Vid_Classes: true,
+              Reactions: true,
+            },
+          },
+          participant: true,
+          suggested_parti: true,
+          gifted_parti: true,
+        },
+      });
+      return result;
+    } catch (err) {
+      console.log(err.message);
+      return err.message;
+    }
+  }
+
+  async trainersDetail(host) {
+    try {
+      const result = await prisma.course.findMany({
+        where: { host },
+        include: {
+          host_details: true,
+          Classes: true,
+          Vid_Classes: true,
+          Participants: true,
+          Gift: true,
+          Suggest: true,
+          Reactions: true,
+        },
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   async courseReaction(reactor_id, course_id) {
     try {
       const result = await prisma.reactions.findFirst({
@@ -22,6 +66,7 @@ class Courses_Classes {
         });
       }
     } catch (err) {
+      console.log(err.message);
       return err.message;
     }
   }

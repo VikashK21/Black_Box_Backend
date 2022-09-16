@@ -5,14 +5,38 @@ const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
 
 class Course_inf {
+  studentsDetail = async (req, res) => {
+    try {
+      const result = await Courses.studentsDetail(req.user_id);
+      // const result = await Courses.studentsDetail(Number(req.params.id));
+      res.status(200).json(result);
+    } catch (err) {
+      console.log(err.message);
+      res.status(400).json(err.message);
+    }
+  };
+
+  trainersDetail = async (req, res) => {
+    try {
+      // const result = await Courses.trainersDetail(req.user_id);
+      const result = await Courses.trainersDetail(Number(req.params.id));
+      res.status(200).json(result);
+    } catch (err) {
+      console.log(err.message);
+      res.status(400).json(err.message);
+    }
+  };
+
   courseReaction = async (req, res) => {
     try {
       const result = await Courses.courseReaction(
         req.user_id,
         Number(req.params.courseID)
       );
+      console.log(result, "lets see");
       res.status(200).json(result);
     } catch (err) {
+      console.log(err.message);
       res.status(400).json(err.message);
     }
   };

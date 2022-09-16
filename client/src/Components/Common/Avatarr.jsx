@@ -122,6 +122,22 @@ const Avatarr = () => {
           )}
           My classes
         </MenuItem>
+        <Link to="/edit/profile" className="text-dark">
+        <MenuItem>
+          {name ? (
+            prop ? (
+              <Avatar src={propic} />
+            ) : (
+              <Avatar sx={{ width: 32, height: 32 }}>
+                {name[0].toUpperCase()}
+              </Avatar>
+            )
+          ) : (
+            <Avatar />
+          )}
+          Edit
+        </MenuItem>
+        </Link>
         <Divider />
         {name ? (
           <MenuItem

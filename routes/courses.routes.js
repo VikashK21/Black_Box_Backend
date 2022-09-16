@@ -98,8 +98,23 @@ router.get("/course", (req, res) => {
         route: "/api/react/:courseID",
       },
     },
+
+    trainersHosted: {
+      GET: {
+        route: "/api/trainer",
+      },
+    },
+    studentCourses: {
+      GET: {
+        route: "/api/student",
+      },
+    },
   });
 });
+
+//registered course for both...
+router.get("/trainer/:id", Course_inf.trainersDetail);
+router.get("/student", authorizationToken, Course_inf.studentsDetail);
 
 //reactions...
 router.post("/react/:courseID", authorizationToken, Course_inf.courseReaction);

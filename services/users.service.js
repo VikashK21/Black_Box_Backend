@@ -16,7 +16,7 @@ class Users {
       }
       if (
         (result2 && result2.provider === "google") ||
-        result.provider === "facebook"
+        result2.provider === "facebook"
       ) {
         return `Please login with ${result2.provider} Account!!`;
       }
@@ -25,8 +25,10 @@ class Users {
         where: { email },
         data: { password },
       });
+      console.log(result);
       return result;
     } catch (err) {
+      console.log(err.message);
       return err.message;
     }
   }

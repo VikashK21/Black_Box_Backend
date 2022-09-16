@@ -8,7 +8,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import Button from "@mui/material/Button";
 import { BsCalendarDate } from "react-icons/bs";
 import Icon2 from "../../Images/Classes/icon2.png";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import YtVid from "./YtVid";
 import AuthContext from "../../Context/AuthContext";
@@ -19,7 +19,6 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import Img from "./Img";
 import DefaultPic from "../../Images/defualtProPic.jpg";
-
 
 const Join = () => {
   const { id } = useParams();
@@ -128,33 +127,39 @@ const Join = () => {
         <Container className="p-5 position-relative">
           <Row>
             <Col md={4} xs={12}>
-              <div className="  d-flex justify-content-center w-100 ">
-                <img
-                  src={
-                    course.host_details.img_thumbnail
-                      ? course.host_details.img_thumbnail.secure_url
-                      : DefaultPic
-                  }
-                  alt="class1"
-                  className="img-fluid iconpic my-5 icon1"
-                />
-              </div>
-              <div className="d-flex justify-content-end w-100 ">
-                <img
-                  src={
-                    course.host_details.img_thumbnail
-                      ? course.host_details.img_thumbnail.secure_url
-                      : DefaultPic
-                  }
-                  alt="class1"
-                  className="img-fluid iconpic icon2 "
-                />
-              </div>
+              <Link to={`/profile/${course.host_details.id}`}>
+                <div className="  d-flex justify-content-center w-100 ">
+                  <img
+                    src={
+                      course.host_details.img_thumbnail
+                        ? course.host_details.img_thumbnail.secure_url
+                        : DefaultPic
+                    }
+                    alt="class1"
+                    className="img-fluid iconpic my-5 icon1"
+                  />
+                </div>
+              </Link>
+
+              <Link to={`/profile/${course.host_details.id}`}>
+                <div className="d-flex justify-content-end w-100 ">
+                  <img
+                    src={
+                      course.host_details.img_thumbnail
+                        ? course.host_details.img_thumbnail.secure_url
+                        : DefaultPic
+                    }
+                    alt="class1"
+                    className="img-fluid iconpic icon2 "
+                  />
+                </div>
+              </Link>
             </Col>
             <Col md={8} xs={12}>
               <div className="hostdiv">
                 <h6>Taught by</h6>
-                <h2 className="gx">
+              <Link to={`/profile/${course.host_details.id}`}>
+                <h2 className="gx text-dark">
                   {course.host_details.first_name
                     ? course.host_details.first_name
                     : "loading"}{" "}
@@ -162,6 +167,7 @@ const Join = () => {
                     ? course.host_details.last_name
                     : "loading"}
                 </h2>
+              </Link>
               </div>
             </Col>
           </Row>
@@ -172,10 +178,13 @@ const Join = () => {
         <Container className="p-5 pt-0 position-relative mt-1">
           <Row className="top-0">
             <Col md={4}></Col>
-            <Col md={8} style={{
-              height: 'fitContent',
-          }}>
-              <div className=" top-0" >
+            <Col
+              md={8}
+              style={{
+                height: "fitContent",
+              }}
+            >
+              <div className=" top-0">
                 {course.host_details.about
                   ? course.host_details.about
                   : "Loading"}
@@ -191,7 +200,6 @@ const Join = () => {
                 <div className="w-100 mb-2 icon1">
                   <div>
                     {course.structure ? <h5>COURSE STRUCTURE</h5> : ""}
-
                     {course.structure ? (
                       <p className="fn gl">{course.structure}</p>
                     ) : (
@@ -292,7 +300,19 @@ const Join = () => {
                 </div>
                 <div className="icon2">
                   <div>
-                    {course ? course.Classes ? course.Classes.length>0 ? <h5 >Classes</h5> : "" : "" : ""}
+                    {course ? (
+                      course.Classes ? (
+                        course.Classes.length > 0 ? (
+                          <h5>Classes</h5>
+                        ) : (
+                          ""
+                        )
+                      ) : (
+                        ""
+                      )
+                    ) : (
+                      ""
+                    )}
                   </div>
                   {course.Classes
                     ? course.Classes.map((item, index) => {
@@ -386,15 +406,19 @@ const Join = () => {
                     perPage: 3,
                   }}
                 >
-                  {course ? course.images ? course.images.map((image, index) => (
-                    <SplideSlide
-                      key={index}
-                      className="d-flex justify-content-center"
-                    >
-                      {/* <img src={image} className="classimages" /> */}
-                      <Img image={image} />
-                    </SplideSlide>
-                  )): "" : ""}
+                  {course
+                    ? course.images
+                      ? course.images.map((image, index) => (
+                          <SplideSlide
+                            key={index}
+                            className="d-flex justify-content-center"
+                          >
+                            {/* <img src={image} className="classimages" /> */}
+                            <Img image={image} />
+                          </SplideSlide>
+                        ))
+                      : ""
+                    : ""}
                 </Splide>
               </div>
             </Col>

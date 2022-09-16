@@ -29,6 +29,8 @@ import Host5 from "./Pages/Classes/Host5";
 import Host6 from "./Pages/Classes/Host6";
 import LinearStepper2 from "./Pages/Classes/LinearStepper2";
 import Choose from "./Pages/Classes/Choose";
+import Trainer from "./Pages/Classes/Trainer";
+import Edit from "./Pages/Login/Edit";
 
 function App() {
   return (
@@ -46,6 +48,7 @@ function App() {
                 <Route path="/hosting" element={<LinearStepper />} />
                 <Route path="/hosting2" element={<LinearStepper2 />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/edit/profile" element={<Edit />} />
               </Route>
               <Route path="/host" element={<Host />} />
               <Route path="/host/2" element={<Host2 />} />
@@ -57,6 +60,7 @@ function App() {
               <Route path="/nav" element={<Burger />} />
               <Route path="/classes" element={<Classes />} />
               <Route path="/classes/join/:id" element={<Join />} />
+              <Route path="/trainer/:id" element={<Trainer />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
 

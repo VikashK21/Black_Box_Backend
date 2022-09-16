@@ -22,14 +22,12 @@ const Profile = () => {
   // const [reaction, setReaction] = useState([]);
 
   useEffect(() => {
-    ////
     getCoursesList();
-    // eslint-disable-next-line
   }, []);
 
   const [timer, setTimer] = useState(true);
   const [expiryTime, setExpiryTime] = useState(
-    "Thu Sep 01 2022 16:50:00 GMT+0530 (India Standard Time)"
+    "Fri Sep 16 2022 16:50:00 GMT+0530 (India Standard Time)"
   );
   const [countdownTime, setCountdownTime] = useState({
     countdownDays: "",

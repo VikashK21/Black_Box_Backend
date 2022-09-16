@@ -11,7 +11,7 @@ export default AuthContext;
 export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
-// export const BaseUrl = "https://black-box-backend.herokuapp.com";
+// export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
 // export const BaseUrl = "/api"
@@ -133,6 +133,7 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then((res) => {
+        console.log(res.data);
         var details = res.data.result;
         localStorage.setItem("User", JSON.stringify(details.id));
         const propic =
@@ -154,6 +155,7 @@ export const AuthProvider = ({ children }) => {
         console.log(err.data);
         if (err.response.status === 400) {
           errorToast("Invalid Username or password");
+          navigate("/login");
           // setTimeout(() => {
           //   errorToast("");
           // }, 1500);
@@ -195,6 +197,22 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  // const getProfile = async () => {
+  //   await axios
+  //     .get(BaseUrl + "/profile", {
+  //       headers: {
+  //         Authorization: "Bearer " + authTokens,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setProfile(res.data.result);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.data);
+  //     });
+  // };
+
   const OtpVerify = async (e) => {
     e.preventDefault();
     await axios
@@ -210,23 +228,63 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const getMyProfile = async () => {
-    await axios
-      .post(
-        BaseUrl + "user/view/profile",
-        {},
+  const editProfile = async (pro,propic) => {
+    console.log(pro);
+    console.log(cloud);
+    console.log("Heyyyy");
+    if (propic === "") {
+      await axios
+        .patch(BaseUrl + "/profile", 
         {
-          headers: { Authorization: `Bearer ${authTokens}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        setProfile(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+          
+          first_name: pro.first_name,
+          last_name: pro.last_name,
+          email: pro.email,
+          phone_num: pro.phone_num,
+          about: pro.about,
+        },
+         {
+            headers: { Authorization: `Bearer ${authTokens}` },
+        })
+        .then((res) => {
+            console.log(res.data);
+            console.log("Successs");
+            setProfile(res.data.result);
+            navigate("/profile");
+        })
+        .catch((err) => {
+            console.log(err.data);
+        });
+    }
+    else{
+      await axios
+        .patch(BaseUrl + "/profile", 
+        {
+          img_thumbnail: propic,
+          first_name: pro.first_name,
+          last_name: pro.last_name,
+          email: pro.email,
+          phone_num: pro.phone_num,
+          about: pro.about,
+        },
+         {
+            headers: { Authorization: `Bearer ${authTokens}` },
+        })
+        .then((res) => {
+            console.log(res.data);
+            console.log("Successs");
+            setProfile(res.data.result);
+            navigate("/profile");
+        })
+        .catch((err) => {
+            console.log(err.data);
+        });
+
+    }
+    
+};
+
+  
 
   const backendUpdate = async (data) => {
     await axios
@@ -328,7 +386,6 @@ export const AuthProvider = ({ children }) => {
     await axios
       .get(BaseUrl + "/courses")
       .then((res) => {
-        console.log(res.data);
         setCourseList(res.data);
         let reactArray = [];
         let heart = false;
@@ -405,7 +462,7 @@ export const AuthProvider = ({ children }) => {
     signupUser,
     profile,
     setProfile,
-    getMyProfile,
+    
     loginUser,
     logoutUser,
     setValues,
@@ -439,6 +496,8 @@ export const AuthProvider = ({ children }) => {
     userDetails,
     setCourseList,
     reaction,
+    authTokens,
+    editProfile,
     triggerReaction,
   };
 

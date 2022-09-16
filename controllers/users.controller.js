@@ -4,10 +4,11 @@ class User_Ctrl {
   forgetPass = async (req, res) => {
     try {
       const result = await Users.forgetPass(req.body.email, req.body.password);
+      console.log(result);
       if (typeof result === "object") {
         return res.status(202).json(result);
       }
-      return res.status(404).json(result);
+      res.status(404).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }
