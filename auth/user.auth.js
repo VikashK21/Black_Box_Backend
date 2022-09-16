@@ -29,15 +29,12 @@ const tokenGenerator = new TokenGenerator(
 
 authenticationToken = (data) => {
   console.log(tokenGenerator, "tokenGenerator");
-  token = tokenGenerator.sign(
-    { id: data.id },
-    {
-      audience: "myaud",
-      issuer: "myissuer",
-      jwtid: "1",
-      subject: "user",
-    }
-  );
+  token = tokenGenerator.sign(data, {
+    audience: "myaud",
+    issuer: "myissuer",
+    jwtid: "1",
+    subject: "user",
+  });
   //my...
   // const result = jwt.sign(`${data.id}`, process.env.SECRET_KEY_TOKEN, {
   //   algorithm: "RS256",
