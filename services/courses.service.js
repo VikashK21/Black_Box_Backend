@@ -428,6 +428,7 @@ class Courses_Classes {
         where: { id },
         include: {
           host_details: true,
+          Participants: true,
           Classes: true,
           Vid_Classes: true,
           Reactions: true,
