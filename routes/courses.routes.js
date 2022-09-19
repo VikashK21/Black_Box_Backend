@@ -26,7 +26,7 @@ router.get("/course", (req, res) => {
     },
     editCourseById: {
       PATCH: {
-        route: "/api/courses/:id",
+        route: "/api/course/:id",
         parameters: "you already have it..",
       },
     },
@@ -127,17 +127,17 @@ router.post("/host/course", authorizationToken, Course_inf.hostCourse);
 //also adding the reaction...
 router.get("/courses", Course_inf.getAllCourses);
 router.get("/courses/:id", Course_inf.getCourseById);
-router.patch("/courses/:id", authorizationToken, Course_inf.editCourseById);
+router.patch("/course/:id", authorizationToken, Course_inf.editCourseById);
 
 router.post(
   "/participant/:courseID",
   authorizationToken,
-  Course_inf.addParticipant
+  Course_inf.addParticipant,
 );
 router.get(
   "/parallelclasses/:courseID",
   authorizationToken,
-  Course_inf.parallelClasses
+  Course_inf.parallelClasses,
 );
 router.patch("/attending", authorizationToken, Course_inf.attendingCls);
 router.get("/nextclass", authorizationToken, Course_inf.nextClass);
@@ -145,6 +145,7 @@ router.post("/gift", authorizationToken, Course_inf.addToGifted);
 router.post("/suggest", authorizationToken, Course_inf.addToSuggested);
 
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
+router.patch("/class/:id", authorizationToken);
 /**
  * @swagger
  * /api/host/classes:

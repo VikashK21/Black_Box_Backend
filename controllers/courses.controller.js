@@ -5,6 +5,15 @@ const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
 
 class Course_inf {
+  editClassById = async (req, res) => {
+    try {
+      const result = await Courses.editClassById(req.user_id, req.body);
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   studentsDetail = async (req, res) => {
     try {
       const result = await Courses.studentsDetail(req.user_id);
@@ -31,7 +40,7 @@ class Course_inf {
     try {
       const result = await Courses.courseReaction(
         req.user_id,
-        Number(req.params.courseID)
+        Number(req.params.courseID),
       );
       console.log(result, "lets see");
       res.status(200).json(result);
@@ -72,7 +81,7 @@ class Course_inf {
       const result = await Courses.addSuggested(
         req.user_id,
         req.body.email,
-        req.body.course_id
+        req.body.course_id,
       );
       res.status(200).json(result);
     } catch (err) {
@@ -84,7 +93,7 @@ class Course_inf {
       const result = await Courses.addToGifted(
         req.user_id,
         req.body.email,
-        req.body.course_id
+        req.body.course_id,
       );
       res.status(200).json(result);
     } catch (err) {
@@ -96,7 +105,7 @@ class Course_inf {
     try {
       const result = await Courses.addParticipants(
         req.user_id,
-        Number(req.params.courseID)
+        Number(req.params.courseID),
       );
       res.status(200).json(result);
     } catch (err) {
@@ -108,7 +117,7 @@ class Course_inf {
     try {
       const result = await Courses.parallelClasses(
         req.user_id,
-        Number(req.params.courseID)
+        Number(req.params.courseID),
       );
       res.status(200).json(result);
     } catch (err) {
@@ -120,7 +129,7 @@ class Course_inf {
       const result = await Courses.editCourseById(
         Number(req.params.id),
         req.body,
-        req.user_id
+        req.user_id,
       );
       res.status(200).json(result);
     } catch (err) {
@@ -182,7 +191,7 @@ class Course_inf {
             title,
             description,
           }),
-        })
+        }),
       );
     }
   };
@@ -200,7 +209,7 @@ class Course_inf {
       uploadVideoToYouTube(filename, title, description);
     });
     res.send(
-      '<h4 align="center">Successfully video uploaded!! Please go back to continue procedure : )</h4>'
+      '<h4 align="center">Successfully video uploaded!! Please go back to continue procedure : )</h4>',
     );
   };
 }

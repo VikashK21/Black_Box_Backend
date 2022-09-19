@@ -4,6 +4,18 @@ const fs = require("fs");
 const fs2 = require("fs-extra");
 
 class Courses_Classes {
+  async editClassById(id, data) {
+    try {
+      const result = prisma.classes.update({
+        where: { id },
+        data,
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   async studentsDetail(participant_id) {
     try {
       const result = await prisma.participants.findMany({
@@ -98,6 +110,11 @@ class Courses_Classes {
       //3
       if (result && result.Participants.length > 0) {
         await prisma.participants.deleteMany({
+          where: { course_id: id },
+        });
+      }
+      if (result && result.Reactions.length > 0) {
+        await prisma.reactions.deleteMany({
           where: { course_id: id },
         });
       }
@@ -414,7 +431,10 @@ class Courses_Classes {
 
   async editCourseById(id, data, host) {
     try {
-      const result = await prisma.course.update({ where: { id, host }, data });
+      const result = await prisma.course.update({
+        where: { id, host },
+        data,
+      });
       return result;
     } catch (err) {
       console.log(err.message, "the editCourse by id");
