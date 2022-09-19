@@ -145,7 +145,7 @@ router.post("/gift", authorizationToken, Course_inf.addToGifted);
 router.post("/suggest", authorizationToken, Course_inf.addToSuggested);
 
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
-router.patch("/class/:id", authorizationToken);
+router.patch("/class/:id", authorizationToken, Course_inf.editClassById);
 /**
  * @swagger
  * /api/host/classes:

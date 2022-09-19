@@ -40,8 +40,8 @@ function App() {
           <AuthProvider>
             <ToastContainer />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/enter" element={<Enter />} />
+              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/" element={<Enter />} />
               <Route path="/main" element={<Main />} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/host" element={<Choose />} />

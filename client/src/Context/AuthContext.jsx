@@ -27,13 +27,13 @@ export const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
+      : null,
   );
 
   const [user, setUser] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwt_decode(localStorage.getItem("authTokens"))
-      : null
+      : null,
   );
 
   const { errorToast, successToast } = useContext(StyleContext);
@@ -172,13 +172,31 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = async () => {
-    setAuthTokens(null);
-    setUser(null);
-    localStorage.removeItem("authTokens");
-    localStorage.removeItem("User");
-    localStorage.removeItem("name");
-    localStorage.removeItem("propic");
-    navigate("/main");
+    await axios
+      .post(BaseUrl + "/logout", {
+        headers: {
+          Authorization: `Bearer ${authTokens}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setAuthTokens(null);
+        setUser(null);
+        localStorage.removeItem("authTokens");
+        localStorage.removeItem("User");
+        localStorage.removeItem("name");
+        localStorage.removeItem("propic");
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+    // setAuthTokens(null);
+    // setUser(null);
+    // localStorage.removeItem("authTokens");
+    // localStorage.removeItem("User");
+    // localStorage.removeItem("name");
+    // localStorage.removeItem("propic");
+    // navigate("/main");
   };
 
   const OtpLogin = async (e) => {
@@ -245,7 +263,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          }
+          },
         )
         .then((res) => {
           console.log(res.data);
@@ -270,7 +288,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          }
+          },
         )
         .then((res) => {
           console.log(res.data);
@@ -304,7 +322,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const res = await axios.post(
           "https://api.cloudinary.com/v1_1/black-box/image/upload",
-          data
+          data,
         );
         console.log(res.data, "uploaded...");
         return res.data;
@@ -321,7 +339,7 @@ export const AuthProvider = ({ children }) => {
           formData.append("cloud_name", "black-box");
           const data = await uploaingImg(formData);
           return data.secure_url;
-        })
+        }),
       );
       console.log(uploaders, "res is here.");
       const res = await axios.post(
@@ -331,7 +349,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       console.log(res.data);
       if (typeof res.data === "object") {
@@ -352,7 +370,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       setClasslist([{ ...classlist[0], ...res.data }]);
       successToast("Class Added Successfully");
@@ -436,7 +454,7 @@ export const AuthProvider = ({ children }) => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       console.log(result, "result");
     } catch (err) {

@@ -8,6 +8,7 @@ import Class2 from "../../Images/Classes/class2.jpg";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
 import { AiFillHeart } from "react-icons/ai";
+import TabPanel from "./TabPanel";
 // import ReadMoreReact from "read-more-react";
 import { Link } from "react-router-dom";
 
@@ -205,9 +206,10 @@ const Profile = () => {
             </Col>
             <Col md={8} className="p-0 ">
               {showclasses ? (
-                <div ref={scollToRef}>
-                  <h1>My classes</h1>
-                </div>
+                // <div ref={scollToRef}>
+                //   <h1>My classes</h1>
+                // </div>
+                <TabPanel/>
               ) : (
                 <div className="feeds">
                   {courseList.length > 0 &&

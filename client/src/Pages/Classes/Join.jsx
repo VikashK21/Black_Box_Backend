@@ -19,6 +19,18 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import Img from "./Img";
 import DefaultPic from "../../Images/defualtProPic.jpg";
+import View from "./View";
+
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ImageIcon from "@mui/icons-material/Image";
+import WorkIcon from "@mui/icons-material/Work";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 
 const Join = () => {
   const { id } = useParams();
@@ -59,6 +71,15 @@ const Join = () => {
     };
     fetchData();
   }, []);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -196,8 +217,10 @@ const Join = () => {
                     {course.host_details.first_name
                       ? course.host_details.first_name
                       : "loading"}{" "}
-                    {course.host_details.last_name ? course.host_details.last_name !== ""
-                      ? course.host_details.last_name : "loading"
+                    {course.host_details.last_name
+                      ? course.host_details.last_name !== ""
+                        ? course.host_details.last_name
+                        : "loading"
                       : ""}
                   </h2>
                 </Link>
@@ -207,10 +230,12 @@ const Join = () => {
         </Container>
       </Container>
 
-      <Container fluid className="p-0 m-0 bgw "
-      style={{
-        minHeight: "1000px",
-      }}
+      <Container
+        fluid
+        className="p-0 m-0 bgw "
+        style={{
+          minHeight: "1000px",
+        }}
       >
         <Container className="p-5 pt-0 position-relative mt-1">
           <Row className="top-0">
@@ -487,7 +512,95 @@ const Join = () => {
                     <span className="gx">
                       FEE: ₹{course.price ? course.price : ""} / PERSON
                     </span>
-                    <span className="gl textgrey">View all dates</span>
+                    {/* <View/> */}
+                    <React.Fragment>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          textAlign: "center",
+                        }}
+                      >
+                        <span className="gl textgrey cp" onClick={handleClick}>
+                          View all dates
+                        </span>
+                      </Box>
+                      <Menu
+                        anchorEl={anchorEl}
+                        id="account-menu"
+                        open={open}
+                        onClose={handleClose}
+                        onClick={handleClose}
+                        PaperProps={{
+                          elevation: 0,
+                          sx: {
+                            overflow: "visible",
+                            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                            mt: 1.5,
+                            "& .MuiAvatar-root": {
+                              width: 32,
+                              height: 32,
+                              ml: -0.5,
+                              mr: 1,
+                            },
+                            "&:before": {
+                              content: '""',
+                              display: "block",
+                              position: "absolute",
+                              top: 0,
+                              right: 14,
+                              width: 10,
+                              height: 10,
+                              bgcolor: "background.paper",
+                              transform: "translateY(-50%) rotate(45deg)",
+                              zIndex: 0,
+                            },
+                          },
+                        }}
+                        transformOrigin={{
+                          horizontal: "right",
+                          vertical: "top",
+                        }}
+                        anchorOrigin={{
+                          horizontal: "right",
+                          vertical: "bottom",
+                        }}
+                      >
+                        <List
+                          sx={{
+                            width: "100%",
+                            maxWidth: 360,
+                            bgcolor: "background.paper",
+                          }}
+                        >
+                          {course.Classes
+                            ? course.Classes.map((item, index) => {
+                                var day = new Date(item.date);
+
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemAvatar>
+                                      <Avatar>{index + 1}</Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                      primary={
+                                        day.toLocaleDateString("default", {
+                                          month: "short",
+                                        }) +
+                                        " " +
+                                        day.getDate() +
+                                        " " +
+                                        item.time
+                                      }
+                                      secondary={item.duration + " minutes"}
+                                    />
+                                  </ListItem>
+                                );
+                              })
+                            : ""}
+                        </List>
+                      </Menu>
+                    </React.Fragment>
                   </div>
                 </h4>
 
@@ -540,14 +653,15 @@ const Join = () => {
                       setLoading(true);
                     }}
                   >
-                    { loading ? 
-                    <div class="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                      <div class="ldio-cqj9sf9mcdj">
-                        <div></div>
+                    {loading ? (
+                      <div class="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                        <div class="ldio-cqj9sf9mcdj">
+                          <div></div>
+                        </div>
                       </div>
-                    </div> :
-                    " " }
-
+                    ) : (
+                      " "
+                    )}
                     Book your tickets
                   </Button>
                 </div>

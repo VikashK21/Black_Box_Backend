@@ -8,7 +8,7 @@ import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
 
 const Choose = () => {
-  const { course, setCourse } = useContext(AuthContext);
+  const { course, setCourse, setImage } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,6 +26,8 @@ const Choose = () => {
       content: [{}],
       requirements: [{}],
     });
+
+    setImage([]);
   }, []);
 
   return (
@@ -33,13 +35,13 @@ const Choose = () => {
       <Header />
       <Container className="m-0 p-0 white"></Container>
       <Container
-          fluid
-          className="d-flex bggrey justify-content-center py-5 mb-5"
-        >
-          <div>
-            <h1 className="regtitle">Course type</h1>
-          </div>
-        </Container>
+        fluid
+        className="d-flex bggrey justify-content-center py-5 mb-5"
+      >
+        <div>
+          <h1 className="regtitle">Course type</h1>
+        </div>
+      </Container>
       <Container
         className="d-flex justify-content-center my-4"
         style={{
@@ -62,7 +64,8 @@ const Choose = () => {
               <p className="gl pt-4">Here you can host a class</p>
               <p className="gl ">
                 where you can teach one course on the same subject by taking
-                multiple days to complete the whole topic. You will have to mention what topics you will be convering in different days.
+                multiple days to complete the whole topic. You will have to
+                mention what topics you will be convering in different days.
               </p>
               {/* <p className="gl ">E.g. </p> */}
             </b>
