@@ -15,6 +15,7 @@ class Users {
             include: {
               Classes: true,
               Vid_Classes: true,
+              Reactions: true,
             },
           },
         },

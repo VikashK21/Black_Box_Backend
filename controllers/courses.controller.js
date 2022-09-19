@@ -27,8 +27,8 @@ class Course_inf {
 
   trainersDetail = async (req, res) => {
     try {
-      // const result = await Courses.trainersDetail(req.user_id);
-      const result = await Courses.trainersDetail(Number(req.params.id));
+      const result = await Courses.trainersDetail(req.user_id);
+      // const result = await Courses.trainersDetail(Number(req.params.id));
       res.status(200).json(result);
     } catch (err) {
       console.log(err.message);
