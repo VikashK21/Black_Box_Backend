@@ -40,12 +40,12 @@ const Header = () => {
                   </li> */}
                   <li>
                     <Link to="/classes" className="link px-3 ">
-                      JOIN CLASSES
+                      JOIN
                     </Link>
                   </li>
                   <li>
                     <Link to="/host" className="link px-3 ">
-                      HOST A CLASS
+                      HOST
                     </Link>
                   </li>
                   {/* <li>

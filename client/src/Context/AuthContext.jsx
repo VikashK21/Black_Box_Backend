@@ -8,13 +8,13 @@ import StyleContext from "./StyleContext";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api";
+// export const BaseUrl = "/api"
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -27,13 +27,13 @@ export const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
-      : null,
+      : null
   );
 
   const [user, setUser] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwt_decode(localStorage.getItem("authTokens"))
-      : null,
+      : null
   );
 
   const { errorToast, successToast } = useContext(StyleContext);
@@ -245,7 +245,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          },
+          }
         )
         .then((res) => {
           console.log(res.data);
@@ -270,10 +270,11 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          },
+          }
         )
         .then((res) => {
           console.log(res.data);
+          localStorage.setItem("propic", res.data.img_thumbnail);
           console.log("Successs");
           setProfile(res.data.result);
           navigate("/profile");
@@ -299,13 +300,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const HostCourse = async (e) => {
-    // console.log(course, "the auth, final section...");
-    // uploadImage();
     async function uploaingImg(data) {
       try {
         const res = await axios.post(
           "https://api.cloudinary.com/v1_1/black-box/image/upload",
-          data,
+          data
         );
         console.log(res.data, "uploaded...");
         return res.data;
@@ -322,7 +321,7 @@ export const AuthProvider = ({ children }) => {
           formData.append("cloud_name", "black-box");
           const data = await uploaingImg(formData);
           return data.secure_url;
-        }),
+        })
       );
       console.log(uploaders, "res is here.");
       const res = await axios.post(
@@ -332,7 +331,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       console.log(res.data);
       if (typeof res.data === "object") {
@@ -353,12 +352,24 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       setClasslist([{ ...classlist[0], ...res.data }]);
+      successToast("Class Added Successfully");
     } catch (err) {
       console.log(err.message);
     }
+  };
+
+  const DynamicTimer = async () => {
+    await axios
+      .get(BaseUrl + "/nextclass")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
   };
 
   function letSee(e) {
@@ -425,7 +436,7 @@ export const AuthProvider = ({ children }) => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       console.log(result, "result");
     } catch (err) {
@@ -494,6 +505,7 @@ export const AuthProvider = ({ children }) => {
     authTokens,
     editProfile,
     triggerReaction,
+    DynamicTimer,
   };
 
   return (

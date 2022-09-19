@@ -270,7 +270,7 @@ const Host2 = () => {
                     ))}
                   </Col>
 
-                  <h5 className="text-start">Classes</h5>
+                  {/* <h5 className="text-start">Classes</h5> */}
 
                   {/* <Col md={12}>
                     <TextField

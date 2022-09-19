@@ -21,7 +21,7 @@ const Splider = (props) => {
         aria-label="My Favorite Images"
         style={{ width: "100%", height: "100%" }}
         options={{
-          type: "loop",
+          // type: "loop",
           drag: "free",
           gap: "1rem",
           perPage: 3,

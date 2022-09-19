@@ -51,7 +51,7 @@ const Host3 = () => {
             <Box>
               <h5 className="text-start my-3">Add classes</h5>
               <Row className="signupform ">
-                <Col md={6} className="">
+                <Col md={12} className="">
                   <div className="d-flex">
                     <TextField
                       
@@ -68,9 +68,9 @@ const Host3 = () => {
                     />
                   </div>
                 </Col>
-                <Col md={6} className="">
+                {/* <Col md={6} className="">
                   <div className="d-flex">
-                    {/* ₹ */}
+                    
                     <TextField
                       label="Fee"
                       name="fee"
@@ -88,7 +88,7 @@ const Host3 = () => {
                       className=" mb-3 w-100"
                     />
                   </div>
-                </Col>
+                </Col> */}
                 <Col md={12} className="my-2">
                   <div className="d-flex">
                     <TextField

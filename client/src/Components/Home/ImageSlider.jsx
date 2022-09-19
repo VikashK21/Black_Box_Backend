@@ -15,7 +15,7 @@ const ImageSlider = () => {
     <Container fluid className="p-0 m-0 w-100">
       <Carousel variant="dark" className="caro">
         <Carousel.Item>
-          <img className="slideimg " src={Carousel1} alt="First slide"
+          <img className="slideimg " src="https://ik.imagekit.io/Michu/BlackBox/B_03SngjxZ2.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1663565484866" alt="First slide"
           style={{
             objectPosition: "bottom",
           }}
@@ -33,7 +33,7 @@ const ImageSlider = () => {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="slideimg " src={Carousel2} alt="Second slide"
+          <img className="slideimg " src="https://ik.imagekit.io/Michu/BlackBox/A_8IkCQUbCwI.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1663565505200" alt="Second slide"
           style={{
             objectPosition: "top",
           }}

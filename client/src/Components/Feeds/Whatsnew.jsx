@@ -49,7 +49,7 @@ const Whatsnew = () => {
 
               <h3>{name}</h3>
             </div>
-            <div className="searchdiv mt-5">
+            {/* <div className="searchdiv mt-5">
               <input
                 type="text"
                 className="borderlessinput"
@@ -70,7 +70,7 @@ const Whatsnew = () => {
                   <h6 className="gl">Public</h6>
                 </div>
               </div>
-            </div>
+            </div> */}
           </Col>
           <Col md={8}>
             <h1 className="profilename gx">What's new</h1>

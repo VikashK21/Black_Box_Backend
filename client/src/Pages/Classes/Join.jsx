@@ -111,7 +111,7 @@ const Join = () => {
     }
 
     const options = {
-      key: "rzp_live_f8Ca3KlJVCNOIa",
+      key: "rzp_test_u8GQT2ewwaxjJw",
       currency: "INR",
       amount: course.price * 100,
       name: "BlackBox - Teach and Learn",
@@ -143,10 +143,10 @@ const Join = () => {
       <Header />
       <Container fluid className="white"></Container>
 
-      <Container fluid className="p-0 m-0 bggrey ">
-        <Container className="p-5  d-flex justify-content-center">
+      <Container fluid className="p-0 m-0 bggrey">
+        <Container className="px-5 pt-2  d-flex justify-content-center">
           <div className="text-center">
-            <h1 className="gx classtitle my-3">
+            <h1 className="gx classtitle mt-3">
               {course.title ? course.title : "Loading"}
             </h1>
             {/* <h5>Course Type: {course.duration_type}</h5> */}
@@ -157,7 +157,6 @@ const Join = () => {
             </h5>
           </div>
         </Container>
-
         <Container className="p-5 position-relative">
           <Row>
             <Col md={4} xs={12}>
@@ -208,7 +207,11 @@ const Join = () => {
         </Container>
       </Container>
 
-      <Container fluid className="p-0 m-0 bgw ">
+      <Container fluid className="p-0 m-0 bgw "
+      style={{
+        minHeight: "1000px",
+      }}
+      >
         <Container className="p-5 pt-0 position-relative mt-1">
           <Row className="top-0">
             <Col md={4}></Col>
@@ -434,7 +437,7 @@ const Join = () => {
                 <Splide
                   style={{ width: "100%", height: "100%" }}
                   options={{
-                    type: "loop",
+                    // type: "loop",
                     drag: "free",
                     gap: "1rem",
                     perPage: 3,
@@ -456,7 +459,7 @@ const Join = () => {
                 </Splide>
               </div>
             </Col>
-            <Col md={6} sm={12} className="mb-5">
+            <Col md={6} sm={12} className="mb-5 pb-5">
               <h4 className="gx">Dates</h4>
               {course.Classes
                 ? course.Classes.map((item, index) => {
@@ -484,7 +487,7 @@ const Join = () => {
                     <span className="gx">
                       FEE: ₹{course.price ? course.price : ""} / PERSON
                     </span>
-                    <span className="gl textgrey">Show all prices</span>
+                    <span className="gl textgrey">View all dates</span>
                   </div>
                 </h4>
 

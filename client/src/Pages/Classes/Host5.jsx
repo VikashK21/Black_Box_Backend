@@ -104,7 +104,7 @@ const Host5 = () => {
             <Container className=" my-5 w-100 d-flex justify-content-center">
               <form className="d-flex justify-content-center w-100 m-2 mt-5">
                 <Box>
-                  <h5 className="text-start my-3">Course Structure</h5>
+                  <h5 className="text-start my-3">Structure</h5>
                   <Row className="signupform ">
                     <Col md={12}>
                       <TextField

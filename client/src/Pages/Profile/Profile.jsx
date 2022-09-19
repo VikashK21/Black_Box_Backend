@@ -18,11 +18,13 @@ const Profile = () => {
     // setCourseList,
     reaction,
     triggerReaction,
+    DynamicTimer,
   } = useContext(AuthContext);
   // const [reaction, setReaction] = useState([]);
 
   useEffect(() => {
     getCoursesList();
+    DynamicTimer();
   }, []);
 
   const [timer, setTimer] = useState(true);
