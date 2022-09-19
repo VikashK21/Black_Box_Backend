@@ -1,6 +1,15 @@
 const Users = new (require("../services/users.service"))();
 
 class User_Ctrl {
+  hostProfile = async (req, res) => {
+    try {
+      const result = await Users.hostProfile(Number(req.params.id));
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   forgetPass = async (req, res) => {
     try {
       const result = await Users.forgetPass(req.body.email, req.body.password);

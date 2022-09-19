@@ -20,6 +20,7 @@ class Users {
           },
         },
       });
+      return result;
     } catch (err) {
       return err.message;
     }

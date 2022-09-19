@@ -54,6 +54,11 @@ router.get("/users", async (req, res, next) => {
           },
         },
       },
+      hostersProfileById: {
+        GET: {
+          route: "/api/host/profile/:id",
+        },
+      },
     },
   });
 });
@@ -62,6 +67,7 @@ router.get("/users", async (req, res, next) => {
 /**
  *
  */
+router.get("/host/profile/:id", Users.hostProfile);
 router.get("/profile", authorizationToken, Users.profile);
 router.patch("/profile", authorizationToken, Users.editProfile);
 router.patch("/forgetpass", Users.forgetPass);
@@ -71,26 +77,26 @@ router.post("/logout", Users.logout);
 //google
 router.get(
   "/signup/google",
-  passport.authenticate("google", { scope: ["email", "profile"] })
+  passport.authenticate("google", { scope: ["email", "profile"] }),
 );
 router.get(
   "/google/callback",
   passport.authenticate("google", {
     successRedirect: "/api/protected",
     failureRedirect: "/api/failure",
-  })
+  }),
 );
 //facebook
 router.get(
   "/signup/facebook",
-  passport.authenticate("facebook", { scope: "email" })
+  passport.authenticate("facebook", { scope: "email" }),
 );
 router.get(
   "/facebook/callback",
   passport.authenticate("facebook", {
     successRedirect: "/api/protected",
     failureRedirect: "/api/failure",
-  })
+  }),
 );
 //handler
 router.get("/protected", Users.signup);
