@@ -30,7 +30,7 @@ const Classes = () => {
       <Container className="p-0 m-0 mb-5">
         <div className="d-flex justify-content-center flex-column w-100">
           <div>
-            <h2 className="text-center gl my-5">CLASSES</h2>
+            <h2 className="text-center gl my-3">CLASSES</h2>
           </div>
 
           <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">

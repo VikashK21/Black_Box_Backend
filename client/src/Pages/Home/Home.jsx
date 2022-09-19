@@ -6,22 +6,24 @@ import AuthContext from "../../Context/AuthContext";
 
 const Home = () => {
   let navigate = useNavigate();
-  const {user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    if (user) {
+      navigate("/profile");
+    } else {
+      setShow(true);
 
-    setShow(true);
+      setTimeout(() => {
+        setShow(false);
+      }, 3000);
 
-    setTimeout(() => {
-      setShow(false);
-    }, 3000);
-
-    setTimeout(() => {
-      navigate("/enter");
-    }, 4000);
-    
+      setTimeout(() => {
+        navigate("/enter");
+      }, 4000);
+    }
   }, []);
 
   return (

@@ -267,7 +267,7 @@ const Edit = () => {
                       type="submit"
                       className="bgdark w-100"
                     >
-                      Join here
+                      Update
                     </Button>
                   </div>
                 </div>

@@ -14,7 +14,7 @@ export default AuthContext;
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api"
+export const BaseUrl = "/api";
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -27,13 +27,13 @@ export const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
+      : null,
   );
 
   const [user, setUser] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwt_decode(localStorage.getItem("authTokens"))
-      : null
+      : null,
   );
 
   const { errorToast, successToast } = useContext(StyleContext);
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
   const [signUpBatch, setSignUpBatch] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
 
-  const signupUser = async () => {
+  const signupUser = async (propic) => {
     await axios
       .post(BaseUrl + "/signup", {
         first_name: values.firstname,
@@ -104,7 +104,7 @@ export const AuthProvider = ({ children }) => {
         password: values.password,
         phone_num: values.mobile,
         about: values.about,
-        img_thumbnail: cloud,
+        img_thumbnail: propic,
       })
       .then((res) => {
         console.log(res.data);
@@ -245,7 +245,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          }
+          },
         )
         .then((res) => {
           console.log(res.data);
@@ -270,7 +270,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          }
+          },
         )
         .then((res) => {
           console.log(res.data);
@@ -298,10 +298,6 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  // const YoutubeAPI = async () =>{
-
-  // }
-
   const HostCourse = async (e) => {
     // console.log(course, "the auth, final section...");
     // uploadImage();
@@ -309,7 +305,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const res = await axios.post(
           "https://api.cloudinary.com/v1_1/black-box/image/upload",
-          data
+          data,
         );
         console.log(res.data, "uploaded...");
         return res.data;
@@ -326,7 +322,7 @@ export const AuthProvider = ({ children }) => {
           formData.append("cloud_name", "black-box");
           const data = await uploaingImg(formData);
           return data.secure_url;
-        })
+        }),
       );
       console.log(uploaders, "res is here.");
       const res = await axios.post(
@@ -336,8 +332,9 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
+      console.log(res.data);
       if (typeof res.data === "object") {
         setCourseId(res.data);
       }
@@ -356,7 +353,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       setClasslist([{ ...classlist[0], ...res.data }]);
     } catch (err) {
@@ -428,7 +425,7 @@ export const AuthProvider = ({ children }) => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       console.log(result, "result");
     } catch (err) {

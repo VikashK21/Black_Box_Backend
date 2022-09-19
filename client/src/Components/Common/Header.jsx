@@ -33,11 +33,11 @@ const Header = () => {
             <div className="navs align-items-center">
               <b>
                 <ul className="navul">
-                  <li>
+                  {/* <li>
                     <Link to="/" className="link px-3 ">
                       STREAM
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link to="/classes" className="link px-3 ">
                       JOIN CLASSES
@@ -67,11 +67,11 @@ const Header = () => {
                       
 
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/nav" className="link px-3 pt-1 ">
                       <GiHamburgerMenu className="" size={30} />
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </b>
             </div>

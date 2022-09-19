@@ -66,6 +66,7 @@ const LinearStepper = () => {
     setActiveStep(activeStep + 1);
     setSkippedSteps(skippedSteps.filter((skipItem) => skipItem !== activeStep));
     if (activeStep === 1) {
+      alert("Course details saved");
       HostCourse();
     }
   };

@@ -188,14 +188,14 @@ class Course_inf {
   };
 
   uploadVideoWithAuth = (req, res) => {
-    // console.log("google");
+    console.log("google");
     const { filename, title, description } = JSON.parse(req.query.state);
-    // console.log(req.query.state, "accha");
+    console.log(req.query.state, "accha");
     // console.log(req.query.code, "dekha maine");
 
     oAuth.getToken(req.query.code, (err, token) => {
       if (err) throw err;
-      // console.log(token, "from get token...");
+      console.log(token, "from get token...");
       oAuth.setCredentials(token);
       uploadVideoToYouTube(filename, title, description);
     });

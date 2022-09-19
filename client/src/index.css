@@ -49,10 +49,12 @@ code {
 .slideimg {
   position: relative;
   display: block;
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  object-fit: cover !important;
+
   /* min-height: clamp(300px, 50vh, 800px); */
-  min-height: 100vh !important;
+  max-height: 70vh !important;
   /* background-color shows in the reserved space before image loads */
   background-color: hsl(200, 20%, 75%);
   /* Make background pulse so it looks kinda load-y */

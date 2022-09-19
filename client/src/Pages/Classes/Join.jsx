@@ -23,7 +23,7 @@ import DefaultPic from "../../Images/defualtProPic.jpg";
 const Join = () => {
   const { id } = useParams();
 
-  const { BaseUrl } = useContext(AuthContext);
+  const { BaseUrl, authTokens } = useContext(AuthContext);
   const name = localStorage.getItem("name");
   const [course, setCourse] = useState({
     host_details: {
@@ -70,6 +70,37 @@ const Join = () => {
     });
   };
 
+  const addingparticipant = async () => {
+    await axios
+      .post(
+        BaseUrl + "/participant/" + id,
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const checkBeforeJoining = async (id) => {
+    await axios
+      .get(BaseUrl + "/parallelclasses/" + id, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        displayRazorpay();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const displayRazorpay = async (price) => {
     const response = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
@@ -80,9 +111,9 @@ const Join = () => {
     }
 
     const options = {
-      key: "rzp_test_E0zBRvp7PcQtdS",
+      key: "rzp_live_f8Ca3KlJVCNOIa",
       currency: "INR",
-      amount: 140000,
+      amount: course.price * 100,
       name: "BlackBox - Teach and Learn",
       description: "Paying your course/class fee ",
       // image: "https://blackbox.in/assets/images/logo.png",
@@ -91,6 +122,7 @@ const Join = () => {
         console.log(response);
         alert("Payment Successful");
         alert(response.razorpay_payment_id);
+        addingparticipant();
       },
 
       prefill: {
@@ -103,6 +135,8 @@ const Join = () => {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
+
+  const [loading, setLoading] = useState(false);
 
   return (
     <Container fluid className="m-0 p-0 ">
@@ -158,16 +192,16 @@ const Join = () => {
             <Col md={8} xs={12}>
               <div className="hostdiv">
                 <h6>Taught by</h6>
-              <Link to={`/profile/${course.host_details.id}`}>
-                <h2 className="gx text-dark">
-                  {course.host_details.first_name
-                    ? course.host_details.first_name
-                    : "loading"}{" "}
-                  {course.host_details.last_name
-                    ? course.host_details.last_name
-                    : "loading"}
-                </h2>
-              </Link>
+                <Link to={`/profile/${course.host_details.id}`}>
+                  <h2 className="gx text-dark">
+                    {course.host_details.first_name
+                      ? course.host_details.first_name
+                      : "loading"}{" "}
+                    {course.host_details.last_name ? course.host_details.last_name !== ""
+                      ? course.host_details.last_name : "loading"
+                      : ""}
+                  </h2>
+                </Link>
               </div>
             </Col>
           </Row>
@@ -498,9 +532,19 @@ const Join = () => {
                   <Button
                     className="bgdark text-light w-100 rounded-3"
                     onClick={() => {
-                      displayRazorpay();
+                      console.log(course.id);
+                      checkBeforeJoining(course.id);
+                      setLoading(true);
                     }}
                   >
+                    { loading ? 
+                    <div class="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                      <div class="ldio-cqj9sf9mcdj">
+                        <div></div>
+                      </div>
+                    </div> :
+                    " " }
+
                     Book your tickets
                   </Button>
                 </div>

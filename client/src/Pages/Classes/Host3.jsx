@@ -30,14 +30,14 @@ const Host3 = () => {
       </Container>
       <Container className="d-flex justify-content-center mt-3">
         {/* <h3>Added classes</h3> */}
-        <Row className="w-50">
+        {/* <Row className="w-50">
           <Col md={2}>#1</Col>
           <Col md={2}>Name</Col>
           <Col md={2}>Fee</Col>
           <Col md={2}>Date</Col>
           <Col md={2}>Time</Col>
           <Col md={2}>Duration</Col>
-        </Row>
+        </Row> */}
       </Container>
       <Container fluid className="d-flex justify-content-center m-0 p-0">
         {/* <Container fluid className="reg_div py-5">

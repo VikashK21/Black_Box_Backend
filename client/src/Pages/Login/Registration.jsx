@@ -68,6 +68,7 @@ const Registration = () => {
   };
 
   const uploadImage = () => {
+    var propic = "";
     if (image !== null) {
       const data = new FormData();
       data.append("file", image);
@@ -84,14 +85,15 @@ const Registration = () => {
           //   timestamp: data.data.created_at,
           // });
 
-          setCloud(JSON.stringify(data.data));
-          signupUser();
+          // setCloud(JSON.stringify(data.data));
+          propic = JSON.stringify(data.data);
+          signupUser(propic);
         })
         .catch((err) => {
           alert(err);
         });
     } else {
-      signupUser();
+      signupUser(propic);
     }
   };
 

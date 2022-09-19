@@ -180,7 +180,7 @@ class Courses_Classes {
               duration,
               class_id,
               course_id,
-              link
+              link,
             ) {
               // This is just to bring the values in the sorting order.
               let num = date;
@@ -225,7 +225,7 @@ class Courses_Classes {
                   new Date().getMonth() + 2,
                   "--- the month",
                   Number(date.split("-")[1]),
-                  date
+                  date,
                 );
                 nextClassGroupt[num] = {
                   [Number(time.split(":")[0])]: {
@@ -247,7 +247,7 @@ class Courses_Classes {
                 Cls[0].duration,
                 Cls[0].id,
                 crs.course.id,
-                crs.course.link
+                crs.course.link,
               );
             } else if (Cls.length > 1) {
               for (let clsSq of Cls) {
@@ -258,7 +258,7 @@ class Courses_Classes {
                     clsSq.duration,
                     clsSq.id,
                     crs.course.id,
-                    crs.course.link
+                    crs.course.link,
                   );
                 }
               }
@@ -271,7 +271,7 @@ class Courses_Classes {
         }
         // The locha of TIME...but gave Success.
         const sendingClass = Object.values(
-          Object.values(nextClassGroupt)[0]
+          Object.values(nextClassGroupt)[0],
         )[0];
 
         let gTime = sendingClass.time.split(":");
@@ -522,6 +522,7 @@ class Courses_Classes {
       });
       fs2.removeSync("./videos");
       fs.writeFileSync("./youtube.json", JSON.stringify({ id: null }, null, 4));
+      fs.removeSync("/videos");
     } catch (err) {
       console.log(err.message);
       return err.message;

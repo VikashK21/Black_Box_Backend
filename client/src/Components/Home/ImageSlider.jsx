@@ -15,7 +15,11 @@ const ImageSlider = () => {
     <Container fluid className="p-0 m-0 w-100">
       <Carousel variant="dark" className="caro">
         <Carousel.Item>
-          <img className="slideimg " src={Carousel1} alt="First slide" />
+          <img className="slideimg " src={Carousel1} alt="First slide"
+          style={{
+            objectPosition: "bottom",
+          }}
+          />
           <Carousel.Caption className="c1">
             <h5>MAKE THE WORLD</h5>
             <h5>YOUR CLASSROOM</h5>
@@ -29,7 +33,11 @@ const ImageSlider = () => {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="slideimg " src={Carousel2} alt="Second slide" />
+          <img className="slideimg " src={Carousel2} alt="Second slide"
+          style={{
+            objectPosition: "top",
+          }}
+          />
           <Carousel.Caption className="c2">
             <h5>BRINGING YOU</h5>
             <h5>THE BEST TEACHERS</h5>
@@ -45,7 +53,7 @@ const ImageSlider = () => {
             </button>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item>
+        {/* <Carousel.Item>
           <img className="slideimg " src={Carousel3} alt="Third slide" />
           <Carousel.Caption className="c3">
             <h5>VIRTUAL</h5>
@@ -62,7 +70,7 @@ const ImageSlider = () => {
             <h5>STREAMING</h5>
             <button>WATCH NOW</button>
           </Carousel.Caption>
-        </Carousel.Item>
+        </Carousel.Item> */}
       </Carousel>
     </Container>
   );

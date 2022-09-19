@@ -51,9 +51,7 @@ const Login = () => {
               onChange={changeHandler}
             />
 
-            {/* <input type="text" className='bw input my-3' placeholder='Email' />
-      <input type="password" className='bw input' placeholder='Password' /> */}
-
+            
             <div className="mt-3 d-flex flex-column">
               <p className="moto opacity-75">
                 Use your email or mobile to signin
