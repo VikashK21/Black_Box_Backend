@@ -82,7 +82,7 @@ class User_Ctrl {
       if (req.body.hasOwnProperty("email")) {
         const result = await Users.loginWithEmailPass(
           req.body.email,
-          req.body.password
+          req.body.password,
         );
         if (typeof result === "object") {
           return res.status(202).cookie("token_key", result.token).json(result);

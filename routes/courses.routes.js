@@ -113,7 +113,7 @@ router.get("/course", (req, res) => {
 });
 
 //registered course for both...
-router.get("/trainer/:id", Course_inf.trainersDetail);
+router.get("/trainer", authorizationToken, Course_inf.trainersDetail);
 router.get("/student", authorizationToken, Course_inf.studentsDetail);
 
 //reactions...

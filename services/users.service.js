@@ -6,6 +6,24 @@ const { authenticationToken } = require("../auth/user.auth");
 // const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
+  async hostProfile(id) {
+    try {
+      const result = await prisma.users.findUnique({
+        where: { id },
+        include: {
+          Course: {
+            include: {
+              Classes: true,
+              Vid_Classes: true,
+            },
+          },
+        },
+      });
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   async forgetPass(email, password) {
     try {
       const result2 = await prisma.users.findUnique({
