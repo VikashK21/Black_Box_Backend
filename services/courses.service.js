@@ -93,6 +93,7 @@ class Courses_Classes {
           Participants: true,
           Gift: true,
           Suggest: true,
+          Reactions: true,
         },
       });
       //1
