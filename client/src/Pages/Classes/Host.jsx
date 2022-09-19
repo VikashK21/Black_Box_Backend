@@ -69,10 +69,11 @@ const Host = () => {
   };
 
   useEffect(() => {
+    setImage([]);
     if (course.type === "") {
       navigate("/host");
     }
-  }, [image]);
+  }, []);
 
   const changeHandler = (e) => {
     setCourse({ ...course, [e.target.name]: e.target.value });
@@ -170,10 +171,10 @@ const Host = () => {
                 </Col>
               </Row>
             </div>
-            <div className="profile-img text-center my-1">
+            <div className="profile-img text-center my-1 d-flex">
               {image.length > 0 &&
                 image.map((ele, index) => (
-                  <div key={index}>
+                  <div key={index} className="mx-2">
                     <img width={250} src={ele} alt="" />
                   </div>
                 ))}

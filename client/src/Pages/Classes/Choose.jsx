@@ -12,6 +12,7 @@ const Choose = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
     setCourse({
       title: "",
       description: "",
@@ -26,8 +27,9 @@ const Choose = () => {
       content: [{}],
       requirements: [{}],
     });
-
+    
     setImage([]);
+
   }, []);
 
   return (

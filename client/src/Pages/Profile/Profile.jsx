@@ -138,7 +138,7 @@ const Profile = () => {
                   </Row>
                 ) : (
                   <Row className="mt-2 m-0 ">
-                    <h2 className="p-0">Hurraay! </h2>
+                    <h2 className="p-0">Hurraay!</h2>
                     <h4 className="p-0">The wait is over. Join the class!</h4>
                     <a
                       href="http://localhost:3000/hosting"
@@ -185,7 +185,7 @@ const Profile = () => {
                   className=" p-0 m-0 w-75 cp"
                   onClick={() => {
                     setShowclasses(true);
-                    scollToRef.current.scrollIntoView();
+                    // scollToRef.current.scrollIntoView();
                   }}
                   style={{
                     borderRadius: "15px",
