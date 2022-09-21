@@ -5,9 +5,21 @@ const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
 
 class Course_inf {
+  deleteClassById = async (req, res) => {
+    try {
+      const result = Courses.deleteClassById(Number(req.params.id));
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   editClassById = async (req, res) => {
     try {
-      const result = await Courses.editClassById(req.user_id, req.body);
+      const result = await Courses.editClassById(
+        Number(req.params.id),
+        req.body,
+      );
       res.status(200).json(result);
     } catch (err) {
       res.status(400).json(err.message);

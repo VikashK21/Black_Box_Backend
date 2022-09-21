@@ -109,6 +109,20 @@ router.get("/course", (req, res) => {
         route: "/api/student",
       },
     },
+
+    editClassById: {
+      PATCH: {
+        route: "/api/class/:id",
+        parameters:
+          "The same body what your were sending for the adding Classes",
+      },
+    },
+
+    deleteClassById: {
+      DELETE: {
+        route: "/api/class/:id",
+      },
+    },
   });
 });
 
@@ -146,6 +160,7 @@ router.post("/suggest", authorizationToken, Course_inf.addToSuggested);
 
 router.post("/host/classes", authorizationToken, Course_inf.course_Classes);
 router.patch("/class/:id", authorizationToken, Course_inf.editClassById);
+router.delete("/class/:id", authorizationToken, Course_inf.deleteClassById);
 /**
  * @swagger
  * /api/host/classes:

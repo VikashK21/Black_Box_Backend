@@ -4,6 +4,17 @@ const fs = require("fs");
 const fs2 = require("fs-extra");
 
 class Courses_Classes {
+  async deleteClassById(id) {
+    try {
+      const result = prisma.classes.delete({
+        where: { id },
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   async editClassById(id, data) {
     try {
       const result = prisma.classes.update({

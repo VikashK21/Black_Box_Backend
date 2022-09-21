@@ -1,6 +1,24 @@
+const { send_OTP } = require("../auth/verfication");
+const crypto = require("crypto");
 const Users = new (require("../services/users.service"))();
+const fs = require("fs");
 
 class User_Ctrl {
+  verification = (req, res) => {
+    const otp = crypto.randomInt(100000, 999999);
+    send_OTP(req.body.email, otp);
+    res.status(200).json({ status: true });
+  };
+
+  verifying = async (req, res) => {
+    const data = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
+    if (data.passCode === req.body.otp) {
+      res.status(200).json({ status: true });
+    } else {
+      res.status(400).json({ status: false });
+    }
+  };
+
   hostProfile = async (req, res) => {
     try {
       const result = await Users.hostProfile(Number(req.params.id));
@@ -12,7 +30,11 @@ class User_Ctrl {
 
   forgetPass = async (req, res) => {
     try {
-      const result = await Users.forgetPass(req.body.email, req.body.password);
+      const data = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
+      if (!data.hasOwnProperty("passEmail")) {
+        return res.status(400).json({ status: false });
+      }
+      const result = await Users.forgetPass(data.passEmail, req.body.password);
       console.log(result);
       if (typeof result === "object") {
         return res.status(202).json(result);
@@ -75,6 +97,7 @@ class User_Ctrl {
 
   logout = async (req, res) => {
     try {
+      fs.writeFileSync("./youtube.json", JSON.stringify({ id: null }, null, 4));
       req.logout();
       console.log("print");
     } catch (error) {

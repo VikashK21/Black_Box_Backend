@@ -6,6 +6,7 @@ const { authenticationToken } = require("../auth/user.auth");
 // const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
+  
   async hostProfile(id) {
     try {
       const result = await prisma.users.findUnique({

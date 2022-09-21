@@ -46,11 +46,36 @@ router.get("/users", async (req, res, next) => {
         },
       },
       forgetPass: {
-        PATCH: {
-          route: "/api/forgetpass",
-          parameters: {
-            email: "string",
-            password: "string",
+        1: {
+          POST: {
+            route: "/api/sendotp",
+            parameters: {
+              email: "string",
+            },
+          },
+          response: {
+            status: true,
+            status: false,
+          },
+        },
+        2: {
+          POST: {
+            route: "/api/verification",
+            parameters: {
+              otp: "number",
+            },
+          },
+          response: {
+            status: true,
+            status: false,
+          },
+        },
+        3: {
+          PATCH: {
+            route: "/api/forgetpass",
+            parameters: {
+              password: "string",
+            },
           },
         },
       },
@@ -67,6 +92,8 @@ router.get("/users", async (req, res, next) => {
 /**
  *
  */
+router.post("/sendotp", Users.verification);
+router.post("/verification", Users.verifying);
 router.get("/host/profile/:id", Users.hostProfile);
 router.get("/profile", authorizationToken, Users.profile);
 router.patch("/profile", authorizationToken, Users.editProfile);
