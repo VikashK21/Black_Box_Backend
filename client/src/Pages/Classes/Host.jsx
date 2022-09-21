@@ -69,7 +69,7 @@ const Host = () => {
   };
 
   useEffect(() => {
-    setImage([]);
+    // setImage([]);
     if (course.type === "") {
       navigate("/host");
     }
@@ -171,13 +171,41 @@ const Host = () => {
                 </Col>
               </Row>
             </div>
-            <div className="profile-img text-center my-1 d-flex">
-              {image.length > 0 &&
+            <div className="profile-img text-center my-1 "
+            style={{
+              height: "fit-content",
+            }}
+            >
+              <div className="d-flex my-3 imgscroll" style={{
+                overflowX: "auto",
+                overflowY: "hidden",
+                height: "fit-content",
+              }}>
+                {image.length > 0 &&
                 image.map((ele, index) => (
-                  <div key={index} className="mx-2">
-                    <img width={250} src={ele} alt="" />
+                  <div key={index} className=" mx-2 p-2">
+                    <img width={250} src={ele} alt="" className="imghover" />
+                    <div>
+                      <Button
+                        variant="contained"
+                        color="error"
+                        className="my-2 imgdlt "
+                        
+                        onClick={() => {
+                          const list = [...image];
+                          list.splice(index, 1);
+                          setImage(list);
+                        }}
+                      >
+                        Delete
+                      </Button>
+
+                    </div>
+
                   </div>
                 ))}
+              </div>
+              
               <div className="edit-profile-pic d-flex justify-content-center">
                 <div className="d-flex">
                   <FormControl
@@ -191,13 +219,32 @@ const Host = () => {
                     }}
                     accept=".jpg,.jpeg,.png,"
                   />
-                  <label htmlFor="upload_image">
+                  {image.length !== 0 ? (
+                    <label htmlFor="upload_image">
+                    <span className="profilepic__icon">
+                      <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                        Add image
+                      </p>
+                    </span>
+                  </label>
+                  ) : (
+                    <label htmlFor="upload_image">
+                    <span className="profilepic__icon">
+                      <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                        Upload image
+                      </p>
+                    </span>
+                  </label>
+                  )}
+              
+                    
+                  {/* <label htmlFor="upload_image">
                     <span className="profilepic__icon">
                       <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
                         Upload photo
                       </p>
                     </span>
-                  </label>
+                  </label> */}
                   <FormDialog />
                 </div>
               </div>

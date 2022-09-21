@@ -79,8 +79,8 @@ export default function BasicTabs() {
               justifyContent: "end",
             }}
           >
-            <Tab label="Item One" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
+            <Tab label="Hosted classes" {...a11yProps(0)} />
+            <Tab label="Joined classes" {...a11yProps(1)} />
           </Tabs>
           {/* <button>X</button> */}
           <p>X</p>
@@ -131,7 +131,7 @@ export default function BasicTabs() {
             </Row>
           </Col>
           <Col md={6}>
-            <Row className="mt-2 m-0 ">
+            <Row className=" m-0 ">
               <h2 className="p-0">Hurraay!</h2>
               <h4 className="p-0">The wait is over. Join the class!</h4>
               <a

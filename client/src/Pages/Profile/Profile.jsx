@@ -192,16 +192,7 @@ const Profile = () => {
                   }}
                 />
               </Row>
-              <Row className="mt-4 ">
-                <h2 className="gl">Streaming</h2>
-                <img
-                  src={Classes}
-                  className=" p-0 m-0 w-75 mb-3"
-                  style={{
-                    borderRadius: "15px",
-                  }}
-                />
-              </Row>
+              
               <hr />
             </Col>
             <Col md={8} className="p-0 ">

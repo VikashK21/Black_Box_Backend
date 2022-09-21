@@ -23,6 +23,10 @@ const Enter = () => {
     useEffect(() => {
     // user ? navigate("/profile") : navigate("/");
 
+    if(user){
+        navigate("/profile")
+    }
+
         setShow(true);
         onkeyup = (e) => {
             if (e.keyCode === 13) {

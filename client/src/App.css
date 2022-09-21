@@ -1004,5 +1004,30 @@ li{
 }
 
 
+.imgscroll::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+.imgscroll::-webkit-scrollbar-track {
+  background: white;        /* color of the tracking area */
+}
+
+.imgscroll::-webkit-scrollbar-thumb {
+  background-color: var(--yellow);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid white;  /* creates padding around scroll thumb */
+}
+
+.imgdlt{
+  visibility: none !important;
+}
+
+.imghover:hover{
+  transform: scale(1.1) !important;
+}
+
+.imghover:hover + .imgdlt{
+  visibility: visible;
+}
 
 
