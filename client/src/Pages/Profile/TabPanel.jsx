@@ -159,16 +159,16 @@ export default function BasicTabs() {
                       </Col>
                       <Col md={6} className=" align-content-center">
                         <h6>
-                          {/* Instructor :<b> {item.host_details.first_name}</b> */}
+                          Instructor :<b> {item.course.host_details.first_name}</b>
                         </h6>
                         <h6>
-                          Title : <b>{item.title}</b>
+                          Title : <b>{item.course.title}</b>
                         </h6>
                         <h6>
-                          {/* Classes : <b>{item.Classes.length}</b> */}
+                          Classes : <b>{item.course.Classes.length}</b>
                         </h6>
                         <h6>
-                          {/* Participants : <b>{item.Participants.length}</b> */}
+                          Participants : <b>{item.course.Participants.length}</b>
                         </h6>
                       </Col>
                     </Row>

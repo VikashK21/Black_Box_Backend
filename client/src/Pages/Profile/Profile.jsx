@@ -89,9 +89,13 @@ const Profile = () => {
       <Container fluid className="white"></Container>
       <Whatsnew />
       <Container fluid className="p-0 m-0">
-        <Container className="p-5 pt-4">
+        <Container className="p-5 pt-4"
+        style={{
+          width: "65%",
+        }}
+        >
           <Row className="mt-2 ">
-            <Col md={4} className="p-0">
+            <Col md={5} className="p-0">
               <div>
 
                 {showclasses===false && (
@@ -212,7 +216,7 @@ const Profile = () => {
               
               <hr />
             </Col>
-            <Col md={8} className="p-0 ">
+            <Col md={7} className="p-0 ">
               {showclasses ? (
                 // <div ref={scollToRef}>
                 //   <h1>My classes</h1>
@@ -271,13 +275,13 @@ const Profile = () => {
                               </Col>
                             </Row>
                             <Link to={`/classes/join/${course.id}`}>
-                              <Row className="d-flex justify-content-center bgw my-1 py-1">
+                              <Row className="d-flex justify-content-center bgw">
                                 <img
                                   src={a[0]}
                                   alt=""
                                   className=""
                                   style={{
-                                    width: "40%",
+                                    width: "80%",
                                   }}
                                 />
                               </Row>
