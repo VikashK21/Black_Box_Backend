@@ -18,26 +18,65 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DatePicker from "react-multi-date-picker";
+import { useEffect } from "react";
 
 const Host3 = () => {
-  const { classes, setClasses, HostClasses } = useContext(AuthContext);
+  const {
+    classes,
+    setClasses,
+    HostClasses,
+    classlist,
+    setClasslist,
+    setHostClasses,
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    setClasslist([{}]);
+    console.log(classlist);
+  }, []);
 
   return (
     <Container fluid className=" p-0 m-0 ">
-      {/* <Header /> */}
-      <Container className="d-flex justify-content-center mt-5">
-        <h4>Added class</h4>
-      </Container>
       <Container className="d-flex justify-content-center mt-3">
-        {/* <h3>Added classes</h3> */}
-        {/* <Row className="w-50">
-          <Col md={2}>#1</Col>
-          <Col md={2}>Name</Col>
-          <Col md={2}>Fee</Col>
-          <Col md={2}>Date</Col>
-          <Col md={2}>Time</Col>
-          <Col md={2}>Duration</Col>
-        </Row> */}
+        <div className="w-75 text-center mt-3">
+          {classlist && <h4>Added classes</h4>}
+          {classlist && (
+            <b>
+            <Row className="w-100 mb-2">
+              <Col md={2}>No</Col>
+              <Col md={2}>Title</Col>
+              <Col md={2}>Date</Col>
+              <Col md={2}>Time</Col>
+              <Col md={2}>Duration</Col>
+              <Col md={2}>Action</Col>
+            </Row>
+            </b>
+          )}
+          {classlist
+            ? classlist.map((item, index) => (
+                <Row className="w-100 ">
+                  <Col md={2}>#{index + 1}</Col>
+                  <Col md={2}>{item.title}</Col>
+                  <Col md={2}>{item.date}</Col>
+                  <Col md={2}>{item.time}</Col>
+                  <Col md={2}>{item.duration + " mins"}</Col>
+                  <Col md={2}>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => {
+                        setClasslist(classlist.filter((i) => i !== item)); //filtering out the item that is clicked on and setting the new array to the classlist state variable.
+
+                        console.log(classlist);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </Col>
+                </Row>
+              ))
+            : null}
+        </div>
       </Container>
       <Container fluid className="d-flex justify-content-center m-0 p-0">
         {/* <Container fluid className="reg_div py-5">
@@ -54,7 +93,6 @@ const Host3 = () => {
                 <Col md={12} className="">
                   <div className="d-flex">
                     <TextField
-                      
                       label="Title"
                       name="title"
                       value={classes.title}
@@ -119,6 +157,7 @@ const Host3 = () => {
                     {classes.date?.toDate?.().toString()} */}
                     <input
                       type="date"
+                      value={classes.date}
                       className="w-100 p-2 rounded-2 timefield border-1"
                       onChange={(e) => {
                         setClasses({ ...classes, date: e.target.value });
@@ -132,20 +171,19 @@ const Host3 = () => {
                   <input
                     type="time"
                     value={classes.time}
-                    onChange={(e) =>{
-                      setClasses({ ...classes, time: e.target.value })
-                      console.log(e.target.value)
+                    onChange={(e) => {
+                      setClasses({ ...classes, time: e.target.value });
+                      console.log(e.target.value);
                     }}
                     className="w-100 p-2 rounded-2 timefield border-1"
                   />
                 </Col>
                 <Col md={4}>
                   <TextField
-                    
                     label="Duration"
                     name="duration"
                     type="number"
-                    placeholder="e.g : 1 hour"
+                    placeholder="e.g : 45 minutes"
                     variant="outlined"
                     value={classes.duration}
                     onChange={(e) =>
@@ -154,7 +192,6 @@ const Host3 = () => {
                     className=" mb-3 w-100"
                   />
                 </Col>
-
                 <Col md={12} className="mt-4">
                   <div className="d-flex justify-content-between">
                     <Button

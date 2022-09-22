@@ -485,8 +485,8 @@ const Join = () => {
               </div>
             </Col>
             <Col md={6} sm={12} className="mb-5 pb-5">
-              <h4 className="gx">Dates</h4>
-              {course.Classes
+              {/* <h4 className="gx">Dates</h4> */}
+              {/* {course.Classes
                 ? course.Classes.map((item, index) => {
                     var day = new Date(item.date);
 
@@ -503,9 +503,8 @@ const Join = () => {
                       </h5>
                     );
                   })
-                : ""}
+                : ""} */}
 
-              {/* <h5>June 21, 22, 23 | 3:30 PM - 4:30 PM</h5> */}
               <div className="joinclassdiv py-4 px-5">
                 <h4>
                   <div className="d-flex justify-content-between">

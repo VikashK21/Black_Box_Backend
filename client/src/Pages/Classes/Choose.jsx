@@ -27,7 +27,7 @@ const Choose = () => {
       content: [{}],
       requirements: [{}],
     });
-    
+
     setImage([]);
 
   }, []);

@@ -30,7 +30,7 @@ app.use(
     secret: process.env.SECRET_KEY_TOKEN,
     resave: false,
     saveUninitialized: true,
-  })
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,7 +38,7 @@ app.use(passport.session());
 //Home page
 if (process.env.NODE_ENV == "production") {
   app.use(express.static("client/build"));
-  // app.get("*", (req, res) => {
+  // app.get("/*", (req, res) => {
   //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
   // });
 }

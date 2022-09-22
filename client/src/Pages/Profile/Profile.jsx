@@ -11,6 +11,8 @@ import { AiFillHeart } from "react-icons/ai";
 import TabPanel from "./TabPanel";
 // import ReadMoreReact from "read-more-react";
 import { Link } from "react-router-dom";
+import StyleContext from "../../Context/StyleContext";
+
 
 const Profile = () => {
   const {
@@ -21,6 +23,8 @@ const Profile = () => {
     triggerReaction,
     DynamicTimer,
   } = useContext(AuthContext);
+
+  const {successToast, errorToast} = useContext(StyleContext)
   // const [reaction, setReaction] = useState([]);
 
   useEffect(() => {
@@ -165,11 +169,11 @@ const Profile = () => {
                     <Col md={3}>
                       <img src={Class2} alt="classes" className="w-100" />
                     </Col>
-                    <Col md={6}>
-                      <h5>Instructor : Name</h5>
-                      <h5>Class : Class</h5>
-                      <h5>Duration : 45 mins</h5>
-                      <h5>Day : #22 </h5>
+                    <Col md={6} className=" align-content-center">
+                      <h6>Instructor :<b> Name</b></h6>
+                      <h6>Class : <b>Class</b></h6>
+                      <h6>Duration : <b>45 mins</b></h6>
+                      <h6>Day : <b>#22</b> </h6>
                     </Col>
                   </Row>
                 )}
@@ -200,7 +204,9 @@ const Profile = () => {
                 // <div ref={scollToRef}>
                 //   <h1>My classes</h1>
                 // </div>
-                <TabPanel/>
+                <TabPanel
+                 props={setShowclasses}
+                />
               ) : (
                 <div className="feeds">
                   {courseList.length > 0 &&
@@ -252,13 +258,13 @@ const Profile = () => {
                               </Col>
                             </Row>
                             <Link to={`/classes/join/${course.id}`}>
-                              <Row className="d-flex justify-content-center bgw">
+                              <Row className="d-flex justify-content-center bgw my-1 py-1">
                                 <img
                                   src={a[0]}
                                   alt=""
                                   className=""
                                   style={{
-                                    width: "40%",
+                                    width: "80%",
                                   }}
                                 />
                               </Row>
@@ -269,8 +275,20 @@ const Profile = () => {
                                 md={5}
                                 className="d-flex justify-content-start"
                               >
-                                <Button className="bgdark text-white">
-                                  Share
+                                <Button
+                                variant="contained "
+                                className="bgy text-white outline-0"
+                                onClick={() => {
+                                  console.log("clicked");
+                                  //Copy the link to clipboard
+                                  navigator.clipboard.writeText(
+                                    `http://localhost:3000/classes/join/${course.id}`
+                                  );
+                                  successToast("Link copied to clipboard");
+                                }}
+                                
+                                >
+                                  Copy
                                 </Button>
                               </Col>
                               <Col

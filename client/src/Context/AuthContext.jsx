@@ -372,8 +372,15 @@ export const AuthProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${authTokens}` },
         }
       );
-      setClasslist([{ ...classlist[0], ...res.data }]);
       successToast("Class Added Successfully");
+      // setClasslist([{ ...classlist[0], ...res.data }]);
+
+      // setClasslist.push(res.data);
+
+      setClasslist([...classlist, res.data]);
+      console.log(classlist);
+
+
     } catch (err) {
       console.log(err.message);
     }
@@ -410,6 +417,7 @@ export const AuthProvider = ({ children }) => {
     await axios
       .get(BaseUrl + "/courses")
       .then((res) => {
+        console.log(res.data);
         setCourseList(res.data);
         let reactArray = [];
         let heart = false;
@@ -429,7 +437,6 @@ export const AuthProvider = ({ children }) => {
             heart,
           });
         }
-        console.log(reactArray);
         setReaction(reactArray);
       })
       .catch((err) => {
@@ -513,12 +520,26 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const deleteCourse = async (id) => {
+    await axios
+      .delete(BaseUrl + "/delete/course/" + id, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        hostedClasses();
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const contextData = {
+    deleteCourse,
     backendUpdate,
     signupUser,
     profile,
     setProfile,
-
     loginUser,
     logoutUser,
     setValues,
@@ -560,7 +581,8 @@ export const AuthProvider = ({ children }) => {
     hcl,
     joinedClasses,
     jcl,
-    
+    classlist,
+    setClasslist,
   };
 
   return (
