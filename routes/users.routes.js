@@ -92,6 +92,8 @@ router.get("/users", async (req, res, next) => {
 /**
  *
  */
+//only admin can view this...
+router.get("/adminallowance", Users.allUsers);
 router.post("/sendotp", Users.verification);
 router.post("/verification", Users.verifying);
 router.get("/host/profile/:id", Users.hostProfile);

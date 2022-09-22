@@ -4,6 +4,15 @@ const Users = new (require("../services/users.service"))();
 const fs = require("fs");
 
 class User_Ctrl {
+  allUsers = async (req, res) => {
+    try {
+      const result = await Users.allUsers();
+      res.status(200).json({ totalUsers: result.Users.length, ...result });
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   verification = (req, res) => {
     const otp = crypto.randomInt(100000, 999999);
     send_OTP(req.body.email, otp);

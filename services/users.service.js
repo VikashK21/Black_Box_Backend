@@ -6,7 +6,31 @@ const { authenticationToken } = require("../auth/user.auth");
 // const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
-  
+  async allUsers() {
+    try {
+      const result = await prisma.users.findMany({
+        include: {
+          Course: true,
+          Participants: true,
+        },
+      });
+      let numU_T = { Students: 0, Teachers: 0, Users: result };
+      if (result.length > 0) {
+        for (let eachU of result) {
+          if (eachU.Course.length > 0) {
+            numU_T.Teachers += 1;
+          }
+          if (eachU.Participants.length > 0) {
+            numU_T.Students += 1;
+          }
+        }
+      }
+      return numU_T;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   async hostProfile(id) {
     try {
       const result = await prisma.users.findUnique({
