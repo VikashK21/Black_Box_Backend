@@ -123,7 +123,6 @@ code {
   position: absolute !important;
   border-radius: 15px !important;
   transition: 0s !important;
-
 }
 
 .zoom:hover {
@@ -147,6 +146,7 @@ code {
 .ic {
   width: 50px;
   height: 50px;
+  /* width: 100% !important; */
 
   /* fill the container, preserving aspect ratio, and cropping to fit */
   /* background-size: cover; */
@@ -162,6 +162,16 @@ code {
 .ic2 {
   width: 100px;
   height: 100px;
+
+  object-fit: cover;
+
+  background-position: top center;
+
+  border-radius: 50%;
+}
+
+.ic3 {
+  width: 100% !important;
 
   object-fit: cover;
 
@@ -192,6 +202,6 @@ code {
   cursor: pointer;
 }
 
-.read-more-button{
+.read-more-button {
   cursor: pointer !important;
 }

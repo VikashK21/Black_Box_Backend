@@ -90,40 +90,45 @@ const Whatsnew = () => {
                         key={index}
                         style={{ height: "320px" }}
                       >
-                      <Link to={`/classes/join/${course.id}`} className="cp"> 
-
-                        <div className="profileclassesimg">
-                          <img src={a[0]} className="classesimg" />
-                        </div>
-                        <Row className="profilest bw m-0 p-2" 
-                        style={{
-                          overflowY: "hidden",
-                        }}
-                        >
-                          <Col xs={4} className="" 
-                          
+                        <Link to={`/classes/join/${course.id}`} className="cp">
+                          <div className="profileclassesimg">
+                            <img src={a[0]} className="classesimg" />
+                          </div>
+                          <Row
+                            className="profilest bw m-0 p-2 "
+                            style={{
+                              overflowY: "hidden",
+                            }}
                           >
-                            <img
-                              src={
-                                host
-                                  ? host.secure_url
+                            <div className="d-flex"
+                            style={{
+                              overflowX: "hidden",
+                            }}
+                            >
+                              <div  className="w-25">
+                              <img
+                                src={
+                                  host
                                     ? host.secure_url
+                                      ? host.secure_url
+                                      : DefaultPic
                                     : DefaultPic
-                                  : DefaultPic
-                              }
-                              className="ic pt-2"
-                            />
-                          </Col>
-                          <Col xs={8} className="p-2 ">
-                            <b>
-                              <p className="gl mb-0">{course.title}</p>
-                            </b>
-                            <p className="gl textgrey">
-                              {course.host_details.first_name}
-                            </p>
-                          </Col>
-                        </Row>
-                      </Link>
+                                }
+                                className="ic3 pt-2"
+                              />
+                            </div>
+                            <div className=" w-75">
+                              <b>
+                                <p className="gl mb-0">{course.title}</p>
+                              </b>
+                              <p className="gl textgrey">
+                                {course.host_details.first_name}
+                              </p>
+                            </div>
+                            </div>
+                            
+                          </Row>
+                        </Link>
                       </Col>
                     );
                   })

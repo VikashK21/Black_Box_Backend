@@ -22,6 +22,8 @@ const Profile = () => {
     reaction,
     triggerReaction,
     DynamicTimer,
+    showclasses,
+    setShowclasses,
   } = useContext(AuthContext);
 
   const {successToast, errorToast} = useContext(StyleContext)
@@ -78,7 +80,7 @@ const Profile = () => {
     CountdownTimer();
   });
 
-  const [showclasses, setShowclasses] = useState(false);
+  // const [showclasses, setShowclasses] = useState(false);
   const scollToRef = useRef();
 
   return (
@@ -91,7 +93,10 @@ const Profile = () => {
           <Row className="mt-2 ">
             <Col md={4} className="p-0">
               <div>
-                {timer ? (
+
+                {showclasses===false && (
+                  <>
+                   {timer ? (
                   <Row className="mt-2 ">
                     <b>
                       <h2>Your next class starts in </h2>
@@ -177,10 +182,18 @@ const Profile = () => {
                     </Col>
                   </Row>
                 )}
-                <div>
+<div>
                   <br />
                   <hr />
                 </div>
+                  </>
+                  
+                )}
+
+
+               
+
+                
               </div>
               <Row className="mt-2">
                 <h2 className="gl">My Classes</h2>
@@ -264,7 +277,7 @@ const Profile = () => {
                                   alt=""
                                   className=""
                                   style={{
-                                    width: "80%",
+                                    width: "40%",
                                   }}
                                 />
                               </Row>

@@ -24,6 +24,8 @@ export const BaseUrl = "/api"
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
+  const [showclasses, setShowclasses] = useState(false);
+
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
@@ -186,6 +188,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem("User");
         localStorage.removeItem("name");
         localStorage.removeItem("propic");
+        navigate("/main");
       })
       .catch((err) => {
         console.log(err.data);
@@ -583,6 +586,8 @@ export const AuthProvider = ({ children }) => {
     jcl,
     classlist,
     setClasslist,
+    showclasses,
+    setShowclasses,
   };
 
   return (
