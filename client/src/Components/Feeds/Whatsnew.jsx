@@ -66,18 +66,22 @@ const Whatsnew = () => {
                   <p className="gl">{about}</p>
                 </b>
                 <div className="d-flex">
-                  <Button variant="contained" className="bggrey w-100 me-1 text-dark">
+                  <Link to="/edit/profile">
+                  <Button variant="contained" className="bggrey w-50 me-1 text-dark px-4">
                     Edit
                   </Button>
+                  </Link>
+                  
                   <Button
                     variant="contained"
-                    className="bgy w-100 ms-1 text-dark"
+                    className="bgy w-50 ms-1 text-dark"
                     onClick={() => {
                       setShowclasses(true);
                     }}
                   >
                     My Classes
                   </Button>
+                 
                 </div>
 
                 {/* <Button variant="contained">Edit</Button> */}
