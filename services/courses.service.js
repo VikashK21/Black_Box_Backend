@@ -37,6 +37,7 @@ class Courses_Classes {
               Classes: true,
               Vid_Classes: true,
               Reactions: true,
+              host_details: true,
             },
           },
           participant: true,
