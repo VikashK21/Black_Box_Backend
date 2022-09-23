@@ -34,6 +34,7 @@ class Courses_Classes {
         include: {
           course: {
             include: {
+              Participants: true,
               Classes: true,
               Vid_Classes: true,
               Reactions: true,
