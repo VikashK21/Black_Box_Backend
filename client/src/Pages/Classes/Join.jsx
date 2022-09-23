@@ -31,11 +31,15 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ImageIcon from "@mui/icons-material/Image";
 import WorkIcon from "@mui/icons-material/Work";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import StyleContext from "../../Context/StyleContext";
+import {useNavigate} from "react-router-dom"
 
 const Join = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { BaseUrl, authTokens } = useContext(AuthContext);
+  const {successToast, errorToast} = useContext(StyleContext);
   const name = localStorage.getItem("name");
   const [course, setCourse] = useState({
     host_details: {
@@ -102,6 +106,7 @@ const Join = () => {
       )
       .then((res) => {
         console.log(res.data);
+        navigate("/profile");
       })
       .catch((err) => {
         console.log(err.message);
@@ -141,9 +146,12 @@ const Join = () => {
 
       handler: function (response) {
         console.log(response);
-        alert("Payment Successful");
-        alert(response.razorpay_payment_id);
         addingparticipant();
+        setTimeout(() => {
+          successToast("Payment Successful");
+        }, 2000);
+
+          
       },
 
       prefill: {

@@ -147,6 +147,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("authTokens", JSON.stringify(res.data.token));
         setUser(jwt_decode(res.data.token));
         setUserDetails(res.data.result);
+        localStorage.setItem("userDetails", res.data.result.about);
         const name =
           res.data.result.first_name + " " + res.data.result.last_name;
         localStorage.setItem("name", name);
