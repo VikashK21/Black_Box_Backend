@@ -134,10 +134,10 @@ const Whatsnew = () => {
                         md={3}
                         className="my-4 mt-1 class"
                         key={index}
-                        style={{ height: "320px" }}
+                        // style={{ height: "320px" }}
                       >
                         <Link to={`/classes/join/${course.id}`} className="cp">
-                          <div className="boxshadow rounded-5">
+                          <div className="boxshadow rounded-5 mb-2">
                             <div className="profileclassesimg">
                               <img src={a[0]} className="classesimg" />
                             </div>

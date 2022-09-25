@@ -103,7 +103,7 @@ const Profile = () => {
           ) : (
             <Row className="mt-2 ">
               <Col md={5} className="p-0">
-                {/* <div className="bgw rounded-3 ps-3 py-3 boxshadow me-2 mb-2">
+                <div className="bgw rounded-3 ps-3 py-3 boxshadow me-2 mb-2">
                   {showclasses === false && (
                     <>
                       {timer ? (
@@ -209,7 +209,7 @@ const Profile = () => {
                       </div>
                     </>
                   )}
-                </div> */}
+                </div>
                 <div className="mt-2 rounded-3 bgw p-3 pe-0 boxshadow me-2">
                   <h2 className="gl">My Classes</h2>
                   <img
