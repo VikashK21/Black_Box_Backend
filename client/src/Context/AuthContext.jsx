@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -160,12 +160,13 @@ export const AuthProvider = ({ children }) => {
           errorToast("Invalid Username or password");
           navigate("/login");
           // setTimeout(() => {
-          //   errorToast("");
-          // }, 1500);
+            //   errorToast("");
+            // }, 1500);
         }
       });
   };
-
+  
+  const scollToRef = useRef();
   const loginUser = async (e) => {
     e.preventDefault();
 
@@ -488,6 +489,7 @@ export const AuthProvider = ({ children }) => {
   const [hcl, setHcl] = useState([]);
 
   const hostedClasses = async () => {
+    
     await axios
       .get(BaseUrl + "/trainer", {
         headers: { Authorization: `Bearer ${authTokens}` },
@@ -495,6 +497,7 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         console.log(res.data);
         setHcl(res.data);
+        scollToRef.current.scrollIntoView();
       })
       .catch((err) => {
         console.log(err.message);
@@ -502,8 +505,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const [jcl, setJcl] = useState([]);
-
+  
   const joinedClasses = async () => {
+
     await axios
       .get(BaseUrl + "/student", {
         headers: { Authorization: `Bearer ${authTokens}` },
@@ -511,6 +515,7 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         console.log(res.data);
         setJcl(res.data);
+        scollToRef.current.scrollIntoView();
       })
       .catch((err) => {
         console.log(err.message);
@@ -538,7 +543,10 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+
+
   const contextData = {
+    scollToRef,
     deleteCourse,
     backendUpdate,
     signupUser,

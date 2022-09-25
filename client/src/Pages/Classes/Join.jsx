@@ -32,14 +32,14 @@ import ImageIcon from "@mui/icons-material/Image";
 import WorkIcon from "@mui/icons-material/Work";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import StyleContext from "../../Context/StyleContext";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { BaseUrl, authTokens } = useContext(AuthContext);
-  const {successToast, errorToast} = useContext(StyleContext);
+  const { BaseUrl, authTokens,user } = useContext(AuthContext);
+  const { successToast, errorToast } = useContext(StyleContext);
   const name = localStorage.getItem("name");
   const [course, setCourse] = useState({
     host_details: {
@@ -150,8 +150,6 @@ const Join = () => {
         setTimeout(() => {
           successToast("Payment Successful");
         }, 2000);
-
-          
       },
 
       prefill: {
@@ -655,9 +653,13 @@ const Join = () => {
                   <Button
                     className="bgdark text-light w-100 rounded-3"
                     onClick={() => {
-                      console.log(course.id);
-                      checkBeforeJoining(course.id);
-                      setLoading(true);
+                      if (user) {
+                        console.log(course.id);
+                        checkBeforeJoining(course.id);
+                        setLoading(true);
+                      } else {
+                        navigate("/profile");
+                      }
                     }}
                   >
                     {loading ? (

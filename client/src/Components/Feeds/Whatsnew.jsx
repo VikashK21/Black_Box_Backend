@@ -18,7 +18,7 @@ const Whatsnew = () => {
   const propic = prop.secure_url;
   const about = localStorage.getItem("userDetails");
 
-  const { goToTop, getCoursesList, courseList, setShowclasses } =
+  const { goToTop, getCoursesList, courseList, setShowclasses, scollToRef } =
     useContext(AuthContext);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Whatsnew = () => {
                     src={propic}
                     width={100}
                     height={100}
-                    className=" mb-1 mt-3 ic2"
+                    className=" mb-1 mt-3 ic2 "
                   />
                 ) : (
                   <img
@@ -49,7 +49,7 @@ const Whatsnew = () => {
                     style={{
                       borderRadius: "50%",
                     }}
-                    className="profilepic mb-1 mt-3"
+                    className="profilepic mb-1 mt-3 "
                   />
                 )
               ) : (
@@ -62,29 +62,37 @@ const Whatsnew = () => {
               )}
               <div className="mt-3 ps-3">
                 <h3>{name}</h3>
-                <b>
-                  <p className="gl">{about}</p>
-                </b>
+
+                <p className="">{about}</p>
+
                 <div className="d-flex">
                   <Link to="/edit/profile">
-                  <Button variant="contained" className="bggrey w-50 me-1 text-dark px-4">
-                    Edit
-                  </Button>
+                    <Button
+                      variant="contained"
+                      className="bggrey me-1 text-dark px-4"
+                      style={{
+                        height: "40px",
+                        width: "100px",
+                      }}
+                    >
+                      Edit
+                    </Button>
                   </Link>
-                  
+
                   <Button
                     variant="contained"
-                    className="bgy w-50 ms-1 text-dark"
+                    className="bg-dark ms-1 text-white"
+                    style={{
+                      height: "40px",
+                      width: "130px",
+                    }}
                     onClick={() => {
                       setShowclasses(true);
                     }}
                   >
                     My Classes
                   </Button>
-                 
                 </div>
-
-                {/* <Button variant="contained">Edit</Button> */}
               </div>
             </div>
             {/* <div className="searchdiv mt-5">
@@ -134,7 +142,7 @@ const Whatsnew = () => {
                               <img src={a[0]} className="classesimg" />
                             </div>
                             <Row
-                              className="profilest bw m-0 p-2 "
+                              className="profilest bw m-0"
                               style={{
                                 overflowY: "hidden",
                               }}
@@ -145,25 +153,12 @@ const Whatsnew = () => {
                                   overflowX: "hidden",
                                 }}
                               >
-                                <div className="w-25">
-                                  <img
-                                    src={
-                                      host
-                                        ? host.secure_url
-                                          ? host.secure_url
-                                          : DefaultPic
-                                        : DefaultPic
-                                    }
-                                    className="ic3 pt-2"
-                                  />
-                                </div>
-                                <div className=" w-75">
+                                <div className=" w-75 ms-1 pt-1">
                                   <b>
-                                    <p className="gl mb-0">{course.title}</p>
+                                    <p className="gl mb-0 text-dark">
+                                      {course.title}
+                                    </p>
                                   </b>
-                                  <p className="gl textgrey">
-                                    {course.host_details.first_name}
-                                  </p>
                                 </div>
                               </div>
                             </Row>

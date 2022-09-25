@@ -12,7 +12,7 @@ import TabPanel from "./TabPanel";
 // import ReadMoreReact from "read-more-react";
 import { Link } from "react-router-dom";
 import StyleContext from "../../Context/StyleContext";
-import {FaRegComment} from "react-icons/fa";
+import { FaRegComment } from "react-icons/fa";
 
 const Profile = () => {
   const {
@@ -24,6 +24,8 @@ const Profile = () => {
     DynamicTimer,
     showclasses,
     setShowclasses,
+    scollToRef,
+    
   } = useContext(AuthContext);
 
   const { successToast, errorToast } = useContext(StyleContext);
@@ -81,7 +83,6 @@ const Profile = () => {
   });
 
   // const [showclasses, setShowclasses] = useState(false);
-  const scollToRef = useRef();
 
   return (
     <Container fluid className="m-0 p-0 bgg">
@@ -94,14 +95,15 @@ const Profile = () => {
           style={{
             maxWidth: "1000px",
           }}
-          
         >
           {showclasses ? (
-            <TabPanel />
+            <div >
+              <TabPanel />
+            </div>
           ) : (
             <Row className="mt-2 ">
               <Col md={5} className="p-0">
-                <div className="bgw rounded-3 ps-3 py-3 boxshadow me-2 mb-2">
+                {/* <div className="bgw rounded-3 ps-3 py-3 boxshadow me-2 mb-2">
                   {showclasses === false && (
                     <>
                       {timer ? (
@@ -134,7 +136,6 @@ const Profile = () => {
                           </Col>
                           <Col xs={3} className="p-2 timer">
                             <h1>
-                              {/* {countdownTime.countdownMinutes} */}
                               {countdownTime.countdownMinutes.toString()
                                 .length === 1
                                 ? "0" + countdownTime.countdownMinutes
@@ -146,7 +147,6 @@ const Profile = () => {
                           </Col>
                           <Col xs={3} className="p-2 timer">
                             <h1>
-                              {/* {countdownTime.countdownSeconds} */}
                               {countdownTime.countdownSeconds.toString()
                                 .length === 1
                                 ? "0" + countdownTime.countdownSeconds
@@ -205,12 +205,11 @@ const Profile = () => {
                         </Row>
                       )}
                       <div>
-                        {/* <br />
-                        <hr /> */}
+                        
                       </div>
                     </>
                   )}
-                </div>
+                </div> */}
                 <div className="mt-2 rounded-3 bgw p-3 pe-0 boxshadow me-2">
                   <h2 className="gl">My Classes</h2>
                   <img
@@ -218,14 +217,14 @@ const Profile = () => {
                     className=" p-0 m-0 w-75 cp"
                     onClick={() => {
                       setShowclasses(true);
-                      // scollToRef.current.scrollIntoView();
+                      scollToRef.current.scrollIntoView();
+
                     }}
                     style={{
                       borderRadius: "15px",
                     }}
                   />
                 </div>
-
               </Col>
               <Col md={7} className="p-0 ">
                 <div className="feeds pt-1">
@@ -243,10 +242,10 @@ const Profile = () => {
                             className="mb-4 bgw rounded-3 p-3 ps-2 ms-1 me-2  boxshadow"
                             key={index}
                           >
-                            <Row className=" pt-2">
+                            <Row className=" ">
                               <Col md={8}>
-                                <div className="d-flex pb-2">
-                                  <img
+                                <div className="d-flex">
+                                  {/* <img
                                     src={
                                       host
                                         ? host.secure_url
@@ -256,21 +255,19 @@ const Profile = () => {
                                     }
                                     alt="classes"
                                     className="ic"
-                                  />
+                                  /> */}
                                   <div
-                                    style={{
-                                      margin: "auto 0",
-                                    }}
+                                    
                                   >
-                                    <h5 className="ps-2">{course.title}</h5>
+                                    <h5 className="ps-3">{course.title}</h5>
                                   </div>
                                 </div>
                               </Col>
-                              <Col
+                              {/* <Col
                                 md={4}
                                 className="d-flex justify-content-end pe-4"
                               >
-                                {/* <div
+                                <div
                                   className="d-flex"
                                   style={{
                                     margin: "auto",
@@ -293,7 +290,7 @@ const Profile = () => {
                                     alt="classes"
                                     className="ic"
                                   />
-                                </div> */}
+                                </div>
                                 <div
                                   style={{
                                     margin: "auto 0",
@@ -301,7 +298,7 @@ const Profile = () => {
                                 >
                                   :
                                 </div>
-                              </Col>
+                              </Col> */}
                             </Row>
                             <Link to={`/classes/join/${course.id}`}>
                               <Row className="d-flex justify-content-center bgw m-0 p-0">
@@ -338,7 +335,7 @@ const Profile = () => {
                               </Col> */}
                               <Col
                                 md={5}
-                                className="d-flex justify-content-start"
+                                className="d-flex justify-content-start ps-4"
                               >
                                 <div className="cp">
                                   {reaction.length > 0 &&
@@ -360,8 +357,7 @@ const Profile = () => {
                                         : "gray",
                                   }}
                                 />
-                                <FaRegComment size={28}  />
-
+                                <FaRegComment size={28} />
                               </Col>
                               <Col md={1}></Col>
                             </Row>
@@ -375,7 +371,7 @@ const Profile = () => {
           )}
         </Container>
       </Container>
-      <Footer />
+      <Footer feeds="true" />
     </Container>
   );
 };

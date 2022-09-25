@@ -7,10 +7,16 @@ import { AiOutlineTwitter } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const Footer = (props) => {
   return (
-    <Container fluid className="m-0 p-0">
-      <Row className="m-0 p-0 footerrow align-items-center">
+    <Container fluid className="m-0 p-0 boxshadow">
+      {props.feeds ? (
+        " "
+        
+      ) : (
+        <Row className="m-0 p-0 footerrow align-items-center"
+        
+      >
         <Col md={4} className="footercol d-none d-md-block">
           <center>
             <h1 className="gl ">CONTACT</h1>
@@ -65,6 +71,10 @@ const Footer = () => {
           </center>
         </Col>
       </Row>
+
+      )
+      }
+      
       <Container
         fluid
         className="w-100 py-1 m-0 text-light p-0 bgdark align-items-center icon2"

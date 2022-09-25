@@ -38,7 +38,7 @@ const Host3 = () => {
   return (
     <Container fluid className=" p-0 m-0 ">
       <Container className="d-flex justify-content-center mt-3">
-        <div className="w-75 text-center mt-3">
+        {/* <div className="w-75 text-center mt-3">
           {classlist && <h4>Added classes</h4>}
           {classlist && (
             <b>
@@ -76,7 +76,7 @@ const Host3 = () => {
                 </Row>
               ))
             : null}
-        </div>
+        </div> */}
       </Container>
       <Container fluid className="d-flex justify-content-center m-0 p-0">
         {/* <Container fluid className="reg_div py-5">

@@ -35,8 +35,7 @@ const Host6 = () => {
       <Container className="d-flex justify-content-center mt-5">
         <h4>Added class</h4>
       </Container>
-      <Container className="d-flex justify-content-center mt-3">
-        {/* <h3>Added classes</h3> */}
+      {/* <Container className="d-flex justify-content-center mt-3">
         <Row className="w-50">
           <Col md={2}>#1</Col>
           <Col md={2}>Name</Col>
@@ -45,7 +44,7 @@ const Host6 = () => {
           <Col md={2}>Time</Col>
           <Col md={2}>Duration</Col>
         </Row>
-      </Container>
+      </Container> */}
       <Container fluid className="d-flex justify-content-center m-0 p-0">
         {/* <Container fluid className="reg_div py-5">
           <div>

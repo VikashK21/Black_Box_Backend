@@ -10,6 +10,7 @@ import { Col, Row } from "react-bootstrap";
 import { Button } from "@mui/material";
 import { useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
+import AlertDialog from "./AlertDialog";
 
 function TabPanel(props) {
   const { children, setShowclasses, value, index, ...other } = props;
@@ -60,6 +61,8 @@ export default function BasicTabs() {
     deleteCourse,
     showclasses,
     setShowclasses,
+    scollToRef, 
+    
   } = useContext(AuthContext);
 
   useEffect(() => {
@@ -74,21 +77,21 @@ export default function BasicTabs() {
         sx={{ borderBottom: 1, borderColor: "divider" }}
         className="d-flex justify-content-between"
       >
-        <h4 className="gl textgrey">View my classes</h4>
+        {/* <h4 className="gl textgrey">My classes</h4> */}
 
-        <div className="d-flex">
+        <div className="d-flex" ref={scollToRef}>
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
             style={{
               display: "flex",
-              justifyContent: "end",
+              justifyContent: "center",
             }}
           >
             <Tab label="Hosted classes" {...a11yProps(0)} />
             <Tab label="Joined classes" {...a11yProps(1)} />
-            <Tab label="X" onClick={() => setShowclasses(false)} />
+            <Tab label="X" onClick={() => setShowclasses(false)} className="d-flex justify-content-start" />
           </Tabs>
           {/* <button>X</button> */}
         </div>
@@ -151,40 +154,21 @@ export default function BasicTabs() {
                           Edit
                         </Button> */}
                             {item.Participants.length === 0 && (
-                              <Button
-                                variant="contained"
-                                color="error"
-                                className="mx-2"
-                                onClick={() => {
-                                  // deleteClass(item._id);
-                                  console.log(item.id);
-                                  deleteCourse(item.id);
-                                }}
-                              >
-                                Delete
-                              </Button>
+                              // <Button
+                              //   variant="contained"
+                              //   color="error"
+                              //   className="mx-2"
+                              //   onClick={() => {
+                              //     deleteCourse(item.id);
+                              //   }}
+                              // >
+                              //   Delete
+                              // </Button>
+                              <AlertDialog title={item.title} id={item.id} />
                             )}
                           </div>
 
-                          <div className="d-flex justify-content-center align-content-center h-75 my-1 ">
-                            {/* <Button variant="contained" className="bgy">
-                          Edit
-                        </Button> */}
-                            {item.Participants.length === 0 && (
-                              <Button
-                                variant="contained"
-                                color="error"
-                                className="mx-2"
-                                onClick={() => {
-                                  // deleteClass(item._id);
-                                  console.log(item.id);
-                                  deleteCourse(item.id);
-                                }}
-                              >
-                                Delete
-                              </Button>
-                            )}
-                          </div>
+                          
                         </Row>
                       </Col>
                     </Row>

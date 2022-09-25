@@ -89,16 +89,14 @@ const Header = () => {
               <div className="navs align-items-center">
                 <b>
                   <ul className="navul">
-                  <li>
-                    {/* <Link to='/enter' className='link px-2 '> */}
+                  {/* <li>
                     <BsSearch className="" size={25} />
-                    {/* </Link> */}
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <Link to="/login" className="link px-2 ">
                       <BsGlobe className="" size={25} />
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     {/* <Link to="/profile" className="link px-2 "> */}
                       {/* <FaRegUser className="" size={25} /> */}
