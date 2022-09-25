@@ -190,7 +190,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem("User");
         localStorage.removeItem("name");
         localStorage.removeItem("propic");
-        navigate("/main");
+        navigate("/profile");
       })
       .catch((err) => {
         console.log(err.data);

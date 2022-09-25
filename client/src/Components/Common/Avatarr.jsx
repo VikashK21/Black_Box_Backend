@@ -153,7 +153,7 @@ const Avatarr = () => {
         ) : (
           <MenuItem
             onClick={() => {
-              logoutUser();
+              
               navigate("/login");
             }}
           >
