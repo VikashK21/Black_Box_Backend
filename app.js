@@ -8,6 +8,7 @@ const express = require("express");
 const createError = require("http-errors");
 const passport = require("passport");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const path = require("path");
 
 //Helping to understand APIs...
@@ -26,10 +27,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
+app.use(cookieParser())
 app.use(
   session({
     secret: process.env.SECRET_KEY_TOKEN,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
   }),
 );

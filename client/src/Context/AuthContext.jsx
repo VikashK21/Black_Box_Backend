@@ -14,11 +14,10 @@ export default AuthContext;
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api"
-// process.env.NODE_ENV === "production"
-//   ? "/api"
-//   : "http://localhost:3001/api";
-
+export let BaseUrl = "http://localhost:3001/api";
+if (process.env.NODE_ENV === "production") {
+  BaseUrl = "/api";
+}
 // export const BaseLink = "http://localhost:3000/";
 
 export const AuthProvider = ({ children }) => {
@@ -29,13 +28,13 @@ export const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
+      : null,
   );
 
   const [user, setUser] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwt_decode(localStorage.getItem("authTokens"))
-      : null
+      : null,
   );
 
   const { errorToast, successToast } = useContext(StyleContext);
@@ -268,7 +267,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          }
+          },
         )
         .then((res) => {
           console.log(res.data);
@@ -293,7 +292,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          }
+          },
         )
         .then((res) => {
           console.log(res.data);
@@ -327,7 +326,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const res = await axios.post(
           "https://api.cloudinary.com/v1_1/black-box/image/upload",
-          data
+          data,
         );
         console.log(res.data, "uploaded...");
         return res.data;
@@ -344,7 +343,7 @@ export const AuthProvider = ({ children }) => {
           formData.append("cloud_name", "black-box");
           const data = await uploaingImg(formData);
           return data.secure_url;
-        })
+        }),
       );
       console.log(uploaders, "res is here.");
       const res = await axios.post(
@@ -354,7 +353,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       console.log(res.data);
       if (typeof res.data === "object") {
@@ -375,7 +374,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       successToast("Class Added Successfully");
       // setClasslist([{ ...classlist[0], ...res.data }]);
@@ -384,8 +383,6 @@ export const AuthProvider = ({ children }) => {
 
       setClasslist([...classlist, res.data]);
       console.log(classlist);
-
-
     } catch (err) {
       console.log(err.message);
     }
@@ -466,7 +463,7 @@ export const AuthProvider = ({ children }) => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       console.log(result, "result");
     } catch (err) {
@@ -489,7 +486,6 @@ export const AuthProvider = ({ children }) => {
   const [hcl, setHcl] = useState([]);
 
   const hostedClasses = async () => {
-
     await axios
       .get(BaseUrl + "/trainer", {
         headers: { Authorization: `Bearer ${authTokens}` },
@@ -507,7 +503,6 @@ export const AuthProvider = ({ children }) => {
   const [jcl, setJcl] = useState([]);
 
   const joinedClasses = async () => {
-
     await axios
       .get(BaseUrl + "/student", {
         headers: { Authorization: `Bearer ${authTokens}` },
@@ -555,8 +550,6 @@ export const AuthProvider = ({ children }) => {
         console.log(err.message);
       });
   };
-
-
 
   const contextData = {
     scollToRef,
