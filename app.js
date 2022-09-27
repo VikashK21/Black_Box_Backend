@@ -27,16 +27,18 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
-app.use(cookieParser());
-app.use(
-  session({
-    secret: process.env.SECRET_KEY_TOKEN,
-    resave: true,
-    saveUninitialized: true,
-  }),
-);
-app.use(passport.initialize());
-app.use(passport.session());
+
+/////Related to social auth....
+// app.use(cookieParser());
+// app.use(
+//   session({
+//     secret: process.env.SECRET_KEY_TOKEN,
+//     resave: true,
+//     saveUninitialized: true,
+//   }),
+// );
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 //Home page
 ///////Remeber for heroku APP....
