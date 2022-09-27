@@ -160,12 +160,12 @@ export const AuthProvider = ({ children }) => {
           errorToast("Invalid Username or password");
           navigate("/login");
           // setTimeout(() => {
-            //   errorToast("");
-            // }, 1500);
+          //   errorToast("");
+          // }, 1500);
         }
       });
   };
-  
+
   const scollToRef = useRef();
   const loginUser = async (e) => {
     e.preventDefault();
@@ -489,7 +489,7 @@ export const AuthProvider = ({ children }) => {
   const [hcl, setHcl] = useState([]);
 
   const hostedClasses = async () => {
-    
+
     await axios
       .get(BaseUrl + "/trainer", {
         headers: { Authorization: `Bearer ${authTokens}` },
@@ -505,7 +505,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const [jcl, setJcl] = useState([]);
-  
+
   const joinedClasses = async () => {
 
     await axios

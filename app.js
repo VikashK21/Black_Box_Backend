@@ -1,6 +1,7 @@
 //Remeber the errors can be from here also, when without .evn...
 require("dotenv").config();
-require("./auth/google.auth");
+//////Have to do some updates....
+// require("./auth/google.auth");
 // require("./auth/facebook.auth");
 //Modules : ) ...
 const express = require("express");
@@ -36,12 +37,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Home page
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("client/build"));
-  // app.get("/*", (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
-  // });
-}
+///////Remeber for heroku APP....
+// if (process.env.NODE_ENV == "production") {
+//   app.use(express.static("client/build"));
+//   // app.get("/*", (req, res) => {
+//   //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+//   // });
+// }
 // app.get("/", async (req, res, next) => {
 //   res.send({
 //     message:
@@ -59,7 +61,8 @@ app.use("/api", require("./routes/courses.routes"));
 
 //Error Handlings...
 app.use((req, res, next) => {
-  res.redirect("https://creative-black-box.herokuapp.com/");
+  //////For the heroku appp
+  // res.redirect("https://creative-black-box.herokuapp.com/");
   next(createError.NotFound());
 });
 
