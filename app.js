@@ -7,8 +7,9 @@ require("dotenv").config();
 const express = require("express");
 const createError = require("http-errors");
 const passport = require("passport");
-const session = require("express-session");
-const cookieParser = require("cookie-parser");
+//  -----> rember this part...
+// const session = require("express-session");
+// const cookieParser = require("cookie-parser");
 const path = require("path");
 
 //Helping to understand APIs...
