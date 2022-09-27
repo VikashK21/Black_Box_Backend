@@ -43,6 +43,7 @@
     "youtube-api": "^3.0.1"
   },
   "devDependencies": {
+    "kill-port": "^2.0.1",
     "nodemon": "^2.0.19",
     "prisma": "^4.1.1",
     "swagger-jsdoc": "^6.2.5",
