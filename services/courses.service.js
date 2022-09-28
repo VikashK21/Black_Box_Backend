@@ -443,12 +443,8 @@ class Courses_Classes {
     }
   }
 
-  async editCourseById(id, data, host) {
+  async editCourseById(id, data) {
     try {
-      const result2 = await prisma.course.findUnique({ where: { host } });
-      if (!result2) {
-        return "You cannot edit this course!!";
-      }
       data = {
         title: data.course.title,
         price: data.course.price,
