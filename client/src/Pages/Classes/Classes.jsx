@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
-import ReadMoreReact from 'read-more-react';
+import ReadMoreReact from "read-more-react";
 
 const Classes = () => {
   const { goToTop, getCoursesList, courseList } = useContext(AuthContext);
@@ -30,9 +30,9 @@ const Classes = () => {
                 <h2 className="text-center gl my-5">CLASSES</h2>
               </div>
 
-               <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
+              <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
                 {/* Map a function to display the classes list */}
-                {courseList &&
+                {courseList.length > 0 &&
                   courseList.map((course) => {
                     // console.log(course.images);
                     const a = JSON.parse(course.images);
@@ -40,7 +40,11 @@ const Classes = () => {
                       <Col
                         key={course.id}
                         className="my-4 cp position-relative"
-                        style={{ minWidth: "320px", maxWidth: "320px" , minHeight: '400px' }}
+                        style={{
+                          minWidth: "320px",
+                          maxWidth: "320px",
+                          minHeight: "400px",
+                        }}
                       >
                         <Link to={`/classes/join/${course.id}`}>
                           <div onClick={goToTop} className="zoom">
@@ -55,14 +59,14 @@ const Classes = () => {
                             <Row className="profile m-0 p-2 pt-4">
                               <h6 className="gx classtitlee">{course.title}</h6>
                               <p className="clsdesc">
-                              <ReadMoreReact
-                                    text={course.description}
-                                    min={150}
-                                    ideal={200}
-                                    max={500}
-                                    readMoreText=".. read more"
-                                  />
-                                </p>
+                                <ReadMoreReact
+                                  text={course.description}
+                                  min={150}
+                                  ideal={200}
+                                  max={500}
+                                  readMoreText=".. read more"
+                                />
+                              </p>
 
                               <Col xs={8} className="p-2 pt-2 pb-0">
                                 <h6 className="gx tutorname">
