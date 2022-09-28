@@ -14,10 +14,8 @@ export default AuthContext;
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export let BaseUrl = "http://localhost:3001/api";
-if (process.env.NODE_ENV === "production") {
-  BaseUrl = "/api";
-}
+// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "/api";
 // export const BaseLink = "http://localhost:3000/";
 
 export const AuthProvider = ({ children }) => {

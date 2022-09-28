@@ -8,8 +8,8 @@ const express = require("express");
 const createError = require("http-errors");
 const passport = require("passport");
 //  -----> rember this part...
-// const session = require("express-session");
-// const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const path = require("path");
 
 //Helping to understand APIs...
@@ -30,25 +30,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 /////Related to social auth....
-// app.use(cookieParser());
-// app.use(
-//   session({
-//     secret: process.env.SECRET_KEY_TOKEN,
-//     resave: true,
-//     saveUninitialized: true,
-//   }),
-// );
+app.use(cookieParser());
+app.use(
+  session({
+    secret: process.env.SECRET_KEY_TOKEN,
+    resave: true,
+    saveUninitialized: true,
+  }),
+);
 // app.use(passport.initialize());
 // app.use(passport.session());
 
 //Home page
 ///////Remeber for heroku APP....
-// if (process.env.NODE_ENV == "production") {
-//   app.use(express.static("client/build"));
-//   // app.get("/*", (req, res) => {
-//   //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
-//   // });
-// }
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+  // app.get("/*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+  // });
+}
 // app.get("/", async (req, res, next) => {
 //   res.send({
 //     message:
