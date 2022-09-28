@@ -450,7 +450,7 @@ class Courses_Classes {
         price: data.course.price,
         description: data.course.description,
         host: id,
-        max_paticipants: Number(data.course.max_students),
+        max_paticipants: Number(data.course.max_paticipants),
         images: JSON.stringify(data.course.images),
         duration_type: data.course.type,
         link: data.course.link,
