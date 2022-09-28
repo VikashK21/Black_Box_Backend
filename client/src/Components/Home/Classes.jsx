@@ -35,7 +35,7 @@ const Classes = () => {
 
           <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
             {/* Map a function to display the classes list */}
-            {courseList.length > 0 &&
+            {courseList.length > 4 &&
               courseList.slice(0, 4).map((course) => {
                 // console.log(course.images);
                 const a = JSON.parse(course.images);
