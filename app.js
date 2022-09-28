@@ -43,12 +43,12 @@ app.use(
 
 //Home page
 ///////Remeber for heroku APP....
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("client/build"));
-  // app.get("/*", (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
-  // });
-}
+// if (process.env.NODE_ENV == "production") {
+//   app.use(express.static("client/build"));
+//   // app.get("/*", (req, res) => {
+//   //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+//   // });
+// }
 // app.get("/", async (req, res, next) => {
 //   res.send({
 //     message:
