@@ -12,7 +12,9 @@ const Classes = () => {
 
   useEffect(() => {
     goToTop();
+    console.log(courseList, "beggining");
     getCoursesList();
+    debugger;
   }, []);
 
   return (
@@ -34,7 +36,7 @@ const Classes = () => {
                 {/* Map a function to display the classes list */}
                 {courseList.length > 0 &&
                   courseList.map((course) => {
-                    // console.log(course.images);
+                    console.log("from heree");
                     const a = JSON.parse(course.images);
                     return (
                       <Col
