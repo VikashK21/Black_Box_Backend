@@ -1,8 +1,8 @@
 //Remeber the errors can be from here also, when without .evn...
 require("dotenv").config();
-//////Have to do some updates....
-// require("./auth/google.auth");
-// require("./auth/facebook.auth");
+//////-----> rember this part...
+require("./auth/google.auth");
+require("./auth/facebook.auth");
 //Modules : ) ...
 const express = require("express");
 const createError = require("http-errors");
@@ -38,17 +38,19 @@ app.use(
     saveUninitialized: true,
   }),
 );
-// app.use(passport.initialize());
-// app.use(passport.session());
+// -----> rember this part..
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Home page
 ///////Remeber for heroku APP....
-// if (process.env.NODE_ENV == "production") {
-//   app.use(express.static("client/build"));
-//   // app.get("/*", (req, res) => {
-//   //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
-//   // });
-// }
+// -----> rember this part..
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+  // app.get("/*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+  // });
+}
 // app.get("/", async (req, res, next) => {
 //   res.send({
 //     message:
@@ -66,8 +68,8 @@ app.use("/api", require("./routes/courses.routes"));
 
 //Error Handlings...
 app.use((req, res, next) => {
-  //////For the heroku appp
-  // res.redirect("https://creative-black-box.herokuapp.com/");
+  //////For the heroku appp -----> rember this part..
+  res.redirect("https://creative-black-box.herokuapp.com/");
   next(createError.NotFound());
 });
 
