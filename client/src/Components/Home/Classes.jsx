@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
@@ -16,10 +16,13 @@ import ReadMoreReact from "read-more-react";
 
 const Classes = () => {
   const { goToTop, getCoursesList, courseList } = useContext(AuthContext);
+  const [itratingCourse, setItratingCourse] = useState([]);
 
   useEffect(() => {
     getCoursesList();
-    console.log(courseList);
+    if (courseList.length > 4) {
+      setItratingCourse(courseList.slice(0, 4));
+    }
   }, []);
 
   return (
@@ -35,8 +38,8 @@ const Classes = () => {
 
           <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
             {/* Map a function to display the classes list */}
-            {courseList.length > 4
-              ? courseList.slice(0, 4).map((course) => {
+            {itratingCourse.length > 0 &&
+              itratingCourse.map((course) => {
                 // console.log(course.images);
                 const a = JSON.parse(course.images);
                 return (
@@ -98,8 +101,7 @@ const Classes = () => {
                     </Link>
                   </Col>
                 );
-              })
-              : null}
+              })}
           </Row>
 
           <Row className=" m-0 p-0">
