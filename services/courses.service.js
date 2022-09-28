@@ -445,8 +445,27 @@ class Courses_Classes {
 
   async editCourseById(id, data, host) {
     try {
+      const result2 = await prisma.course.findUnique({ where: { host } });
+      if (!result2) {
+        return "You cannot edit this course!!";
+      }
+      data = {
+        title: data.course.title,
+        price: data.course.price,
+        description: data.course.description,
+        host: id,
+        max_paticipants: Number(data.course.max_students),
+        images: JSON.stringify(data.course.images),
+        duration_type: data.course.type,
+        link: data.course.link,
+        class_structure: data.course.classes,
+        structure: data.course.structure,
+        methodology: data.course.methodology,
+        content: data.course.content,
+        requirements: data.course.requirements,
+      };
       const result = await prisma.course.update({
-        where: { id, host },
+        where: { id },
         data,
       });
       return result;
