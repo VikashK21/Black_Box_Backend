@@ -57,6 +57,7 @@ const Registration = () => {
     profile,
     cloud,
     setCloud,
+    loading
   } = useContext(AuthContext);
 
   // useEffect(() => {
