@@ -23,6 +23,7 @@ const EditCourse = () => {
     course,
     image,
     setImage,
+    setUpdatedImgs,
     classes,
     setClasses,
     HostClasses,
@@ -41,6 +42,7 @@ const EditCourse = () => {
       .then((res) => {
         console.log(res.data);
         setCourse(res.data);
+        setImage(res.data.images);
       })
       .catch((err) => {
         console.log(err);
@@ -323,6 +325,7 @@ const EditCourse = () => {
                         imageCallback={(image) => {
                           // setImage(image);
                           setImage((prev) => [...prev, image]);
+                          setUpdatedImgs((pre) => [...pre, image]);
                           // setCopyImage((prev) => [...prev, image]);
                           setShowCropper(false);
                         }}
@@ -382,7 +385,7 @@ const EditCourse = () => {
                                                 onChange={(e) => {
                                                   handleMethodologyChange(
                                                     e,
-                                                    index
+                                                    index,
                                                   );
                                                   console.log(method);
                                                 }}
@@ -394,7 +397,7 @@ const EditCourse = () => {
                                                   <Button
                                                     onClick={() =>
                                                       handleMethodologyRemove(
-                                                        index
+                                                        index,
                                                       )
                                                     }
                                                     color="error"
@@ -423,7 +426,7 @@ const EditCourse = () => {
                                               )}
                                             </div>
                                           </div>
-                                        )
+                                        ),
                                       )
                                     : ""}
                                 </Col>
@@ -560,10 +563,11 @@ const EditCourse = () => {
               <Row className="w-50">
                 <Col xs={12} className="d-flex justify-content-center mt-3">
                   <div className="w-100 d-flex">
-                    <Button className="bgy text-dark w-50 rounded-2 me-2"
-                    onClick={()=>{
-                      editCourse(id);
-                    }}
+                    <Button
+                      className="bgy text-dark w-50 rounded-2 me-2"
+                      onClick={() => {
+                        editCourse(id);
+                      }}
                     >
                       Update
                     </Button>
