@@ -11,8 +11,8 @@
     "start": "nodemon app.js",
     "dev": "node app.js",
     "build": "prisma generate",
-    "pushorigin": "git status && git add . && git commit 'the changes in the fullstack' && git push origin main",
-    "pushheroku": "git status && git add . && git commit 'the changes occured for further updates' && git push heroku master",
+    "pushorigin": "git status && git add . && git commit -m 'the changes in the fullstack' && git push origin main",
+    "pushheroku": "git status && git add . && git commit -m 'the changes occured for further updates' && git push heroku master",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
