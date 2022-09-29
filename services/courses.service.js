@@ -445,11 +445,11 @@ class Courses_Classes {
 
   async editCourseById(id, data) {
     try {
+      console.log(id);
       data = {
         title: data.course.title,
         price: data.course.price,
         description: data.course.description,
-        host: id,
         max_paticipants: Number(data.course.max_paticipants),
         images: JSON.stringify(data.course.images),
         duration_type: data.course.type,
