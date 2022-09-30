@@ -26,6 +26,7 @@ const Profile = () => {
     setShowclasses,
     scollToRef,
     classtime,
+    noClasses,
   } = useContext(AuthContext);
 
   const { successToast, errorToast } = useContext(StyleContext);
@@ -104,106 +105,115 @@ const Profile = () => {
           ) : (
             <Row className="mt-2 ">
               <Col md={5} className="p-0 ">
-                <div className="bgw rounded-3 ps-3 py-3 boxshadow mx-2 mb-2">
-                  {showclasses === false && (
-                    <>
-                      {timer ? (
-                        <Row className="mt-2 ">
-                          <b>
-                            <h2>Your next class starts in </h2>
-                          </b>
-                          <Col xs={3} className="p-2 ps-0 timer text-center">
-                            <h1>
-                              {countdownTime.countdownDays.toString().length ===
-                              1
-                                ? "0" + countdownTime.countdownDays
-                                : countdownTime.countdownDays}
-                            </h1>
+                {noClasses ? (
+                  <div className="bgw rounded-3 ps-3 py-3 boxshadow mx-2 mb-2">
+                    {showclasses === false && (
+                      <>
+                        {timer ? (
+                          <Row className="mt-2 ">
+                            <b>
+                              <h2>Your next class starts in </h2>
+                            </b>
+                            <Col xs={3} className="p-2 ps-0 timer text-center">
+                              <h1>
+                                {countdownTime.countdownDays.toString()
+                                  .length === 1
+                                  ? "0" + countdownTime.countdownDays
+                                  : countdownTime.countdownDays}
+                              </h1>
 
-                            <b>
-                              <p className="">Days</p>
-                            </b>
-                          </Col>
-                          <Col xs={3} className="p-2 ps-0 timer text-center">
-                            <h1>
-                              {countdownTime.countdownHours.toString()
-                                .length === 1
-                                ? "0" + countdownTime.countdownHours
-                                : countdownTime.countdownHours}
-                            </h1>
-                            <b>
-                              <p className="">Hours</p>
-                            </b>
-                          </Col>
-                          <Col xs={3} className="p-2 ps-0 timer text-center">
-                            <h1>
-                              {countdownTime.countdownMinutes.toString()
-                                .length === 1
-                                ? "0" + countdownTime.countdownMinutes
-                                : countdownTime.countdownMinutes}
-                            </h1>
-                            <b>
-                              <p className="">Minutes</p>
-                            </b>
-                          </Col>
-                          <Col xs={3} className="p-2 ps-0 timer text-center">
-                            <h1>
-                              {countdownTime.countdownSeconds.toString()
-                                .length === 1
-                                ? "0" + countdownTime.countdownSeconds
-                                : countdownTime.countdownSeconds}
-                            </h1>
-                            <b>
-                              <p className="">Seconds</p>
-                            </b>
-                          </Col>
-                        </Row>
-                      ) : (
-                        <Row className="mt-2 m-0 ">
-                          <h5 className="p-0">Hurraay, The wait is over!</h5>
-                          <h5 className="p-0">Join the class</h5>
-                          <a
-                            href="http://localhost:3000/hosting"
-                            target="_blank"
-                            className="w-50 p-0"
-                          >
-                            <Button
-                              variant="primary"
-                              className="mt-2  w-100 bgy border-0"
+                              <b>
+                                <p className="">Days</p>
+                              </b>
+                            </Col>
+                            <Col xs={3} className="p-2 ps-0 timer text-center">
+                              <h1>
+                                {countdownTime.countdownHours.toString()
+                                  .length === 1
+                                  ? "0" + countdownTime.countdownHours
+                                  : countdownTime.countdownHours}
+                              </h1>
+                              <b>
+                                <p className="">Hours</p>
+                              </b>
+                            </Col>
+                            <Col xs={3} className="p-2 ps-0 timer text-center">
+                              <h1>
+                                {countdownTime.countdownMinutes.toString()
+                                  .length === 1
+                                  ? "0" + countdownTime.countdownMinutes
+                                  : countdownTime.countdownMinutes}
+                              </h1>
+                              <b>
+                                <p className="">Minutes</p>
+                              </b>
+                            </Col>
+                            <Col xs={3} className="p-2 ps-0 timer text-center">
+                              <h1>
+                                {countdownTime.countdownSeconds.toString()
+                                  .length === 1
+                                  ? "0" + countdownTime.countdownSeconds
+                                  : countdownTime.countdownSeconds}
+                              </h1>
+                              <b>
+                                <p className="">Seconds</p>
+                              </b>
+                            </Col>
+                          </Row>
+                        ) : (
+                          <Row className="mt-2 m-0 ">
+                            <h5 className="p-0">Hurraay, The wait is over!</h5>
+                            <h5 className="p-0">Join the class</h5>
+                            <a
+                              href={classtime ? classtime.link : ""}
+                              target="_blank"
+                              className="w-50 p-0"
                             >
-                              Enter room
-                            </Button>
-                          </a>
-                        </Row>
-                      )}
+                              <Button
+                                variant="primary"
+                                className="mt-2  w-100 bgy border-0"
+                              >
+                                Enter room
+                              </Button>
+                            </a>
+                          </Row>
+                        )}
 
-                      {timer ? (
-                        ""
-                      ) : (
-                        <Row className="my-3">
-                          <Col xs={4}>
-                            <img src={Class2} alt="classes" className="w-100" />
-                          </Col>
-                          <Col xs={8} className=" align-content-center ">
-                            <h6>
-                              Instructor :<b> Name</b>
-                            </h6>
-                            <h6>
-                              Class : <b>Class</b>
-                            </h6>
-                            <h6>
-                              Duration : <b>45 mins</b>
-                            </h6>
-                            <h6>
-                              Day : <b>#22</b>
-                            </h6>
-                          </Col>
-                        </Row>
-                      )}
-                      <div></div>
-                    </>
-                  )}
-                </div>
+                        {timer ? (
+                          ""
+                        ) : (
+                          <Row className="my-3">
+                            <Col xs={4}>
+                              <img
+                                src={Class2}
+                                alt="classes"
+                                className="w-100"
+                              />
+                            </Col>
+                            <Col xs={8} className=" align-content-center ">
+                              <h6>
+                                Instructor :<b> Name</b>
+                              </h6>
+                              <h6>
+                                Class : <b>Class</b>
+                              </h6>
+                              <h6>
+                                Duration : <b>45 mins</b>
+                              </h6>
+                              <h6>
+                                Day : <b>#22</b>
+                              </h6>
+                            </Col>
+                          </Row>
+                        )}
+                        <div></div>
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  ""
+                )}
+
                 <div className="mt-2 rounded-3 bgw p-3 pe-0 boxshadow mx-2">
                   <h2 className="gl">My Classes</h2>
                   <img

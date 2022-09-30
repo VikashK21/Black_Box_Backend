@@ -38,8 +38,13 @@ import Loader from "../../Components/Common/Loader";
 const Join = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { suggest, setSuggest } = useState("");
+  const handleChange = (e) => {
+    setSuggest(e.target.value);
+  };
 
-  const { BaseUrl, authTokens, user,setLoading,loading } = useContext(AuthContext);
+  const { BaseUrl, authTokens, user, setLoading, loading, getSuggest } =
+    useContext(AuthContext);
   const { successToast, errorToast } = useContext(StyleContext);
   const name = localStorage.getItem("name");
   const [course, setCourse] = useState({
@@ -163,7 +168,6 @@ const Join = () => {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
-
 
   return (
     <Container fluid className="m-0 p-0 ">
@@ -309,7 +313,7 @@ const Join = () => {
                         : ""}
                     </ul>
                   </div>
-                 
+
                   <div className="w-100 mt-2 ">
                     {course.requirements && course.requirements.length > 1 ? (
                       <h5>REQUIREMENTS</h5>
@@ -396,7 +400,7 @@ const Join = () => {
                       : ""}
                   </ul>
                 </div>
-               
+
                 <div className="w-100 mt-2 icon2">
                   {course.requirements && course.requirements.length > 1 ? (
                     <h5>REQUIREMENTS</h5>
@@ -592,6 +596,7 @@ const Join = () => {
                   <div className="searchdiv mt-2">
                     <input
                       type="text"
+                      onChange={handleChange}
                       className="borderlessinput"
                       placeholder="Friend's email address"
                     />
@@ -599,6 +604,9 @@ const Join = () => {
                       <AiOutlineArrowRight
                         className="profilesearch p-2"
                         size={35}
+                        onClick={() => {
+                          getSuggest(course.id, suggest);
+                        }}
                       />
                     </div>
                   </div>
@@ -634,12 +642,11 @@ const Join = () => {
                   >
                     {loading ? (
                       <>
-                      <div class="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                        <div class="ldio-cqj9sf9mcdj">
-                          <div></div>
+                        <div class="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                          <div class="ldio-cqj9sf9mcdj">
+                            <div></div>
+                          </div>
                         </div>
-                      </div>
-                      
                       </>
                     ) : (
                       " "

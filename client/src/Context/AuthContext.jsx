@@ -381,7 +381,7 @@ export const AuthProvider = ({ children }) => {
   const editClass = async (id, id2) => {
     console.log(id, id2);
     console.log(classes);
-    
+
     await axios
       .patch(
         BaseUrl + "/class/" + id2,
@@ -426,6 +426,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const HostClasses2 = async (id) => {
+    console.log(id);
     try {
       const res = await axios.post(
         BaseUrl + "/host/classes",
@@ -444,6 +445,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const [classtime, setClasstime] = useState({});
+  const [noClasses, setNoClasses] = useState(true);
 
   const DynamicTimer = async () => {
     await axios
@@ -456,6 +458,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err.data);
+        setNoClasses(false);
       });
   };
 
@@ -635,6 +638,26 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const getSuggest = async (id, email) => {
+    await axios
+      .post(
+        BaseUrl + "/suggest",
+        {
+          course_id: id,
+          email: email,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const contextData = {
     editClass,
     scollToRef,
@@ -695,6 +718,8 @@ export const AuthProvider = ({ children }) => {
     loading,
     updatedImgs,
     setUpdatedImgs,
+    getSuggest,
+    noClasses,
   };
 
   return (
