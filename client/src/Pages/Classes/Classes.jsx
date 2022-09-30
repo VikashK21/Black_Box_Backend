@@ -43,7 +43,7 @@ const Classes = () => {
                         style={{ minWidth: "320px", maxWidth: "320px" , minHeight: '400px' }}
                       >
                         <Link to={`/classes/join/${course.id}`}>
-                          <div onClick={goToTop} className="zoom">
+                          <div onClick={goToTop} className="zoom zhoom">
                             <div className="imgdiv">
                               <img
                                 src={a[0]}
@@ -52,8 +52,10 @@ const Classes = () => {
                               />
                               {/* <img src={course.images[0].secure_url} className="classesimg p-0 m-0" /> */}
                             </div>
-                            <Row className="profile m-0 p-2 pt-4">
-                              <h6 className="gx classtitlee">{course.title}</h6>
+                            <Row className="profile m-0 p-2 pt-3">
+                              <h6 className="gx classtitlee">
+                                {course.title ? course.title.length > 20 ? course.title.slice(0, 20) + '..' : course.title : 'No title'}
+                              </h6>
                               <p className="clsdesc">
                               <ReadMoreReact
                                     text={course.description}

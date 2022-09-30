@@ -14,8 +14,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddClass() {
+export default function AddClass(props) {
   const [open, setOpen] = React.useState(false);
+  console.log(props);
 
   const {
     classes,
@@ -23,7 +24,7 @@ export default function AddClass() {
     classlist,
     setClasslist,
     setHostClasses,
-    HostClasses,
+    HostClasses2,
   } = React.useContext(AuthContext);
 
   const handleClickOpen = () => {
@@ -36,7 +37,7 @@ export default function AddClass() {
 
   const handleSuccess = () => {
     setOpen(false);
-    HostClasses(props.course_id);
+    HostClasses2(props.id);
   };
 
   return (
@@ -44,7 +45,7 @@ export default function AddClass() {
       <Button
         variant="contained"
         className="w-100 bgy"
-        onCLick={handleClickOpen}
+        onClick={handleClickOpen}
       >
         Add class
       </Button>

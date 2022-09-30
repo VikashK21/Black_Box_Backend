@@ -297,7 +297,6 @@ const Join = () => {
                     ) : (
                       ""
                     )}
-                    {/* Check if the course structure is there in the course and map it */}
                     <ul>
                       {course.content && course.content.length > 1
                         ? course.content.map((item, index) => {
@@ -310,25 +309,7 @@ const Join = () => {
                         : ""}
                     </ul>
                   </div>
-                  <div className="w-100 mt-2 ">
-                    {course.methodology && course.methodology.length > 1 ? (
-                      <h5>METHODOLOGY</h5>
-                    ) : (
-                      ""
-                    )}
-                    {/* Check if the course structure is there in the course and map it */}
-                    <ul>
-                      {course.methodology && course.methodology.length > 1
-                        ? course.methodology.map((item, index) => {
-                            return (
-                              <li key={index} className="gl fn">
-                                {item.methodology}
-                              </li>
-                            );
-                          })
-                        : ""}
-                    </ul>
-                  </div>
+                 
                   <div className="w-100 mt-2 ">
                     {course.requirements && course.requirements.length > 1 ? (
                       <h5>REQUIREMENTS</h5>
@@ -415,24 +396,7 @@ const Join = () => {
                       : ""}
                   </ul>
                 </div>
-                {/* <div className="w-100 mt-2 icon2">
-                  {course.methodology && course.methodology.length > 1 ? (
-                    <h5>METHODOLOGY</h5>
-                  ) : (
-                    ""
-                  )}
-                  <ul>
-                    {course.methodology && course.methodology.length > 1
-                      ? course.methodology.map((item, index) => {
-                          return (
-                            <li key={index} className="gl fn">
-                              {item.methodology}
-                            </li>
-                          );
-                        })
-                      : ""}
-                  </ul>
-                </div> */}
+               
                 <div className="w-100 mt-2 icon2">
                   {course.requirements && course.requirements.length > 1 ? (
                     <h5>REQUIREMENTS</h5>
@@ -695,22 +659,3 @@ const Join = () => {
 };
 
 export default Join;
-
-// {course.methodology ? (
-//   course.methodology.length > 0 ? (
-//     course.methodology.map((methodology, index) => {
-
-//           return (
-//             <></>
-//           );
-//         }
-//     )
-//     )
-//    : (<>
-//     "Nothing to show"
-//     </>
-//   )
-// ) : (
-//   <>  "Loading"</>
-
-// )}

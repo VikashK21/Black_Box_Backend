@@ -25,6 +25,7 @@ import axios from "axios";
 import FormDialog from "../../Components/Common/FormDialog";
 import MeetLink from "./MeetLink";
 import EditClass from "./EditClass";
+import AddClass from "./AddClass";
 
 const EditCourse = () => {
   const {
@@ -581,9 +582,10 @@ const EditCourse = () => {
                       <h3>Added classes</h3>
                     </div>
                     <div className="d-flex justify-content-end">
-                      <Button variant="contained" className="w-100 bgy">
+                      {/* <Button variant="contained" className="w-100 bgy">
                         Add class
-                      </Button>
+                      </Button> */}
+                      <AddClass id={course.id} />
                     </div>
                   </div>
                   <Row className="mt-3">
@@ -686,7 +688,6 @@ const EditCourse = () => {
           </div>
         </Container>
       </Container>
-      
 
       <Footer feeds="true" />
     </Container>

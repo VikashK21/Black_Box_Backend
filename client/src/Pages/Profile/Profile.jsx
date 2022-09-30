@@ -38,7 +38,9 @@ const Profile = () => {
 
   const [timer, setTimer] = useState(true);
 
-  const [expiryTime, setExpiryTime] = useState(classtime? classtime.time ? classtime.time : 0 : 0); 
+  const [expiryTime, setExpiryTime] = useState(
+    classtime ? (classtime.time ? classtime.time : 0) : 0
+  );
   const [countdownTime, setCountdownTime] = useState({
     countdownDays: "",
     countdownHours: "",
@@ -158,10 +160,8 @@ const Profile = () => {
                         </Row>
                       ) : (
                         <Row className="mt-2 m-0 ">
-                          <h4 className="p-0">Hurraay!</h4>
-                          <h5 className="p-0">
-                            The wait is over. Join the class!
-                          </h5>
+                          <h5 className="p-0">Hurraay, The wait is over!</h5>
+                          <h5 className="p-0">Join the class</h5>
                           <a
                             href="http://localhost:3000/hosting"
                             target="_blank"

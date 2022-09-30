@@ -15,18 +15,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function EditClass(props) {
-  
   const [open, setOpen] = React.useState(false);
 
-  const {
-    classes,
-    setClasses,
-    HostClasses,
-    classlist,
-    setClasslist,
-    setHostClasses,
-    editClass,
-  } = React.useContext(AuthContext);
+  const { classes, setClasses, HostClasses, editClass } =
+    React.useContext(AuthContext);
+
+  setClasses(props.classes);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,7 +32,7 @@ export default function EditClass(props) {
 
   const handleSuccess = () => {
     setOpen(false);
-    editClass(props.course_id, props.id);
+    editClass(classes.course_id, classes.id);
   };
 
   return (
@@ -65,8 +59,7 @@ export default function EditClass(props) {
                 <TextField
                   label="Title"
                   name="title"
-                  // value={props.classes.title}
-                  defaultValue={props.classes.title}
+                  defaultValue={classes?.title}
                   onChange={(e) =>
                     setClasses({ ...classes, title: e.target.value })
                   }
@@ -85,7 +78,7 @@ export default function EditClass(props) {
                   name="description"
                   multiline
                   rows={3}
-                  defaultValue={props.classes.description}
+                  defaultValue={classes?.description}
                   onChange={(e) =>
                     setClasses({ ...classes, description: e.target.value })
                   }
@@ -97,18 +90,9 @@ export default function EditClass(props) {
             </Col>
             <Col md={4} xs={12} className="">
               <>
-                {/* <DatePicker
-                      className="w-100"
-                      placeholder="Date"
-                      value={classes.date}
-                      onChange={(e) =>
-                        setClasses({ ...classes, date: e.target.value })
-                      }
-                    />
-                    {classes.date?.toDate?.().toString()} */}
                 <input
                   type="date"
-                  defaultValue={props.classes.date}
+                  defaultValue={classes?.date}
                   className="w-100 p-2 rounded-2 timefield border-1"
                   onChange={(e) => {
                     setClasses({ ...classes, date: e.target.value });
@@ -121,7 +105,7 @@ export default function EditClass(props) {
             <Col md={4}>
               <input
                 type="time"
-                defaultValue={props.classes.time}
+                defaultValue={classes?.time}
                 onChange={(e) => {
                   setClasses({ ...classes, time: e.target.value });
                   console.log(e.target.value);
@@ -136,7 +120,7 @@ export default function EditClass(props) {
                 type="number"
                 placeholder="e.g : 45 minutes"
                 variant="outlined"
-                defaultValue={props.classes.duration}
+                defaultValue={classes?.duration}
                 onChange={(e) =>
                   setClasses({ ...classes, duration: e.target.value })
                 }

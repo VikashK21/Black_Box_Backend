@@ -8,13 +8,13 @@ import StyleContext from "./StyleContext";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api"
+// export const BaseUrl = "/api"
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -378,6 +378,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const editClass = async (id, id2) => {
+    console.log(id, id2);
+    console.log(classes);
+    
+    await axios
+      .patch(
+        BaseUrl + "/class/" + id2,
+        {
+          classes: classes,
+          course_id: id,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const HostClasses = async (e) => {
     try {
       const res = await axios.post(
@@ -397,6 +420,24 @@ export const AuthProvider = ({ children }) => {
 
       setClasslist([...classlist, res.data]);
       console.log(classlist);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const HostClasses2 = async (id) => {
+    try {
+      const res = await axios.post(
+        BaseUrl + "/host/classes",
+        {
+          classes: classes,
+          course_id: id,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        }
+      );
+      successToast("Class Added Successfully");
     } catch (err) {
       console.log(err.message);
     }
@@ -595,6 +636,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const contextData = {
+    editClass,
     scollToRef,
     deleteCourse,
     backendUpdate,
@@ -616,6 +658,7 @@ export const AuthProvider = ({ children }) => {
     cloud,
     setCloud,
     HostClasses,
+    HostClasses2,
     HostCourse,
     courseId,
     setCourseId,
