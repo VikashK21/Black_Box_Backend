@@ -27,7 +27,10 @@ const Profile = () => {
     scollToRef,
     classtime,
     noClasses,
+    setNoClasses,
   } = useContext(AuthContext);
+
+
 
   const { successToast, errorToast } = useContext(StyleContext);
   // const [reaction, setReaction] = useState([]);
@@ -35,6 +38,9 @@ const Profile = () => {
   useEffect(() => {
     getCoursesList();
     DynamicTimer();
+    if (classtime.length === undefined) {
+      setNoClasses(false);
+    }
   }, []);
 
   const [timer, setTimer] = useState(true);
@@ -82,6 +88,7 @@ const Profile = () => {
 
   useEffect(() => {
     CountdownTimer();
+    
   });
 
   // const [showclasses, setShowclasses] = useState(false);
@@ -187,7 +194,7 @@ const Profile = () => {
                               <img
                                 src={Class2}
                                 alt="classes"
-                                className="w-100"
+                                className="w-75"
                               />
                             </Col>
                             <Col xs={8} className=" align-content-center ">

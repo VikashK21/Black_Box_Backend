@@ -120,10 +120,10 @@ export default function EditClass(props) {
                 type="number"
                 placeholder="e.g : 45 minutes"
                 variant="outlined"
-                defaultValue={classes?.duration}
-                onChange={(e) =>
-                  setClasses({ ...classes, duration: e.target.value })
-                }
+                value={Number(classes.duration)}
+                onChange={(e) => {
+                  setClasses({ ...classes, duration: e.target.value });
+                }}
                 className=" mb-3 w-100"
               />
             </Col>

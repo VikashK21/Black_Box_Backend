@@ -18,7 +18,7 @@ class Course_inf {
     try {
       const result = await Courses.editClassById(
         Number(req.params.id),
-        req.body,
+        req.body
       );
       res.status(200).json(result);
     } catch (err) {
