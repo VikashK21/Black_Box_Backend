@@ -22,6 +22,11 @@ export default function EditClass(props) {
 
   setClasses(props.classes);
 
+  const handleChange = (e) => {
+    setClasses({ ...classes, [e.target.name]: e.target.value });
+    console.log(classes);
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -60,9 +65,12 @@ export default function EditClass(props) {
                   label="Title"
                   name="title"
                   defaultValue={classes?.title}
-                  onChange={(e) =>
-                    setClasses({ ...classes, title: e.target.value })
-                  }
+                  onChange={(e) => {
+                    handleChange(e);
+                    // setClasses({ ...classes, title: e.target.value });
+                    // console.log(e.target.value);
+                    // console.log(classes);
+                  }}
                   multiline
                   variant="outlined"
                   placeholder="e.g :  Day 1: Intro to React"
@@ -79,9 +87,11 @@ export default function EditClass(props) {
                   multiline
                   rows={3}
                   defaultValue={classes?.description}
-                  onChange={(e) =>
-                    setClasses({ ...classes, description: e.target.value })
-                  }
+                  onChange={(e) => {
+                    // setClasses({ ...classes, description: e.target.value });
+                    // console.log(classes);
+                    handleChange(e);
+                  }}
                   variant="outlined"
                   placeholder="e.g :  This class will teach you about React and its advantages"
                   className=" mb-3 w-100"
@@ -92,12 +102,14 @@ export default function EditClass(props) {
               <>
                 <input
                   type="date"
+                  name="date"
                   defaultValue={classes?.date}
                   className="w-100 p-2 rounded-2 timefield border-1"
                   onChange={(e) => {
-                    setClasses({ ...classes, date: e.target.value });
-                    console.log(classes.date);
-                    console.log(e);
+                    // setClasses({ ...classes, date: e.target.value });
+                    // console.log(classes.date);
+                    // console.log(e);
+                    handleChange(e);
                   }}
                 />
               </>
@@ -105,10 +117,13 @@ export default function EditClass(props) {
             <Col md={4}>
               <input
                 type="time"
+                name="time"
                 defaultValue={classes?.time}
                 onChange={(e) => {
-                  setClasses({ ...classes, time: e.target.value });
-                  console.log(e.target.value);
+                  // setClasses({ ...classes, time: e.target.value });
+                  // console.log(e.target.value);
+                  // console.log(classes);
+                  handleChange(e);
                 }}
                 className="w-100 p-2 rounded-2 timefield border-1"
               />
@@ -120,9 +135,12 @@ export default function EditClass(props) {
                 type="number"
                 placeholder="e.g : 45 minutes"
                 variant="outlined"
-                value={Number(classes.duration)}
+                defaultValue={Number(classes?.duration)}
                 onChange={(e) => {
-                  setClasses({ ...classes, duration: e.target.value });
+                  // setClasses({ ...classes, duration: e.target.value });
+                  // console.log(e.target.value);
+                  // console.log(classes);
+                  handleChange(e);
                 }}
                 className=" mb-3 w-100"
               />

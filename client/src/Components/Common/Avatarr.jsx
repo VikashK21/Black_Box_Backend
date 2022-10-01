@@ -22,13 +22,13 @@ const Avatarr = () => {
     setAnchorEl(null);
   };
 
-  const { logoutUser } = React.useContext(AuthContext);
+  const { logoutUser, setShowclasses, scollToRef } =
+    React.useContext(AuthContext);
   const name = localStorage.getItem("name");
   // console.log(user.img_thumbnail.secure_url);
   const pro = localStorage.getItem("propic");
-  const prop = pro ? pro.length > 0 ? JSON.parse(pro) : "" : "";
+  const prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
   const propic = prop.secure_url;
-  
 
   return (
     <React.Fragment>
@@ -108,7 +108,14 @@ const Avatarr = () => {
             Profile
           </MenuItem>
         </Link>
-        <MenuItem>
+
+        <MenuItem
+          onClick={() => {
+            navigate("/profile");
+            setShowclasses(true);
+            scollToRef.current.scrollIntoView();
+          }}
+        >
           {name ? (
             prop ? (
               <Avatar src={propic} />
@@ -123,20 +130,20 @@ const Avatarr = () => {
           My classes
         </MenuItem>
         <Link to="/edit/profile" className="text-dark">
-        <MenuItem>
-          {name ? (
-            prop ? (
-              <Avatar src={propic} />
+          <MenuItem>
+            {name ? (
+              prop ? (
+                <Avatar src={propic} />
+              ) : (
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {name[0].toUpperCase()}
+                </Avatar>
+              )
             ) : (
-              <Avatar sx={{ width: 32, height: 32 }}>
-                {name[0].toUpperCase()}
-              </Avatar>
-            )
-          ) : (
-            <Avatar />
-          )}
-          Edit
-        </MenuItem>
+              <Avatar />
+            )}
+            Edit
+          </MenuItem>
         </Link>
         <Divider />
         {name ? (
@@ -153,7 +160,6 @@ const Avatarr = () => {
         ) : (
           <MenuItem
             onClick={() => {
-              
               navigate("/login");
             }}
           >

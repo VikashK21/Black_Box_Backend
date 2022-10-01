@@ -128,6 +128,8 @@ const Host = () => {
                     type="number"
                     name="max_students"
                     defaultValue={course.max_students}
+                    InputProps={{ inputProps: { min: 1 } }}
+
                     placeholder="Maximum number of students"
                     onChange={changeHandler}
                     variant="outlined"

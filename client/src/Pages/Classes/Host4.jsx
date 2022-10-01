@@ -101,6 +101,8 @@ const Host4 = () => {
                     label="Maximum Students"
                     type="number"
                     name="max_students"
+                    InputProps={{ inputProps: { min: 1 } }}
+
                     defaultValue={course.max_students}
                     placeholder="Maximum number of students"
                     onChange={changeHandler}

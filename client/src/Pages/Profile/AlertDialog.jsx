@@ -29,7 +29,7 @@ export default function AlertDialog(props) {
     <div>
       <Button
         variant="contained"
-        className="w-75"
+        className="w-100"
         color="error"
         onClick={handleClickOpen}
       >

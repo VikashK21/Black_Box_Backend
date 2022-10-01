@@ -88,8 +88,8 @@ export default function BasicTabs() {
                 justifyContent: "center",
               }}
             >
-              <Tab label="Hosted classes" {...a11yProps(0)} />
-              <Tab label="Joined classes" {...a11yProps(1)} />
+              <Tab label="Joined classes" {...a11yProps(0)} />
+              <Tab label="Hosted classes" {...a11yProps(1)} />
               <Tab
                 label="X"
                 onClick={() => setShowclasses(false)}
@@ -99,21 +99,26 @@ export default function BasicTabs() {
             {/* <button>X</button> */}
           </div>
         </Box>
-        <TabPanel value={value} index={0}>
-          <Row>
+        <TabPanel value={value} index={1}>
+          <Row className="loginpage">
             {hcl ? (
               hcl.length > 0 ? (
                 hcl.map((item, index) => {
-                 
                   const a = JSON.parse(item.images);
 
                   return (
-                    <Col md={6} key={index}>
+                    <Col md={4} key={index}>
                       <Row className="my-3 w-100 bs">
                         <Col xs={9}>
                           <Row>
                             <Col xs={4}>
-                              <img src={a[0]} alt="classes" className="w-100" />
+                              <Link to={`/classes/join/${item.id}`}>
+                                <img
+                                  src={a[0]}
+                                  alt="classes"
+                                  className="w-100"
+                                />
+                              </Link>
                             </Col>
                             {/* <Col xs={8}>
                         <h5>Instructor : You</h5>
@@ -128,7 +133,7 @@ export default function BasicTabs() {
                               <h6>
                                 Title :{" "}
                                 <b>
-                                    {item.title.length > 20
+                                  {item.title.length > 20
                                     ? item.title.slice(0, 40) + "..."
                                     : item.title}
                                 </b>
@@ -150,22 +155,27 @@ export default function BasicTabs() {
                             }}
                           >
                             <div className=" h-75 my-1 ">
-                              
-                              
-                                
-                              
-                                <AlertDialog title={item.title} id={item.id} />
-                              
-                              <a href={item.link} target="_blank" className="w-100">
-                                <Button variant="contained" className="bgy text-dark w-100 my-2 px-2">
+                              <AlertDialog title={item.title} id={item.id} />
+
+                              <a
+                                href={item.link}
+                                target="_blank"
+                                className="w-100"
+                              >
+                                <Button
+                                  variant="contained"
+                                  className="bgy text-dark w-100 my-2 px-2"
+                                >
                                   Join
                                 </Button>
                               </a>
-                              <Link to={`/edit/course/${item.id}`} >
-                              
-                              <Button variant="contained" className="bg-dark text-white w-100 my-1 px-2">
+                              <Link to={`/edit/course/${item.id}`}>
+                                <Button
+                                  variant="contained"
+                                  className="bg-dark text-white w-100 my-1 px-2"
+                                >
                                   Edit
-                              </Button>
+                                </Button>
                               </Link>
                             </div>
                           </Row>
@@ -182,69 +192,70 @@ export default function BasicTabs() {
             )}
           </Row>
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          {jcl ? (
-            jcl.length > 0 ? (
-              jcl.map((item, index) => {
+        <TabPanel value={value} index={0}>
+          <div className="loginpage">
+            {jcl ? (
+              jcl.length > 0 ? (
+                jcl.map((item, index) => {
+                  const a = JSON.parse(item.course.images);
 
-                const a = JSON.parse(item.course.images);
-
-                return (
-                  <Row className="my-3 w-100 bs" key={index}>
-                    <Col md={6}>
-                      <Row className="my-3">
-                        <Col xs={3}>
-                          <img src={a[0]} alt="classes" className="w-100" />
-                        </Col>
-                        <Col xs={6} className=" align-content-center">
-                          <h6>
-                            Instructor :
-                            <b> {item.course.host_details.first_name}</b>
+                  return (
+                    <Row className="my-3 w-100 bs" key={index}>
+                      <Col md={6}>
+                        <Row className="my-3">
+                          <Col xs={3}>
+                            <img src={a[0]} alt="classes" className="w-100" />
+                          </Col>
+                          <Col xs={6} className=" align-content-center">
+                            <h6>
+                              Instructor :
+                              <b> {item.course.host_details.first_name}</b>
+                            </h6>
+                            <h6>
+                              Title : <b>{item.course.title}</b>
+                            </h6>
+                            <h6>
+                              Classes : <b>{item.course.Classes.length}</b>
+                            </h6>
+                            <h6>
+                              Fee : <b>Rs.{item.course.price}</b>
+                            </h6>
+                          </Col>
+                        </Row>
+                      </Col>
+                      <Col xs={6}>
+                        <Row className=" m-0 ">
+                          <h6 className="p-0">
+                            The wait is over. Join the class!
                           </h6>
-                          <h6>
-                            Title : <b>{item.course.title}</b>
-                          </h6>
-                          <h6>
-                            Classes : <b>{item.course.Classes.length}</b>
-                          </h6>
-                          <h6>
-                            Fee : <b>Rs.{item.course.price}</b>
-                          </h6>
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col xs={6}>
-                      <Row className=" m-0 ">
-                        <h6 className="p-0">
-                          The wait is over. Join the class!
-                        </h6>
-                        <a
-                          href={item.course.link}
-                          target="_blank"
-                          className="w-50 p-0"
-                        >
-                          <Button
-                            variant="primary"
-                            className="mt-2  w-100 bgy border-0 text-dark"
-                            style={{
-                              height: "40px",
-                              width: "180px",
-                            }}
+                          <a
+                            href={item.course.link}
+                            target="_blank"
+                            className="w-50 p-0"
                           >
-                            Enter room
-                          </Button>
-                        </a>
-                      </Row>
-                    </Col>
-                  </Row>
-                );
-              })
+                            <Button
+                              variant="primary"
+                              className="mt-2  w-100 bgy border-0 text-dark"
+                              style={{
+                                height: "40px",
+                                width: "180px",
+                              }}
+                            >
+                              Enter room
+                            </Button>
+                          </a>
+                        </Row>
+                      </Col>
+                    </Row>
+                  );
+                })
+              ) : (
+                <h1>No classes joined</h1>
+              )
             ) : (
-              <h1>No classes joined</h1>
-            )
-          ) : (
-            ""
-          )}
+              ""
+            )}
+          </div>
         </TabPanel>
       </Box>
     </div>

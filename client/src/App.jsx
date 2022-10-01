@@ -32,6 +32,7 @@ import Choose from "./Pages/Classes/Choose";
 import Trainer from "./Pages/Classes/Trainer";
 import Edit from "./Pages/Login/Edit";
 import EditCourse from "./Pages/Classes/EditCourse";
+import TabPanel2 from "./Pages/Profile/TabPanel";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/edit/profile" element={<Edit />} />
                 <Route path="/edit/course/:id" element={<EditCourse />} />
+                <Route path="/myclasses" element={<TabPanel2 />} />
               </Route>
               <Route path="/host" element={<Host />} />
               <Route path="/host/2" element={<Host2 />} />

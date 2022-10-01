@@ -185,6 +185,8 @@ const Host3 = () => {
                     label="Duration"
                     name="duration"
                     type="number"
+                    InputProps={{ inputProps: { min: 1 } }}
+
                     placeholder="e.g : 45 minutes"
                     variant="outlined"
                     value={classes.duration}

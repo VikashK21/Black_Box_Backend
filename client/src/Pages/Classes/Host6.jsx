@@ -34,7 +34,7 @@ const Host6 = () => {
     <Container fluid className=" p-0 m-0 ">
       {/* <Header /> */}
       <Container className="d-flex justify-content-center mt-5">
-      <div className="w-75 text-center mt-3">
+        <div className="w-75 text-center mt-3">
           {classlist.length > 0 && <h4>Added classes</h4>}
           {classlist.length > 0 && (
             <b>
@@ -98,7 +98,6 @@ const Host6 = () => {
             <Box>
               <h5 className="text-start my-3">Add classes</h5>
               <Row className="signupform ">
-                
                 <Col md={4} xs={12} className="">
                   <>
                     {/* <DatePicker
@@ -137,6 +136,7 @@ const Host6 = () => {
                     label="Duration"
                     name="duration"
                     type="number"
+                    InputProps={{ inputProps: { min: 1 } }}
                     placeholder="e.g : 1 hour"
                     variant="outlined"
                     value={classes.duration}

@@ -16,7 +16,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AddClass(props) {
   const [open, setOpen] = React.useState(false);
-  console.log(props);
 
   const {
     classes,
