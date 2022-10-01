@@ -101,6 +101,8 @@ export const AuthProvider = ({ children }) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const signupUser = async (propic) => {
+    setLoading(true);
+
     await axios
       .post(BaseUrl + "/signup", {
         first_name: values.firstname,
@@ -114,10 +116,14 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         console.log(res.data);
         standingData(values.email, values.password);
+        setLoading(false);
+
         navigate("/profile");
       })
       .catch((err) => {
         console.log(err.data);
+        setLoading(false);
+
 
         if (err.response.status === 400) {
           // setErrUser("Username already exists");
@@ -163,7 +169,9 @@ export const AuthProvider = ({ children }) => {
         console.log(err.data);
         if (err.response.status === 400) {
           errorToast("Invalid Username or password");
-          navigate("/login");
+        setLoading(false);
+
+          // navigate("/login");
           // setTimeout(() => {
           //   errorToast("");
           // }, 1500);
@@ -282,6 +290,8 @@ export const AuthProvider = ({ children }) => {
         })
         .catch((err) => {
           console.log(err.data);
+        setLoading(false);
+
         });
     } else {
       await axios

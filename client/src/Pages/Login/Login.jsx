@@ -8,13 +8,18 @@ import AuthContext, { BaseUrl } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
+import { useEffect } from "react";
 
 const Login = () => {
-  const { loginUser, setValues, values, loading } = useContext(AuthContext);
+  const { loginUser, setValues, values, loading,setLoading } = useContext(AuthContext);
 
   const google = () => {
     window.open(BaseUrl + "/signup/google", "_self");
   };
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });

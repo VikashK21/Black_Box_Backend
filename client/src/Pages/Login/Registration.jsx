@@ -59,11 +59,12 @@ const Registration = () => {
     cloud,
     setCloud,
     loading,
+    setLoading,
   } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   console.log(image);
-  // } , [image]);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
