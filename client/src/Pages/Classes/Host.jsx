@@ -254,7 +254,7 @@ const Host = () => {
 
             {showCropper && (
               <CropImage
-                cropRatio={{ width: 320, height: 420 }}
+                cropRatio={{ width: 300, height: 380 }}
                 src={cropImage}
                 imageCallback={(image) => {
                   // setImage(image);

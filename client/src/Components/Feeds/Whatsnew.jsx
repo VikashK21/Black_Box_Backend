@@ -31,9 +31,10 @@ const Whatsnew = () => {
       fluid
       className="profilediv d-flex justify-content-center p-0 m-0 bgw boxshadow my-1"
     >
-      <Container className="pc p-5 pb-0">
+      <Container className="pc py-5 pb-0">
         <Row>
-          <Col lg={4}>
+          <Col lg={1}></Col>
+          <Col lg={3}>
             <Row className="mb-5">
               <Col
                 md={12}
@@ -131,7 +132,7 @@ const Whatsnew = () => {
               </div>
             </div> */}
           </Col>
-          <Col lg={8} className="ps-4 ">
+          <Col lg={7} className="ps-4 ">
             <h1 className="profilename gx">What's new</h1>
             <div
               className="d-flex w-100 abc"
@@ -201,6 +202,8 @@ const Whatsnew = () => {
                 : ""}
             </div>
           </Col>
+          <Col lg={1}></Col>
+
         </Row>
       </Container>
     </Container>

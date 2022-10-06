@@ -479,15 +479,16 @@ ul{
 .imgdiv{
   height: 341px !important;
 }
+
 .imgdiv2{
-  height: 171px !important;
+  height: 250px !important;
 }
 
 .clsdesc{
   font-size: clamp(0.6rem, 2.5vw, .8rem);
   font-family: Gilroy-Light !important;
   color: rgb(61, 61, 61) !important;
-
+  min-height: 30px !important;
 }
 
 .knowdiv{
@@ -563,10 +564,10 @@ ul{
 
 
 .classtitlee{
-  font-size: clamp(0.9rem, 4vw, 1.2rem);
+  font-size: clamp(0.5rem, 4vw, 1rem);
   font-family: Gilroy-ExtraBold !important;
   color: rgb(85, 85, 85) !important;
-  line-height: 1;
+  line-height: 0 !important;
 }
 
 .tutorname{

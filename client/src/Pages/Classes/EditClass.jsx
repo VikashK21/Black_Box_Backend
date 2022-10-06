@@ -20,7 +20,11 @@ export default function EditClass(props) {
   const { classes, setClasses, HostClasses, editClass } =
     React.useContext(AuthContext);
 
-  setClasses(props.classes);
+  React.useEffect(() => {
+    setClasses(props.classes);
+    console.log(props.classes, "the useeffect..");
+    // console.log(classes, 'the usestate');
+  }, []);
 
   const handleChange = (e) => {
     setClasses({ ...classes, [e.target.name]: e.target.value });
@@ -38,6 +42,11 @@ export default function EditClass(props) {
   const handleSuccess = () => {
     setOpen(false);
     editClass(classes.course_id, classes.id);
+    props.setClss((pre) => {
+      let updatePro = pre;
+      updatePro[props.index] = classes;
+      return updatePro;
+    });
   };
 
   return (
@@ -135,7 +144,7 @@ export default function EditClass(props) {
                 type="number"
                 placeholder="e.g : 45 minutes"
                 variant="outlined"
-                defaultValue={Number(classes?.duration)}
+                value={Number(classes?.duration)}
                 onChange={(e) => {
                   // setClasses({ ...classes, duration: e.target.value });
                   // console.log(e.target.value);

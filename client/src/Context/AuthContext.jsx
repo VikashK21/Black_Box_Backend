@@ -8,13 +8,13 @@ import StyleContext from "./StyleContext";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api"
+// export const BaseUrl = "/api"
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -97,6 +97,8 @@ export const AuthProvider = ({ children }) => {
   const [courseId, setCourseId] = useState();
   const [name, setName] = useState();
 
+  const [toChoose, setToChoose] = useState(false);
+
   const [signUpBatch, setSignUpBatch] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
 
@@ -118,12 +120,16 @@ export const AuthProvider = ({ children }) => {
         standingData(values.email, values.password);
         setLoading(false);
 
-        navigate("/profile");
+        if (setToChoose) {
+          navigate("/host");
+        } else {
+          navigate("/profile");
+        }
+        
       })
       .catch((err) => {
         console.log(err.data);
         setLoading(false);
-
 
         if (err.response.status === 400) {
           // setErrUser("Username already exists");
@@ -169,7 +175,7 @@ export const AuthProvider = ({ children }) => {
         console.log(err.data);
         if (err.response.status === 400) {
           errorToast("Invalid Username or password");
-        setLoading(false);
+          setLoading(false);
 
           // navigate("/login");
           // setTimeout(() => {
@@ -290,8 +296,7 @@ export const AuthProvider = ({ children }) => {
         })
         .catch((err) => {
           console.log(err.data);
-        setLoading(false);
-
+          setLoading(false);
         });
     } else {
       await axios
@@ -725,6 +730,9 @@ export const AuthProvider = ({ children }) => {
     getSuggest,
     noClasses,
     setNoClasses,
+    deleteClass,
+    toChoose,
+    setToChoose,
   };
 
   return (

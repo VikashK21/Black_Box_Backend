@@ -36,7 +36,7 @@ const Profile = () => {
   useEffect(() => {
     getCoursesList();
     DynamicTimer();
-    if (classtime.length === undefined) {
+    if (classtime === undefined) {
       setNoClasses(false);
     }
     setShowclasses(false);
@@ -112,6 +112,7 @@ const Profile = () => {
               }}
             >
               <Row className="mt-2 ">
+                <Col md={1}></Col>
                 <Col md={5} className="p-0 ">
                   {noClasses ? (
                     <div className="bgw rounded-3 ps-3 py-3 boxshadow mx-2 mb-2">
@@ -247,7 +248,7 @@ const Profile = () => {
                     />
                   </div>
                 </Col>
-                <Col md={7} className="p-0 ">
+                <Col md={5} className="p-0 ">
                   {/* <h1 className="profilename gx p-3 pb-1 ps-4">Feeds Section</h1> */}
 
                   <div className=" pt-1">
@@ -285,42 +286,6 @@ const Profile = () => {
                                     </div>
                                   </div>
                                 </Col>
-                                {/* <Col
-                                md={4}
-                                className="d-flex justify-content-end pe-4"
-                              >
-                                <div
-                                  className="d-flex"
-                                  style={{
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <h6 className="pe-2">
-                                    <b>
-                                      {course.host_details.first_name}{" "}
-                                      {course.host_details.last_name}
-                                    </b>
-                                  </h6>
-                                  <img
-                                    src={
-                                      host
-                                        ? host.secure_url
-                                          ? host.secure_url
-                                          : DefaultPic
-                                        : DefaultPic
-                                    }
-                                    alt="classes"
-                                    className="ic"
-                                  />
-                                </div>
-                                <div
-                                  style={{
-                                    margin: "auto 0",
-                                  }}
-                                >
-                                  :
-                                </div>
-                              </Col> */}
                               </Row>
                               <Link to={`/classes/join/${course.id}`}>
                                 <Row className="d-flex justify-content-center bggrey m-0 p-0 ">
@@ -329,7 +294,7 @@ const Profile = () => {
                                     alt=""
                                     className="ms-1"
                                     style={{
-                                      width: "80%",
+                                      width: "100%",
                                     }}
                                   />
                                 </Row>
@@ -398,6 +363,7 @@ const Profile = () => {
                       })}
                   </div>
                 </Col>
+                <Col md={1}></Col>
               </Row>
             </Container>
           </Container>

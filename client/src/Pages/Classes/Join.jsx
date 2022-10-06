@@ -43,8 +43,16 @@ const Join = () => {
     setSuggest(e.target.value);
   };
 
-  const { BaseUrl, authTokens, user, setLoading, loading, getSuggest } =
-    useContext(AuthContext);
+  const {
+    BaseUrl,
+    authTokens,
+    user,
+    setLoading,
+    loading,
+    getSuggest,
+    toChoose,
+    setToChoose,
+  } = useContext(AuthContext);
   const { successToast, errorToast } = useContext(StyleContext);
   const name = localStorage.getItem("name");
   const [course, setCourse] = useState({
@@ -636,7 +644,8 @@ const Join = () => {
                         checkBeforeJoining(course.id);
                         setLoading(true);
                       } else {
-                        navigate("/profile");
+                        setToChoose(true);
+                        navigate("/signup");
                       }
                     }}
                   >

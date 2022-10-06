@@ -16,13 +16,17 @@ const Avatarr = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    if (user) {
+      setAnchorEl(event.currentTarget);
+    } else {
+      navigate("/login");
+    }
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const { logoutUser, setShowclasses, scollToRef } =
+  const { logoutUser, setShowclasses, scollToRef, user } =
     React.useContext(AuthContext);
   const name = localStorage.getItem("name");
   // console.log(user.img_thumbnail.secure_url);
@@ -92,60 +96,67 @@ const Avatarr = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <Link to="/profile" className="text-dark">
-          <MenuItem>
-            {name ? (
-              prop ? (
-                <Avatar src={propic} />
+        {user ? (
+          <>
+            {" "}
+            <Link to="/profile" className="text-dark">
+              <MenuItem>
+                {name ? (
+                  prop ? (
+                    <Avatar src={propic} />
+                  ) : (
+                    <Avatar sx={{ width: 32, height: 32 }}>
+                      {name[0].toUpperCase()}
+                    </Avatar>
+                  )
+                ) : (
+                  <Avatar />
+                )}
+                Profile
+              </MenuItem>
+            </Link>
+            <MenuItem
+              onClick={() => {
+                navigate("/profile");
+                setShowclasses(true);
+                scollToRef.current.scrollIntoView();
+              }}
+            >
+              {name ? (
+                prop ? (
+                  <Avatar src={propic} />
+                ) : (
+                  <Avatar sx={{ width: 32, height: 32 }}>
+                    {name[0].toUpperCase()}
+                  </Avatar>
+                )
               ) : (
-                <Avatar sx={{ width: 32, height: 32 }}>
-                  {name[0].toUpperCase()}
-                </Avatar>
-              )
-            ) : (
-              <Avatar />
-            )}
-            Profile
-          </MenuItem>
-        </Link>
+                <Avatar />
+              )}
+              My classes
+            </MenuItem>
+            <Link to="/edit/profile" className="text-dark">
+              <MenuItem>
+                {name ? (
+                  prop ? (
+                    <Avatar src={propic} />
+                  ) : (
+                    <Avatar sx={{ width: 32, height: 32 }}>
+                      {name[0].toUpperCase()}
+                    </Avatar>
+                  )
+                ) : (
+                  <Avatar />
+                )}
+                Edit
+              </MenuItem>
+            </Link>
+            <Divider />
+          </>
+        ) : (
+          " "
+        )}
 
-        <MenuItem
-          onClick={() => {
-            navigate("/profile");
-            setShowclasses(true);
-            scollToRef.current.scrollIntoView();
-          }}
-        >
-          {name ? (
-            prop ? (
-              <Avatar src={propic} />
-            ) : (
-              <Avatar sx={{ width: 32, height: 32 }}>
-                {name[0].toUpperCase()}
-              </Avatar>
-            )
-          ) : (
-            <Avatar />
-          )}
-          My classes
-        </MenuItem>
-        <Link to="/edit/profile" className="text-dark">
-          <MenuItem>
-            {name ? (
-              prop ? (
-                <Avatar src={propic} />
-              ) : (
-                <Avatar sx={{ width: 32, height: 32 }}>
-                  {name[0].toUpperCase()}
-                </Avatar>
-              )
-            ) : (
-              <Avatar />
-            )}
-            Edit
-          </MenuItem>
-        </Link>
-        <Divider />
         {name ? (
           <MenuItem
             onClick={() => {

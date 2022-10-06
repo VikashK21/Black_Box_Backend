@@ -42,9 +42,11 @@ const EditCourse = () => {
     BaseUrl,
     setUpdatedImgs,
     editCourse,
+    deleteClass,
   } = useContext(AuthContext);
 
   const [imgs, setImgs] = useState([]);
+  const [clss, setClss] = useState([]);
 
   const { id } = useParams();
 
@@ -56,10 +58,13 @@ const EditCourse = () => {
         setCourse(res.data);
         setImage(res.data.images);
         setImgs([...res.data.images]);
+        setClss(res.data.Classes);
+        console.log(res.data.Classes, "the distributer");
       })
       .catch((err) => {
         console.log(err);
       });
+    // }, [clss]); ----> this is for making the chnages occur, but it will make the whole things in continues process...
   }, []);
 
   const [showCropper, setShowCropper] = useState(false);
@@ -404,7 +409,7 @@ const EditCourse = () => {
                                                 onChange={(e) => {
                                                   handleMethodologyChange(
                                                     e,
-                                                    index
+                                                    index,
                                                   );
                                                   console.log(method);
                                                 }}
@@ -416,7 +421,7 @@ const EditCourse = () => {
                                                   <Button
                                                     onClick={() =>
                                                       handleMethodologyRemove(
-                                                        index
+                                                        index,
                                                       )
                                                     }
                                                     color="error"
@@ -445,7 +450,7 @@ const EditCourse = () => {
                                               )}
                                             </div>
                                           </div>
-                                        )
+                                        ),
                                       )
                                     : ""}
                                 </Col>
@@ -589,79 +594,81 @@ const EditCourse = () => {
                     </div>
                   </div>
                   <Row className="mt-3">
-                    {course
-                      ? course.Classes
-                        ? course.Classes.length > 0
-                          ? course.Classes.map((classes, index) => {
-                              // console.log(classes);
-                              return (
-                                <Col md={4} key={index}>
-                                  <Card
-                                    className="mb-4 "
-                                    style={{
-                                      height: "300px",
-                                    }}
-                                  >
-                                    <CardHeader
-                                      title={"Day : " + (index + 1)}
-                                      subheader={
-                                        classes.date + " " + classes.time
-                                      }
-                                    />
-                                    <CardContent>
-                                      <Row>
-                                        <Col md={8}>
-                                          <div>
-                                            <h6 className="mb-2 font-weight-bold">
-                                              {classes.title
-                                                ? classes.title.length > 30
-                                                  ? classes.title.substring(
-                                                      0,
-                                                      30
-                                                    ) + "..."
-                                                  : classes.title
-                                                : ""}
-                                            </h6>
-                                            <p className="mb-3 font-size-sm text-black-50">
-                                              {classes.description
-                                                ? classes.description.length >
-                                                  50
-                                                  ? classes.description.substring(
-                                                      0,
-                                                      50
-                                                    ) + "..."
-                                                  : classes.description
-                                                : ""}
-                                            </p>
-                                          </div>
-                                        </Col>
-                                        <Col md={4}>
-                                          <div>
-                                            {/* <Button
+                    {clss.length > 0 &&
+                      clss.map((classes, index) => {
+                        // console.log(classes);
+                        return (
+                          <Col md={4} key={index}>
+                            <Card
+                              className="mb-4 "
+                              style={{
+                                height: "300px",
+                              }}
+                            >
+                              <CardHeader
+                                title={"Day : " + (index + 1)}
+                                subheader={classes.date + " " + classes.time}
+                              />
+                              <CardContent>
+                                <Row>
+                                  <Col md={8}>
+                                    <div>
+                                      <h6 className="mb-2 font-weight-bold">
+                                        {classes.title
+                                          ? classes.title.length > 30
+                                            ? classes.title.substring(0, 30) +
+                                              "..."
+                                            : classes.title
+                                          : ""}
+                                      </h6>
+                                      <p className="mb-3 font-size-sm text-black-50">
+                                        {classes.description
+                                          ? classes.description.length > 50
+                                            ? classes.description.substring(
+                                                0,
+                                                50,
+                                              ) + "..."
+                                            : classes.description
+                                          : ""}
+                                      </p>
+                                    </div>
+                                  </Col>
+                                  <Col md={4}>
+                                    <div>
+                                      {/* <Button
                                               variant="contained"
                                               className="h-25 ms-2 w-100 mt-2 px-2 bg-dark"
                                             >
                                               Edit
                                             </Button> */}
-                                            <EditClass classes={classes} />
-                                            <Button
-                                              color="error"
-                                              variant="contained"
-                                              className="h-25 ms-2 w-100 mt-2 px-2"
-                                            >
-                                              Remove
-                                            </Button>
-                                          </div>
-                                        </Col>
-                                      </Row>
-                                    </CardContent>
-                                  </Card>
-                                </Col>
-                              );
-                            })
-                          : ""
-                        : ""
-                      : ""}
+                                      <EditClass
+                                        classes={classes}
+                                        setClss={setClss}
+                                        index={index}
+                                      />
+                                      <Button
+                                        color="error"
+                                        variant="contained"
+                                        className="h-25 ms-2 w-100 mt-2 px-2"
+                                        onClick={() => {
+                                          setClss((pre) => {
+                                            let updatePro = pre;
+                                            updatePro.slice(index, 1);
+                                            return updatePro;
+                                          });
+                                          // deleteClass(classes.id);
+                                        }}
+                                      >
+                                        Remove
+                                      </Button>
+                                    </div>
+                                  </Col>
+                                </Row>
+                              </CardContent>
+                            </Card>
+                          </Col>
+                        );
+                      })}
                   </Row>
                 </Col>
               </Row>

@@ -137,7 +137,7 @@ const Host6 = () => {
                     name="duration"
                     type="number"
                     InputProps={{ inputProps: { min: 1 } }}
-                    placeholder="e.g : 1 hour"
+                    placeholder="e.g : 45 mins"
                     variant="outlined"
                     value={classes.duration}
                     onChange={(e) =>
