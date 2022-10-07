@@ -35,13 +35,8 @@ const Edit = () => {
   const [cropImage, setCropImage] = useState(false);
   const [changed, setChanged] = useState(false);
 
-  const {
-    setCloud,
-    authTokens,
-    BaseUrl,
-    editProfile,
-    loading,
-  } = useContext(AuthContext);
+  const { setCloud, authTokens, BaseUrl, editProfile, loading,setLoading } =
+    useContext(AuthContext);
 
   const [pro, setPro] = useState({
     first_name: "",
@@ -54,6 +49,7 @@ const Edit = () => {
   });
 
   useEffect(() => {
+    setLoading(false);
     console.log("profile");
     const getMyProfile = async () => {
       await axios
@@ -63,11 +59,14 @@ const Edit = () => {
         .then((res) => {
           console.log(res.data);
           setPro(res.data);
-          if (res.data.img_thumbnail!=="{}") {
-            var i = JSON.parse(res.data.img_thumbnail);
-            setImage(i.secure_url);
+          if (res.data.img_thumbnail !== "{}") {
+            if (res.data.img_thumbnail.includes("{")) {
+              var i = JSON.parse(res.data.img_thumbnail);
+              setImage(i.secure_url);
+            } else {
+              setImage(res.data.img_thumbnail);
+            }
           }
-          
         })
         .catch((err) => {
           console.log(err);
@@ -92,26 +91,24 @@ const Edit = () => {
         .post("https://api.cloudinary.com/v1_1/black-box/image/upload", data)
         .then((data) => {
           console.log(data);
-          propic = JSON.stringify(data.data);
-
-          editProfile(pro,propic);
+          propic = data.data.secure_url;
+          editProfile(pro, propic);
         })
         .catch((err) => {
           alert(err);
         });
     } else {
-        editProfile(pro,propic);
+      editProfile(pro, propic);
     }
   };
 
-
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm({
-//     resolver: yupResolver(schema),
-//   });
+  //   const {
+  //     register,
+  //     handleSubmit,
+  //     formState: { errors },
+  //   } = useForm({
+  //     resolver: yupResolver(schema),
+  //   });
 
   return (
     <Container fluid className="loginpage p-0 m-0 ">
@@ -137,7 +134,7 @@ const Edit = () => {
                 ) : (
                   <img width={250} src={image ? image : Default} alt="" />
                 )}
-                
+
                 <div className="edit-profile-pic d-flex justify-content-center">
                   <div className="d-flex">
                     <FormControl
@@ -189,11 +186,11 @@ const Edit = () => {
                       name="first_name"
                       value={pro?.first_name}
                       defaultValue={pro?.first_name}
-                    //   {...register("first_name")}
+                      //   {...register("first_name")}
                       variant="outlined"
                       className=" mb-3 w-100"
                       onChange={changeHandler}
-                    //   helperText={errors.firstname && errors.firstname.message}
+                      //   helperText={errors.firstname && errors.firstname.message}
                     />
                   </Col>
                   <Col md={6}>
@@ -202,11 +199,11 @@ const Edit = () => {
                       name="last_name"
                       value={pro?.last_name}
                       defaultValue={pro?.last_name}
-                    //   {...register("last_name")}
+                      //   {...register("last_name")}
                       variant="outlined"
                       className=" mb-3 w-100"
                       onChange={changeHandler}
-                    //   helperText={errors.lastname && errors.lastname.message}
+                      //   helperText={errors.lastname && errors.lastname.message}
                     />
                   </Col>
                   <Col md={6}>
@@ -215,12 +212,12 @@ const Edit = () => {
                       name="email"
                       value={pro?.email}
                       defaultValue={pro?.email}
-                    //   {...register("email")}
+                      //   {...register("email")}
                       variant="outlined"
                       autoComplete="false"
                       className=" mb-3 w-100"
                       onChange={changeHandler}
-                    //   helperText={errors.email && errors.email.message}
+                      //   helperText={errors.email && errors.email.message}
                     />
                   </Col>
                   <Col md={6}>
@@ -237,7 +234,7 @@ const Edit = () => {
                       onChange={(phone) =>
                         setPro({ ...pro, phone_num: pro.phone_num })
                       }
-                    //   helperText={errors.phone && errors.phone.message}
+                      //   helperText={errors.phone && errors.phone.message}
                     />
                   </Col>
 
@@ -250,7 +247,7 @@ const Edit = () => {
                       className="w-100 noti-content"
                       value={pro?.about}
                       defaultValue={pro?.about}
-                    //   {...register("about")}
+                      //   {...register("about")}
                       placeholder="About yourself"
                       onChange={changeHandler}
                     />
@@ -261,35 +258,30 @@ const Edit = () => {
                 </Row>
 
                 <div className=" d-flex flex-column">
-                 
                   <div className=" pt-1 w-100">
                     <Button
                       variant="contained"
                       type="submit"
                       className="bgdark w-100"
                     >
-                      
-                        {loading ? (
-                          <>
+                      {loading ? (
+                        <>
                           <div class="loadingio-spinner-rolling-jm01qv7mmak mx-2">
                             <div class="ldio-cqj9sf9mcdj">
                               <div></div>
                             </div>
                           </div>
                           Updating
-                          
-                          </>
-                        ) : (
-                          " Update"
-                        )}
-                      
+                        </>
+                      ) : (
+                        " Update"
+                      )}
                     </Button>
                   </div>
                 </div>
               </Box>
             </form>
           </Container>
-          
         </div>
       </Container>
       <Footer />

@@ -36,8 +36,11 @@ const Profile = () => {
   useEffect(() => {
     getCoursesList();
     DynamicTimer();
-    if (classtime === undefined) {
+    console.log(typeof classtime);
+    if (typeof classtime === "string") {
+      console.log("stringggg");
       setNoClasses(false);
+
     }
     setShowclasses(false);
   }, []);
@@ -182,8 +185,8 @@ const Profile = () => {
                             </Row>
                           ) : (
                             <Row className="mt-2 m-0 ">
-                              <h5 className="p-0">The wait is finally over!</h5>
-                              <h5 className="p-0">Join the class</h5>
+                              <h5 className="p-0">It’s on.</h5>
+                              <h5 className="p-0">Join your class here.</h5>
                               <a
                                 href={classtime ? classtime.link : ""}
                                 target="_blank"
@@ -244,7 +247,7 @@ const Profile = () => {
                       }}
                       style={{
                         borderRadius: "15px",
-                      }}
+                      }}reactCourse
                     />
                   </div>
                 </Col>
@@ -254,12 +257,17 @@ const Profile = () => {
                   <div className=" pt-1">
                     {courseList.length > 0 &&
                       courseList.map((course, index) => {
-                        const host = course.host_details.img_thumbnail
+                        if (course.host_details.img_thumbnail.includes("{")){
+                          const host = course.host_details.img_thumbnail
                           ? course.host_details.img_thumbnail.secure_url !==
                             null
                             ? JSON.parse(course.host_details.img_thumbnail)
                             : null
                           : null;
+                        } else {
+                          const host = course.host_details.img_thumbnail
+                        }
+                        
                         const a = JSON.parse(course.images);
                         if (a.length !== 0) {
                           return (
@@ -375,5 +383,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-

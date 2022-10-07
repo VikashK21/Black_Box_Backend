@@ -15,8 +15,15 @@ import $ from "jquery";
 const Whatsnew = () => {
   const name = localStorage.getItem("name");
   const pro = localStorage.getItem("propic");
-  const prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
-  const propic = prop.secure_url;
+  if (pro.includes("{")) {
+    var prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
+    var propic = prop.secure_url;
+  } else {
+    var prop = pro;
+    var propic = pro;
+  }
+  // const prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
+  // const propic = prop.secure_url;
   const about = localStorage.getItem("userDetails");
 
   const { goToTop, getCoursesList, courseList, setShowclasses, scollToRef } =
@@ -98,33 +105,6 @@ const Whatsnew = () => {
                 </div>
               </Col>
             </Row>
-
-            {/* <div className="d-flex pb-5">
-              
-            
-            </div> */}
-            {/* <div className="searchdiv mt-5">
-              <input
-                type="text"
-                className="borderlessinput"
-                placeholder="Search black box"
-              />
-              <div className="icondiv">
-                <BsSearch className="profilesearch p-2" size={35} />
-              </div>
-            </div>
-            <div>
-              <div className="ms-3 my-5 mt-3 d-flex">
-                <div className="d-flex">
-                  <FiLock className="profilelock me-2" size={25} />
-                  <h6 className="gl">Private</h6>
-                </div>
-                <div className="d-flex mx-3">
-                  <FiUnlock className="profileunlock me-2" size={25} />
-                  <h6 className="gl">Public</h6>
-                </div>
-              </div>
-            </div> */}
           </Col>
           <Col lg={7} className="ps-4 ">
             <h1 className="profilename gx">What's new</h1>
@@ -137,11 +117,15 @@ const Whatsnew = () => {
               {courseList
                 ? courseList.slice(0, 5).map((course, index) => {
                     const a = JSON.parse(course.images);
-                    const host = course.host_details.img_thumbnail
-                      ? course.host_details.img_thumbnail.secure_url !== null
-                        ? JSON.parse(course.host_details.img_thumbnail)
-                        : null
-                      : null;
+                    if (course.host_details.img_thumbnail.includes("{")) {
+                      const host = course.host_details.img_thumbnail
+                        ? course.host_details.img_thumbnail.secure_url !== null
+                          ? JSON.parse(course.host_details.img_thumbnail)
+                          : null
+                        : null;
+                    } else {
+                      const host = course.host_details.img_thumbnail;
+                    }
                     if (a.length !== 0 && a[0].length !== undefined) {
                       return (
                         <div

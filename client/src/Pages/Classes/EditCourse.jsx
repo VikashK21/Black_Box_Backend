@@ -590,7 +590,7 @@ const EditCourse = () => {
                       {/* <Button variant="contained" className="w-100 bgy">
                         Add class
                       </Button> */}
-                      {/* <AddClass id={course.id} /> */}
+                      <AddClass id={course.id} />
                     </div>
                   </div>
                   <Row className="mt-3">

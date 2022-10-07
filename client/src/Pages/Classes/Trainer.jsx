@@ -32,7 +32,7 @@ const Trainer = () => {
     images: [],
   });
 
-  const [img, setImg] = useState({});
+  const [img, setImg] = useState("");
 
   useEffect(() => {
     getCoursesList();
@@ -41,7 +41,16 @@ const Trainer = () => {
         .get(BaseUrl + "/host/profile/" + id)
         .then((res) => {
           console.log(res.data);
-          setImg(JSON.parse(res.data.img_thumbnail));
+          console.log(res.data.img_thumbnail);
+          if (res.data.img_thumbnail.includes("{")) {
+            var i = JSON.parse(res.data.img_thumbnail);
+            setImg(i.secure_url);
+            console.log(img);
+          } else {
+            setImg(res.data.img_thumbnail);
+            console.log(img);
+          }
+
           setCourse(res.data);
         })
         .catch((err) => {
@@ -62,26 +71,14 @@ const Trainer = () => {
             <Col md={4} xs={12}>
               <div className="  d-flex justify-content-center w-100 ">
                 <img
-                  src={
-                    img
-                      ? img.secure_url
-                        ? img.secure_url
-                        : DefaultPic
-                      : DefaultPic
-                  }
+                  src={img ? img : DefaultPic}
                   alt="class1"
                   className="img-fluid iconpic my-5 icon1"
                 />
               </div>
               <div className="d-flex justify-content-end w-100 ">
                 <img
-                  src={
-                    img
-                      ? img.secure_url
-                        ? img.secure_url
-                        : DefaultPic
-                      : DefaultPic
-                  }
+                  src={img ? img : DefaultPic}
                   alt="class1"
                   className="img-fluid iconpic icon2 "
                 />

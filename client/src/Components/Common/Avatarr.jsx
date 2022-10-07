@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import AuthContext from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Avatarr = () => {
   const navigate = useNavigate();
@@ -28,11 +29,25 @@ const Avatarr = () => {
 
   const { logoutUser, setShowclasses, scollToRef, user } =
     React.useContext(AuthContext);
-  const name = localStorage.getItem("name");
+
   // console.log(user.img_thumbnail.secure_url);
+
   const pro = localStorage.getItem("propic");
-  const prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
-  const propic = prop.secure_url;
+  if (pro) {
+    if (pro.includes("{")) {
+      var prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
+      var propic = prop.secure_url;
+    } else {
+      var propic = pro;
+    }
+  } else {
+    var propic = "";
+  }
+
+  const name = localStorage.getItem("name");
+
+  // const prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
+  // const propic = prop.secure_url;
 
   return (
     <React.Fragment>
@@ -47,8 +62,10 @@ const Avatarr = () => {
             aria-expanded={open ? "true" : undefined}
           >
             {name ? (
-              prop ? (
-                <Avatar src={propic} />
+              propic ? (
+                <>
+                  <Avatar src={propic} />
+                </>
               ) : (
                 <Avatar sx={{ width: 32, height: 32 }}>
                   {name[0].toUpperCase()}
@@ -102,8 +119,10 @@ const Avatarr = () => {
             <Link to="/profile" className="text-dark">
               <MenuItem>
                 {name ? (
-                  prop ? (
-                    <Avatar src={propic} />
+                  propic ? (
+                    <>
+                      <Avatar src={propic} />
+                    </>
                   ) : (
                     <Avatar sx={{ width: 32, height: 32 }}>
                       {name[0].toUpperCase()}
@@ -123,8 +142,10 @@ const Avatarr = () => {
               }}
             >
               {name ? (
-                prop ? (
-                  <Avatar src={propic} />
+                propic ? (
+                  <>
+                    <Avatar src={propic} />
+                  </>
                 ) : (
                   <Avatar sx={{ width: 32, height: 32 }}>
                     {name[0].toUpperCase()}
@@ -138,8 +159,10 @@ const Avatarr = () => {
             <Link to="/edit/profile" className="text-dark">
               <MenuItem>
                 {name ? (
-                  prop ? (
-                    <Avatar src={propic} />
+                  propic ? (
+                    <>
+                      <Avatar src={propic} />
+                    </>
                   ) : (
                     <Avatar sx={{ width: 32, height: 32 }}>
                       {name[0].toUpperCase()}

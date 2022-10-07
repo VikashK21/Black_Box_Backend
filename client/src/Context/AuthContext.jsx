@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 // import { imageListItemClasses } from "@mui/material";
 import StyleContext from "./StyleContext";
+import { type } from "@testing-library/user-event/dist/type";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -147,11 +148,22 @@ export const AuthProvider = ({ children }) => {
         console.log(res.data);
         var details = res.data.result;
         localStorage.setItem("User", JSON.stringify(details.id));
-        const propic =
-          res.data.result.img_thumbnail.length > 0
-            ? JSON.parse(res.data.result.img_thumbnail)
-            : "";
-        localStorage.setItem("propic", JSON.stringify(propic));
+        // const propic = "";
+        console.log("details.id");
+        if (res.data.result.img_thumbnail.includes("{")) {
+          console.log("yes");
+          console.log(res.data.result.img_thumbnail);
+          const propic =
+            res.data.result.img_thumbnail.length > 0
+              ? JSON.parse(res.data.result.img_thumbnail)
+              : "";
+          console.log(propic);
+          localStorage.setItem("propic", JSON.stringify(propic));
+        } else {
+          const propic2 = res.data.result.img_thumbnail;
+          localStorage.setItem("propic", propic2);
+        }
+
         setAuthTokens(res.data.token);
         localStorage.setItem("authTokens", JSON.stringify(res.data.token));
         setUser(jwt_decode(res.data.token));
@@ -169,9 +181,9 @@ export const AuthProvider = ({ children }) => {
         } else {
           navigate("/profile");
         }
-        
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err.data);
         if (err.response.status === 400) {
           errorToast("Invalid Username or password");
@@ -289,8 +301,8 @@ export const AuthProvider = ({ children }) => {
         )
         .then((res) => {
           console.log(res.data);
-          console.log("Successs");
           setProfile(res.data.result);
+          
           setLoading(false);
           navigate("/profile");
         })
@@ -453,7 +465,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const [classtime, setClasstime] = useState({});
+  const [classtime, setClasstime] = useState("");
   const [noClasses, setNoClasses] = useState(true);
 
   const DynamicTimer = async () => {
@@ -462,8 +474,8 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
-        console.log(res.data);
         setClasstime(res.data);
+        console.log(typeof classtime);
       })
       .catch((err) => {
         console.log(err.data);

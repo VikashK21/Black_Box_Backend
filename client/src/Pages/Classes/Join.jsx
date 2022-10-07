@@ -70,16 +70,22 @@ const Join = () => {
   });
 
   useEffect(() => {
+    setLoading(false);
     const fetchData = async () => {
       await axios
         .get(BaseUrl + "/courses/" + id)
         .then((res) => {
           const data = res.data;
           console.log(data);
-          data.host_details.img_thumbnail =
-            data.host_details.img_thumbnail.length > 0
-              ? JSON.parse(data.host_details.img_thumbnail)
-              : "";
+          if (data.host_details.img_thumbnail.includes("{")) {
+            data.host_details.img_thumbnail =
+              data.host_details.img_thumbnail.length > 0
+                ? JSON.parse(data.host_details.img_thumbnail)
+                : "";
+          } else {
+            data.host_details.img_thumbnail = data.host_details.img_thumbnail;
+          }
+
           console.log(data);
           setCourse(data);
         })
@@ -217,9 +223,13 @@ const Join = () => {
                 <div className="d-flex justify-content-end w-100 ">
                   <img
                     src={
-                      course.host_details.img_thumbnail
-                        ? course.host_details.img_thumbnail.secure_url
-                        : DefaultPic
+                      // course.host_details.img_thumbnail
+                      //   ? course.host_details.img_thumbnail.secure_url
+                      //   : DefaultPic
+                      course.host_details.img_thumbnail.includes("{")
+                        ? JSON.parse(course.host_details.img_thumbnail)
+                            .secure_url
+                        : course.host_details.img_thumbnail
                     }
                     alt="class1"
                     className="img-fluid iconpic icon2 "
@@ -230,7 +240,7 @@ const Join = () => {
             <Col md={8} xs={12}>
               <div className="hostdiv">
                 <h6>Instructor</h6>
-                <Link to={`/trainer/${course.host_details.id}`}>
+                <Link to={`/profile/${course.host_details.id}`}>
                   <h2 className="gx text-dark">
                     {course.host_details.first_name
                       ? course.host_details.first_name

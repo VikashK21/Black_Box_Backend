@@ -89,7 +89,7 @@ const Registration = () => {
           // });
 
           // setCloud(JSON.stringify(data.data));
-          propic = JSON.stringify(data.data);
+          propic = data.data.secure_url;
           signupUser(propic);
         })
         .catch((err) => {

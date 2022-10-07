@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
@@ -12,7 +12,6 @@ const Choose = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
     setCourse({
       title: "",
       description: "",
@@ -29,7 +28,6 @@ const Choose = () => {
     });
 
     setImage([]);
-
   }, []);
 
   return (
@@ -41,20 +39,31 @@ const Choose = () => {
         className="d-flex bggrey justify-content-center py-5 mb-5"
       >
         <div>
-          <h1 className="regtitle">Course type</h1>
+          <h1 className="regtitle">Formats</h1>
         </div>
       </Container>
       <Container
-        className="d-flex justify-content-center my-4"
+        className=" my-4"
         style={{
           minHeight: "300px",
         }}
       >
-        <div className="mt-5 d-flex justify-content-center w-75">
-          <div className="w-100 text-end pe-5">
+        <Row className="d-flex justify-content-center text-center">
+          <Col md={8}>
+            <p className="description">
+            There are two formats in which classes are conducted on Black Box.
+            One as a single class. And the other as a course conducted as a
+            series of classes over time. You can choose the format you want to
+            host your class based on whether it is a single class or a course.
+            Click on the appropriate button below to host your class/ course.
+            </p>
+          </Col>
+        </Row>
+        <Row className="mt-3 d-flex justify-content-center w-100">
+          <Col className="w-100 text-end pe-5">
             <Button
               variant="contained"
-              className="h-25 w-50 bgy"
+              className="h-100 w-25 bgy"
               onClick={() => {
                 setCourse({ ...course, type: "Course" });
                 navigate("/hosting");
@@ -62,19 +71,11 @@ const Choose = () => {
             >
               Course
             </Button>
-            <b>
-              <p className="gl pt-4">Here you can host a class</p>
-              <p className="gl ">
-                where you can teach one course on the same subject by taking
-                multiple days to complete the whole topic. You will have to
-                mention what topics you will be convering in different days.
-              </p>
-            </b>
-          </div>
-          <div className="w-100 ps-5">
+          </Col>
+          <Col className="w-100 ps-5">
             <Button
               variant="contained"
-              className="h-25 w-50  bgy"
+              className="h-100 w-25  bgy"
               onClick={() => {
                 setCourse({ ...course, type: "Classes" });
                 navigate("/hosting2");
@@ -82,16 +83,8 @@ const Choose = () => {
             >
               Class
             </Button>
-            <b>
-              <p className="gl pt-4">Here you can host a class</p>
-              <p className="gl ">
-                where you can teach one class on the same subject by teaching on
-                different days. You can set different days as the students will
-                feel flexible to choose any class they are available to.
-              </p>
-            </b>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Container>
       <Footer />
     </Container>
