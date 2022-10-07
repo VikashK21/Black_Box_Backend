@@ -83,7 +83,8 @@ const Join = () => {
                 ? JSON.parse(data.host_details.img_thumbnail)
                 : "";
           } else {
-            data.host_details.img_thumbnail = data.host_details.img_thumbnail;
+            data.host_details.img_thumbnail =
+              data.host_details.img_thumbnail.secure_url;
           }
 
           console.log(data);
@@ -122,7 +123,7 @@ const Join = () => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       )
       .then((res) => {
         console.log(res.data);
@@ -149,7 +150,7 @@ const Join = () => {
 
   const displayRazorpay = async (price) => {
     const response = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
+      "https://checkout.razorpay.com/v1/checkout.js",
     );
     if (!response) {
       alert("You are offline");
@@ -226,10 +227,11 @@ const Join = () => {
                       // course.host_details.img_thumbnail
                       //   ? course.host_details.img_thumbnail.secure_url
                       //   : DefaultPic
+                      typeof course.host_details.img_thumbnail === "string" &&
                       course.host_details.img_thumbnail.includes("{")
                         ? JSON.parse(course.host_details.img_thumbnail)
                             .secure_url
-                        : course.host_details.img_thumbnail
+                        : course.host_details.img_thumbnail.secure_url
                     }
                     alt="class1"
                     className="img-fluid iconpic icon2 "
