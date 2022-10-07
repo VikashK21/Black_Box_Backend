@@ -119,13 +119,6 @@ export const AuthProvider = ({ children }) => {
         console.log(res.data);
         standingData(values.email, values.password);
         setLoading(false);
-
-        if (setToChoose) {
-          navigate("/host");
-        } else {
-          navigate("/profile");
-        }
-        
       })
       .catch((err) => {
         console.log(err.data);
@@ -169,7 +162,14 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("name", name);
         setName(name);
         setLoading(false);
-        navigate("/profile");
+
+        if (toChoose) {
+          navigate("/host");
+          setToChoose(false);
+        } else {
+          navigate("/profile");
+        }
+        
       })
       .catch((err) => {
         console.log(err.data);

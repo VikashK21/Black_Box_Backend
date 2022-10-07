@@ -199,7 +199,7 @@ const Join = () => {
         <Container className="p-5 position-relative">
           <Row>
             <Col md={4} xs={12}>
-              <Link to={`/profile/${course.host_details.id}`}>
+              <Link to={`/trainer/${course.host_details.id}`}>
                 <div className="  d-flex justify-content-center w-100 ">
                   <img
                     src={
@@ -213,7 +213,7 @@ const Join = () => {
                 </div>
               </Link>
 
-              <Link to={`/profile/${course.host_details.id}`}>
+              <Link to={`/trainer/${course.host_details.id}`}>
                 <div className="d-flex justify-content-end w-100 ">
                   <img
                     src={
@@ -230,7 +230,7 @@ const Join = () => {
             <Col md={8} xs={12}>
               <div className="hostdiv">
                 <h6>Instructor</h6>
-                <Link to={`/profile/${course.host_details.id}`}>
+                <Link to={`/trainer/${course.host_details.id}`}>
                   <h2 className="gx text-dark">
                     {course.host_details.first_name
                       ? course.host_details.first_name

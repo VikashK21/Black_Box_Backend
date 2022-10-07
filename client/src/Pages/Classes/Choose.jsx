@@ -62,14 +62,14 @@ const Choose = () => {
             >
               Course
             </Button>
-            {/* <b>
+            <b>
               <p className="gl pt-4">Here you can host a class</p>
               <p className="gl ">
                 where you can teach one course on the same subject by taking
                 multiple days to complete the whole topic. You will have to
                 mention what topics you will be convering in different days.
               </p>
-            </b> */}
+            </b>
           </div>
           <div className="w-100 ps-5">
             <Button
@@ -82,14 +82,14 @@ const Choose = () => {
             >
               Class
             </Button>
-            {/* <b>
+            <b>
               <p className="gl pt-4">Here you can host a class</p>
               <p className="gl ">
                 where you can teach one class on the same subject by teaching on
                 different days. You can set different days as the students will
                 feel flexible to choose any class they are available to.
               </p>
-            </b> */}
+            </b>
           </div>
         </div>
       </Container>

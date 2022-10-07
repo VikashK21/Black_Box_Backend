@@ -321,28 +321,7 @@ const Registration = () => {
                   </Col>
                 </Row>
 
-                {/* <TextField
-              
-              label="Mobile"
-              name='mobile'
-              variant="outlined"
-              className=" mb-3"
-              onChange={changeHandler}
-            /> */}
-                {/* <PhoneInput
-                country={"in"}
-                enableSearch={true}
-                name='mobile'
-                className="mb-3 w-100 "
-                style={{width: "100%",zIndex:1}}
-                value={values.mobile}
-                onChange={changeHandler}
-                onChange={setValues.mobile(phone)}
-            /> */}
-
-                {/* <input type="text" className='bw input my-3' placeholder='Email' />
-      <input type="password" className='bw input' placeholder='Password' /> */}
-
+               
                 <div className="mt-3 d-flex flex-column">
                   <p className="moto opacity-75">
                     Already logged in?

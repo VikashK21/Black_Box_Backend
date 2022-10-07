@@ -41,38 +41,33 @@ const Whatsnew = () => {
                 className="d-flex justify-content-start align-items-center"
               >
                 <div className="ps-3">
-                {prop ? (
-                  propic ? (
-                    <img
-                      src={propic}
-                      
-                      className=" mb-1 mt-3 ic2 "
-                    />
+                  {prop ? (
+                    propic ? (
+                      <img src={propic} className=" mb-1 mt-3 ic2 " />
+                    ) : (
+                      <img
+                        width={100}
+                        height={100}
+                        style={{
+                          borderRadius: "50%",
+                        }}
+                        className="profilepic mb-1 mt-3 "
+                      />
+                    )
                   ) : (
                     <img
+                      src={DefaultPic}
                       width={100}
-                    height={100}
-                      style={{
-                        borderRadius: "50%",
-                      }}
-                      className="profilepic mb-1 mt-3 "
+                      height={100}
+                      className=" mb-1 mt-3 ic2"
                     />
-                  )
-                ) : (
-                  <img
-                    src={DefaultPic}
-                    width={100}
-                    height={100}
-                    className=" mb-1 mt-3 ic2"
-                  />
-                )}</div>
+                  )}
+                </div>
               </Col>
               <Col md={12}>
                 <div className="mt-2 ps-3">
                   <h3>{name}</h3>
-
                   <p className="">{about}</p>
-
                   <div className="d-flex">
                     <Link to="/edit/profile">
                       <Button
@@ -86,7 +81,6 @@ const Whatsnew = () => {
                         Edit
                       </Button>
                     </Link>
-
                     <Button
                       variant="contained"
                       className="bg-dark ms-1 text-white"
@@ -148,62 +142,72 @@ const Whatsnew = () => {
                         ? JSON.parse(course.host_details.img_thumbnail)
                         : null
                       : null;
-                    return (
-                      <div
-                        className="my-4 mt-1 me-4 class"
-                        key={index}
+                    if (a.length !== 0 && a[0].length !== undefined) {
+                      return (
+                        <div
+                          className="my-4 mt-1 me-4 class"
+                          key={index}
 
-                        // style={{ height: "320px" }}
-                      >
-                        <Link to={`/classes/join/${course.id}`} className="cp">
-                          <div
-                            className="boxshadow rounded-5 mb-2"
-                            style={{
-                              width: "155px",
-                            }}
+                          // style={{ height: "320px" }}
+                        >
+                          <Link
+                            to={`/classes/join/${course.id}`}
+                            className="cp"
                           >
-                            <div className="profileclassesimg">
-                              <img src={a[0]} className="classesimg" />
-                            </div>
-                            <Row
-                              className="profilest bw m-0 "
+                            <div
+                              className="boxshadow rounded-5 mb-2"
                               style={{
-                                overflowY: "hidden",
+                                width: "155px",
                               }}
                             >
-                              <div
-                                className="d-flex"
+                              <div className="profileclassesimg">
+                                <img src={a[0]} className="classesimg" />
+                              </div>
+                              <Row
+                                className="profilest bw m-0 "
                                 style={{
-                                  overflowX: "hidden",
+                                  overflowY: "hidden",
                                 }}
                               >
                                 <div
-                                  className=" w-75 ms-1 pt-1"
+                                  className="d-flex"
                                   style={{
-                                    margin: "auto",
+                                    overflowX: "hidden",
                                   }}
                                 >
-                                  <b>
-                                    <p className="gx pb-1 text-dark"
+                                  <div
+                                    className=" w-75 ms-1 pt-1"
                                     style={{
                                       margin: "auto",
-                                    }}>
-                                      {course.title ? course.title.length > 20 ? course.title.slice(0, 20) + "..." : course.title : ""}
-                                    </p>
-                                  </b>
+                                    }}
+                                  >
+                                    <b>
+                                      <p
+                                        className="gx pb-1 text-dark"
+                                        style={{
+                                          margin: "auto",
+                                        }}
+                                      >
+                                        {course.title
+                                          ? course.title.length > 20
+                                            ? course.title.slice(0, 20) + "..."
+                                            : course.title
+                                          : ""}
+                                      </p>
+                                    </b>
+                                  </div>
                                 </div>
-                              </div>
-                            </Row>
-                          </div>
-                        </Link>
-                      </div>
-                    );
+                              </Row>
+                            </div>
+                          </Link>
+                        </div>
+                      );
+                    }
                   })
                 : ""}
             </div>
           </Col>
           <Col lg={1}></Col>
-
         </Row>
       </Container>
     </Container>

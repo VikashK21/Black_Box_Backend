@@ -28,7 +28,6 @@ const Host = () => {
     uploadImage,
   } = useContext(AuthContext);
 
-  
   const [showCropper, setShowCropper] = useState(false);
   const [cropImage, setCropImage] = useState(false);
 
@@ -106,7 +105,7 @@ const Host = () => {
                     required
                   />
                 </Col>
-                
+
                 <Col md={12} className="mx-0">
                   <TextField
                     className="my-2 w-100"
@@ -129,7 +128,6 @@ const Host = () => {
                     name="max_students"
                     defaultValue={course.max_students}
                     InputProps={{ inputProps: { min: 1 } }}
-
                     placeholder="Maximum number of students"
                     onChange={changeHandler}
                     variant="outlined"
@@ -140,7 +138,7 @@ const Host = () => {
                   <TextField
                     className="my-2 w-100"
                     label="Price"
-                    name="price" 
+                    name="price"
                     placeholder="Fee e.g. 1400"
                     defaultValue={course.price}
                     onChange={changeHandler}
@@ -173,41 +171,42 @@ const Host = () => {
                 </Col>
               </Row>
             </div>
-            <div className="profile-img text-center my-1 "
-            style={{
-              height: "fit-content",
-            }}
-            >
-              <div className="d-flex my-3 imgscroll" style={{
-                overflowX: "auto",
-                overflowY: "hidden",
+            <div
+              className="profile-img text-center my-1 "
+              style={{
                 height: "fit-content",
-              }}>
+              }}
+            >
+              <div
+                className="d-flex my-3 imgscroll"
+                style={{
+                  overflowX: "auto",
+                  overflowY: "hidden",
+                  height: "fit-content",
+                }}
+              >
                 {image.length > 0 &&
-                image.map((ele, index) => (
-                  <div key={index} className=" mx-2 p-2">
-                    <img width={250} src={ele} alt="" className="imghover" />
-                    <div>
-                      <Button
-                        variant="contained"
-                        color="error"
-                        className="my-2 imgdlt "
-                        
-                        onClick={() => {
-                          const list = [...image];
-                          list.splice(index, 1);
-                          setImage(list);
-                        }}
-                      >
-                        Delete
-                      </Button>
-
+                  image.map((ele, index) => (
+                    <div key={index} className=" mx-2 p-2">
+                      <img width={250} src={ele} alt="" className="imghover" />
+                      <div>
+                        <Button
+                          variant="contained"
+                          color="error"
+                          className="my-2 imgdlt "
+                          onClick={() => {
+                            const list = [...image];
+                            list.splice(index, 1);
+                            setImage(list);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
                     </div>
-
-                  </div>
-                ))}
+                  ))}
               </div>
-              
+
               <div className="edit-profile-pic d-flex justify-content-center">
                 <div className="d-flex">
                   <FormControl
@@ -223,23 +222,22 @@ const Host = () => {
                   />
                   {image.length !== 0 ? (
                     <label htmlFor="upload_image">
-                    <span className="profilepic__icon">
-                      <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
-                        Add image
-                      </p>
-                    </span>
-                  </label>
+                      <span className="profilepic__icon">
+                        <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                          Add image
+                        </p>
+                      </span>
+                    </label>
                   ) : (
                     <label htmlFor="upload_image">
-                    <span className="profilepic__icon">
-                      <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
-                        Upload image
-                      </p>
-                    </span>
-                  </label>
+                      <span className="profilepic__icon">
+                        <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                          Upload image
+                        </p>
+                      </span>
+                    </label>
                   )}
-              
-                    
+
                   {/* <label htmlFor="upload_image">
                     <span className="profilepic__icon">
                       <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
@@ -254,7 +252,7 @@ const Host = () => {
 
             {showCropper && (
               <CropImage
-                cropRatio={{ width: 300, height: 380 }}
+                cropRatio={{ width: 320, height: 420 }}
                 src={cropImage}
                 imageCallback={(image) => {
                   // setImage(image);

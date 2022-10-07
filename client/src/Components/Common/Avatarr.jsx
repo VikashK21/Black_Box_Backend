@@ -97,7 +97,7 @@ const Avatarr = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {user ? (
-          <>
+          <div>
             {" "}
             <Link to="/profile" className="text-dark">
               <MenuItem>
@@ -152,7 +152,7 @@ const Avatarr = () => {
               </MenuItem>
             </Link>
             <Divider />
-          </>
+          </div>
         ) : (
           " "
         )}

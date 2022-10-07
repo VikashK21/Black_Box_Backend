@@ -7,6 +7,8 @@ import { BsGlobe } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Avatarr from "./Avatarr";
+import AuthContext from "../../Context/AuthContext";
+import { useContext } from "react";
 
 const Header = () => {
   const [navb, setNavb] = useState(false);
@@ -16,6 +18,7 @@ const Header = () => {
   };
 
   window.addEventListener("scroll", handleNavbar);
+  const {setToChoose} = useContext(AuthContext);
 
   return (
     <>
@@ -44,7 +47,9 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/host" className="link pe-3 ">
+                    <Link to="/host" className="link pe-3 " onClick={()=>{
+                      setToChoose(true)
+                    }}>
                       HOST A CLASS 
                     </Link>
                   </li>

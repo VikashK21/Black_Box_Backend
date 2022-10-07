@@ -88,8 +88,8 @@ export default function BasicTabs() {
                 justifyContent: "center",
               }}
             >
-              <Tab label="Joined classes" {...a11yProps(0)} />
-              <Tab label="Hosted classes" {...a11yProps(1)} />
+              <Tab label="Students" {...a11yProps(0)} />
+              <Tab label="Teacher" {...a11yProps(1)} />
               <Tab
                 label="X"
                 onClick={() => setShowclasses(false)}

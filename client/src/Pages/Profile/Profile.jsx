@@ -288,7 +288,7 @@ const Profile = () => {
                                 </Col>
                               </Row>
                               <Link to={`/classes/join/${course.id}`}>
-                                <Row className="d-flex justify-content-center bggrey m-0 p-0 ">
+                                <Row className="d-flex justify-content-center bgw m-0 p-0 ">
                                   <img
                                     src={a[0]}
                                     alt=""
@@ -375,3 +375,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
