@@ -11,6 +11,7 @@ import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
 import { Button } from "@mui/material";
 import $ from "jquery";
+import ReadMoreReact from "read-more-react";
 
 const Whatsnew = () => {
   const name = localStorage.getItem("name");
@@ -74,8 +75,15 @@ const Whatsnew = () => {
               <Col md={12}>
                 <div className="mt-2 ps-3">
                   <h3>{name}</h3>
-                  <p className="">{about}</p>
-                  <div className="d-flex">
+                  {/* <p className="">{about}</p> */}
+                  <ReadMoreReact
+                    text={about}
+                    min={150}
+                    ideal={150}
+                    max={150}
+                    readMoreText=".. read more"
+                  />
+                  <div className="d-flex mt-2">
                     <Link to="/edit/profile">
                       <Button
                         variant="contained"
