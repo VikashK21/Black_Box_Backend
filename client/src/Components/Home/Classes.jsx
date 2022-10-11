@@ -36,7 +36,7 @@ const Classes = () => {
             {/* Map a function to display the classes list */}
             {courseList &&
               courseList.length > 4 &&
-              courseList.slice(0, 4).map((course) => {
+              courseList.map((course) => {
                 // console.log(course.images);
                 const a = JSON.parse(course.images);
                 return (
@@ -170,13 +170,13 @@ const Classes = () => {
               })}
           </Row>
 
-          <Row className=" m-0 p-0">
+          {/* <Row className=" m-0 p-0">
             <Col className="d-flex justify-content-center">
               <Link to="/classes">
                 <button className="seemore gx">SEE MORE</button>
               </Link>
             </Col>
-          </Row>
+          </Row> */}
         </div>
       </Container>
     </Container>
