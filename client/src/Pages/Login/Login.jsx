@@ -109,7 +109,7 @@ const Login = () => {
             />
             Sign in with Google
           </a> */}
-          <GoogleLoginButton onClick={google} />
+          {/* <GoogleLoginButton onClick={google} /> */}
 
           {/* <a className="hollow button primary w-100" href="#"
           >
@@ -119,7 +119,7 @@ const Login = () => {
             />
             Sign in with Facebook
           </a> */}
-          <FacebookLoginButton />
+          {/* <FacebookLoginButton /> */}
         </div>
       </Container>
 

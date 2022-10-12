@@ -366,7 +366,7 @@ const Registration = () => {
               </Box>
             </form>
           </Container>
-          <hr className="my-3" />
+          {/* <hr className="my-3" />
           <div className="d-flex justify-content-between w-100">
             <GoogleLoginButton>
               <span>Signup with Google</span>
@@ -374,7 +374,7 @@ const Registration = () => {
             <FacebookLoginButton>
               <span>Signup with Facebook</span>
             </FacebookLoginButton>
-          </div>
+          </div> */}
         </div>
       </Container>
       <Footer />
