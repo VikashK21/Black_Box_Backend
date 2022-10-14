@@ -40,7 +40,7 @@ const schema = yup.object().shape({
 
   about: yup
     .string()
-    .min(20, "About should contain 10 characters")
+    .min(10, "Should contain a minimum of 10 characters")
     .required("About is required"),
 });
 
