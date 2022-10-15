@@ -37,6 +37,9 @@ app.use(
     secret: process.env.SECRET_KEY_TOKEN,
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      secure: process.env.NODE_ENV === "production" ? true : false,
+    },
   }),
 );
 // -----> rember this part..
