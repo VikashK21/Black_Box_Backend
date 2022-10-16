@@ -11,15 +11,10 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import { useEffect } from "react";
 
 const Login = () => {
-  const { loginUser, setValues, values, loading, setLoading } =
-    useContext(AuthContext);
+  const { loginUser, setValues, values, loading,setLoading } = useContext(AuthContext);
 
   const google = () => {
     window.open(BaseUrl + "/signup/google", "_self");
-  };
-
-  const facebook = () => {
-    window.open(BaseUrl + "/signup/facebook", "_self");
   };
 
   useEffect(() => {
@@ -114,7 +109,7 @@ const Login = () => {
             />
             Sign in with Google
           </a> */}
-          <GoogleLoginButton onClick={google} />
+          {/* <GoogleLoginButton onClick={google} /> */}
 
           {/* <a className="hollow button primary w-100" href="#"
           >
@@ -124,7 +119,7 @@ const Login = () => {
             />
             Sign in with Facebook
           </a> */}
-          <FacebookLoginButton onClick={facebook} />
+          {/* <FacebookLoginButton /> */}
         </div>
       </Container>
 
