@@ -46,12 +46,12 @@ app.use(passport.session());
 //Home page//
 ///////Remeber for heroku APP....
 // -----> rember this part..
-// if (process.env.NODE_ENV == "production") {
-//   app.use(express.static("client/build"));
-//   // app.get("/*", (req, res) => {
-//   //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
-//   // });
-// }
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+  // app.get("/*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+  // });
+}
 // app.get("/", async (req, res, next) => {
 //   res.send({
 //     message:
@@ -70,7 +70,7 @@ app.use("/api", require("./routes/courses.routes"));
 //Error Handlings...
 app.use((req, res, next) => {
   //////For the heroku appp -----> rember this part..
-  // res.redirect("https://creative-black-box.herokuapp.com/");
+  res.redirect("https://creative-black-box.herokuapp.com/");
   next(createError.NotFound());
 });
 

@@ -245,7 +245,7 @@ const Join = () => {
             <Col md={8} xs={12}>
               <div className="hostdiv">
                 <h6>Instructor</h6>
-                <Link to={`/profile/${course.host_details.id}`}>
+                <Link to={`/trainer/${course.host_details.id}`}>
                   <h2 className="gx text-dark">
                     {course.host_details.first_name
                       ? course.host_details.first_name
