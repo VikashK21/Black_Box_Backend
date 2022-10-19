@@ -43,7 +43,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Home page//
+//Home page
 ///////Remeber for heroku APP....
 // -----> rember this part..
 if (process.env.NODE_ENV == "production") {
