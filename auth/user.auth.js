@@ -46,7 +46,7 @@ authenticationToken = (data) => {
 
 authorizationToken = (req, res, next) => {
   console.log(req.headers);
-  // const cookie = req.headers.authorization;
+  const cookie = req.headers.authorization;
   //remeber this 
   // const cookie = req.headers.cookie;
   console.log(cookie, "cookiedasdasds");
