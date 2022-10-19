@@ -48,12 +48,12 @@ authorizationToken = (req, res, next) => {
   console.log(req.headers);
   // const cookie = req.headers.authorization;
   //remeber this 
-  const cookie = req.headers.cookie;
+  // const cookie = req.headers.cookie;
   console.log(cookie, "cookiedasdasds");
   if (cookie) {
     let token = cookie.split(" ")[1];
     //and this too
-    token = token.split("=")[1];
+    // token = token.split("=")[1];
     const decodedToken = tokenGenerator.verify(token, {
       verify: {
         audience: "myaud",
