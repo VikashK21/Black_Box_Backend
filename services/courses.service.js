@@ -301,6 +301,9 @@ class Courses_Classes {
           return nextClassGroupt;
         }
         // The locha of TIME...but gave Success.
+        if (JSON.stringify(nextClassGroupt).length === 2) {
+          return "No classes for now.";
+        }
         const sendingClass = Object.values(
           Object.values(nextClassGroupt)[0],
         )[0];

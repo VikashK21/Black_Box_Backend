@@ -24,7 +24,7 @@ const tokenGenerator = new TokenGenerator(
     noTimestamp: false,
     // expiresIn: "2m",
     // notBefore: "2s",
-  }
+  },
 );
 
 authenticationToken = (data) => {
@@ -47,9 +47,11 @@ authenticationToken = (data) => {
 authorizationToken = (req, res, next) => {
   console.log(req.headers);
   const cookie = req.headers.authorization;
-  // console.log(cookie, "cookiedasdasds");
+  // const cookie = req.headers.cookie;
+  console.log(cookie, "cookiedasdasds");
   if (cookie) {
     let token = cookie.split(" ")[1];
+    // token = token.split("=")[1];
     const decodedToken = tokenGenerator.verify(token, {
       verify: {
         audience: "myaud",
