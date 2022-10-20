@@ -40,6 +40,7 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth2": "^0.2.0",
     "path": "^0.12.7",
+    "socket.io": "^4.5.3",
     "twilio": "^3.80.1",
     "uuid": "^8.3.2",
     "youtube-api": "^3.0.1"
