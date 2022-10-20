@@ -65,6 +65,7 @@ if (process.env.NODE_ENV == "production") {
 //The APIs sections...
 app.use("/api", require("./routes/users.routes"));
 app.use("/api", require("./routes/courses.routes"));
+// app.use("/meeting", require("./server"));
 // app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 //Error Handlings...
@@ -84,4 +85,4 @@ app.use((err, req, res, next) => {
 
 //The listner...
 const PORT = process.env.PORT || 3001;
-const server = app.listen(PORT, () => console.log(`🚀 @ http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🚀 @ http://localhost:${PORT}`));
