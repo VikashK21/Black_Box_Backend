@@ -98,7 +98,7 @@ router.get("/course", (req, res) => {
         route: "/api/react/:courseID",
         params:
           "add the course id instead of courseID and also remeber the auth token",
-        info: "This API is for both time reacting and disreacting too. The reaction data will receive with the courses."
+        info: "This API is for both time reacting and disreacting too. The reaction data will receive with the courses in Reactions feild.",
       },
     },
 
