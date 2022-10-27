@@ -921,6 +921,10 @@ ul{
   }
 }
 
+/* a{
+  color: var(--dark) !important;
+} */
+
 @media (min-width: 768px) {
   .icon1 {
     display: none !important;

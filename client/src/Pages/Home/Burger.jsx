@@ -185,6 +185,9 @@ const Burger = () => {
                 onClick={() => {
                   navigate("/classes");
                 }}
+                onMouseLeave={() => {
+                  setShow("");
+                }}
               >
                 <h4
                   className={
@@ -195,25 +198,49 @@ const Burger = () => {
                   onMouseEnter={() => {
                     setShow("classes");
                   }}
+                  onMouseLeave={() => {
+                    setShow("");
+                  }}
                 >
                   CLASSES
                 </h4>
               </div>
-              {/* <div className="py-2">
+              <div className="py-2">
                 <h4
                   className={
-                    show === "live"
+                    show === "host"
                       ? "underline cp display-6 text-bold"
                       : "underline cp"
                   }
                   onMouseEnter={() => {
-                    setShow("live");
+                    setShow("host");
+                  }}
+                  onMouseLeave={() => {
+                    setShow("");
                   }}
                 >
-                  LIVE
+                  <Link to="/host" class="text-dark">HOST A CLASS</Link>
                 </h4>
               </div>
               <div className="py-2">
+                <h4
+                  className={
+                    show === "join"
+                      ? "underline cp display-6 text-bold"
+                      : "underline cp"
+                  }
+                  onMouseEnter={() => {
+                    setShow("join");
+                  }}
+                  onMouseLeave={() => {
+                    setShow("");
+                  }}
+                >
+                  <Link to="/join" class="text-dark">JOIN A CLASS</Link>
+                 
+                </h4>
+              </div>
+              {/* <div className="py-2">
                 <h4
                   className={
                     show === "programmes"
@@ -222,6 +249,9 @@ const Burger = () => {
                   }
                   onMouseEnter={() => {
                     setShow("programmes");
+                  }}
+                  onMouseLeave={() => {
+                    setShow("");
                   }}
                 >
                   PROGRAMMES
@@ -237,6 +267,9 @@ const Burger = () => {
                   onMouseEnter={() => {
                     setShow("instructors");
                   }}
+                  onMouseLeave={() => {
+                    setShow("home");
+                  }}
                 >
                   INSTRUCTORS
                 </h4>
@@ -250,6 +283,9 @@ const Burger = () => {
                   }
                   onMouseEnter={() => {
                     setShow("streaming");
+                  }}
+                  onMouseLeave={() => {
+                    setShow("home");
                   }}
                 >
                   STREAMING
