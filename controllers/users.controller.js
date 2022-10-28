@@ -92,12 +92,6 @@ class User_Ctrl {
         };
       }
       const result = await Users.signup(data);
-      console.log(
-        data,
-        ">>>>the data while singing in",
-        "\n >>>> the data recieved from db",
-        result,
-      );
       if (typeof result === "object") {
         if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
