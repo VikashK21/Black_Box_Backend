@@ -104,7 +104,7 @@ class User_Ctrl {
           return res.cookie("token_key", result.token);
           // .redirect("https://blackboxnow.com/profile");
         } else {
-          return res.status(201).json(result);
+          return res.status(201).cookie("token_key", result.token).json(result);
         }
       }
       res.status(400).json(result);
