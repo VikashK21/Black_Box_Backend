@@ -98,11 +98,14 @@ class User_Ctrl {
         result,
       );
       if (typeof result === "object") {
-        if (result.provider === "google" || result.provider === "facebook") {
+        if (
+          result.result.provider === "google" ||
+          result.result.provider === "facebook"
+        ) {
+          console.log(result, "vikash");
           res.cookie("token_key", result.token);
-          return res.redirect("https://blackboxnow.com/profile");
+          res.redirect("https://blackboxnow.com/profile");
         }
-        console.log(result, "vikash");
         return res.status(201).json(result);
       }
       res.status(400).json(result);
