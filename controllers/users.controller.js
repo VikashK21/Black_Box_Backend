@@ -91,9 +91,23 @@ class User_Ctrl {
         };
       }
       const result = await Users.signup(data);
+      console.log(
+        data,
+        ">>>>the data while singing in",
+        "\n >>>> the data recieved from db",
+        result,
+      );
       if (typeof result === "object") {
         if (result.provider === "google" || result.provider === "facebook") {
-          res.redirect("https://creative-black-box.herokuapp.com/profile");
+          const result = await Users.loginWithEmailPass(
+            data.email,
+            data.password,
+          );
+          console.log(result, "with the token");
+          if (typeof result === "object") {
+            res.cookie("token_key", result.token);
+            res.redirect("https://blackboxnow.com/profile");
+          }
         }
         console.log(result, "vikash");
         return res.status(201).json(result);
