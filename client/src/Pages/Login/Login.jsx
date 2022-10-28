@@ -9,14 +9,28 @@ import { Link } from "react-router-dom";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useEffect } from "react";
+import axios from "axios";
 
 const Login = () => {
-  const { loginUser, setValues, values, loading, setLoading } =
-    useContext(AuthContext);
+  const {
+    loginUser,
+    setValues,
+    values,
+    loading,
+    setLoading,
+    savingCredentials,
+  } = useContext(AuthContext);
 
   const google = () => {
-    const name = window.open(BaseUrl + "/signup/google", "_self");
-    console.log(name.name);
+    window.open(BaseUrl + "/signup/google", "_self");
+    axios
+      .get(BaseUrl + "/socialuser")
+      .then((res) => {
+        savingCredentials(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   const facebook = () => {

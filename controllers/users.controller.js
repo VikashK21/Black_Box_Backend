@@ -3,8 +3,19 @@ const crypto = require("crypto");
 const Users = new (require("../services/users.service"))();
 const fs = require("fs");
 const { token } = require("morgan");
+let userData;
 
 class User_Ctrl {
+  socialUser = async (req, res) => {
+    try {
+      if (userData) {
+        res.status(200).json(userData);
+      }
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   allUsers = async (req, res) => {
     try {
       const result = await Users.allUsers();
@@ -95,7 +106,8 @@ class User_Ctrl {
       if (typeof result === "object") {
         if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
-          return res.redirect("https://blackboxnow.com/login");
+          userData = result;
+          res.status(200).send("You are logged in successfully");
         } else {
           return res.status(201).json(result);
         }
