@@ -95,10 +95,11 @@ class User_Ctrl {
       if (typeof result === "object") {
         if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
-          return res.cookie("token_key", result.token);
-          // .redirect("https://blackboxnow.com/profile");
+          return res
+            .cookie("token_key", result.token)
+            .redirect("https://blackboxnow.com/login");
         } else {
-          return res.status(201).cookie("token_key", result.token);
+          return res.status(201).json(result);
         }
       }
       res.status(400).json(result);
