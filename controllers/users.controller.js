@@ -99,15 +99,8 @@ class User_Ctrl {
       );
       if (typeof result === "object") {
         if (result.provider === "google" || result.provider === "facebook") {
-          const result = await Users.loginWithEmailPass(
-            data.email,
-            data.password,
-          );
-          console.log(result, "with the token");
-          if (typeof result === "object") {
-            res.cookie("token_key", result.token);
-            return res.redirect("https://blackboxnow.com/profile");
-          }
+          res.cookie("token_key", result.token);
+          return res.redirect("https://blackboxnow.com/profile");
         }
         console.log(result, "vikash");
         return res.status(201).json(result);
