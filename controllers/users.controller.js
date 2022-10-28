@@ -102,7 +102,7 @@ class User_Ctrl {
         if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
           res.cookie("token_key", result.token);
-          res.redirect("https://blackboxnow.com/profile");
+          return res.redirect("https://blackboxnow.com/profile");
         }
         return res.status(201).json(result);
       }
