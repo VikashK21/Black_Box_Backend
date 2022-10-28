@@ -2,6 +2,7 @@ const { send_OTP } = require("../auth/verfication");
 const crypto = require("crypto");
 const Users = new (require("../services/users.service"))();
 const fs = require("fs");
+const { token } = require("morgan");
 
 class User_Ctrl {
   allUsers = async (req, res) => {
@@ -98,10 +99,7 @@ class User_Ctrl {
         result,
       );
       if (typeof result === "object") {
-        if (
-          result.result.provider === "google" ||
-          result.result.provider === "facebook"
-        ) {
+        if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
           res.cookie("token_key", result.token);
           res.redirect("https://blackboxnow.com/profile");
