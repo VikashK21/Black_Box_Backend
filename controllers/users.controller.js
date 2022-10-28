@@ -101,10 +101,12 @@ class User_Ctrl {
       if (typeof result === "object") {
         if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
-          res.cookie("token_key", result.token);
-          return res.redirect("https://blackboxnow.com/profile");
+          return res
+            .cookie("token_key", result.token)
+            .redirect("https://blackboxnow.com/profile");
+        } else {
+          return res.status(201).json(result);
         }
-        return res.status(201).json(result);
       }
       res.status(400).json(result);
     } catch (err) {
