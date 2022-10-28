@@ -15,7 +15,7 @@ const Login = () => {
     useContext(AuthContext);
 
   const google = () => {
-    window.open(BaseUrl + "/signup/google", "_self");
+    window.open(BaseUrl + "/signup/google", "_blank");
   };
 
   const facebook = () => {
