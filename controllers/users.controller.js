@@ -106,7 +106,7 @@ class User_Ctrl {
           console.log(result, "with the token");
           if (typeof result === "object") {
             res.cookie("token_key", result.token);
-            res.redirect("https://blackboxnow.com/profile");
+            return res.redirect("https://blackboxnow.com/profile");
           }
         }
         console.log(result, "vikash");
