@@ -88,14 +88,14 @@ class Users {
 
   async editProfile(data, id) {
     try {
-      if (data.hasOwnProperty("email")) {
-        const result2 = await prisma.users.findUnique({
-          where: { id },
-        });
-        if (result2.provider === "google" || result2.provider === "facebook") {
-          return `Please edit the email from your ${result2.provider} account!!`;
-        }
-      }
+      // if (data.hasOwnProperty("email")) {
+      //   const result2 = await prisma.users.findUnique({
+      //     where: { id },
+      //   });
+      //   // if (result2.provider === "google" || result2.provider === "facebook") {
+      //   //   return `Please edit the email from your ${result2.provider} account!!`;
+      //   // }
+      // }
       if (data.hasOwnProperty("password")) {
         data.password = await bcrypt.hash(data.password, 12);
       }
