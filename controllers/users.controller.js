@@ -80,6 +80,7 @@ class User_Ctrl {
   editProfile = async (req, res) => {
     try {
       const result = await Users.editProfile(req.body, req.user_id);
+      console.log(result, "the object");
       if (typeof result === "object") {
         return res.status(202).json(result);
       }
