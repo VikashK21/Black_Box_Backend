@@ -59,8 +59,10 @@ const Classes = () => {
                           />
                           {/* <img src={course.images[0].secure_url} className="classesimg p-0 m-0" /> */}
                         </div>
-                        <Row className="profile m-0 p-2 pt-4">
-                          <h6 className="gx classtitlee">{course.title}</h6>
+                        <Row className="profile m-0 p-2 pt-3">
+                        <h6 className="gx classtitlee">{
+                          course.title && course.title.length > 40 ? course.title.substring(0, 40) + "..." : course.title
+                          }</h6>
                           <p className="clsdesc">
                             <ReadMoreReact
                               text={course.description}
@@ -70,7 +72,6 @@ const Classes = () => {
                               readMoreText=".. read more"
                             />
                           </p>
-
                           <Col xs={8} className="p-2 pt-2 pb-0">
                             <h6 className="gx tutorname">
                               {course.host_details.first_name}
@@ -129,7 +130,10 @@ const Classes = () => {
                           {/* <img src={course.images[0].secure_url} className="classesimg p-0 m-0" /> */}
                         </div>
                         <Row className="profile m-0 p-2 pt-4">
-                          <h6 className="gx classtitlee">{course.title}</h6>
+                          <h6 className="gx classtitlee">{
+                          course.title && course.title.length > 20 ? course.title.substring(0, 20) + "..." : course.title
+                          
+                          }</h6>
                           <p className="clsdesc">
                             <ReadMoreReact
                               text={course.description}

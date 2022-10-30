@@ -113,6 +113,9 @@ const Host5 = () => {
                         multiline
                         name="structure"
                         defaultValue={course.structure}
+                        onKeyDown={(e) => {
+                          e.key === "Enter" && e.preventDefault();
+                        }}
                         rows={3}
                         onChange={changeHandler}
                         variant="outlined"
@@ -183,6 +186,9 @@ const Host5 = () => {
                               multiline
                               // rows={3}
                               variant="outlined"
+                              onKeyDown={(e) => {
+                                e.key === "Enter" && e.preventDefault();
+                              }}
                               value={course.content[index].content}
                               onChange={(e) => handleContentChange(e, index)}
                               className=" mb-3 w-100"
@@ -224,6 +230,9 @@ const Host5 = () => {
                           <div className="d-flex">
                             <TextField
                               label="Enter a requirement"
+                              onKeyDown={(e) => {
+                                e.key === "Enter" && e.preventDefault();
+                              }}
                               name="requirements"
                               multiline
                               variant="outlined"

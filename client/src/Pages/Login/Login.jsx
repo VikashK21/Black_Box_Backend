@@ -9,32 +9,13 @@ import { Link } from "react-router-dom";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useEffect } from "react";
-import axios from "axios";
 
 const Login = () => {
-  const {
-    loginUser,
-    setValues,
-    values,
-    loading,
-    setLoading,
-    savingCredentials,
-  } = useContext(AuthContext);
+  const { loginUser, setValues, values, loading, setLoading } =
+    useContext(AuthContext);
 
   const google = () => {
     window.open(BaseUrl + "/signup/google", "_self");
-    axios
-      .get(BaseUrl + "/socialuser")
-      .then((res) => {
-        savingCredentials(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-
-  const facebook = () => {
-    window.open(BaseUrl + "/signup/facebook", "_self");
   };
 
   useEffect(() => {
@@ -59,7 +40,6 @@ const Login = () => {
               <span className="underline cp"> Register</span>
             </Link>
           </p>
-
           <form className="d-flex flex-column m-2 mt-5  " onSubmit={loginUser}>
             <TextField
               label="Email"
@@ -75,7 +55,6 @@ const Login = () => {
               name="password"
               onChange={changeHandler}
             />
-
             <div className="mt-3 d-flex flex-column">
               {/* <p className="moto opacity-75">
                 Use your email or mobile to signin
@@ -101,8 +80,8 @@ const Login = () => {
                 >
                   {loading ? (
                     <>
-                      <div class="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                        <div class="ldio-cqj9sf9mcdj">
+                      <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                        <div className="ldio-cqj9sf9mcdj">
                           <div> </div>
                         </div>
                       </div>
@@ -129,7 +108,7 @@ const Login = () => {
             />
             Sign in with Google
           </a> */}
-          <GoogleLoginButton onClick={google} />
+          {/* <GoogleLoginButton onClick={google} /> */}
 
           {/* <a className="hollow button primary w-100" href="#"
           >
@@ -139,7 +118,7 @@ const Login = () => {
             />
             Sign in with Facebook
           </a> */}
-          <FacebookLoginButton onClick={facebook} />
+          {/* <FacebookLoginButton /> */}
         </div>
       </Container>
 

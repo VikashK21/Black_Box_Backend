@@ -266,8 +266,8 @@ const Edit = () => {
                     >
                       {loading ? (
                         <>
-                          <div class="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                            <div class="ldio-cqj9sf9mcdj">
+                          <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                            <div className="ldio-cqj9sf9mcdj">
                               <div></div>
                             </div>
                           </div>

@@ -118,6 +118,9 @@ const Host2 = () => {
                       multiline
                       name="structure"
                       defaultValue={course.structure}
+                      onKeyDown={(e) => {
+                        e.key === "Enter" && e.preventDefault();
+                      }}
                       rows={3}
                       onChange={changeHandler}
                       variant="outlined"
@@ -185,6 +188,9 @@ const Host2 = () => {
                             
                             label="Enter a content"
                             name="content"
+                            onKeyDown={(e) => {
+                              e.key === "Enter" && e.preventDefault();
+                            }}
                             placeholder="e.g: Introduction to Calligraphy"
                             multiline
                             // rows={3}
@@ -233,7 +239,9 @@ const Host2 = () => {
                             label="Enter a requirement"
                             name="requirements"
                             multiline
-                            
+                            onKeyDown={(e) => {
+                              e.key === "Enter" && e.preventDefault();
+                            }}
                             variant="outlined"
                             placeholder="e.g: Basic knowledge of Cooking"
                             value={course.requirements[index].requirements}

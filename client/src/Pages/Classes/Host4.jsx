@@ -77,6 +77,9 @@ const Host4 = () => {
                     defaultValue={course.title}
                     onChange={changeHandler}
                     variant="outlined"
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     required
                   />
                 </Col>
@@ -91,6 +94,9 @@ const Host4 = () => {
                     defaultValue={course.description}
                     onChange={changeHandler}
                     multiline
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     variant="outlined"
                     required
                   />
@@ -100,6 +106,9 @@ const Host4 = () => {
                     className="my-2 w-100"
                     label="Maximum Students"
                     type="number"
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     name="max_students"
                     InputProps={{ inputProps: { min: 1 } }}
 
@@ -117,6 +126,9 @@ const Host4 = () => {
                     name="price"
                     placeholder="Fee e.g. 1400"
                     defaultValue={course.price}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     onChange={changeHandler}
                     InputProps={{
                       startAdornment: (
@@ -132,6 +144,9 @@ const Host4 = () => {
                     className="my-2 w-100"
                     label="Google meet"
                     name="link"
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     defaultValue={course.meet}
                     placeholder="To get the google meet link, click on Link button"
                     onChange={changeHandler}

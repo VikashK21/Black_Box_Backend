@@ -102,6 +102,9 @@ const Host = () => {
                     defaultValue={course.title}
                     onChange={changeHandler}
                     variant="outlined"
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     required
                   />
                 </Col>
@@ -115,6 +118,9 @@ const Host = () => {
                     minRows={3}
                     defaultValue={course.description}
                     onChange={changeHandler}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     multiline
                     variant="outlined"
                     required
@@ -128,6 +134,9 @@ const Host = () => {
                     name="max_students"
                     defaultValue={course.max_students}
                     InputProps={{ inputProps: { min: 1 } }}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     placeholder="Maximum number of students"
                     onChange={changeHandler}
                     variant="outlined"
@@ -140,6 +149,9 @@ const Host = () => {
                     label="Price"
                     name="price"
                     placeholder="Fee e.g. 1400"
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     defaultValue={course.price}
                     onChange={changeHandler}
                     InputProps={{
@@ -156,6 +168,9 @@ const Host = () => {
                     className="my-2 w-100"
                     label="Google meet"
                     name="link"
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     defaultValue={course.link}
                     placeholder="To get the google meet link, click on Link button"
                     onChange={changeHandler}

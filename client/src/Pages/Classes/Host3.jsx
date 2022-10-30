@@ -100,7 +100,11 @@ const Host3 = () => {
                       value={classes.title}
                       onChange={(e) =>
                         setClasses({ ...classes, title: e.target.value })
+                        
                       }
+                      onKeyDown={(e) => {
+                        e.key === "Enter" && e.preventDefault();
+                      }}
                       multiline
                       variant="outlined"
                       placeholder="e.g :  Day 1: Intro to React"
@@ -137,6 +141,9 @@ const Host3 = () => {
                       multiline
                       rows={3}
                       value={classes.description}
+                      onKeyDown={(e) => {
+                        e.key === "Enter" && e.preventDefault();
+                      }}
                       onChange={(e) =>
                         setClasses({ ...classes, description: e.target.value })
                       }
@@ -161,6 +168,9 @@ const Host3 = () => {
                       type="date"
                       value={classes.date}
                       className="w-100 p-2 rounded-2 timefield border-1"
+                      onKeyDown={(e) => {
+                        e.key === "Enter" && e.preventDefault();
+                      }}
                       onChange={(e) => {
                         setClasses({ ...classes, date: e.target.value });
                         console.log(classes.date);
@@ -177,6 +187,9 @@ const Host3 = () => {
                       setClasses({ ...classes, time: e.target.value });
                       console.log(e.target.value);
                     }}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     className="w-100 p-2 rounded-2 timefield border-1"
                   />
                 </Col>
@@ -186,7 +199,9 @@ const Host3 = () => {
                     name="duration"
                     type="number"
                     InputProps={{ inputProps: { min: 1 } }}
-
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     placeholder="e.g : 45 minutes"
                     variant="outlined"
                     value={classes.duration}

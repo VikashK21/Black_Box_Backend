@@ -219,7 +219,7 @@ const Burger = () => {
                     setShow("");
                   }}
                 >
-                  <Link to="/host" class="text-dark">HOST A CLASS</Link>
+                  <Link to="/host" className="text-dark">HOST A CLASS</Link>
                 </h4>
               </div>
               <div className="py-2">
@@ -236,7 +236,7 @@ const Burger = () => {
                     setShow("");
                   }}
                 >
-                  <Link to="/join" class="text-dark">JOIN A CLASS</Link>
+                  <Link to="/join" className="text-dark">JOIN A CLASS</Link>
                  
                 </h4>
               </div>

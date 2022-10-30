@@ -117,6 +117,9 @@ const Host6 = () => {
                         console.log(classes.date);
                         console.log(e);
                       }}
+                      onKeyDown={(e) => {
+                        e.key === "Enter" && e.preventDefault();
+                      }}
                     />
                   </>
                 </Col>
@@ -128,6 +131,9 @@ const Host6 = () => {
                       setClasses({ ...classes, time: e.target.value });
                       console.log(e.target.value);
                     }}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     className="w-100 p-2 rounded-2 timefield border-1"
                   />
                 </Col>
@@ -137,6 +143,9 @@ const Host6 = () => {
                     name="duration"
                     type="number"
                     InputProps={{ inputProps: { min: 1 } }}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" && e.preventDefault();
+                    }}
                     placeholder="e.g : 45 mins"
                     variant="outlined"
                     value={classes.duration}
@@ -153,6 +162,9 @@ const Host6 = () => {
                       color="error"
                       variant="contained"
                       className="w-25"
+                      onKeyDown={(e) => {
+                        e.key === "Enter" && e.preventDefault();
+                      }}
                       onClick={() => {
                         console.log(classes);
                         setClasses({

@@ -15,7 +15,7 @@ export default AuthContext;
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api";
+export const BaseUrl = "/api"
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -30,13 +30,13 @@ export const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
-      : null,
+      : null
   );
 
   const [user, setUser] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwt_decode(localStorage.getItem("authTokens"))
-      : null,
+      : null
   );
 
   const { errorToast, successToast } = useContext(StyleContext);
@@ -137,42 +137,6 @@ export const AuthProvider = ({ children }) => {
 
   const [userDetails, setUserDetails] = useState([]);
 
-  const savingCredentials = (res) => {
-    localStorage.setItem("User", JSON.stringify(res.data.result.id));
-    // const propic = "";
-    console.log("details.id");
-    if (res.data.result.img_thumbnail.includes("{")) {
-      console.log("yes");
-      console.log(res.data.result.img_thumbnail);
-      const propic =
-        res.data.result.img_thumbnail.length > 0
-          ? JSON.parse(res.data.result.img_thumbnail)
-          : "";
-      console.log(propic);
-      localStorage.setItem("propic", JSON.stringify(propic));
-    } else {
-      const propic2 = res.data.result.img_thumbnail;
-      localStorage.setItem("propic", propic2);
-    }
-
-    setAuthTokens(res.data.token);
-    localStorage.setItem("authTokens", JSON.stringify(res.data.token));
-    setUser(jwt_decode(res.data.token));
-    setUserDetails(res.data.result);
-    localStorage.setItem("userDetails", res.data.result.about);
-    const name = res.data.result.first_name + " " + res.data.result.last_name;
-    localStorage.setItem("name", name);
-    setName(name);
-    setLoading(false);
-
-    if (toChoose) {
-      navigate("/host");
-      setToChoose(false);
-    } else {
-      navigate("/profile");
-    }
-  };
-
   const standingData = async (email, password) => {
     setLoading(true);
     await axios
@@ -182,7 +146,41 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         console.log(res.data);
-        savingCredentials(res);
+        var details = res.data.result;
+        localStorage.setItem("User", JSON.stringify(details.id));
+        // const propic = "";
+        console.log("details.id");
+        if (res.data.result.img_thumbnail.includes("{")) {
+          console.log("yes");
+          console.log(res.data.result.img_thumbnail);
+          const propic =
+            res.data.result.img_thumbnail.length > 0
+              ? JSON.parse(res.data.result.img_thumbnail)
+              : "";
+          console.log(propic);
+          localStorage.setItem("propic", JSON.stringify(propic));
+        } else {
+          const propic2 = res.data.result.img_thumbnail;
+          localStorage.setItem("propic", propic2);
+        }
+
+        setAuthTokens(res.data.token);
+        localStorage.setItem("authTokens", JSON.stringify(res.data.token));
+        setUser(jwt_decode(res.data.token));
+        setUserDetails(res.data.result);
+        localStorage.setItem("userDetails", res.data.result.about);
+        const name =
+          res.data.result.first_name + " " + res.data.result.last_name;
+        localStorage.setItem("name", name);
+        setName(name);
+        setLoading(false);
+
+        if (toChoose) {
+          navigate("/host");
+          setToChoose(false);
+        } else {
+          navigate("/profile");
+        }
       })
       .catch((err) => {
         setLoading(false);
@@ -299,12 +297,12 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          },
+          }
         )
         .then((res) => {
           console.log(res.data);
           setProfile(res.data.result);
-
+          
           setLoading(false);
           navigate("/profile");
         })
@@ -326,7 +324,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          },
+          }
         )
         .then((res) => {
           console.log(res.data);
@@ -361,7 +359,7 @@ export const AuthProvider = ({ children }) => {
         try {
           const res = await axios.post(
             "https://api.cloudinary.com/v1_1/black-box/image/upload",
-            data,
+            data
           );
           console.log(res.data, "uploaded...");
           return res.data;
@@ -377,7 +375,7 @@ export const AuthProvider = ({ children }) => {
           formData.append("cloud_name", "black-box");
           const data = await uploaingImg(formData);
           return data.secure_url;
-        }),
+        })
       );
       return uploaders;
     } catch (err) {
@@ -396,7 +394,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       console.log(res.data);
       if (typeof res.data === "object") {
@@ -433,7 +431,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       successToast("Class Added Successfully");
       // setClasslist([{ ...classlist[0], ...res.data }]);
@@ -458,7 +456,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       successToast("Class Added Successfully");
       window.location.reload();
@@ -549,7 +547,7 @@ export const AuthProvider = ({ children }) => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       console.log(result, "result");
     } catch (err) {
@@ -650,7 +648,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       )
       .then((res) => {
         console.log(res.data);
@@ -671,7 +669,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       )
       .then((res) => {
         console.log(res.data);
@@ -747,7 +745,6 @@ export const AuthProvider = ({ children }) => {
     deleteClass,
     toChoose,
     setToChoose,
-    savingCredentials,
   };
 
   return (
