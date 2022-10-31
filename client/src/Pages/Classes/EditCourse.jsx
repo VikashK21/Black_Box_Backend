@@ -176,6 +176,9 @@ const EditCourse = () => {
                             name="title"
                             placeholder="e.g. Introduction to React.js"
                             value={course.title}
+                            onKeyDown={(e) => {
+                              e.key === "Enter" && e.preventDefault();
+                            }}
                             defaultValue={course.title}
                             onChange={changeHandler}
                             variant="outlined"
@@ -189,6 +192,9 @@ const EditCourse = () => {
                             label="Description"
                             placeholder="i.e. You can talk about what you will be teaching in this course in short"
                             name="description"
+                            onKeyDown={(e) => {
+                              e.key === "Enter" && e.preventDefault();
+                            }}
                             minRows={3}
                             value={course.description}
                             defaultValue={course.description}
@@ -203,6 +209,9 @@ const EditCourse = () => {
                             className="my-2 w-100"
                             label="Maximum Students"
                             type="number"
+                            onKeyDown={(e) => {
+                              e.key === "Enter" && e.preventDefault();
+                            }}
                             name="max_students"
                             // defaultValue={course.max_paticipants}
                             value={
@@ -222,6 +231,9 @@ const EditCourse = () => {
                             label="Price"
                             name="price"
                             placeholder="Fee e.g. 1400"
+                            onKeyDown={(e) => {
+                              e.key === "Enter" && e.preventDefault();
+                            }}
                             value={course.price}
                             defaultValue={course.price}
                             onChange={changeHandler}
@@ -241,6 +253,9 @@ const EditCourse = () => {
                             className="my-2 w-100"
                             label="Google meet"
                             name="link"
+                            onKeyDown={(e) => {
+                              e.key === "Enter" && e.preventDefault();
+                            }}
                             defaultValue={course.link}
                             value={course.link}
                             placeholder="To get the google meet link, click on Link button"
@@ -398,6 +413,10 @@ const EditCourse = () => {
                                                 multiline
                                                 // rows={3}
                                                 variant="outlined"
+                                                onKeyDown={(e) => {
+                                                  e.key === "Enter" &&
+                                                    e.preventDefault();
+                                                }}
                                                 placeholder="e.g :  Lectures / Demonstration / Q&A Sessions"
                                                 value={
                                                   course.methodology[index]
@@ -409,7 +428,7 @@ const EditCourse = () => {
                                                 onChange={(e) => {
                                                   handleMethodologyChange(
                                                     e,
-                                                    index,
+                                                    index
                                                   );
                                                   console.log(method);
                                                 }}
@@ -421,7 +440,7 @@ const EditCourse = () => {
                                                   <Button
                                                     onClick={() =>
                                                       handleMethodologyRemove(
-                                                        index,
+                                                        index
                                                       )
                                                     }
                                                     color="error"
@@ -450,7 +469,7 @@ const EditCourse = () => {
                                               )}
                                             </div>
                                           </div>
-                                        ),
+                                        )
                                       )
                                     : ""}
                                 </Col>
@@ -478,6 +497,9 @@ const EditCourse = () => {
                                       placeholder="e.g: Introduction to Calligraphy"
                                       multiline
                                       variant="outlined"
+                                      onKeyDown={(e) => {
+                                        e.key === "Enter" && e.preventDefault();
+                                      }}
                                       value={
                                         course.content[index].content
                                           ? course.content[index].content
@@ -530,6 +552,9 @@ const EditCourse = () => {
                                     <TextField
                                       label="Enter a requirement"
                                       name="requirements"
+                                      onKeyDown={(e) => {
+                                        e.key === "Enter" && e.preventDefault();
+                                      }}
                                       multiline
                                       variant="outlined"
                                       placeholder="e.g: Basic knowledge of Cooking"
@@ -626,7 +651,7 @@ const EditCourse = () => {
                                           ? classes.description.length > 50
                                             ? classes.description.substring(
                                                 0,
-                                                50,
+                                                50
                                               ) + "..."
                                             : classes.description
                                           : ""}
