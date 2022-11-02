@@ -33,7 +33,7 @@ class User_Ctrl {
 
   verifying = async (req, res) => {
     const data = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
-    if (data.passCode === req.body.otp) {
+    if (data.passCode === Number(req.body.otp)) {
       res.status(200).json({ status: true });
     } else {
       res.status(400).json({ status: false });
