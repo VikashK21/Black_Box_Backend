@@ -15,8 +15,7 @@ const Login = () => {
     useContext(AuthContext);
 
   const google = () => {
-    // window.open(BaseUrl + "/signup/google", "_self");
-    window.open(BaseUrl + "/signup/google", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+    window.open(BaseUrl + "/signup/google", "_self");
   };
 
   useEffect(() => {
@@ -109,7 +108,7 @@ const Login = () => {
             />
             Sign in with Google
           </a> */}
-          <GoogleLoginButton onClick={google} />
+          {/* <GoogleLoginButton onClick={google} /> */}
 
           {/* <a className="hollow button primary w-100" href="#"
           >

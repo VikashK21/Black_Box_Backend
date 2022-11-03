@@ -148,6 +148,7 @@ const Host = () => {
                     className="my-2 w-100"
                     label="Price"
                     name="price"
+                    type="number"
                     placeholder="Fee e.g. 1400"
                     onKeyDown={(e) => {
                       e.key === "Enter" && e.preventDefault();

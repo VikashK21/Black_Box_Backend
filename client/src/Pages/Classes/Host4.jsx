@@ -124,6 +124,7 @@ const Host4 = () => {
                     className="my-2 w-100"
                     label="Price"
                     name="price"
+                    type="number"
                     placeholder="Fee e.g. 1400"
                     defaultValue={course.price}
                     onKeyDown={(e) => {
@@ -176,8 +177,7 @@ const Host4 = () => {
                       <Button
                         variant="contained"
                         color="error"
-                        className="my-2 imgdlt "
-                        
+                        className="my-2 imgdlt"
                         onClick={() => {
                           const list = [...image];
                           list.splice(index, 1);

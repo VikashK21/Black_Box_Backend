@@ -66,6 +66,9 @@ class Users {
         return `Please login with ${result2.provider} Account!!`;
       }
       password = await bcrypt.hash(password, 12);
+      if (result2.password === password) {
+        return "Please change your password to new one!!";
+      }
       const result = await prisma.users.update({
         where: { email },
         data: { password },
