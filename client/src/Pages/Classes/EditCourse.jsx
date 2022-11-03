@@ -162,7 +162,11 @@ const EditCourse = () => {
             <Container className="d-flex justify-content-center bgw rounded-3 boxshadow py-5 pb-2 m-0">
               <Row className="m-0 p-0 pb-5">
                 <Col md={6} sm={12} className="m-0 p-0">
-                  <form className="d-flex justify-content-center flex-column w-100  m-2 me-0  ">
+                  <form className="d-flex justify-content-center flex-column w-100  m-2 me-0  "
+                    onSubmit={(e)=>{
+                      e.preventDefault();
+                    }}
+                  >
                     <div className="d-flex justify-content-center w-100 mb-5">
                       <Row
                         className=" w-100 px-3"

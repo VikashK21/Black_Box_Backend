@@ -3,9 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
 import ReadMoreReact from "read-more-react";
+import $ from 'jquery'; 
 
 // import HoverVideoPlayer from 'react-hover-video-player';
-// import Class2 from "../../Images/Classes/class2.jpg";
+import Class2 from "../../Images/Classes/class2.jpg";
 // import Class3 from "../../Images/Classes/class3.jpg";
 // import Class4 from "../../Images/Classes/class4.jpeg";
 
@@ -16,7 +17,6 @@ import ReadMoreReact from "read-more-react";
 
 const Classes = () => {
   const { goToTop, getCoursesList, courseList } = useContext(AuthContext);
-
   useEffect(() => {
     getCoursesList();
   }, []);
@@ -27,17 +27,15 @@ const Classes = () => {
       className="p-0 m-0 d-flex justify-content-center classescontainer w-100"
     >
       <Container className="p-0 m-0 mb-5">
-        <div className="d-flex justify-content-center flex-column w-100">
+        <div className="d-flex justify-content-center flex-column w-100 pt-2">
           <div>
             <h2 className="text-center gl my-3">CLASSES</h2>
           </div>
 
           <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
-            {/* Map a function to display the classes list */}
             {courseList &&
               courseList.length > 4 &&
               courseList.map((course) => {
-                // console.log(course.images);
                 const a = JSON.parse(course.images);
                 return (
                   <Col
@@ -57,7 +55,6 @@ const Classes = () => {
                             alt="No images uploaded"
                             className="classesimg p-0 m-0"
                           />
-                          {/* <img src={course.images[0].secure_url} className="classesimg p-0 m-0" /> */}
                         </div>
                         <Row className="profile m-0 p-2 pt-3">
                         <h6 className="gx classtitlee">{
@@ -101,13 +98,10 @@ const Classes = () => {
                 );
               })}
           </Row>
-
           <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
-            {/* Map a function to display the classes list */}
             {courseList &&
               courseList.length <= 4 &&
               courseList.map((course) => {
-                // console.log(course.images);
                 const a = JSON.parse(course.images);
                 return (
                   <Col
@@ -127,7 +121,6 @@ const Classes = () => {
                             alt="No images uploaded"
                             className="classesimg p-0 m-0"
                           />
-                          {/* <img src={course.images[0].secure_url} className="classesimg p-0 m-0" /> */}
                         </div>
                         <Row className="profile m-0 p-2 pt-4">
                           <h6 className="gx classtitlee">{
@@ -173,13 +166,95 @@ const Classes = () => {
                 );
               })}
           </Row>
-
-          {/* <Row className=" m-0 p-0">
-            <Col className="d-flex justify-content-center">
-              <Link to="/classes">
-                <button className="seemore gx">SEE MORE</button>
-              </Link>
-            </Col>
+          {/* <Row  className="pb-4 ">
+          <div
+              className="d-flex w-100 abc"
+              style={{
+                overflowX: "scroll",
+                overflowY: "hidden",
+              }}
+            >
+              { [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(()=>{
+              return(
+              
+                        <div
+                          className="my-4 mt-1 me-4 class "
+                        >
+                            <div
+                              className="boxshadow rounded-5 mb-2 mb-5 cp my-4 hoverlater"
+                              // onMouseEnter={
+                              //   () => {
+                              //     setTimeout(() => {
+                              //       $(".pclass").removeClass("d-none");
+                              // }
+                              // , 100)
+                              //   }
+                              // }
+                              // onMouseLeave={
+                              //   () => {
+                              //     setTimeout(() => {
+                              //       $(".pclass").addClass("d-none");
+                              // }
+                              // , 100)
+                              //   }
+                              // }
+                              style={{
+                                width: "190px",
+                                // height: "179px",
+                              }}
+                            >
+                              <div className="profileclassesimg22">
+                                <img src={Class2} className="classesimg22" />
+                              </div>
+                              <Row
+                                className="profilest bw m-0 "
+                                
+                              >
+                                <div
+                                  className="d-flex"
+                                  style={{
+                                    overflowX: "hidden",
+                                  }}
+                                >
+                                  <div
+                                    className=" w-100 pe-1 ms-1 pt-1 pb-1"
+                                   
+                                  >
+                                    <b>
+                                      <h5
+                                        className="gx py-1 text-dark"
+                                        style={{
+                                          margin: "auto",
+                                          fontSize: "16px",
+                                          fontWeight: "400",
+                                        }}
+                                      >
+                                        This is a titleeee
+                                        This is a titleeee okay..
+                                      </h5>
+                                      </b>
+                                      <p
+                                        style=
+                                          {{
+                                            fontSize: "13px",
+                                            lineHeight: "1.2",
+                                          }}
+                                          className="pclass"
+                                        
+                                      >
+                                        This is a description
+                                            and im not the person that you're looking for
+                                            and im fine thankyou and even im not coughing
+                                      </p>
+                                  </div>
+                                </div>
+                              </Row>
+                            </div>
+                        </div>
+              );
+            })}
+                        
+            </div>
           </Row> */}
         </div>
       </Container>

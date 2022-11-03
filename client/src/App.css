@@ -450,12 +450,49 @@ ul{
   background-color: #f7f7f7 !important;
 }
 
+
+
 .classesimg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+}
+
+.profileclassesimg22{
+  height: 200px !important;
+}
+
+.classesimg22 {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover;
   /* margin-bottom: 10rem; */
   border-radius: 15px 15px 0 0;
+}
+
+
+.hoverlater {
+  height: 180px !important;
+  transition: all 0.5s  ease-in-out !important;
+  cursor: pointer !important  ;
+}
+
+.shush{
+  display: none;
+}
+
+.hoverlater:hover  {
+  height: 400px !important;
+  transition: all 0.3s  !important;
+  transform: scale(1.2) !important;
+  transition-delay: 2s !important;
+}
+
+.hoverlater:hover > .shush{
+  display: block !important;
+  transition: all 0.3s !important;
+  transition-delay: 2s  !important;
 }
 
 .imgdiv {
@@ -519,7 +556,7 @@ ul{
 }
 
 .profileclassesimg {
-  height: 200px !important;
+  height: 250px !important;
   /* width: 114px !important; */
 }
 
@@ -560,7 +597,7 @@ ul{
   border-radius: 0 0 15px 15px;
   display: flex;
   justify-content: space-around;
-  height: 48px !important;
+  height: fit-content !important;
 }
 
 .profilest h6 {
