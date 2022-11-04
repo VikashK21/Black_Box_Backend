@@ -83,25 +83,25 @@ const Whatsnew = () => {
                     max={150}
                     readMoreText=".. read more"
                   />
-                  <div className="d-flex mt-2">
+                  <div className=" mt-2">
                     <Link to="/edit/profile">
                       <Button
                         variant="contained"
-                        className="bggrey me-1 text-dark px-4"
+                        className="bggrey me-1 text-dark px-4 mb-1 mt-3"
                         style={{
                           height: "40px",
-                          width: "100px",
+                          width: "160px",
                         }}
                       >
-                        Edit
+                        Edit Profile
                       </Button>
                     </Link>
                     <Button
                       variant="contained"
-                      className="bg-dark ms-1 text-white"
+                      className="bg-dark text-white"
                       style={{
                         height: "40px",
-                        width: "130px",
+                        width: "160px",
                       }}
                       onClick={() => {
                         setShowclasses(true);

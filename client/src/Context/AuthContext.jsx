@@ -236,11 +236,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const OtpLogin = async (e) => {
-    console.log(values.mobile, "Heyyy");
+    console.log(values.email, "Heyyy");
     e.preventDefault();
     await axios
-      .post(BaseUrl + "/login", {
-        phone_num: values.mobile,
+      .post(BaseUrl + "/sendotp", {
+        email: values.email,
       })
       .then((res) => {
         console.log(res.data);
@@ -270,9 +270,22 @@ export const AuthProvider = ({ children }) => {
   const OtpVerify = async (e) => {
     e.preventDefault();
     await axios
-      .post(BaseUrl + "/login", {
-        phone_num: values.mobile,
+      .post(BaseUrl + "/verification", {
         otp: values.otp,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  };
+
+  const changePass = async (e) => {
+    e.preventDefault();
+    await axios
+      .post(BaseUrl + "/forgetpass", {
+        password: values.password,
       })
       .then((res) => {
         console.log(res.data);
@@ -678,7 +691,7 @@ export const AuthProvider = ({ children }) => {
         console.log(err.message);
       });
   };
-
+  
   const contextData = {
     editClass,
     scollToRef,
@@ -745,6 +758,7 @@ export const AuthProvider = ({ children }) => {
     deleteClass,
     toChoose,
     setToChoose,
+    changePass,
   };
 
   return (

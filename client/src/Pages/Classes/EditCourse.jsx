@@ -196,9 +196,7 @@ const EditCourse = () => {
                             label="Description"
                             placeholder="i.e. You can talk about what you will be teaching in this course in short"
                             name="description"
-                            onKeyDown={(e) => {
-                              e.key === "Enter" && e.preventDefault();
-                            }}
+                            
                             minRows={3}
                             value={course.description}
                             defaultValue={course.description}

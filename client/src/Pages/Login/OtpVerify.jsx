@@ -30,9 +30,7 @@ const OtpVerify = () => {
 
           <form className="d-flex flex-column m-2 mt-5  " 
           onSubmit={OtpVerify}>
-          
             <TextField
-             
               label="OTP"
               placeholder="Enter your OTP"
               variant="outlined"
@@ -40,8 +38,7 @@ const OtpVerify = () => {
               name='otp'
               onChange={changeHandler}
             />
-            
-
+        
             <div className=" d-flex flex-column">
               
               <div className=" pt-2 w-100">

@@ -20,28 +20,31 @@ const Otp = () => {
         setValues({ ...values, [e.target.name]: e.target.value });
       }
 
+      
+
   return (
     <Container fluid className="loginpage p-0 m-0 ">
       <Header />
       <Container fluid className="d-flex justify-content-center  page p-0 m-0">
         <div className=" logindiv ">
           <h1 className=" gl title">OTP Login</h1>
-          <p className="desc">Not yet joined? <span className="underline cp">Register</span></p>
+          {/* <p className="desc">Not yet joined? <span className="underline cp">Register</span></p> */}
 
           <form className="d-flex flex-column m-2 mt-5  " 
           onSubmit={OtpLogin}>
+            <p className="text-start mb-0">Enter you email : </p>
           
-          <PhoneInput
-                enableSearch={true}
-                dropdownStyle={{height:'200px'}}
-                country={"in"}
-                containerClass="mb-1 w-100 mobile m-0 p-0" 
-                onChange={phone => setValues({...values, mobile: phone})}
+         
+            <TextField
+                onChange={changeHandler}
+                className="mb-1 w-100 mobile m-0 p-0"
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                name="email"
+                required
             />
-            
-
             <div className=" d-flex flex-column">
-              
               <div className=" pt-2 w-100">
                 <Button variant="contained" type="submit" className="bgdark w-100 ">
                   Send OTP
