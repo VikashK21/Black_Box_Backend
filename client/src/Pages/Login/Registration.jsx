@@ -324,7 +324,7 @@ const Registration = () => {
               )}
 
                
-                <div className="mt-3 d-flex flex-column pt-3">
+                <div className="mt-3 d-flex flex-column t-3">
                   <p className="moto opacity-75">
                     Already logged in?
                     <Link to="/login" className="text-decoration-none">

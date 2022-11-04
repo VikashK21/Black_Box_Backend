@@ -251,10 +251,10 @@ const Profile = () => {
                     />
                   </div>
                 </Col>
-                <Col md={5} className="p-0 ">
+                <Col md={5} className="p-0  mb-4">
                   {/* <h1 className="profilename gx p-3 pb-1 ps-4">Feeds Section</h1> */}
 
-                  <div className=" pt-1">
+                  <div className=" pt-1 ">
                     {courseList.length > 0 &&
                       courseList.map((course, index) => {
                         if (course.host_details.img_thumbnail.includes("{")){

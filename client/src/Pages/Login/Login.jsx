@@ -40,12 +40,22 @@ const Login = () => {
               <span className="underline cp"> Register</span>
             </Link>
           </p>
-          <form className="d-flex flex-column m-2 mt-5  " onSubmit={loginUser}>
+          <form className="d-flex flex-column m-2 mt-5  " onSubmit={loginUser}
+            
+          >
             <TextField
               label="Email"
               variant="outlined"
               className=" mb-3"
               name="email"
+              onKeyDown={
+                (e) => {
+                  if (e.key === "Enter") {
+                    loginUser();
+                  }
+                }
+
+              }
               onChange={changeHandler}
             />
             <TextField
@@ -53,6 +63,14 @@ const Login = () => {
               label="Password"
               variant="outlined"
               name="password"
+              onKeyDown={
+                (e) => {
+                  if (e.key === "Enter") {
+                    loginUser();
+                  }
+                }
+                
+              }
               onChange={changeHandler}
             />
             <div className="mt-3 d-flex flex-column">
