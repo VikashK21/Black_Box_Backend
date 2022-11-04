@@ -155,59 +155,7 @@ const Registration = () => {
               className="d-flex justify-content-center flex-column w-100  m-2 mt-5"
               onSubmit={handleSubmit(uploadImage)}
             >
-              <div className="profile-img text-center my-1">
-                {!image ? (
-                  // <img
-                  //   width={250}
-                  //   src={profile.avatar ? profile.avatar.url : Default }
-                  //   alt=""
-                  // />
-                  ""
-                ) : (
-                  <img width={250} src={image ? image : Default} alt="" />
-                )}
-                <div className="edit-profile-pic d-flex justify-content-center">
-                  <div className="d-flex">
-                    <FormControl
-                      className="d-none"
-                      id="upload_image"
-                      type="file"
-                      onChange={(e) => {
-                        setCropImage(e.target.files[0]);
-                        setShowCropper(true);
-                      }}
-                      accept=".jpg,.jpeg,.png,"
-                    />
-                    <label htmlFor="upload_image">
-                      <span className="profilepic__icon">
-                        {!image ? (
-                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
-                            Upload photo
-                          </p>
-                        ) : (
-                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
-                            Change photo
-                          </p>
-                        )}
-                      </span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              {showCropper && (
-                <CropImage
-                  cropRatio={{ width: 320, height: 420 }}
-                  src={cropImage}
-                  imageCallback={(image) => {
-                    setImage(image);
-                    setShowCropper(false);
-                  }}
-                  closeHander={() => {
-                    setShowCropper(false);
-                  }}
-                />
-              )}
+             
               <Box>
                 <Row className="signupform">
                   <Col md={6}>
@@ -364,6 +312,59 @@ const Registration = () => {
                   </div>
                 </div>
               </Box>
+              <div className="profile-img text-center my-1">
+                {!image ? (
+                  // <img
+                  //   width={250}
+                  //   src={profile.avatar ? profile.avatar.url : Default }
+                  //   alt=""
+                  // />
+                  ""
+                ) : (
+                  <img width={250} src={image ? image : Default} alt="" />
+                )}
+                <div className="edit-profile-pic d-flex justify-content-center">
+                  <div className="d-flex">
+                    <FormControl
+                      className="d-none"
+                      id="upload_image"
+                      type="file"
+                      onChange={(e) => {
+                        setCropImage(e.target.files[0]);
+                        setShowCropper(true);
+                      }}
+                      accept=".jpg,.jpeg,.png,"
+                    />
+                    <label htmlFor="upload_image">
+                      <span className="profilepic__icon">
+                        {!image ? (
+                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                            Upload photo
+                          </p>
+                        ) : (
+                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
+                            Change photo
+                          </p>
+                        )}
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              {showCropper && (
+                <CropImage
+                  cropRatio={{ width: 320, height: 420 }}
+                  src={cropImage}
+                  imageCallback={(image) => {
+                    setImage(image);
+                    setShowCropper(false);
+                  }}
+                  closeHander={() => {
+                    setShowCropper(false);
+                  }}
+                />
+              )}
             </form>
           </Container>
           {/* <hr className="my-3" />

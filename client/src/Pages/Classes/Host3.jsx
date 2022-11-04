@@ -88,7 +88,7 @@ const Host3 = () => {
         </Container> */}
 
         <Container className=" my-5  w-100 d-flex justify-content-center">
-          <form className="d-flex justify-content-center w-100 m-2 ">
+          <div className="d-flex justify-content-center w-100 m-2 ">
             <Box>
               <h5 className="text-start my-3">Add classes</h5>
               <Row className="signupform ">
@@ -102,9 +102,7 @@ const Host3 = () => {
                         setClasses({ ...classes, title: e.target.value })
                         
                       }
-                      onKeyDown={(e) => {
-                        e.key === "Enter" && e.preventDefault();
-                      }}
+                      
                       multiline
                       variant="outlined"
                       placeholder="e.g :  Day 1: Intro to React"
@@ -141,9 +139,7 @@ const Host3 = () => {
                       multiline
                       rows={3}
                       value={classes.description}
-                      onKeyDown={(e) => {
-                        e.key === "Enter" && e.preventDefault();
-                      }}
+                      
                       onChange={(e) =>
                         setClasses({ ...classes, description: e.target.value })
                       }
@@ -199,9 +195,7 @@ const Host3 = () => {
                     name="duration"
                     type="number"
                     InputProps={{ inputProps: { min: 1 } }}
-                    onKeyDown={(e) => {
-                      e.key === "Enter" && e.preventDefault();
-                    }}
+                    
                     placeholder="e.g : 45 minutes"
                     variant="outlined"
                     value={classes.duration}
@@ -254,7 +248,7 @@ const Host3 = () => {
                 </Col>
               </Row>
             </Box>
-          </form>
+          </div>
         </Container>
       </Container>
       {/* <Footer /> */}

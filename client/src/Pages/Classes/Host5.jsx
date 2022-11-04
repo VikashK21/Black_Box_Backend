@@ -102,7 +102,7 @@ const Host5 = () => {
             className="d-flex justify-content-center  page mb-5 m-0 p-0"
           >
             <Container className=" my-5 w-100 d-flex justify-content-center">
-              <form className="d-flex justify-content-center w-100 m-2 mt-5">
+              <div className="d-flex justify-content-center w-100 m-2 mt-5">
                 <Box>
                   <h5 className="text-start my-3">Structure</h5>
                   <Row className="signupform ">
@@ -113,9 +113,7 @@ const Host5 = () => {
                         multiline
                         name="structure"
                         defaultValue={course.structure}
-                        onKeyDown={(e) => {
-                          e.key === "Enter" && e.preventDefault();
-                        }}
+                        
                         rows={3}
                         onChange={changeHandler}
                         variant="outlined"
@@ -186,9 +184,7 @@ const Host5 = () => {
                               multiline
                               // rows={3}
                               variant="outlined"
-                              onKeyDown={(e) => {
-                                e.key === "Enter" && e.preventDefault();
-                              }}
+                             
                               value={course.content[index].content}
                               onChange={(e) => handleContentChange(e, index)}
                               className=" mb-3 w-100"
@@ -230,9 +226,7 @@ const Host5 = () => {
                           <div className="d-flex">
                             <TextField
                               label="Enter a requirement"
-                              onKeyDown={(e) => {
-                                e.key === "Enter" && e.preventDefault();
-                              }}
+                              
                               name="requirements"
                               multiline
                               variant="outlined"
@@ -288,7 +282,7 @@ const Host5 = () => {
                     </Col> */}
                   </Row>
                 </Box>
-              </form>
+              </div>
             </Container>
           </Container>
         </Container>

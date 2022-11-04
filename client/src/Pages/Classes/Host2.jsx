@@ -106,7 +106,7 @@ const Host2 = () => {
           className="d-flex justify-content-center  page mb-5 m-0 p-0"
         >
           <Container className=" my-5 w-100 d-flex justify-content-center">
-            <form className="d-flex justify-content-center w-100 m-2 mt-5">
+            <div className="d-flex justify-content-center w-100 m-2 mt-5">
               <Box>
                 <h5 className="text-start my-3">Course Structure</h5>
                 <Row className="signupform ">
@@ -118,9 +118,7 @@ const Host2 = () => {
                       multiline
                       name="structure"
                       defaultValue={course.structure}
-                      onKeyDown={(e) => {
-                        e.key === "Enter" && e.preventDefault();
-                      }}
+                      
                       rows={3}
                       onChange={changeHandler}
                       variant="outlined"
@@ -188,9 +186,7 @@ const Host2 = () => {
                             
                             label="Enter a content"
                             name="content"
-                            onKeyDown={(e) => {
-                              e.key === "Enter" && e.preventDefault();
-                            }}
+                            
                             placeholder="e.g: Introduction to Calligraphy"
                             multiline
                             // rows={3}
@@ -239,9 +235,7 @@ const Host2 = () => {
                             label="Enter a requirement"
                             name="requirements"
                             multiline
-                            onKeyDown={(e) => {
-                              e.key === "Enter" && e.preventDefault();
-                            }}
+                           
                             variant="outlined"
                             placeholder="e.g: Basic knowledge of Cooking"
                             value={course.requirements[index].requirements}
@@ -294,7 +288,7 @@ const Host2 = () => {
                   </Col> */}
                 </Row>
               </Box>
-            </form>
+            </div>
           </Container>
         </Container>
       </Container>

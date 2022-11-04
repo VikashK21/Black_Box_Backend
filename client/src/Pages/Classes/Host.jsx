@@ -90,12 +90,8 @@ const Host = () => {
           </div>
         </Container> */}
         <Container className="d-flex justify-content-center">
-          <form className="d-flex justify-content-center flex-column w-100  m-2 "
-            onSubmit={(e) => {
-              e.preventDefault();
-              // signupUser();
-            }
-            }
+          <div className="d-flex justify-content-center flex-column w-100  m-2 "
+            
           >
             <div className="d-flex justify-content-center w-100 mb-5">
               <Row className=" w-100" style={{ maxWidth: "700px" }}>
@@ -318,7 +314,7 @@ const Host = () => {
                 </Button>
               </div>
             </div> */}
-          </form>
+          </div>
         </Container>
       </Container>
       {/* <Footer /> */}
