@@ -53,6 +53,7 @@ export const AuthProvider = ({ children }) => {
     lastname: "",
     email: "",
     password: "",
+    cpassword: "",
     mobile: "",
     about: "",
     otp: "",
@@ -251,30 +252,16 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  // const getProfile = async () => {
-  //   await axios
-  //     .get(BaseUrl + "/profile", {
-  //       headers: {
-  //         Authorization: "Bearer " + authTokens,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setProfile(res.data.result);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.data);
-  //     });
-  // };
-
   const OtpVerify = async (e) => {
+    console.log(values.otp, "Heyyy");
     e.preventDefault();
     await axios
       .post(BaseUrl + "/verification", {
-        otp: values.otp,
+        otp: parseInt(values.otp),
       })
       .then((res) => {
         console.log(res.data);
+        navigate("/change-password");
       })
       .catch((err) => {
         console.log(err.data);
@@ -282,9 +269,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const changePass = async (e) => {
+    console.log(values.password, "Heyyy");
     e.preventDefault();
-    await axios
-      .post(BaseUrl + "/forgetpass", {
+    if (values.password !== values.confirmpassword) {
+      errorToast("Password does not match");
+     
+    }
+    else{
+       await axios
+      .patch(BaseUrl + "/forgetpass", {
         password: values.password,
       })
       .then((res) => {
@@ -293,6 +286,8 @@ export const AuthProvider = ({ children }) => {
       .catch((err) => {
         console.log(err.data);
       });
+    }
+   
   };
 
   const editProfile = async (pro, propic) => {

@@ -25,7 +25,7 @@ const OtpVerify = () => {
         <div className=" logindiv ">
           <h1 className=" gl title">Enter your OTP</h1>
           <p className="desc">
-            We've sent an OTP to <br/> +91 9207404868.
+            We've sent an OTP to <br/> {values.email}
           </p>
 
           <form className="d-flex flex-column m-2 mt-5  " 

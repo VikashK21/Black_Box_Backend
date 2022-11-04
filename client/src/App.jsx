@@ -33,6 +33,7 @@ import Trainer from "./Pages/Classes/Trainer";
 import Edit from "./Pages/Login/Edit";
 import EditCourse from "./Pages/Classes/EditCourse";
 import TabPanel2 from "./Pages/Profile/TabPanel";
+import Change from "./Pages/Login/Change";
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/otplogin" element={<Otp />} />
               <Route path="/otpverify" element={<OtpVerify />} />
+              <Route path="/change-password" element={<Change />} />
 
               <Route path="/signup" element={<Registration />} />
             </Routes>

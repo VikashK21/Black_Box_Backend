@@ -22,20 +22,30 @@ const Change = () => {
     <Container fluid className="loginpage p-0 m-0 ">
       <Header />
       <Container fluid className="d-flex justify-content-center  page p-0 m-0">
-        <div className=" logindiv ">
-          <h1 className=" gl title">Enter your OTP</h1>
-          <p className="desc">
+        <div className=" logindiv text-start  ">
+          <h4 className=" gl ps-3">Change Password</h4>
+          {/* <p className="desc">
             We've sent an OTP to <br/> +91 9207404868.
-          </p>
+          </p> */}
 
           <form className="d-flex flex-column m-2 mt-5  " 
           onSubmit={changePass}>
             <TextField
-              label="OTP"
-              placeholder="Enter your OTP"
+              label="Password"
+              placeholder=" Enter your password"
               variant="outlined"
               className=" mb-3"
-              name='otp'
+              name='password'
+              type="password"
+              onChange={changeHandler}
+            />
+            <TextField
+              label="Confirm password"
+              placeholder="Confirm your password"
+              variant="outlined"
+              className=" mb-3"
+              name='cpassword'
+              type="password"
               onChange={changeHandler}
             />
         

@@ -18,6 +18,7 @@ const Otp = () => {
     
       const changeHandler = e => {
         setValues({ ...values, [e.target.name]: e.target.value });
+        console.log(values.otp);
       }
 
       

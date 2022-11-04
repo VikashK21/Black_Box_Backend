@@ -269,50 +269,7 @@ const Registration = () => {
                   </Col>
                 </Row>
 
-               
-                <div className="mt-3 d-flex flex-column">
-                  <p className="moto opacity-75">
-                    Already logged in?
-                    <Link to="/login" className="text-decoration-none">
-                      {" "}
-                      Login
-                    </Link>
-                  </p>
-                  <center>
-                    <a
-                      className="underline "
-                      style={{
-                        width: "fit-content",
-                        color: "black",
-                        cursor: "pointer",
-                      }}
-                    >
-                      Forgot your password
-                    </a>
-                  </center>
-                  <div className="mt-4 pt-2 w-100">
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      className="bgdark w-100"
-                    >
-                      {loading ? (
-                        <>
-                          <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                            <div className="ldio-cqj9sf9mcdj">
-                              <div></div>
-                            </div>
-                          </div>
-                          Connecting
-                        </>
-                      ) : (
-                        "Join here "
-                      )}
-                    </Button>
-                  </div>
-                </div>
-              </Box>
-              <div className="profile-img text-center my-1">
+                <div className="profile-img text-center my-1">
                 {!image ? (
                   // <img
                   //   width={250}
@@ -365,6 +322,51 @@ const Registration = () => {
                   }}
                 />
               )}
+
+               
+                <div className="mt-3 d-flex flex-column pt-3">
+                  <p className="moto opacity-75">
+                    Already logged in?
+                    <Link to="/login" className="text-decoration-none">
+                      {" "}
+                      Login
+                    </Link>
+                  </p>
+                  <center>
+                    <a
+                      className="underline "
+                      style={{
+                        width: "fit-content",
+                        color: "black",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Forgot your password
+                    </a>
+                  </center>
+                  <div className="mt-4 pt-2 w-100">
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      className="bgdark w-100"
+                    >
+                      {loading ? (
+                        <>
+                          <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                            <div className="ldio-cqj9sf9mcdj">
+                              <div></div>
+                            </div>
+                          </div>
+                          Connecting
+                        </>
+                      ) : (
+                        "Join here "
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </Box>
+              
             </form>
           </Container>
           {/* <hr className="my-3" />
