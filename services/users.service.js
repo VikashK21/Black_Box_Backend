@@ -74,7 +74,8 @@ class Users {
         data: { password },
       });
       console.log(result);
-      return result;
+      const token = await authenticationToken(result);
+      return { token, result };
     } catch (err) {
       console.log(err.message);
       return err.message;
