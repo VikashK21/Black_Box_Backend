@@ -75,6 +75,10 @@ class Users {
       });
       console.log(result);
       const token = await authenticationToken(result);
+      console.log(
+        token,
+        ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+      );
       console.log({ token, result });
       return { token, result };
     } catch (err) {
