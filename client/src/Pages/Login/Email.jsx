@@ -54,7 +54,7 @@ const Email = () => {
         </div>
 
        
-        <GoogleLoginButton onClick={google} />
+        {/* <GoogleLoginButton onClick={google} /> */}
         <FacebookLoginButton />
       </div>
     </Container>

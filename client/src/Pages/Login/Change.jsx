@@ -44,7 +44,7 @@ const Change = () => {
               placeholder="Confirm your password"
               variant="outlined"
               className=" mb-3"
-              name='cpassword'
+              name='confirmpassword'
               type="password"
               onChange={changeHandler}
             />
