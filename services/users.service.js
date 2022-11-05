@@ -75,9 +75,9 @@ class Users {
       });
       console.log(result);
       const token = await authenticationToken(result);
-      console.log(token, 'the logs for token *********');
+      console.log(token, "the logs for token *********");
       console.log({ token, result });
-      return { token, result };
+      return { result, token };
     } catch (err) {
       console.log(err.message);
       return err.message;

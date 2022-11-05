@@ -62,7 +62,7 @@ class User_Ctrl {
         return res.status(400).json({ status: false });
       }
       const result = await Users.forgetPass(data.passEmail, req.body.password);
-      console.log(result);
+      console.log(result, 'the logsssssssssssssssssssssss');
       if (typeof result === "object") {
         return res.status(202).cookie("token_key", result.token).json(result);
       }
