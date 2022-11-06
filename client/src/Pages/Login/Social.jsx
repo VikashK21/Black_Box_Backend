@@ -13,7 +13,7 @@ function Social() {
 
   const profileNavigtr = (e) => {
     e.preventDefault();
-    windowsProp.close();
+    windowsProp.current.close();
     axios
       .get(BaseUrl + "/socialuser")
       .then((res) => {
