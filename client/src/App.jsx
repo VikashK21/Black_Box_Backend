@@ -34,6 +34,7 @@ import Edit from "./Pages/Login/Edit";
 import EditCourse from "./Pages/Classes/EditCourse";
 import TabPanel2 from "./Pages/Profile/TabPanel";
 import Change from "./Pages/Login/Change";
+import Social from "./Pages/Login/Social";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
               <Route path="/change-password" element={<Change />} />
 
               <Route path="/signup" element={<Registration />} />
+              <Route path="/social/:subUrl" element={<Social />} />
             </Routes>
           </AuthProvider>
         </StyleProvider>

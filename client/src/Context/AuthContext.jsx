@@ -759,6 +759,7 @@ export const AuthProvider = ({ children }) => {
     toChoose,
     setToChoose,
     changePass,
+    loginProcess,
   };
 
   return (

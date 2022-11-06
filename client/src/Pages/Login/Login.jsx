@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Footer from "../../Components/Common/Footer";
 import AuthContext, { BaseUrl } from "../../Context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useEffect } from "react";
@@ -14,8 +14,19 @@ const Login = () => {
   const { loginUser, setValues, values, loading, setLoading } =
     useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   const google = () => {
-    window.open(BaseUrl + "/signup/google", "_self");
+    // window.open(
+    //   BaseUrl + "/signup/google",
+    //   "_blank",
+    //   "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400",
+    // );
+    navigate("/social/google");
+  };
+
+  const facebook = () => {
+    navigate("/social/facebook");
   };
 
   useEffect(() => {
@@ -40,22 +51,17 @@ const Login = () => {
               <span className="underline cp"> Register</span>
             </Link>
           </p>
-          <form className="d-flex flex-column m-2 mt-5  " onSubmit={loginUser}
-            
-          >
+          <form className="d-flex flex-column m-2 mt-5  " onSubmit={loginUser}>
             <TextField
               label="Email"
               variant="outlined"
               className=" mb-3"
               name="email"
-              onKeyDown={
-                (e) => {
-                  if (e.key === "Enter") {
-                    loginUser();
-                  }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  loginUser();
                 }
-
-              }
+              }}
               onChange={changeHandler}
             />
             <TextField
@@ -63,14 +69,11 @@ const Login = () => {
               label="Password"
               variant="outlined"
               name="password"
-              onKeyDown={
-                (e) => {
-                  if (e.key === "Enter") {
-                    loginUser();
-                  }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  loginUser();
                 }
-                
-              }
+              }}
               onChange={changeHandler}
             />
             <div className="mt-3 d-flex flex-column">
@@ -126,7 +129,7 @@ const Login = () => {
             />
             Sign in with Google
           </a> */}
-          {/* <GoogleLoginButton onClick={google} /> */}
+          <GoogleLoginButton onClick={google} />
 
           {/* <a className="hollow button primary w-100" href="#"
           >
@@ -136,7 +139,7 @@ const Login = () => {
             />
             Sign in with Facebook
           </a> */}
-          {/* <FacebookLoginButton /> */}
+          <FacebookLoginButton onClick={facebook} />
         </div>
       </Container>
 

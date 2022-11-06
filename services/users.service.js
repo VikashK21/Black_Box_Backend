@@ -94,14 +94,14 @@ class Users {
 
   async editProfile(data, id) {
     try {
-      // if (data.hasOwnProperty("email")) {
-      //   const result2 = await prisma.users.findUnique({
-      //     where: { id },
-      //   });
-      //   // if (result2.provider === "google" || result2.provider === "facebook") {
-      //   //   return `Please edit the email from your ${result2.provider} account!!`;
-      //   // }
-      // }
+      const result2 = await prisma.users.findUnique({
+        where: { id },
+      });
+      if (data.email !== result2.email) {
+        if (result2.provider === "google" || result2.provider === "facebook") {
+          return `Please edit the email from your ${result2.provider} account!!`;
+        }
+      }
       if (data.hasOwnProperty("password")) {
         data.password = await bcrypt.hash(data.password, 12);
       }
@@ -131,9 +131,13 @@ class Users {
         }
       }
       data.password = await bcrypt.hash(data.password, 12);
-      return await prisma.users.create({
+      const result2 = await prisma.users.create({
         data,
       });
+      if (data.hasOwnProperty("provider")) {
+        return this.loginWithEmailPass(data.email, data.password);
+      }
+      return result2;
     } catch (err) {
       console.log(err.message);
       return err.message;

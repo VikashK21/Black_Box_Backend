@@ -9,7 +9,7 @@ class User_Ctrl {
   socialUser = async (req, res) => {
     try {
       if (userData) {
-        res.status(200).json(userData);
+        res.status(200).res(userData);
       }
     } catch (err) {
       res.status(400).json(err.message);
@@ -62,7 +62,7 @@ class User_Ctrl {
         return res.status(400).json({ status: false });
       }
       const result = await Users.forgetPass(data.passEmail, req.body.password);
-      console.log(result, 'the logsssssssssssssssssssssss');
+      console.log(result, "the logsssssssssssssssssssssss");
       if (typeof result === "object") {
         return res.status(202).cookie("token_key", result.token).json(result);
       }
@@ -114,7 +114,11 @@ class User_Ctrl {
         if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
           userData = result;
-          res.status(200).send("You are logged in successfully");
+          res
+            .status(200)
+            .send(
+              `Hello ${result.result.name}, you are logged in successfully. \nPlease click on the Profile button (right hand side) to visit your page.`,
+            );
         } else {
           return res.status(201).json(result);
         }
