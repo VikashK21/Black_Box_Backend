@@ -276,7 +276,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const changePass = async (e) => {
-    console.log(values.password, "Heyyy");
+    console.log(values.password, "Password");
+    console.log(values.cpassword, "Confirm Password");
     e.preventDefault();
     if (values.password !== values.confirmpassword) {
       errorToast("Password does not match");

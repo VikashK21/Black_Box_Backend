@@ -34,6 +34,13 @@ const Change = () => {
               label="Password"
               placeholder=" Enter your password"
               variant="outlined"
+              onKeyDown={
+                (e) => {
+                  if (e.key === "Enter") {
+                    changePass();
+                  }
+                }
+              }
               className=" mb-3"
               name='password'
               type="password"
@@ -43,6 +50,13 @@ const Change = () => {
               label="Confirm password"
               placeholder="Confirm your password"
               variant="outlined"
+              onKeyDown={
+                (e) => {
+                  if (e.key === "Enter") {
+                    changePass();
+                  }
+                }
+              }
               className=" mb-3"
               name='confirmpassword'
               type="password"

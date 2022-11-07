@@ -32,18 +32,30 @@ const Classes = () => {
             <h2 className="text-center gl my-3">CLASSES</h2>
           </div>
 
-          <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
+          <div className=" px-2 d-flex justify-content-center m-0 p-0 abcd ps-5 py-5"
+          style={{
+            overflowX: "scroll",
+          }}
+          >
+            <div 
+            style={{
+              minWidth: "220px",
+              maxWidth: "220px",
+              minHeight: "400px",
+            }}
+            >
+            </div>
             {courseList &&
               courseList.length > 4 &&
               courseList.map((course) => {
                 const a = JSON.parse(course.images);
                 return (
-                  <Col
+                  <div
                     key={course.id}
-                    className="my-4 cp position-relative"
+                    className="my-4 mt-0 cp position-relative me-2 pt-2"
                     style={{
-                      minWidth: "320px",
-                      maxWidth: "320px",
+                      minWidth: "220px",
+                      maxWidth: "220px",
                       minHeight: "400px",
                     }}
                   >
@@ -56,18 +68,21 @@ const Classes = () => {
                             className="classesimg p-0 m-0"
                           />
                         </div>
-                        <Row className="profile m-0 p-2 pt-3">
-                        <h6 className="gx classtitlee">{
-                          course.title && course.title.length > 40 ? course.title.substring(0, 40) + "..." : course.title
+                        <Row className="profile m-0  pt-2">
+                        <h6 className="gx classtitlee"
+                       
+                        >{
+                          course.title && course.title.length > 30 ? course.title.substring(0, 30) + "..." : course.title
                           }</h6>
                           <p className="clsdesc">
-                            <ReadMoreReact
+                            {/* <ReadMoreReact
                               text={course.description}
                               min={150}
                               ideal={200}
                               max={500}
                               readMoreText=".. read more"
-                            />
+                            /> */}
+                            {course.description && course.description.length > 60 ? course.description.substring(0, 60) + "..." : course.description}
                           </p>
                           <Col xs={8} className="p-2 pt-2 pb-0">
                             <h6 className="gx tutorname">
@@ -94,11 +109,11 @@ const Classes = () => {
                         </Row>
                       </div>
                     </Link>
-                  </Col>
+                  </div>
                 );
               })}
-          </Row>
-          <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
+          </div>
+          {/* <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
             {courseList &&
               courseList.length <= 4 &&
               courseList.map((course) => {
@@ -108,9 +123,9 @@ const Classes = () => {
                     key={course.id}
                     className="my-4 cp position-relative"
                     style={{
-                      minWidth: "320px",
-                      maxWidth: "320px",
-                      minHeight: "400px",
+                      minWidth: "220px",
+                      maxWidth: "220px",
+                      minHeight: "300px",
                     }}
                   >
                     <Link to={`/classes/join/${course.id}`}>
@@ -122,9 +137,9 @@ const Classes = () => {
                             className="classesimg p-0 m-0"
                           />
                         </div>
-                        <Row className="profile m-0 p-2 pt-4">
+                        <Row className="profile m-0  pt-2">
                           <h6 className="gx classtitlee">{
-                          course.title && course.title.length > 20 ? course.title.substring(0, 20) + "..." : course.title
+                          course.title && course.title.length > 30 ? course.title.substring(0, 30) + "..." : course.title
                           
                           }</h6>
                           <p className="clsdesc">
@@ -165,7 +180,7 @@ const Classes = () => {
                   </Col>
                 );
               })}
-          </Row>
+          </Row> */}
           {/* <Row  className="pb-4 ">
           <div
               className="d-flex w-100 abc"
@@ -182,25 +197,9 @@ const Classes = () => {
                         >
                             <div
                               className="boxshadow rounded-5 mb-2 mb-5 cp my-4 hoverlater"
-                              // onMouseEnter={
-                              //   () => {
-                              //     setTimeout(() => {
-                              //       $(".pclass").removeClass("d-none");
-                              // }
-                              // , 100)
-                              //   }
-                              // }
-                              // onMouseLeave={
-                              //   () => {
-                              //     setTimeout(() => {
-                              //       $(".pclass").addClass("d-none");
-                              // }
-                              // , 100)
-                              //   }
-                              // }
+                              
                               style={{
                                 width: "190px",
-                                // height: "179px",
                               }}
                             >
                               <div className="profileclassesimg22">

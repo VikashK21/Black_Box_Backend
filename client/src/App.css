@@ -6,8 +6,17 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.abcd::-webkit-scrollbar {
+  display: none;
+}
+
+
 .feeds::-webkit-scrollbar {
   display: none;
+}
+
+.lefttt{
+  left: 0;
 }
 
 .gl {
@@ -478,10 +487,6 @@ ul{
   cursor: pointer !important  ;
 }
 
-.shush{
-  display: none;
-}
-
 .hoverlater:hover  {
   height: 400px !important;
   transition: all 0.3s  !important;
@@ -489,14 +494,14 @@ ul{
   transition-delay: 2s !important;
 }
 
-.hoverlater:hover > .shush{
+/* .hoverlater:hover > .shush{
   display: block !important;
   transition: all 0.3s !important;
   transition-delay: 2s  !important;
-}
+} */
 
 .imgdiv {
-  height: 341px !important;
+  height: 250px !important;
 }
 
 .imgdiv2 {

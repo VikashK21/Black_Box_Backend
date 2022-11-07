@@ -108,7 +108,7 @@ const Footer = (props) => {
                   Terms of use
                 </Link>
               </Col>
-              <Col className="mx-2 cp">Careers</Col>
+              {/* <Col className="mx-2 cp">Careers</Col> */}
               <Col
                 className="mx-2 cp"
                 style={{

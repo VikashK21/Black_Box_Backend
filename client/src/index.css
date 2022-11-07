@@ -123,7 +123,7 @@ code {
 }
 
 .zoom {
-  height: 425px !important;
+  height: 325px !important;
   overflow: hidden !important;
   position: absolute !important;
   border-radius: 15px !important;
@@ -139,13 +139,17 @@ code {
 
 .zoom:hover {
   z-index: 100 !important;
-  margin-top: -50px !important;
+  position: absolute !important;
+  margin-top: -30px !important;
   animation-delay: 1.5s !important;
   transition-delay: 1.5s !important;
-  height: 800px !important;
+  height: 460px !important;
   transform: scale(1.1);
-  background-color: hsla(0, 100%, 100%, 0.16);
-  box-shadow: 0px 24px 38px 3px hsla(0, 0%, 0%, 0.14),
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* background-color: hsla(0, 100%, 100%, 0.16); */
+  background-color: white;
+  box-shadow: 0px 4px 8px 3px hsla(0, 0%, 0%, 0.14),
     0px 9px 46px 8px hsla(0, 0%, 0%, 0.12),
     0px 11px 15px -7px hsla(0, 0%, 0%, 0.2);
   border-radius: 15px !important;
@@ -179,7 +183,6 @@ code {
   box-shadow: 0px 24px 38px 3px hsla(0, 0%, 0%, 0.14),
     0px 9px 46px 8px hsla(0, 0%, 0%, 0.12),
     0px 11px 15px -7px hsla(0, 0%, 0%, 0.2);
-
   border-radius: 15px !important;
 }
 
@@ -187,14 +190,11 @@ code {
   width: 50px;
   height: 50px;
   /* width: 100% !important; */
-
   /* fill the container, preserving aspect ratio, and cropping to fit */
   /* background-size: cover; */
   object-fit: cover;
-
   /* center the image vertically and horizontally */
   background-position: top center;
-
   /* round the edges to a circle with border radius 1/2 container size */
   border-radius: 50%;
 }
@@ -202,11 +202,8 @@ code {
 .ic2 {
   width: 100px;
   height: 100px;
-
   object-fit: cover;
-
   background-position: top center;
-
   border-radius: 50%;
 }
 

@@ -40,6 +40,13 @@ const Otp = () => {
                 onChange={changeHandler}
                 className="mb-1 w-100 mobile m-0 p-0"
                 id="outlined-basic"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    OtpLogin();
+                    }
+                    }}
+                   
+
                 label="Email"
                 variant="outlined"
                 name="email"

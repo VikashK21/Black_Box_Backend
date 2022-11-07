@@ -34,6 +34,13 @@ const OtpVerify = () => {
               label="OTP"
               placeholder="Enter your OTP"
               variant="outlined"
+              onKeyDown={
+                (e) => {
+                  if (e.key === "Enter") {
+                    OtpVerify();
+                  }
+                }
+              }
               className=" mb-3"
               name='otp'
               onChange={changeHandler}

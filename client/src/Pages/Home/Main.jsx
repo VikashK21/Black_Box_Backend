@@ -25,8 +25,8 @@ const Main = () => {
 
       <Classes />
 
-      <Container fluid className="white p-0 m-0"></Container>
-      <Container fluid className="white p-0 m-0"></Container>
+      {/* <Container fluid className="white p-0 m-0"></Container> */}
+      {/* <Container fluid className="white p-0 m-0"></Container> */}
       <Container fluid className="white p-0 m-0"></Container>
 
       <Footer />
