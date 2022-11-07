@@ -10,7 +10,7 @@ class User_Ctrl {
     try {
       console.log(userData);
       if (userData) {
-        return res.status(200).res(userData);
+        return res.status(200).json(userData);
       }
     } catch (err) {
       return res.status(400).json(err.message);
