@@ -136,6 +136,7 @@ class User_Ctrl {
   logout = async (req, res) => {
     try {
       fs.writeFileSync("./youtube.json", JSON.stringify({ id: null }, null, 4));
+      userData = null;
       req.logout();
       console.log("print");
     } catch (error) {
