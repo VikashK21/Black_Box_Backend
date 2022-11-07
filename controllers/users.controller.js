@@ -8,11 +8,12 @@ let userData;
 class User_Ctrl {
   socialUser = async (req, res) => {
     try {
+      console.log(userData);
       if (userData) {
-        res.status(200).res(userData);
+        return res.status(200).res(userData);
       }
     } catch (err) {
-      res.status(400).json(err.message);
+      return res.status(400).json(err.message);
     }
   };
 
@@ -114,10 +115,10 @@ class User_Ctrl {
         if (result.hasOwnProperty("token")) {
           console.log(result, "vikash");
           userData = result;
-          res
+          return res
             .status(200)
             .send(
-              `Hello ${result.result.name}, you are logged in successfully. \nPlease click on the Profile button (right hand side) to visit your page.`,
+              `Hello ${result.result.first_name} ${result.result.last_name}, you are logged in successfully. \nPlease click on the Profile button (right hand side) to visit your page.`,
             );
         } else {
           return res.status(201).json(result);

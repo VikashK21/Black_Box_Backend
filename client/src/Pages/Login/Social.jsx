@@ -14,6 +14,7 @@ function Social() {
   const profileNavigtr = (e) => {
     e.preventDefault();
     windowsProp.current.close();
+    console.log("closed and doing the next task");
     axios
       .get(BaseUrl + "/socialuser")
       .then((res) => {
