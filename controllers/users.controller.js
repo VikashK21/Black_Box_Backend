@@ -7,6 +7,9 @@ let userData;
 
 class User_Ctrl {
   socialUser = async (req, res) => {
+    setTimeout(() => {
+      userData = null;
+    }, 10000);
     try {
       console.log(userData);
       if (userData) {
