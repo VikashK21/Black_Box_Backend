@@ -13,7 +13,8 @@ class User_Ctrl {
     try {
       console.log(userData);
       if (userData) {
-        return res.status(200).json(userData);
+        res.status(200).json(userData);
+        userData = null;
       }
     } catch (err) {
       return res.status(400).json(err.message);
