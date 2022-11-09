@@ -150,6 +150,7 @@ class Users {
       const result = await prisma.users.findUnique({
         where: { email },
       });
+      console.log(password, "the loginWithEmial,----->>>>>");
       if (!result) {
         console.log(result);
         return "The user does not exits!!";
