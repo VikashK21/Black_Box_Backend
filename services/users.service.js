@@ -126,7 +126,7 @@ class Users {
       if (result) {
         if (data.hasOwnProperty("provider")) {
           console.log(result);
-          return this.loginWithEmailPass(data.email, password);
+          return this.loginWithEmailPass(data.email, password, true);
         } else {
           console.log("okay the aready there...");
           return "The user already exits!!";
@@ -137,7 +137,7 @@ class Users {
         data,
       });
       if (data.hasOwnProperty("provider")) {
-        return this.loginWithEmailPass(data.email, password);
+        return this.loginWithEmailPass(data.email, password, true);
       }
       return result2;
     } catch (err) {
@@ -146,7 +146,7 @@ class Users {
     }
   }
 
-  async loginWithEmailPass(email, password) {
+  async loginWithEmailPass(email, password, provider = false) {
     // manual login worked : )
     try {
       const result = await prisma.users.findUnique({
@@ -159,11 +159,7 @@ class Users {
         return "The user does not exits!!";
       }
       password = await bcrypt.compare(password, result.password);
-      if (
-        result.provider === "google" ||
-        result.provider === "facebook" ||
-        password
-      ) {
+      if (provider || password) {
         const token = await authenticationToken(result);
         return { token, result };
       } else if (!password) {
