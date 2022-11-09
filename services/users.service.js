@@ -160,9 +160,9 @@ class Users {
       }
       password = await bcrypt.compare(password, result.password);
       if (
-        password ||
         result.provider === "google" ||
-        result.provider === "facebook"
+        result.provider === "facebook" ||
+        password
       ) {
         const token = await authenticationToken(result);
         return { token, result };
