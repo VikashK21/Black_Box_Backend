@@ -178,6 +178,11 @@ const EditCourse = () => {
                             name="title"
                             placeholder="e.g. Introduction to React.js"
                             value={course.title}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                e.preventDefault();
+                              }
+                            }}
                            
                             defaultValue={course.title}
                             onChange={changeHandler}

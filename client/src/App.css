@@ -491,7 +491,7 @@ ul{
   height: 400px !important;
   transition: all 0.3s  !important;
   transform: scale(1.2) !important;
-  transition-delay: 2s !important;
+  transition-delay: 1.5s !important;
 }
 
 /* .hoverlater:hover > .shush{
@@ -897,7 +897,7 @@ ul{
 
 .classtitle {
   font-family: Gilroy-ExtraBold;
-  font-size: clamp(1.5rem, 7vw, 5rem) !important;
+  font-size: clamp(1.5rem, 7vw, 3.5rem) !important;
   color: rgb(94, 94, 94) !important;
 }
 

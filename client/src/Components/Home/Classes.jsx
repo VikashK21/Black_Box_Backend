@@ -39,8 +39,8 @@ const Classes = () => {
           >
             <div 
             style={{
-              minWidth: "220px",
-              maxWidth: "220px",
+              minWidth: "430px",
+              maxWidth: "430px",
               minHeight: "400px",
             }}
             >

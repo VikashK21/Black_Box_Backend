@@ -120,9 +120,7 @@ const Host = () => {
                     minRows={3}
                     defaultValue={course.description}
                     onChange={changeHandler}
-                    onKeyDown={(e) => {
-                      e.key === "Enter" && e.preventDefault();
-                    }}
+                    
                     multiline
                     variant="outlined"
                     required

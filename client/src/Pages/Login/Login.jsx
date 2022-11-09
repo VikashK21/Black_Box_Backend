@@ -59,7 +59,9 @@ const Login = () => {
               name="email"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
+                  e.preventDefault();
                   loginUser();
+
                 }
               }}
               onChange={changeHandler}
@@ -71,6 +73,7 @@ const Login = () => {
               name="password"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
+                  e.preventDefault();
                   loginUser();
                 }
               }}

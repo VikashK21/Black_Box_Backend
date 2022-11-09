@@ -9,7 +9,10 @@ import { Link } from "react-router-dom";
 
 const Footer = (props) => {
   return (
-    <Container fluid className="m-0 p-0 boxshadow">
+    <Container fluid className="m-0 p-0 boxshadow" 
+    style={{ bottom: 0, zIndex: 999 }}
+
+    >
       {props.feeds ? (
         " "
         

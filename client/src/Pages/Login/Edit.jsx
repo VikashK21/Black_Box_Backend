@@ -141,6 +141,11 @@ const Edit = () => {
                       variant="outlined"
                       className=" mb-3 w-100"
                       onChange={changeHandler}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                        }
+                      }}
                       //   helperText={errors.firstname && errors.firstname.message}
                     />
                   </Col>
@@ -149,6 +154,11 @@ const Edit = () => {
                       label="Last name"
                       name="last_name"
                       value={pro?.last_name}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                        }
+                      }}
                       defaultValue={pro?.last_name}
                       //   {...register("last_name")}
                       variant="outlined"
@@ -163,6 +173,11 @@ const Edit = () => {
                       name="email"
                       value={pro?.email}
                       defaultValue={pro?.email}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                        }
+                      }}
                       //   {...register("email")}
                       variant="outlined"
                       autoComplete="false"
@@ -181,6 +196,11 @@ const Edit = () => {
                       containerClass=" mobile m-0 p-0"
                       value={pro?.phone_num}
                       defaultValue={pro?.phone_num}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                        }
+                      }}
                       required={true}
                       onChange={(phone) =>
                         setPro({ ...pro, phone_num: pro.phone_num })
@@ -200,6 +220,7 @@ const Edit = () => {
                       defaultValue={pro?.about}
                       //   {...register("about")}
                       placeholder="About yourself"
+                      
                       onChange={changeHandler}
                     />
                     <p className="text-danger text-start">

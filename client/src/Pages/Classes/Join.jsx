@@ -149,6 +149,8 @@ const Join = () => {
   };
 
   const displayRazorpay = async (price) => {
+    setLoading(false);
+
     const response = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -182,6 +184,7 @@ const Join = () => {
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
+
   };
 
   return (
@@ -304,7 +307,8 @@ const Join = () => {
                   <div>
                     {course.Classes
                       ? course.Classes.map((item, index) => {
-                          return (
+                        if (item.title) {
+                        return (
                             <div key={index}>
                               <h5>
                                 <span className="textgrey">
@@ -315,6 +319,9 @@ const Join = () => {
                               <p className="fn gl">{item.description}</p>
                             </div>
                           );
+                        
+                        }
+                          
                         })
                       : ""}
                   </div>
@@ -327,11 +334,13 @@ const Join = () => {
                     <ul>
                       {course.content && course.content.length > 1
                         ? course.content.map((item, index) => {
+                          if(item.content){
                             return (
                               <li key={index} className="gl fn">
                                 {item.content}
                               </li>
                             );
+                          }
                           })
                         : ""}
                     </ul>
@@ -347,6 +356,7 @@ const Join = () => {
                       {course.requirements && course.requirements.length > 1
                         ? course.requirements.map((item, index) => {
                             return (
+                              
                               <li key={index} className="gl fn">
                                 {item.requirements}
                               </li>
@@ -414,11 +424,14 @@ const Join = () => {
                   <ul>
                     {course.content && course.content.length > 1
                       ? course.content.map((item, index) => {
+                        if (item.content) {
                           return (
+
                             <li key={index} className="gl fn">
                               {item.content}
                             </li>
                           );
+                            }
                         })
                       : ""}
                   </ul>
@@ -433,11 +446,13 @@ const Join = () => {
                   <ul>
                     {course.requirements && course.requirements.length > 1
                       ? course.requirements.map((item, index) => {
+                        if (item.requirements) {
                           return (
                             <li key={index} className="gl fn">
                               {item.requirements}
                             </li>
                           );
+                        }
                         })
                       : ""}
                   </ul>
@@ -598,6 +613,57 @@ const Join = () => {
                     </React.Fragment>
                   </div>
                 </h4>
+                <p 
+                
+                >
+
+                  {course.description ? course.description : ""}
+                </p>
+                <div className="d-flex">
+                <div className="w-50 mt-3">
+                  <Button
+                    className="bgdark text-light w-100 rounded-3 border border-1"
+                    onClick={() => {
+                      if (user) {
+                        console.log(course.id);
+                        checkBeforeJoining(course.id);
+                        setLoading(true);
+                      } else {
+                        setToChoose(true);
+                        navigate("/signup");
+                      }
+                    }}
+                  >
+                    {loading ? (
+                      <>
+                        <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                          <div className="ldio-cqj9sf9mcdj">
+                            <div></div>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      " "
+                    )}
+                    Book your class
+                  </Button>
+                </div>
+                <div className="mt-3 w-50 ms-2">
+                <Button
+                    className="bgy border border-1  text-dark w-100 rounded-3"
+                    onClick={() => {
+                     //copy link to clipboard
+                     navigator.clipboard.writeText(
+                      `http://blackboxnow.com/classes/join/${course.id}`
+                    );
+                    successToast("Link copied to clipboard");
+                    }}
+                  >
+                   
+                    Share
+                  </Button>
+                </div>
+                </div>
                 {course.Vid_Classes.length !== 0 ? (
                   <YtVid
                     src={`https://www.youtube.com/embed/${
@@ -650,34 +716,7 @@ const Join = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-100 mt-3">
-                  <Button
-                    className="bgdark text-light w-100 rounded-3"
-                    onClick={() => {
-                      if (user) {
-                        console.log(course.id);
-                        checkBeforeJoining(course.id);
-                        setLoading(true);
-                      } else {
-                        setToChoose(true);
-                        navigate("/signup");
-                      }
-                    }}
-                  >
-                    {loading ? (
-                      <>
-                        <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                          <div className="ldio-cqj9sf9mcdj">
-                            <div></div>
-                          </div>
-                        </div>
-                      </>
-                    ) : (
-                      " "
-                    )}
-                    Book your class
-                  </Button>
-                </div>
+                
               </div>
             </Col>
           </Row>

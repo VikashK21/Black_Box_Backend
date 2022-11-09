@@ -134,17 +134,22 @@ code {
   -moz-transition: all 1s;
   -webkit-transition: all 1s;
   -o-transition: all 1s;
-  transition: all 1s;
+  transition: all 0s;
 }
 
 .zoom:hover {
   z-index: 100 !important;
   position: absolute !important;
-  margin-top: -30px !important;
-  animation-delay: 1.5s !important;
-  transition-delay: 1.5s !important;
+  margin-top: -30px  !important;
+  animation-delay: .9s  !important;
+  transition-delay: .9s !important;
   height: 460px !important;
+  /* transition: 0.3s all !important; */
   transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
   margin-top: 10px;
   margin-bottom: 10px;
   /* background-color: hsla(0, 100%, 100%, 0.16); */

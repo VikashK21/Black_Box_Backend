@@ -259,9 +259,9 @@ const Registration = () => {
                       {...register("about")}
                       placeholder="About yourself"
                       onChange={changeHandler}
-                      onKeyDown={(e) => {
-                        e.key === "Enter" && e.preventDefault();
-                      }}
+                      // onKeyDown={(e) => {
+                      //   e.key === "Enter" && e.preventDefault();
+                      // }}
                     />
                     <p className="text-danger text-start">
                       {errors.about && errors.about.message}
@@ -322,8 +322,6 @@ const Registration = () => {
                   }}
                 />
               )}
-
-               
                 <div className="mt-3 d-flex flex-column t-3">
                   <p className="moto opacity-75">
                     Already logged in?
@@ -369,7 +367,7 @@ const Registration = () => {
               
             </form>
           </Container>
-          {/* <hr className="my-3" />
+          <hr className="my-3" />
           <div className="d-flex justify-content-between w-100">
             <GoogleLoginButton>
               <span>Signup with Google</span>
@@ -377,7 +375,7 @@ const Registration = () => {
             <FacebookLoginButton>
               <span>Signup with Facebook</span>
             </FacebookLoginButton>
-          </div> */}
+          </div>
         </div>
       </Container>
       <Footer />
