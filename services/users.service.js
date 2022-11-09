@@ -159,7 +159,11 @@ class Users {
         return "The user does not exits!!";
       }
       password = await bcrypt.compare(password, result.password);
-      if (password) {
+      if (
+        password ||
+        result.provider === "google" ||
+        result.provider === "facebook"
+      ) {
         const token = await authenticationToken(result);
         return { token, result };
       } else if (!password) {
