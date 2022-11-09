@@ -125,6 +125,7 @@ class Users {
       });
       if (result) {
         if (data.hasOwnProperty("provider")) {
+          console.log(result);
           return this.loginWithEmailPass(data.email, password);
         } else {
           console.log("okay the aready there...");
@@ -152,6 +153,7 @@ class Users {
         where: { email },
       });
       console.log(password, "the loginWithEmial,----->>>>>");
+      console.log(result, "the existing entry");
       if (!result) {
         console.log(result);
         return "The user does not exits!!";
