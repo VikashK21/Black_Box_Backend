@@ -1,5 +1,6 @@
 const { oAuth, uploadVideoToYouTube } = require("../utils/youtube");
 const open = require("open");
+const { notify } = require("../services/notification.service");
 
 const Courses = new (require("../services/courses.service"))();
 // const joi = require('joi');
@@ -18,7 +19,7 @@ class Course_inf {
     try {
       const result = await Courses.editClassById(
         Number(req.params.id),
-        req.body
+        req.body,
       );
       res.status(200).json(result);
     } catch (err) {
@@ -90,24 +91,37 @@ class Course_inf {
 
   addToSuggested = async (req, res) => {
     try {
+      console.log(req.body, "the data coming from the client");
       const result = await Courses.addSuggested(
         req.user_id,
         req.body.email,
         req.body.course_id,
       );
-      res.status(200).json(result);
+      if (typeof result === "object") {
+        ///Have to check weather the person should be notified on email or what???
+        notify(
+          req.body.email,
+          req.body.course_id,
+          result.suggester_name,
+          result.suggeter_email,
+        );
+        return res.status(200).json(result);
+      }
+      return res.status(400).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }
   };
   addToGifted = async (req, res) => {
+    console.log(req.body, "the data coming from the client");
     try {
       const result = await Courses.addToGifted(
         req.user_id,
         req.body.email,
-        req.body.course_id,
+        Number(req.body.course_id),
       );
-      res.status(200).json(result);
+      if (typeof result === "object") res.status(200).json(result);
+      return res.status(400).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }

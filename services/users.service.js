@@ -6,6 +6,44 @@ const { authenticationToken } = require("../auth/user.auth");
 // const twilio = require("twilio")(phoneConfig.accountSID, phoneConfig.authToken);
 
 class Users {
+  async matchOtp(email, otp) {
+    try {
+      const result = await prisma.users.findUnique({
+        where: { email },
+      });
+      console.log(result);
+      if (result && result.otp === otp) {
+        await prisma.users.update({
+          where: { email },
+          data: { otp: 0, verified: true },
+        });
+        console.log("yse it came here and updated tooo");
+        return true;
+      }
+      return false;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async userCheck(email, otp) {
+    try {
+      const result = await prisma.users.findUnique({
+        where: { email },
+      });
+      if (result) {
+        await prisma.users.update({
+          where: { email },
+          data: { otp },
+        });
+        return true;
+      }
+      return false;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   async allUsers() {
     try {
       const result = await prisma.users.findMany({
@@ -65,19 +103,21 @@ class Users {
       ) {
         return `Please login with ${result2.provider} Account!!`;
       }
-      password = await bcrypt.hash(password, 12);
-      if (result2.password === password) {
-        return "Please change your password to new one!!";
+      if (result2.verified && result2.otp === 0) {
+        password = await bcrypt.hash(password, 12);
+        if (result2.password === password) {
+          return "Please change your password to new one!!";
+        }
+        const result = await prisma.users.update({
+          where: { email },
+          data: { password, verified: false },
+        });
+        console.log(result);
+        const token = await authenticationToken(result);
+        console.log({ token, result });
+        return { result, token };
       }
-      const result = await prisma.users.update({
-        where: { email },
-        data: { password },
-      });
-      console.log(result);
-      const token = await authenticationToken(result);
-      console.log(token, "the logs for token *********");
-      console.log({ token, result });
-      return { result, token };
+      return "The user is not verified!!";
     } catch (err) {
       console.log(err.message);
       return err.message;
@@ -143,6 +183,7 @@ class Users {
     } catch (err) {
       console.log(err.message);
       return err.message;
+      console.log(err.message);
     }
   }
 

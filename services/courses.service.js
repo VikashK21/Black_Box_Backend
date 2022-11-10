@@ -358,6 +358,10 @@ class Courses_Classes {
   //As confirm, it will be proceed to add the ....
   async addParticipants(participant_id, course_id) {
     try {
+      const result2 = await prisma.participants.findFirst({
+        where: { participant_id },
+      });
+      if (result2) return "Already registered as Participant.";
       const result = await prisma.participants.create({
         data: { participant_id, course_id },
       });
@@ -369,12 +373,52 @@ class Courses_Classes {
 
   async addToGifted(gifted_by, email_id, course_id) {
     try {
-      const result = await prisma.gift.create({
-        data: { gifted_by, email_id, course_id },
-        include: { gifted: true },
+      const result2 = await prisma.users.findUnique({
+        where: { email: email_id },
       });
-      this.addParticipants(result.gifted.id, result.course_id);
-      return result;
+      if (!result2) return "The gifting email does not exist!!";
+      const result3 = await prisma.course.findUnique({
+        where: { id: course_id },
+        include: {
+          Participants: {
+            include: {
+              participant: true,
+            },
+          },
+          Gift: true,
+        },
+      });
+      console.log(result3, "the data");
+      if (result3 && !result3.completion) {
+        let isParti = false;
+        let notYetParti = true;
+        for (let participant of result3.Participants) {
+          if (participant.participant_id === gifted_by) {
+            isParti = true;
+          }
+          if (participant.participant.email === email_id) {
+            notYetParti = false;
+          }
+        }
+        if (!isParti) return "You are not the participant of the course yet!!";
+        if (isParti && notYetParti) {
+          const result = this.addParticipants(result2.id, course_id);
+          if (typeof result === "object") {
+            return await prisma.gift.create({
+              data: {
+                gifted_by,
+                email_id,
+                course_id,
+                participant_id: result.id,
+              },
+              include: { gifted: true },
+            });
+          }
+          return result;
+        }
+        return "Already a participant!";
+      }
+      return "The course is not live now!!";
     } catch (err) {
       return err.message;
     }
@@ -382,10 +426,23 @@ class Courses_Classes {
 
   async addSuggested(suggested_by, email_id, course_id) {
     try {
+      const result2 = await prisma.users.findUnique({
+        where: { email: email_id },
+      });
+      if (!result2) {
+        return "The suggesting email does not exist!!";
+      }
       const result = await prisma.suggest.create({
         data: { suggested_by, email_id, course_id },
       });
-      return result;
+      const result3 = await prisma.users.findUnique({
+        where: { id: suggested_by },
+      });
+      return {
+        ...result,
+        suggeter_email: result3.email,
+        suggester_name: `${result3.first_name} ${result3.last_name}`,
+      };
     } catch (err) {
       return err.message;
     }

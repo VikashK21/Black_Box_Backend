@@ -30,24 +30,28 @@ class User_Ctrl {
     }
   };
 
-  verification = (req, res) => {
-    const otp = crypto.randomInt(100000, 999999);
-    send_OTP(req.body.email, otp);
-    res.status(200).json({ status: true });
+  verification = async (req, res) => {
+    try {
+      //email
+      const otp = crypto.randomInt(100000, 999999);
+      const verifyingE = await Users.userCheck(req.body.email, otp);
+      if (verifyingE) {
+        send_OTP(req.body.email, otp);
+        return res.status(200).json({ status: true });
+      } else {
+        return res.status(400).json({ status: false });
+      }
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
   };
 
   verifying = async (req, res) => {
-    const data = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
-    console.log(
-      "it came to the verifying stages...",
-      data,
-      req.body.otp,
-      ">>>>otp",
-    );
-    if (data.passCode === Number(req.body.otp)) {
-      res.status(200).json({ status: true });
-    } else {
-      res.status(400).json({ status: false });
+    try {
+      const result = await Users.matchOtp(req.body.email, Number(req.body.otp));
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
     }
   };
 
@@ -62,12 +66,7 @@ class User_Ctrl {
 
   forgetPass = async (req, res) => {
     try {
-      const data = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
-      if (!data.hasOwnProperty("passEmail")) {
-        return res.status(400).json({ status: false });
-      }
-      const result = await Users.forgetPass(data.passEmail, req.body.password);
-      console.log(result, "the logsssssssssssssssssssssss");
+      const result = await Users.forgetPass(req.body.email, req.body.password);
       if (typeof result === "object") {
         return res.status(202).cookie("token_key", result.token).json(result);
       }

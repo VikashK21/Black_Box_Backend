@@ -633,8 +633,8 @@ const Join = () => {
                         checkBeforeJoining(course.id);
                         setLoading(true);
                       } else {
-                        setToChoose(true);
-                        navigate("/signup");
+                        setToChoose(course.id);
+                        navigate("/login");
                       }
                     }}
                   >

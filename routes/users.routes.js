@@ -62,6 +62,7 @@ router.get("/users", async (req, res, next) => {
           POST: {
             route: "/api/verification",
             parameters: {
+              email: "string",
               otp: "number",
             },
           },
@@ -74,8 +75,10 @@ router.get("/users", async (req, res, next) => {
           PATCH: {
             route: "/api/forgetpass",
             parameters: {
+              email: "string",
               password: "string",
             },
+            response: "Same response as Login",
           },
         },
       },

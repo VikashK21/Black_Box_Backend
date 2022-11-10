@@ -20,6 +20,8 @@ model Users {
   phone_num     String?        @unique
   password      String
   about         String?
+  otp           Int            @default(0)
+  verified      Boolean        @default(false)
   admin         Boolean        @default(false)
   created_at    DateTime       @default(now())
   Course        Course[]
@@ -88,23 +90,25 @@ model Participants {
 }
 
 model Gift {
-  id           Int          @id @default(autoincrement())
-  gifted_by    Int
-  gifted       Users        @relation(fields: [email_id], references: [email])
-  email_id     String
-  course       Course       @relation(fields: [course_id], references: [id])
-  course_id    Int
-  paticipant_d Participants @relation(fields: [id], references: [id])
-}
-
-model Suggest {
   id             Int          @id @default(autoincrement())
-  suggested_by   Int
-  suggested      Users        @relation(fields: [email_id], references: [email])
+  gifted_by      Int
+  gifted         Users        @relation(fields: [email_id], references: [email])
   email_id       String
   course         Course       @relation(fields: [course_id], references: [id])
   course_id      Int
-  approved_parti Participants @relation(fields: [id], references: [id])
+  paticipant_d   Participants @relation(fields: [participant_id], references: [id])
+  participant_id Int          @unique
+}
+
+model Suggest {
+  id             Int           @id @default(autoincrement())
+  suggested_by   Int
+  suggested      Users         @relation(fields: [email_id], references: [email])
+  email_id       String
+  course         Course        @relation(fields: [course_id], references: [id])
+  course_id      Int
+  approved_parti Participants? @relation(fields: [participant_id], references: [id])
+  participant_id Int?          @unique
 }
 
 model Reactions {

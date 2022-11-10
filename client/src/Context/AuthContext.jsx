@@ -30,13 +30,13 @@ export const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
-      : null,
+      : null
   );
 
   const [user, setUser] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwt_decode(localStorage.getItem("authTokens"))
-      : null,
+      : null
   );
 
   const { errorToast, successToast } = useContext(StyleContext);
@@ -169,11 +169,13 @@ export const AuthProvider = ({ children }) => {
       setName(name);
       setLoading(false);
 
-      if (toChoose) {
+      if (toChoose===true) {
         navigate("/host");
         setToChoose(false);
-      } else {
+      } else if (toChoose === false) {
         navigate("/profile");
+      } else {
+        navigate("/classes/join/" + toChoose);
       }
     } catch (err) {
       console.log(err, "the mislenues error....");
@@ -311,7 +313,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          },
+          }
         )
         .then((res) => {
           console.log(res.data);
@@ -338,7 +340,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          },
+          }
         )
         .then((res) => {
           console.log(res.data);
@@ -373,7 +375,7 @@ export const AuthProvider = ({ children }) => {
         try {
           const res = await axios.post(
             "https://api.cloudinary.com/v1_1/black-box/image/upload",
-            data,
+            data
           );
           console.log(res.data, "uploaded...");
           return res.data;
@@ -389,7 +391,7 @@ export const AuthProvider = ({ children }) => {
           formData.append("cloud_name", "black-box");
           const data = await uploaingImg(formData);
           return data.secure_url;
-        }),
+        })
       );
       return uploaders;
     } catch (err) {
@@ -408,7 +410,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       console.log(res.data);
       if (typeof res.data === "object") {
@@ -445,7 +447,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       successToast("Class Added Successfully");
       // setClasslist([{ ...classlist[0], ...res.data }]);
@@ -470,7 +472,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       successToast("Class Added Successfully");
       window.location.reload();
@@ -561,7 +563,7 @@ export const AuthProvider = ({ children }) => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       );
       console.log(result, "result");
     } catch (err) {
@@ -662,7 +664,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       )
       .then((res) => {
         console.log(res.data);
@@ -683,7 +685,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        },
+        }
       )
       .then((res) => {
         console.log(res.data);

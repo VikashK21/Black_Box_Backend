@@ -28,11 +28,11 @@ const send_OTP = (email, otp) => {
     if (err) throw err;
     else {
       console.log(info);
-      const forgetPass = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
-      forgetPass["passCode"] = otp;
-      forgetPass["passEmail"] = email;
-      console.log(forgetPass);
-      fs.writeFileSync("./youtube.json", JSON.stringify(forgetPass, null, 4));
+      // const forgetPass = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
+      // forgetPass["passCode"] = otp;
+      // forgetPass["passEmail"] = email;
+      // console.log(forgetPass);
+      // fs.writeFileSync("./youtube.json", JSON.stringify(forgetPass, null, 4));
     }
   });
   // return true;
