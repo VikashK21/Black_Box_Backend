@@ -11,14 +11,11 @@ const Footer = (props) => {
   return (
     <Container fluid className="m-0 p-0 boxshadow" 
     style={{ bottom: 0, zIndex: 999 }}
-
     >
       {props.feeds ? (
         " "
-        
       ) : (
         <Row className="m-0 p-0 footerrow align-items-center"
-        
       >
         <Col md={4} className="footercol d-none d-md-block">
           <center>
@@ -26,7 +23,6 @@ const Footer = (props) => {
             <p className="gl moto">learn@blackis.in</p>
           </center>
         </Col>
-
         <Col
           md={4}
           className="footercol "
@@ -66,7 +62,6 @@ const Footer = (props) => {
             </div>
           </center>
         </Col>
-
         <Col md={4} className="footercol d-none d-md-block">
           <center>
             <h1 className="gl ">FAQs</h1>
@@ -74,10 +69,8 @@ const Footer = (props) => {
           </center>
         </Col>
       </Row>
-
       )
       }
-      
       <Container
         fluid
         className="w-100 py-1 m-0 text-light p-0 bgdark align-items-center icon2"

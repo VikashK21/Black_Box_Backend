@@ -355,12 +355,14 @@ const Join = () => {
                     <ul>
                       {course.requirements && course.requirements.length > 1
                         ? course.requirements.map((item, index) => {
+                          if(item.requirements){
                             return (
                               
                               <li key={index} className="gl fn">
                                 {item.requirements}
                               </li>
                             );
+                          }
                           })
                         : ""}
                     </ul>
@@ -402,6 +404,7 @@ const Join = () => {
                   </div>
                   {course.Classes
                     ? course.Classes.map((item, index) => {
+                      if(item.title){
                         return (
                           <div key={index}>
                             <h6 className="gl">
@@ -411,6 +414,7 @@ const Join = () => {
                             <p className="fn gl">{item.description}</p>
                           </div>
                         );
+                      }
                       })
                     : ""}
                 </div>
