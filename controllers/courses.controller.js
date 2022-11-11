@@ -93,9 +93,9 @@ class Course_inf {
     try {
       console.log(req.body, "the data coming from the client");
       const result = await Courses.addSuggested(
-        req.user_id,
+        Number(req.user_id),
         req.body.email,
-        req.body.course_id,
+        Number(req.body.course_id),
       );
       if (typeof result === "object") {
         ///Have to check weather the person should be notified on email or what???
