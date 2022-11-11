@@ -54,8 +54,7 @@ router.get("/users", async (req, res, next) => {
             },
           },
           response: {
-            status: true,
-            status: false,
+            status: Boolean,
           },
         },
         2: {
@@ -67,8 +66,7 @@ router.get("/users", async (req, res, next) => {
             },
           },
           response: {
-            status: true,
-            status: false,
+            status: Boolean
           },
         },
         3: {
