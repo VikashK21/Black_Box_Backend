@@ -21,6 +21,8 @@ const path = require("path");
 //The status to the console, when triggered an API...
 const morgan = require("morgan");
 const cors = require("cors");
+const { debug } = require("console");
+const { debuglog } = require("util");
 
 const app = express();
 
@@ -84,5 +86,8 @@ app.use((err, req, res, next) => {
 });
 
 //The listner...
+debuglog
+debug
+debugger
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`🚀 @ http://localhost:${PORT}`));
