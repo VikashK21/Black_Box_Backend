@@ -477,7 +477,7 @@ ul{
   height: 100% !important;
   object-fit: cover;
   /* margin-bottom: 10rem; */
-  border-radius: 15px 15px 0 0;
+  /* border-radius: 15px 15px 0 0; */
 }
 
 
@@ -554,7 +554,7 @@ ul{
 }
 
 .clsfee h6 {
-  font-size: clamp(0.6rem, 2.5vw, 1.2rem);
+  font-size: clamp(0.6rem, 2.2vw, 1.1rem) !important;
   font-family: Gilroy-ExtraBold !important;
   color: rgb(61, 61, 61) !important;
   line-height: 0.9;

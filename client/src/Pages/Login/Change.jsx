@@ -58,7 +58,7 @@ const Change = () => {
                 }
               }
               className=" mb-3"
-              name='confirmpassword'
+              name='cpassword'
               type="password"
               onChange={changeHandler}
             />

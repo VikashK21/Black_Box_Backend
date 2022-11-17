@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Footer from "../../Components/Common/Footer";
 import AuthContext from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const OtpVerify = () => {
+
+  const navigate = useNavigate();
+
 
     const {
         OtpVerify,
@@ -17,6 +21,17 @@ const OtpVerify = () => {
       const changeHandler = e => {
         setValues({ ...values, [e.target.name]: e.target.value });
       }
+
+      useEffect(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+        if (values.email==="") {
+          navigate("/otp");
+        }
+      }, []);
+
 
   return (
     <Container fluid className="loginpage p-0 m-0 ">

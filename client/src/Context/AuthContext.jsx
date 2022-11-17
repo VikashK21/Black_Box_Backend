@@ -265,10 +265,17 @@ export const AuthProvider = ({ children }) => {
 
   const OtpVerify = async (e) => {
     console.log(values.otp, "Heyyy");
+    console.log(values.email, "Email");
     e.preventDefault();
+    let em = values.email;
+    console.log(em, "em");
+    let otpp = values.otp;
+    console.log(otpp, "otpp");
+
     await axios
       .post(BaseUrl + "/verification", {
-        otp: parseInt(values.otp),
+        otp: otpp,
+        email: em,
       })
       .then((res) => {
         console.log(res.data);
@@ -282,13 +289,15 @@ export const AuthProvider = ({ children }) => {
   const changePass = async (e) => {
     console.log(values.password, "Password");
     console.log(values.cpassword, "Confirm Password");
+    console.log(values.email, "Email");
     e.preventDefault();
-    if (values.password !== values.confirmpassword) {
+    if (values.password !== values.cpassword) {
       errorToast("Password does not match");
     } else {
       await axios
         .patch(BaseUrl + "/forgetpass", {
           password: values.password,
+          email: values.email,
         })
         .then((res) => {
           console.log(res.data);

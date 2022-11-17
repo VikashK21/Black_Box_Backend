@@ -123,10 +123,10 @@ code {
 }
 
 .zoom {
-  height: 325px !important;
-  overflow: hidden !important;
-  position: absolute !important;
-  border-radius: 15px !important;
+  height: 250px !important;
+  overflow-y: hidden !important;
+  /* position: absolute !important; */
+  border-radius: 10px !important;
   transition: 0s all !important;
   transition-duration: 0.3s;
   transition-delay: 2.3s;
@@ -135,15 +135,16 @@ code {
   -webkit-transition: all 1s;
   -o-transition: all 1s;
   transition: all 0s;
+  background-color: white;
 }
 
 .zoom:hover {
-  z-index: 100 !important;
-  position: absolute !important;
-  margin-top: -30px  !important;
+  /* position: absolute !important; */
+  /* margin-top: -30px  !important; */
   animation-delay: .9s  !important;
   transition-delay: .9s !important;
-  height: 460px !important;
+  /* height: 460px !important; */
+  height: 365px !important;
   /* transition: 0.3s all !important; */
   transform: scale(1.1);
   -webkit-transform: scale(1.1);
@@ -157,7 +158,9 @@ code {
   box-shadow: 0px 4px 8px 3px hsla(0, 0%, 0%, 0.14),
     0px 9px 46px 8px hsla(0, 0%, 0%, 0.12),
     0px 11px 15px -7px hsla(0, 0%, 0%, 0.2);
-  border-radius: 15px !important;
+  border-radius: 10px !important;
+  z-index: 999 !important;
+
 }
 
 .zhoom {

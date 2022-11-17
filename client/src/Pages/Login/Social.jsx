@@ -1,6 +1,7 @@
+import { Button } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AuthContext, { BaseUrl } from "../../Context/AuthContext";
 
 function Social() {
@@ -33,8 +34,11 @@ function Social() {
     );
   }, [url]);
   return (
-    <div>
-      <button onClick={profileNavigtr}>Profile</button>
+    <div className="container-fluid">
+      <div className="container d-flex justify-content-end py-5">
+
+      <Button variant="contained" onClick={profileNavigtr}> Go to Profile</Button>
+      </div>
     </div>
   );
 }

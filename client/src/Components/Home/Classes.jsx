@@ -34,7 +34,7 @@ const Classes = () => {
             <h2 className="text-center gl my-3">CLASSES</h2>
           </div>
 
-          <div className=" px-2 d-flex justify-content-center m-0 p-0 abcd ps-5 py-5"
+          {/* <div className=" px-2 d-flex justify-content-center m-0 p-0 abcd ps-5 py-5"
           style={{
             overflowX: "scroll",
           }}
@@ -51,7 +51,6 @@ const Classes = () => {
               courseList.length > 4 &&
               courseList.map((course) => {
                 const a = JSON.parse(course.images);
-                //check if the course name or course description is in the search bar 
                 if (course.title.toLowerCase().includes(value.toLowerCase()) || course.description.toLowerCase().includes(value.toLowerCase()) || value === "") {
             
                 
@@ -76,18 +75,11 @@ const Classes = () => {
                         </div>
                         <Row className="profile m-0  pt-2">
                         <h6 className="gx classtitlee"
-                       
                         >{
                           course.title && course.title.length > 30 ? course.title.substring(0, 30) + "..." : course.title
                           }</h6>
                           <p className="clsdesc">
-                            {/* <ReadMoreReact
-                              text={course.description}
-                              min={150}
-                              ideal={200}
-                              max={500}
-                              readMoreText=".. read more"
-                            /> */}
+                            
                             {course.description && course.description.length > 60 ? course.description.substring(0, 60) + "..." : course.description}
                           </p>
                           <Col xs={8} className="p-2 pt-2 pb-0">
@@ -116,13 +108,12 @@ const Classes = () => {
                       </div>
                     </Link>
                   </div>
-                );
-                          
+                );              
                           }
-                          
+    
               })}
           </div>
-          {/* <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
+          <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
             {courseList &&
               courseList.length <= 4 &&
               courseList.map((course) => {
@@ -190,7 +181,7 @@ const Classes = () => {
                 );
               })}
           </Row> */}
-          {/* <Row  className="pb-4 ">
+          <Row  className="pb-4 ">
           <div
               className="d-flex w-100 abc"
               style={{
@@ -198,21 +189,28 @@ const Classes = () => {
                 overflowY: "hidden",
               }}
             >
-              { [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(()=>{
+             {courseList &&
+              courseList.length > 4 &&
+              courseList.map((course) => {
+                const a = JSON.parse(course.images);
+                //check if the course name or course description is in the search bar 
+                if (course.title.toLowerCase().includes(value.toLowerCase()) || course.description.toLowerCase().includes(value.toLowerCase()) || value === "") {
+            
+                
               return(
               
                         <div
                           className="my-4 mt-1 me-4 class "
                         >
                             <div
-                              className="boxshadow rounded-5 mb-2 mb-5 cp my-4 hoverlater"
+                              className="boxshadow  mb-2 mb-5 cp my-4 zoom"
                               
                               style={{
                                 width: "190px",
                               }}
                             >
                               <div className="profileclassesimg22">
-                                <img src={Class2} className="classesimg22" />
+                                <img src={a} className="classesimg22" />
                               </div>
                               <Row
                                 className="profilest bw m-0 "
@@ -237,8 +235,9 @@ const Classes = () => {
                                           fontWeight: "400",
                                         }}
                                       >
-                                        This is a titleeee
-                                        This is a titleeee okay..
+                                        {
+                          course.title && course.title.length > 30 ? course.title.substring(0, 30) + "..." : course.title
+                          }
                                       </h5>
                                       </b>
                                       <p
@@ -247,23 +246,41 @@ const Classes = () => {
                                             fontSize: "13px",
                                             lineHeight: "1.2",
                                           }}
-                                          className="pclass"
+                                          
                                         
                                       >
-                                        This is a description
-                                            and im not the person that you're looking for
-                                            and im fine thankyou and even im not coughing
+                                        {course.description && course.description.length > 50 ? course.description.substring(0, 50) + "..." : course.description}
                                       </p>
+                                    
+                          <div className="  clsfee ">
+                            <div className="d-flex">
+                              <h6 className="gx">
+                                <span className="textgrey">FEE:</span> ₹
+                                {course.price}
+                                <span className="gl">/ person</span>
+                              </h6>
+                            </div>
+                            <div className="d-flex">
+                              <h6 className="gx">
+                                <span className="textgrey"> Type:</span>
+                                {course.duration_type}
+                              </h6>
+                            </div>
+                          </div>
+                                      
                                   </div>
+                                  
                                 </div>
+                                
                               </Row>
                             </div>
                         </div>
               );
+                                        }
             })}
                         
             </div>
-          </Row> */}
+          </Row>
         </div>
       </Container>
     </Container>
