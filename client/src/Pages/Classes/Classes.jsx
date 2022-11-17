@@ -8,7 +8,7 @@ import AuthContext from "../../Context/AuthContext";
 import ReadMoreReact from "read-more-react";
 
 const Classes = () => {
-  const { goToTop, getCoursesList, courseList } = useContext(AuthContext);
+  const { goToTop, getCoursesList, courseList,value } = useContext(AuthContext);
 
   useEffect(() => {
     goToTop();
@@ -47,6 +47,8 @@ const Classes = () => {
                   courseList.length > 4 &&
                   courseList.map((course) => {
                     const a = JSON.parse(course.images);
+                if (course.title.toLowerCase().includes(value.toLowerCase()) || course.description.toLowerCase().includes(value.toLowerCase()) || value === "") {
+
                     return (
                       <div
                         key={course.id}
@@ -73,13 +75,7 @@ const Classes = () => {
                                   : course.title}
                               </h6>
                               <p className="clsdesc">
-                                {/* <ReadMoreReact
-                              text={course.description}
-                              min={150}
-                              ideal={200}
-                              max={500}
-                              readMoreText=".. read more"
-                            /> */}
+                               
                                 {course.description &&
                                 course.description.length > 60
                                   ? course.description.substring(0, 60) + "..."
@@ -112,6 +108,7 @@ const Classes = () => {
                         </Link>
                       </div>
                     );
+                                }
                   })}
               </div>
             </div>

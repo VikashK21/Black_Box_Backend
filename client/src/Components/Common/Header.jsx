@@ -18,7 +18,10 @@ const Header = () => {
   };
 
   window.addEventListener("scroll", handleNavbar);
-  const {setToChoose} = useContext(AuthContext);
+  const {setToChoose,
+    value,
+    setValue,
+  } = useContext(AuthContext);
 
   return (
     <>
@@ -27,10 +30,14 @@ const Header = () => {
           fluid
           className="d-flex justify-content-between w-100 p-3 navbar"
         >
-          <div>
+          <div className="d-flex">
             <Link to="/main">
               <img src={Logo} width={200} className="p-0 m-0 cp" />
             </Link>
+              <div className="ms-4 pt-1 d-flex searchdiv bggrey ">
+                <input type="text" className="borderless" value={value} onChange={(e)=>{setValue(e.target.value)}} />
+                <BsSearch className="mt-2 ms-2" />
+              </div>
           </div>
           <div className="">
             <div className="navs align-items-center">

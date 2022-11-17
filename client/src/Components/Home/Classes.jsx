@@ -16,7 +16,9 @@ import Class2 from "../../Images/Classes/class2.jpg";
 // import Icon4 from "../../Images/Classes/icon4.png";
 
 const Classes = () => {
-  const { goToTop, getCoursesList, courseList } = useContext(AuthContext);
+  const { goToTop, getCoursesList, courseList,
+    value
+  } = useContext(AuthContext);
   useEffect(() => {
     getCoursesList();
   }, []);
@@ -39,8 +41,8 @@ const Classes = () => {
           >
             <div 
             style={{
-              minWidth: "430px",
-              maxWidth: "430px",
+              minWidth: "680px",
+              maxWidth: "680px",
               minHeight: "400px",
             }}
             >
@@ -49,6 +51,10 @@ const Classes = () => {
               courseList.length > 4 &&
               courseList.map((course) => {
                 const a = JSON.parse(course.images);
+                //check if the course name or course description is in the search bar 
+                if (course.title.toLowerCase().includes(value.toLowerCase()) || course.description.toLowerCase().includes(value.toLowerCase()) || value === "") {
+            
+                
                 return (
                   <div
                     key={course.id}
@@ -111,6 +117,9 @@ const Classes = () => {
                     </Link>
                   </div>
                 );
+                          
+                          }
+                          
               })}
           </div>
           {/* <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">

@@ -28,6 +28,7 @@ const Profile = () => {
     classtime,
     noClasses,
     setNoClasses,
+    value,
   } = useContext(AuthContext);
 
   const { successToast, errorToast } = useContext(StyleContext);
@@ -257,6 +258,7 @@ const Profile = () => {
                   <div className=" pt-1 ">
                     {courseList.length > 0 &&
                       courseList.map((course, index) => {
+
                         if (course.host_details.img_thumbnail.includes("{")){
                           const host = course.host_details.img_thumbnail
                           ? course.host_details.img_thumbnail.secure_url !==
@@ -269,7 +271,12 @@ const Profile = () => {
                         }
                         
                         const a = JSON.parse(course.images);
+
+
+
                         if (a.length !== 0) {
+                if (course.title.toLowerCase().includes(value.toLowerCase()) || course.description.toLowerCase().includes(value.toLowerCase()) || value === "") {
+
                           return (
                             <div
                               className="mb-4 bgw rounded-3 p-3 ps-2 ms-1 me-2  boxshadow"
@@ -367,6 +374,7 @@ const Profile = () => {
                               </Row>
                             </div>
                           );
+                                    }
                         }
                       })}
                   </div>

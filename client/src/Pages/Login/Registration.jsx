@@ -64,6 +64,10 @@ const Registration = () => {
 
   useEffect(() => {
     setLoading(false);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, []);
 
   const changeHandler = (e) => {
@@ -368,14 +372,14 @@ const Registration = () => {
             </form>
           </Container>
           <hr className="my-3" />
-          <div className="d-flex justify-content-between w-100">
+          {/* <div className="d-flex justify-content-between w-100">
             <GoogleLoginButton>
               <span>Signup with Google</span>
             </GoogleLoginButton>
             <FacebookLoginButton>
               <span>Signup with Facebook</span>
             </FacebookLoginButton>
-          </div>
+          </div> */}
         </div>
       </Container>
       <Footer />

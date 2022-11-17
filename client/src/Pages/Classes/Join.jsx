@@ -75,6 +75,7 @@ const Join = () => {
       await axios
         .get(BaseUrl + "/courses/" + id)
         .then((res) => {
+          console.log(res.data);
           const data = res.data;
           console.log(data);
           if (data.host_details.img_thumbnail.includes("{")) {
@@ -160,7 +161,7 @@ const Join = () => {
     }
 
     const options = {
-      key: "rzp_test_u8GQT2ewwaxjJw",
+      key: "rzp_live_f8Ca3KlJVCNOIa",
       currency: "INR",
       amount: course.price * 100,
       name: "BlackBox - Teach and Learn",
@@ -477,7 +478,7 @@ const Join = () => {
                 <Splide
                   style={{ width: "100%", height: "100%" }}
                   options={{
-                    type: "loop",
+                    // type: "loop",
                     drag: "free",
                     gap: "1rem",
                     perPage: 3,
@@ -716,6 +717,16 @@ const Join = () => {
                       <AiOutlineArrowRight
                         className="profilesearch p-2"
                         size={35}
+                        onClick={() => {
+                          if (user) {
+                            console.log(course.id);
+                            checkBeforeJoining(course.id);
+                            setLoading(true);
+                          } else {
+                            setToChoose(course.id);
+                            navigate("/login");
+                          }
+                        }}
                       />
                     </div>
                   </div>

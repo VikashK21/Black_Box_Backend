@@ -98,6 +98,8 @@ export const AuthProvider = ({ children }) => {
   const [courseDetails, setCourseDetails] = useState([]);
   const [courseId, setCourseId] = useState();
   const [name, setName] = useState();
+  const [value, setValue] = useState("");
+
 
   const [toChoose, setToChoose] = useState(false);
 
@@ -695,6 +697,8 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const [batch, setBatch] = useState("");
+
   const contextData = {
     editClass,
     scollToRef,
@@ -763,6 +767,10 @@ export const AuthProvider = ({ children }) => {
     setToChoose,
     changePass,
     loginProcess,
+    value,
+    setValue,
+    batch,
+    setBatch,
   };
 
   return (

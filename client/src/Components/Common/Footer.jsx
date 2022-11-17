@@ -43,16 +43,16 @@ const Footer = (props) => {
               LEARN WHAT YOU SEEK.
             </p>
             <Row className="w-50 mt-5">
-              <Col>
+              <Col xs={3}>
                 <GrFacebookOption size={25} />
               </Col>
-              <Col>
+              <Col xs={3}>
                 <AiOutlineInstagram size={25} />
               </Col>
-              <Col>
+              <Col xs={3}>
                 <AiOutlineTwitter size={25} />
               </Col>
-              <Col>
+              <Col xs={3}>
                 <FaLinkedinIn size={25} />
               </Col>
             </Row>

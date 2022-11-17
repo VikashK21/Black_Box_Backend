@@ -34,10 +34,9 @@ const Otp = () => {
           <form className="d-flex flex-column m-2 mt-5  " 
           onSubmit={OtpLogin}>
             <p className="text-start mb-0">Enter you email : </p>
-          
-         
             <TextField
                 onChange={changeHandler}
+                type="email"
                 className="mb-1 w-100 mobile m-0 p-0"
                 id="outlined-basic"
                 onKeyDown={(e) => {
@@ -45,8 +44,6 @@ const Otp = () => {
                     OtpLogin();
                     }
                     }}
-                   
-
                 label="Email"
                 variant="outlined"
                 name="email"
