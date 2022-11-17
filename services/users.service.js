@@ -18,9 +18,9 @@ class Users {
           data: { otp: 0, verified: true },
         });
         console.log("yse it came here and updated tooo");
-        return true;
+        return { status: true };
       }
-      return false;
+      return { status: false };
     } catch (err) {
       return err.message;
     }
