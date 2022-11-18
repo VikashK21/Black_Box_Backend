@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { BsArrowRight } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
@@ -10,6 +10,7 @@ import ReadMoreReact from "read-more-react";
 const Classes = () => {
   const { goToTop, getCoursesList, courseList, value } =
     useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     goToTop();
@@ -135,7 +136,12 @@ const Classes = () => {
                         value === ""
                       ) {
                         return (
-                          <div className="my-4 mt-1 me-4 class ">
+                          <div
+                            className="my-4 mt-1 me-4 class "
+                            onClick={() =>
+                              navigate("/classes/join/" + course.id)
+                            }
+                          >
                             <div
                               className="boxshadow  mb-2 mb-5 cp my-4 zoom"
                               style={{
