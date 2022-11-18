@@ -232,11 +232,11 @@ const Classes = () => {
                                       fontWeight: "400",
                                     }}
                                   >
-                                    {course.title &&
-                                    course.title.split(" ").length > 3
+                                    {course.title && course.title.length > 30
                                       ? course.title
+                                          .substring(0, 35)
                                           .split(" ")
-                                          .slice(0, 3)
+                                          .slice(0, -1)
                                           .join(" ") + "..."
                                       : course.title}
                                   </h5>
@@ -248,10 +248,11 @@ const Classes = () => {
                                   }}
                                 >
                                   {course.description &&
-                                  course.description.split(" ").length > 10
+                                  course.description.length > 50
                                     ? course.description
+                                        .substring(0, 55)
                                         .split(" ")
-                                        .slice(0, 10)
+                                        .slice(0, -1)
                                         .join(" ") + "..."
                                     : course.description}
                                 </p>
