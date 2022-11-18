@@ -236,7 +236,7 @@ const Classes = () => {
                                     course.title.split(" ").length > 3
                                       ? course.title
                                           .split(" ")
-                                          .slice(3)
+                                          .slice(0, 3)
                                           .join(" ") + "..."
                                       : course.title}
                                   </h5>
@@ -248,9 +248,11 @@ const Classes = () => {
                                   }}
                                 >
                                   {course.description &&
-                                  course.description.length > 50
-                                    ? course.description.substring(0, 50) +
-                                      "..."
+                                  course.description.split(" ").length > 10
+                                    ? course.description
+                                        .split(" ")
+                                        .slice(0, 10)
+                                        .join(" ") + "..."
                                     : course.description}
                                 </p>
 
