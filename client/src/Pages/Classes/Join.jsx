@@ -232,14 +232,19 @@ const Join = () => {
                       // course.host_details.img_thumbnail
                       //   ? course.host_details.img_thumbnail.secure_url
                       //   : DefaultPic
-                      course.host_details.img_thumbnail
-                        ? typeof course.host_details.img_thumbnail ===
-                            "string" &&
-                          course.host_details.img_thumbnail.includes("{")
-                          ? JSON.parse(course.host_details.img_thumbnail)
-                              .secure_url
-                          : course.host_details.img_thumbnail.secure_url
-                        : DefaultPic
+                      // course.host_details.img_thumbnail
+                      //   ? typeof course.host_details.img_thumbnail ===
+                      //       "string" &&
+                      //     course.host_details.img_thumbnail.includes("{")
+                      //     ? JSON.parse(course.host_details.img_thumbnail)
+                      //         .secure_url
+                      //     : course.host_details.img_thumbnail.secure_url
+                      //   : DefaultPic
+                      (typeof course.host_details.img_thumbnail === "object" &&
+                        course.host_details.img_thumbnail.secure_url) ||
+                      (typeof course.host_details.img_thumbnail === "string" &&
+                        course.host_details.img_thumbnail) ||
+                      DefaultPic
                     }
                     alt="class1"
                     className="img-fluid iconpic icon2 "
