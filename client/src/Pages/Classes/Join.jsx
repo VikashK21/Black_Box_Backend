@@ -124,7 +124,7 @@ const Join = () => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       )
       .then((res) => {
         console.log(res.data);
@@ -153,7 +153,7 @@ const Join = () => {
     setLoading(false);
 
     const response = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
+      "https://checkout.razorpay.com/v1/checkout.js",
     );
     if (!response) {
       alert("You are offline");
@@ -185,7 +185,6 @@ const Join = () => {
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
-
   };
 
   return (
@@ -214,9 +213,11 @@ const Join = () => {
                 <div className="  d-flex justify-content-center w-100 ">
                   <img
                     src={
-                      course.host_details.img_thumbnail
-                        ? course.host_details.img_thumbnail.secure_url
-                        : DefaultPic
+                      (typeof course.host_details.img_thumbnail === "object" &&
+                        course.host_details.img_thumbnail.secure_url) ||
+                      (typeof course.host_details.img_thumbnail === "string" &&
+                        course.host_details.img_thumbnail) ||
+                      DefaultPic
                     }
                     alt="class1"
                     className="img-fluid iconpic my-5 icon1"
@@ -308,21 +309,19 @@ const Join = () => {
                   <div>
                     {course.Classes
                       ? course.Classes.map((item, index) => {
-                        if (item.title) {
-                        return (
-                            <div key={index}>
-                              <h5>
-                                <span className="textgrey">
-                                  Day {index + 1}
-                                </span>{" "}
-                                : {item.title}
-                              </h5>
-                              <p className="fn gl">{item.description}</p>
-                            </div>
-                          );
-                        
-                        }
-                          
+                          if (item.title) {
+                            return (
+                              <div key={index}>
+                                <h5>
+                                  <span className="textgrey">
+                                    Day {index + 1}
+                                  </span>{" "}
+                                  : {item.title}
+                                </h5>
+                                <p className="fn gl">{item.description}</p>
+                              </div>
+                            );
+                          }
                         })
                       : ""}
                   </div>
@@ -335,13 +334,13 @@ const Join = () => {
                     <ul>
                       {course.content && course.content.length > 1
                         ? course.content.map((item, index) => {
-                          if(item.content){
-                            return (
-                              <li key={index} className="gl fn">
-                                {item.content}
-                              </li>
-                            );
-                          }
+                            if (item.content) {
+                              return (
+                                <li key={index} className="gl fn">
+                                  {item.content}
+                                </li>
+                              );
+                            }
                           })
                         : ""}
                     </ul>
@@ -356,14 +355,13 @@ const Join = () => {
                     <ul>
                       {course.requirements && course.requirements.length > 1
                         ? course.requirements.map((item, index) => {
-                          if(item.requirements){
-                            return (
-                              
-                              <li key={index} className="gl fn">
-                                {item.requirements}
-                              </li>
-                            );
-                          }
+                            if (item.requirements) {
+                              return (
+                                <li key={index} className="gl fn">
+                                  {item.requirements}
+                                </li>
+                              );
+                            }
                           })
                         : ""}
                     </ul>
@@ -405,17 +403,19 @@ const Join = () => {
                   </div>
                   {course.Classes
                     ? course.Classes.map((item, index) => {
-                      if(item.title){
-                        return (
-                          <div key={index}>
-                            <h6 className="gl">
-                              <span className="textgrey ">Day {index + 1}</span>{" "}
-                              :<b> {item.title}</b>
-                            </h6>
-                            <p className="fn gl">{item.description}</p>
-                          </div>
-                        );
-                      }
+                        if (item.title) {
+                          return (
+                            <div key={index}>
+                              <h6 className="gl">
+                                <span className="textgrey ">
+                                  Day {index + 1}
+                                </span>{" "}
+                                :<b> {item.title}</b>
+                              </h6>
+                              <p className="fn gl">{item.description}</p>
+                            </div>
+                          );
+                        }
                       })
                     : ""}
                 </div>
@@ -429,14 +429,13 @@ const Join = () => {
                   <ul>
                     {course.content && course.content.length > 1
                       ? course.content.map((item, index) => {
-                        if (item.content) {
-                          return (
-
-                            <li key={index} className="gl fn">
-                              {item.content}
-                            </li>
-                          );
-                            }
+                          if (item.content) {
+                            return (
+                              <li key={index} className="gl fn">
+                                {item.content}
+                              </li>
+                            );
+                          }
                         })
                       : ""}
                   </ul>
@@ -451,13 +450,13 @@ const Join = () => {
                   <ul>
                     {course.requirements && course.requirements.length > 1
                       ? course.requirements.map((item, index) => {
-                        if (item.requirements) {
-                          return (
-                            <li key={index} className="gl fn">
-                              {item.requirements}
-                            </li>
-                          );
-                        }
+                          if (item.requirements) {
+                            return (
+                              <li key={index} className="gl fn">
+                                {item.requirements}
+                              </li>
+                            );
+                          }
                         })
                       : ""}
                   </ul>
@@ -618,56 +617,50 @@ const Join = () => {
                     </React.Fragment>
                   </div>
                 </h4>
-                <p 
-                
-                >
-
-                  {course.description ? course.description : ""}
-                </p>
+                <p>{course.description ? course.description : ""}</p>
                 <div className="d-flex">
-                <div className="w-50 mt-3">
-                  <Button
-                    className="bgdark text-light w-100 rounded-3 border border-1"
-                    onClick={() => {
-                      if (user) {
-                        console.log(course.id);
-                        checkBeforeJoining(course.id);
-                        setLoading(true);
-                      } else {
-                        setToChoose(course.id);
-                        navigate("/login");
-                      }
-                    }}
-                  >
-                    {loading ? (
-                      <>
-                        <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                          <div className="ldio-cqj9sf9mcdj">
-                            <div></div>
+                  <div className="w-50 mt-3">
+                    <Button
+                      className="bgdark text-light w-100 rounded-3 border border-1"
+                      onClick={() => {
+                        if (user) {
+                          console.log(course.id);
+                          checkBeforeJoining(course.id);
+                          setLoading(true);
+                        } else {
+                          setToChoose(course.id);
+                          navigate("/login");
+                        }
+                      }}
+                    >
+                      {loading ? (
+                        <>
+                          <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                            <div className="ldio-cqj9sf9mcdj">
+                              <div></div>
+                            </div>
                           </div>
-                        </div>
-                      </>
-                    ) : (
-                      " "
-                    )}
-                    Book your class
-                  </Button>
-                </div>
-                <div className="mt-3 w-50 ms-2">
-                <Button
-                    className="bgy border border-1  text-dark w-100 rounded-3"
-                    onClick={() => {
-                     //copy link to clipboard
-                     navigator.clipboard.writeText(
-                      `http://blackboxnow.com/classes/join/${course.id}`
-                    );
-                    successToast("Link copied to clipboard");
-                    }}
-                  >
-                   
-                    Share
-                  </Button>
-                </div>
+                        </>
+                      ) : (
+                        " "
+                      )}
+                      Book your class
+                    </Button>
+                  </div>
+                  <div className="mt-3 w-50 ms-2">
+                    <Button
+                      className="bgy border border-1  text-dark w-100 rounded-3"
+                      onClick={() => {
+                        //copy link to clipboard
+                        navigator.clipboard.writeText(
+                          `http://blackboxnow.com/classes/join/${course.id}`,
+                        );
+                        successToast("Link copied to clipboard");
+                      }}
+                    >
+                      Share
+                    </Button>
+                  </div>
                 </div>
                 {course.Vid_Classes.length !== 0 ? (
                   <YtVid
@@ -731,7 +724,6 @@ const Join = () => {
                     </div>
                   </div>
                 </div>
-                
               </div>
             </Col>
           </Row>
