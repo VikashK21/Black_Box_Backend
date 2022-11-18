@@ -186,9 +186,9 @@ const Classes = () => {
                                       }}
                                     >
                                       {course.description &&
-                                      course.description.length > 50
+                                      course.description.length > 45
                                         ? course.description
-                                            .substring(0, 50)
+                                            .substring(0, 45)
                                             .split(" ")
                                             .slice(0, -1)
                                             .join(" ") + "..."
