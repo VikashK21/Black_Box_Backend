@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
 import ReadMoreReact from "read-more-react";
-import $ from 'jquery'; 
+import $ from "jquery";
 
 // import HoverVideoPlayer from 'react-hover-video-player';
 import Class2 from "../../Images/Classes/class2.jpg";
@@ -16,9 +16,9 @@ import Class2 from "../../Images/Classes/class2.jpg";
 // import Icon4 from "../../Images/Classes/icon4.png";
 
 const Classes = () => {
-  const { goToTop, getCoursesList, courseList,
-    value
-  } = useContext(AuthContext);
+  const { goToTop, getCoursesList, courseList, value } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
   useEffect(() => {
     getCoursesList();
   }, []);
@@ -181,104 +181,102 @@ const Classes = () => {
                 );
               })}
           </Row> */}
-          <Row  className="pb-4 ">
-          <div
+          <Row className="pb-4 ">
+            <div
               className="d-flex w-100 abc"
               style={{
                 overflowX: "scroll",
                 overflowY: "hidden",
               }}
             >
-             {courseList &&
-              courseList.length > 4 &&
-              courseList.map((course) => {
-                const a = JSON.parse(course.images);
-                //check if the course name or course description is in the search bar 
-                if (course.title.toLowerCase().includes(value.toLowerCase()) || course.description.toLowerCase().includes(value.toLowerCase()) || value === "") {
-            
-                
-              return(
-              
+              {courseList &&
+                courseList.length > 4 &&
+                courseList.map((course) => {
+                  const a = JSON.parse(course.images)[0];
+                  //check if the course name or course description is in the search bar
+                  if (
+                    course.title.toLowerCase().includes(value.toLowerCase()) ||
+                    course.description
+                      .toLowerCase()
+                      .includes(value.toLowerCase()) ||
+                    value === ""
+                  ) {
+                    return (
+                      <div
+                        className="my-4 mt-1 me-4 class "
+                        onClick={navigate("/classes/join/" + course.id)}
+                      >
                         <div
-                          className="my-4 mt-1 me-4 class "
+                          className="boxshadow  mb-2 mb-5 cp my-4 zoom"
+                          style={{
+                            width: "190px",
+                          }}
                         >
+                          <div className="profileclassesimg22">
+                            <img src={a} className="classesimg22" />
+                          </div>
+                          <Row className="profilest bw m-0 ">
                             <div
-                              className="boxshadow  mb-2 mb-5 cp my-4 zoom"
-                              
+                              className="d-flex"
                               style={{
-                                width: "190px",
+                                overflowX: "hidden",
                               }}
                             >
-                              <div className="profileclassesimg22">
-                                <img src={a} className="classesimg22" />
-                              </div>
-                              <Row
-                                className="profilest bw m-0 "
-                                
-                              >
-                                <div
-                                  className="d-flex"
+                              <div className=" w-100 pe-1 ms-1 pt-1 pb-1">
+                                <b>
+                                  <h5
+                                    className="gx py-1 text-dark"
+                                    style={{
+                                      margin: "auto",
+                                      fontSize: "16px",
+                                      fontWeight: "400",
+                                    }}
+                                  >
+                                    {course.title &&
+                                    course.title.split(" ").length > 3
+                                      ? course.title
+                                          .split(" ")
+                                          .slice(3)
+                                          .join(" ") + "..."
+                                      : course.title}
+                                  </h5>
+                                </b>
+                                <p
                                   style={{
-                                    overflowX: "hidden",
+                                    fontSize: "13px",
+                                    lineHeight: "1.2",
                                   }}
                                 >
-                                  <div
-                                    className=" w-100 pe-1 ms-1 pt-1 pb-1"
-                                   
-                                  >
-                                    <b>
-                                      <h5
-                                        className="gx py-1 text-dark"
-                                        style={{
-                                          margin: "auto",
-                                          fontSize: "16px",
-                                          fontWeight: "400",
-                                        }}
-                                      >
-                                        {
-                          course.title && course.title.length > 30 ? course.title.substring(0, 30) + "..." : course.title
-                          }
-                                      </h5>
-                                      </b>
-                                      <p
-                                        style=
-                                          {{
-                                            fontSize: "13px",
-                                            lineHeight: "1.2",
-                                          }}
-                                          
-                                        
-                                      >
-                                        {course.description && course.description.length > 50 ? course.description.substring(0, 50) + "..." : course.description}
-                                      </p>
-                                    
-                          <div className="  clsfee ">
-                            <div className="d-flex">
-                              <h6 className="gx">
-                                <span className="textgrey">FEE:</span> ₹
-                                {course.price}
-                                <span className="gl">/ person</span>
-                              </h6>
-                            </div>
-                            <div className="d-flex">
-                              <h6 className="gx">
-                                <span className="textgrey"> Type:</span>
-                                {course.duration_type}
-                              </h6>
-                            </div>
-                          </div>
-                                      
+                                  {course.description &&
+                                  course.description.length > 50
+                                    ? course.description.substring(0, 50) +
+                                      "..."
+                                    : course.description}
+                                </p>
+
+                                <div className="  clsfee ">
+                                  <div className="d-flex">
+                                    <h6 className="gx">
+                                      <span className="textgrey">FEE:</span> ₹
+                                      {course.price}
+                                      <span className="gl">/ person</span>
+                                    </h6>
                                   </div>
-                                  
+                                  <div className="d-flex">
+                                    <h6 className="gx">
+                                      <span className="textgrey"> Type:</span>
+                                      {course.duration_type}
+                                    </h6>
+                                  </div>
                                 </div>
-                                
-                              </Row>
+                              </div>
                             </div>
+                          </Row>
                         </div>
-              );
-                                        }
-            })}
-                        
+                      </div>
+                    );
+                  }
+                })}
             </div>
           </Row>
         </div>
