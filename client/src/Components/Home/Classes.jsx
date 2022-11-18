@@ -204,7 +204,7 @@ const Classes = () => {
                     return (
                       <div
                         className="my-4 mt-1 me-4 class "
-                        onClick={navigate("/classes/join/" + course.id)}
+                        onClick={() => navigate("/classes/join/" + course.id)}
                       >
                         <div
                           className="boxshadow  mb-2 mb-5 cp my-4 zoom"
