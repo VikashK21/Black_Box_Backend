@@ -71,7 +71,7 @@ app.use("/api", require("./routes/courses.routes"));
 //Error Handlings...
 app.use((req, res, next) => {
   //////For the heroku appp -----> rember this part..
-  // res.redirect("https://creative-black-box.herokuapp.com/");
+  res.redirect("https://creative-black-box.herokuapp.com/");
   next(createError.NotFound());
 });
 
