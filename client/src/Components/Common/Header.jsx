@@ -49,6 +49,10 @@ const Header = () => {
                     </Link>
                   </li> */}
                   <li>
+                    <Link to="/classroom/login" className="link  ">
+CLASSROOM                    </Link>
+                  </li>
+                  <li>
                     <Link to="/classes" className="link px-5 ">
                       JOIN A CLASS
                     </Link>

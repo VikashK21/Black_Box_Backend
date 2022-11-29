@@ -46,12 +46,12 @@ authenticationToken = (data) => {
 
 authorizationToken = (req, res, next) => {
   console.log(req.headers);
-  const cookie = req.headers.authorization;
-  //remeber this 
-  // const cookie = req.headers.cookie;
+  // const cookie = req.headers.authorization;
+  //remeber this
+  const cookie = req.headers.cookie;
   console.log(cookie, "cookiedasdasds");
-  if (cookie) {
-    let token = cookie.split(" ")[1];
+  let token = cookie.split(" ")[1];
+  if (token) {
     //and this too
     // token = token.split("=")[1];
     const decodedToken = tokenGenerator.verify(token, {
@@ -62,9 +62,18 @@ authorizationToken = (req, res, next) => {
         subject: "user",
       },
     });
+    // console.log(decodedToken, "the data when it comes here");
+    if (decodedToken.admin) {
+      req.user_id = decodedToken;
+    }
     // const id = jwt.verify(token, process.env.SECRET_KEY_TOKEN);
     // console.log(decodedToken.id, "id");
-    req.user_id = Number(decodedToken.id);
+    else {
+      req.user_id = Number(decodedToken.id);
+      req.classroom_id =
+        decodedToken.classroom_id && Number(decodedToken.classroom_id);
+    }
+    console.log(req.user_id, req.classroom_id, "the saving...");
     next();
   } else {
     res.status(403).send("Login first to proceed!!");

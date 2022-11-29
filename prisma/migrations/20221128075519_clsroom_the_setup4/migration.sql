@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Classroom_Course" ALTER COLUMN "title" DROP DEFAULT,
+ALTER COLUMN "title" SET DATA TYPE TEXT,
+ALTER COLUMN "description" DROP NOT NULL,
+ALTER COLUMN "class_structure" DROP NOT NULL;

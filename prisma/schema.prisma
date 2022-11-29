@@ -29,6 +29,43 @@ model Users {
   Gift          Gift[]
   Suggest       Suggest[]
   Reactions     Reactions[]
+  Classroom     Classroom?     @relation(fields: [classroom_id], references: [id])
+  classroom_id  Int?
+  updated_at    DateTime       @default(now())
+}
+
+model Classroom {
+  id               Int                @id @default(autoincrement())
+  logo             String?
+  title            String
+  description      String?
+  Classroom_Course Classroom_Course[]
+  email_type       String             @unique
+  Users            Users[]
+  updated_at       DateTime           @default(now())
+}
+
+model Classroom_Course {
+  id           Int           @id @default(autoincrement())
+  completion   Boolean       @default(false)
+  title        String
+  description  String?
+  host_details Classroom     @relation(fields: [host], references: [id])
+  host         Int
+  images       String[]
+  hosted       Boolean       @default(false)
+  Classes      Classes[]
+  link         String?
+  // class_structure String? //
+  // structure       Json?
+  Vid_Classes  Vid_Classes[]
+  // methodology     Json?
+  // content         Json?
+  requirements Json?
+  // Participants    Participants[]
+  // Gift            Gift[]
+  // Suggest         Suggest[]
+  Reactions    Reactions[]
 }
 
 model Course {
@@ -59,23 +96,27 @@ model Course {
 }
 
 model Classes {
-  id          Int     @id @default(autoincrement())
-  title       String?
-  date        String ///*I have to get the date time attached in formal dates
-  over        Boolean @default(false)
-  duration    String
-  time        String ///*Then this field should not be there
-  description String?
-  course      Course  @relation(fields: [course_id], references: [id])
-  course_id   Int
-  fee         String?
+  id                  Int               @id @default(autoincrement())
+  title               String?
+  date                String ///*I have to get the date time attached in formal dates
+  over                Boolean           @default(false)
+  duration            String
+  time                String ///*Then this field should not be there
+  description         String?
+  course              Course?           @relation(fields: [course_id], references: [id])
+  course_id           Int?
+  fee                 String?
+  Classroom_Course    Classroom_Course? @relation(fields: [classroom_course_id], references: [id])
+  classroom_course_id Int?
 }
 
 model Vid_Classes {
-  id        Int    @id @default(autoincrement())
-  name      String
-  course    Course @relation(fields: [course_id], references: [id])
-  course_id Int
+  id                  Int               @id @default(autoincrement())
+  name                String
+  course              Course?           @relation(fields: [course_id], references: [id])
+  course_id           Int?
+  Classroom_Course    Classroom_Course? @relation(fields: [classroom_course_id], references: [id])
+  classroom_course_id Int?
 }
 
 //A user will only be part of participant when paid is successfully verified.
@@ -112,10 +153,12 @@ model Suggest {
 }
 
 model Reactions {
-  id         Int    @id @default(autoincrement())
-  course_id  Int
-  courses    Course @relation(fields: [course_id], references: [id])
-  reactor_id Int
-  reactor    Users  @relation(fields: [reactor_id], references: [id])
-  heartful   Int    @default(1)
+  id                  Int               @id @default(autoincrement())
+  course_id           Int?
+  courses             Course?           @relation(fields: [course_id], references: [id])
+  reactor_id          Int
+  reactor             Users             @relation(fields: [reactor_id], references: [id])
+  heartful            Int               @default(1)
+  Classroom_Course    Classroom_Course? @relation(fields: [classroom_course_id], references: [id])
+  classroom_course_id Int?
 }

@@ -18,7 +18,6 @@ const Profile = () => {
   const {
     getCoursesList,
     courseList,
-    // setCourseList,
     reaction,
     triggerReaction,
     DynamicTimer,
@@ -32,7 +31,6 @@ const Profile = () => {
   } = useContext(AuthContext);
 
   const { successToast, errorToast } = useContext(StyleContext);
-  // const [reaction, setReaction] = useState([]);
 
   useEffect(() => {
     getCoursesList();

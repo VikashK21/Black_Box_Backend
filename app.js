@@ -65,6 +65,8 @@ if (process.env.NODE_ENV == "production") {
 //The APIs sections...
 app.use("/api", require("./routes/users.routes"));
 app.use("/api", require("./routes/courses.routes"));
+app.use("/api/admin", require("./routes/admin.routes"));
+app.use("/api", require("./routes/classroom.routes"));
 // app.use("/meeting", require("./server"));
 // app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 

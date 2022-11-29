@@ -196,7 +196,8 @@ const Join = () => {
         <Container className="px-5 pt-2  d-flex justify-content-center">
           <div className="text-center">
             <h1 className="gx classtitle mt-3">
-              {course.title ? course.title : "Loading"}
+              {course.title ? course.title : <div className="skeleton skeleton-id">
+                </div>}
             </h1>
             {/* <h5>Course Type: {course.duration_type}</h5> */}
             <h5>
@@ -232,19 +233,14 @@ const Join = () => {
                       // course.host_details.img_thumbnail
                       //   ? course.host_details.img_thumbnail.secure_url
                       //   : DefaultPic
-                      // course.host_details.img_thumbnail
-                      //   ? typeof course.host_details.img_thumbnail ===
-                      //       "string" &&
-                      //     course.host_details.img_thumbnail.includes("{")
-                      //     ? JSON.parse(course.host_details.img_thumbnail)
-                      //         .secure_url
-                      //     : course.host_details.img_thumbnail.secure_url
-                      //   : DefaultPic
-                      (typeof course.host_details.img_thumbnail === "object" &&
-                        course.host_details.img_thumbnail.secure_url) ||
-                      (typeof course.host_details.img_thumbnail === "string" &&
-                        course.host_details.img_thumbnail) ||
-                      DefaultPic
+                      course.host_details.img_thumbnail
+                        ? typeof course.host_details.img_thumbnail ===
+                            "string" &&
+                          course.host_details.img_thumbnail.includes("{")
+                          ? JSON.parse(course.host_details.img_thumbnail)
+                              .secure_url
+                          : course.host_details.img_thumbnail.secure_url
+                        : DefaultPic
                     }
                     alt="class1"
                     className="img-fluid iconpic icon2 "

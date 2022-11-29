@@ -163,6 +163,13 @@ class Users {
       const result = await prisma.users.findUnique({
         where: { email: data.email },
       });
+      if (data.hasOwnProperty("phone_num")) {
+        const results2 = await prisma.users.findUnique({
+          where: { phone_num: data.phone_num },
+        });
+        if (results2) return "The user already exist!!";
+      }
+
       if (result) {
         if (data.hasOwnProperty("provider")) {
           console.log(result);
@@ -173,6 +180,19 @@ class Users {
         }
       }
       data.password = await bcrypt.hash(data.password, 12);
+      let result4;
+      const email_type = data.email.split("@")[1];
+      console.log(email_type, "the unique email");
+      if (email_type !== "gmail.com") {
+        result4 = await prisma.classroom.findUnique({
+          where: { email_type },
+        });
+        console.log(result4, "the data");
+        if (result4) {
+          data.classroom_id = result4.id;
+        }
+      }
+      console.log(data, "the params");
       const result2 = await prisma.users.create({
         data,
       });
@@ -190,7 +210,7 @@ class Users {
   async loginWithEmailPass(email, password, provider = false) {
     // manual login worked : )
     try {
-      const result = await prisma.users.findUnique({
+      let result = await prisma.users.findUnique({
         where: { email },
       });
       console.log(password, "the loginWithEmial,----->>>>>");
@@ -201,6 +221,18 @@ class Users {
       }
       password = await bcrypt.compare(password, result.password);
       if (provider || password) {
+        const email_type = email.split("@")[1];
+        if (email_type !== "gmail.com" && !result.classroom_id) {
+          const result3 = await prisma.classroom.findUnique({
+            where: { email_type },
+          });
+          if (result3) {
+            result = await prisma.users.update({
+              where: { id: result.id },
+              data: { classroom_id: result3.id },
+            });
+          }
+        }
         const token = await authenticationToken(result);
         return { token, result };
       } else if (!password) {
