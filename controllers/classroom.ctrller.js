@@ -1,6 +1,19 @@
 const Classroom = new (require("../services/classroom.service"))();
 
 class Classroom_ctrl {
+  workSpaceAllow = async (req, res) => {
+    try {
+      const email_type = req.params.email.split("@")[1];
+      if (email_type === "gmail.com") {
+        return res.status(200).json({ status: false });
+      }
+      const result = await Classroom.workSpaceAllow(email_type);
+      return res.status(200).json({ status: result });
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   createWorkSpace = async (req, res) => {
     try {
       console.log(req.body, "the classroom parameters with data....");

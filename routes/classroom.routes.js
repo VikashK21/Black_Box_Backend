@@ -8,6 +8,12 @@ router.get("/", (req, res) => {
   //   res.send("The classroom page.");
   res.status(200).json({
     msg: "These apis will take the auth token.",
+    workSpaceAllow: {
+      GET: {
+        route: "/api/workspaceallow/:userEmail",
+        response: 'true: go and create || false: leave it.'
+      },
+    },
     createWorkSpace: {
       POST: {
         route: "/api/workspace/:userID",
@@ -100,6 +106,8 @@ router.get("/", (req, res) => {
   });
 });
 //workspace as a company or org...
+router.get("/workspaceallow/:email", Classroom_ctrl.workSpaceAllow);
+
 router.post("/workspace/:id", Classroom_ctrl.createWorkSpace);
 
 router.patch("/workspace", authorizationToken, Classroom_ctrl.editWorkSpace);

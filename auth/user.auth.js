@@ -63,12 +63,12 @@ authorizationToken = (req, res, next) => {
       },
     });
     // console.log(decodedToken, "the data when it comes here");
-    if (decodedToken.admin) {
+    if (decodedToken && decodedToken.admin) {
       req.user_id = decodedToken;
     }
     // const id = jwt.verify(token, process.env.SECRET_KEY_TOKEN);
     // console.log(decodedToken.id, "id");
-    else {
+    else if (decodedToken) {
       req.user_id = Number(decodedToken.id);
       req.classroom_id =
         decodedToken.classroom_id && Number(decodedToken.classroom_id);

@@ -2,6 +2,17 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 class Classroom {
+  async workSpaceAllow(email_type) {
+    try {
+      const result = await prisma.classroom.findUnique({
+        where: { email_type },
+      });
+      if(result) return false
+      return true
+    } catch (err) {
+      return err.message;
+    }
+  }
   async createWorkSpace(id, data) {
     try {
       const result = await prisma.users.findUnique({ where: { id } });
