@@ -10,7 +10,7 @@ import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -60,7 +60,10 @@ const Registration = () => {
     setCloud,
     loading,
     setLoading,
+    workspace,
+    setWorkspace,
   } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(false);
@@ -68,6 +71,9 @@ const Registration = () => {
       top: 0,
       behavior: "smooth",
     });
+    // if (!workspace) {
+    //   navigate("/classroom");
+    // }
   }, []);
 
   const changeHandler = (e) => {
@@ -159,24 +165,77 @@ const Registration = () => {
               className="d-flex justify-content-center flex-column w-100  m-2 mt-5"
               onSubmit={handleSubmit(uploadImage)}
             >
-             
               <Box>
+                <div className="profile-img text-center my-1">
+                  {!image ? (
+                    // <img
+                    //   width={250}
+                    //   src={profile.avatar ? profile.avatar.url : Default }
+                    //   alt=""
+                    // />
+                    ""
+                  ) : (
+                    <img width={250} src={image ? image : Default} alt="" />
+                  )}
+                  <div className="edit-profile-pic d-flex justify-content-center">
+                    <div className="d-flex">
+                      <FormControl
+                        className="d-none"
+                        id="upload_image"
+                        type="file"
+                        onChange={(e) => {
+                          setCropImage(e.target.files[0]);
+                          setShowCropper(true);
+                        }}
+                        accept=".jpg,.jpeg,.png,"
+                      />
+                      <label htmlFor="upload_image">
+                        <span className="profilepic__icon">
+                          {!image ? (
+                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                              Upload Logo
+                            </p>
+                          ) : (
+                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
+                              Change photo
+                            </p>
+                          )}
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {showCropper && (
+                  <CropImage
+                    cropRatio={{ width: 320, height: 420 }}
+                    src={cropImage}
+                    imageCallback={(image) => {
+                      setImage(image);
+                      setShowCropper(false);
+                    }}
+                    closeHander={() => {
+                      setShowCropper(false);
+                    }}
+                  />
+                )}
+
                 <Row className="signupform">
-                  <Col md={6}>
+                  <Col md={12}>
                     <TextField
-                      label="First name"
-                      name="firstname"
-                      {...register("firstname")}
+                      label="Company Name"
+                      name="title"
+                      {...register("title")}
                       variant="outlined"
                       className=" mb-3 w-100"
                       onChange={changeHandler}
-                      helperText={errors.firstname && errors.firstname.message}
+                      helperText={errors.title && errors.title.message}
                       onKeyDown={(e) => {
                         e.key === "Enter" && e.preventDefault();
                       }}
                     />
                   </Col>
-                  <Col md={6}>
+                  {/* <Col md={6}>
                     <TextField
                       label="Last name"
                       name="lastname"
@@ -254,14 +313,14 @@ const Registration = () => {
                         e.key === "Enter" && e.preventDefault();
                       }}
                     />
-                  </Col>
+                  </Col> */}
                   <Col md={12}>
                     <textarea
                       rows="4"
                       className="w-100 noti-content"
-                      name="about"
-                      {...register("about")}
-                      placeholder="About yourself"
+                      name="description"
+                      {...register("description")}
+                      placeholder="About Company"
                       onChange={changeHandler}
                       // onKeyDown={(e) => {
                       //   e.key === "Enter" && e.preventDefault();
@@ -273,68 +332,15 @@ const Registration = () => {
                   </Col>
                 </Row>
 
-                <div className="profile-img text-center my-1">
-                {!image ? (
-                  // <img
-                  //   width={250}
-                  //   src={profile.avatar ? profile.avatar.url : Default }
-                  //   alt=""
-                  // />
-                  ""
-                ) : (
-                  <img width={250} src={image ? image : Default} alt="" />
-                )}
-                <div className="edit-profile-pic d-flex justify-content-center">
-                  <div className="d-flex">
-                    <FormControl
-                      className="d-none"
-                      id="upload_image"
-                      type="file"
-                      onChange={(e) => {
-                        setCropImage(e.target.files[0]);
-                        setShowCropper(true);
-                      }}
-                      accept=".jpg,.jpeg,.png,"
-                    />
-                    <label htmlFor="upload_image">
-                      <span className="profilepic__icon">
-                        {!image ? (
-                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
-                            Upload photo
-                          </p>
-                        ) : (
-                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
-                            Change photo
-                          </p>
-                        )}
-                      </span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              {showCropper && (
-                <CropImage
-                  cropRatio={{ width: 320, height: 420 }}
-                  src={cropImage}
-                  imageCallback={(image) => {
-                    setImage(image);
-                    setShowCropper(false);
-                  }}
-                  closeHander={() => {
-                    setShowCropper(false);
-                  }}
-                />
-              )}
                 <div className="mt-3 d-flex flex-column t-3">
-                  <p className="moto opacity-75">
-                    Already logged in?
+                  {/* <p className="moto opacity-75">
+                    Not yet joined?
                     <Link to="/login" className="text-decoration-none">
                       {" "}
                       Login
                     </Link>
-                  </p>
-                  <center>
+                  </p> */}
+                  {/* <center>
                     <a
                       className="underline "
                       style={{
@@ -345,7 +351,7 @@ const Registration = () => {
                     >
                       Forgot your password
                     </a>
-                  </center>
+                  </center> */}
                   <div className="mt-4 pt-2 w-100">
                     <Button
                       variant="contained"
@@ -368,7 +374,6 @@ const Registration = () => {
                   </div>
                 </div>
               </Box>
-              
             </form>
           </Container>
           {/* <hr className="my-3" /> */}

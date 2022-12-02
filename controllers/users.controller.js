@@ -79,7 +79,7 @@ class User_Ctrl {
     try {
       const result = await Users.profile(req.user_id);
       if (typeof result === "object") {
-        return res.status(200).json(result);
+        return res.status(202).cookie("token_key", result.token).json(result);
       }
       res.status(400).json(result);
     } catch (err) {

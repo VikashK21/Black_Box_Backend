@@ -16,6 +16,7 @@ import { FaRegComment } from "react-icons/fa";
 
 const Profile = () => {
   const {
+    user,
     getCoursesList,
     courseList,
     reaction,
@@ -28,18 +29,21 @@ const Profile = () => {
     noClasses,
     setNoClasses,
     value,
+    getWorkSpaceAllow,
   } = useContext(AuthContext);
 
   const { successToast, errorToast } = useContext(StyleContext);
 
   useEffect(() => {
+    if (!user.classroom_id) {
+      getWorkSpaceAllow(user.email);
+    }
     getCoursesList();
     DynamicTimer();
     console.log(typeof classtime);
     if (typeof classtime === "string") {
       console.log("stringggg");
       setNoClasses(false);
-
     }
     setShowclasses(false);
   }, []);
@@ -47,7 +51,7 @@ const Profile = () => {
   const [timer, setTimer] = useState(true);
 
   const [expiryTime, setExpiryTime] = useState(
-    classtime ? (classtime.time ? classtime.time : 0) : 0
+    classtime ? (classtime.time ? classtime.time : 0) : 0,
   );
   const [countdownTime, setCountdownTime] = useState({
     countdownDays: "",
@@ -63,10 +67,10 @@ const Profile = () => {
       const remainingDayTime = countdownDateTime - currentTime;
       const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
       const totalHours = Math.floor(
-        (remainingDayTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        (remainingDayTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
       );
       const totalMinutes = Math.floor(
-        (remainingDayTime % (1000 * 60 * 60)) / (1000 * 60)
+        (remainingDayTime % (1000 * 60 * 60)) / (1000 * 60),
       );
       const totalSeconds = Math.floor((remainingDayTime % (1000 * 60)) / 1000);
 
@@ -246,7 +250,8 @@ const Profile = () => {
                       }}
                       style={{
                         borderRadius: "15px",
-                      }}reactCourse
+                      }}
+                      reactCourse
                     />
                   </div>
                 </Col>
@@ -256,34 +261,38 @@ const Profile = () => {
                   <div className=" pt-1 ">
                     {courseList.length > 0 &&
                       courseList.map((course, index) => {
-
-                        if (course.host_details.img_thumbnail.includes("{")){
+                        if (course.host_details.img_thumbnail.includes("{")) {
                           const host = course.host_details.img_thumbnail
-                          ? course.host_details.img_thumbnail.secure_url !==
-                            null
-                            ? JSON.parse(course.host_details.img_thumbnail)
-                            : null
-                          : null;
+                            ? course.host_details.img_thumbnail.secure_url !==
+                              null
+                              ? JSON.parse(course.host_details.img_thumbnail)
+                              : null
+                            : null;
                         } else {
-                          const host = course.host_details.img_thumbnail
+                          const host = course.host_details.img_thumbnail;
                         }
-                        
+
                         const a = JSON.parse(course.images);
 
-
-
                         if (a.length !== 0) {
-                if (course.title.toLowerCase().includes(value.toLowerCase()) || course.description.toLowerCase().includes(value.toLowerCase()) || value === "") {
-
-                          return (
-                            <div
-                              className="mb-4 bgw rounded-3 p-3 ps-2 ms-1 me-2  boxshadow"
-                              key={index}
-                            >
-                              <Row className=" ">
-                                <Col md={8}>
-                                  <div className="d-flex">
-                                    {/* <img
+                          if (
+                            course.title
+                              .toLowerCase()
+                              .includes(value.toLowerCase()) ||
+                            course.description
+                              .toLowerCase()
+                              .includes(value.toLowerCase()) ||
+                            value === ""
+                          ) {
+                            return (
+                              <div
+                                className="mb-4 bgw rounded-3 p-3 ps-2 ms-1 me-2  boxshadow"
+                                key={index}
+                              >
+                                <Row className=" ">
+                                  <Col md={8}>
+                                    <div className="d-flex">
+                                      {/* <img
                                     src={
                                       host
                                         ? host.secure_url
@@ -294,27 +303,27 @@ const Profile = () => {
                                     alt="classes"
                                     className="ic"
                                   /> */}
-                                    <div>
-                                      <h5 className="ps-3">{course.title}</h5>
+                                      <div>
+                                        <h5 className="ps-3">{course.title}</h5>
+                                      </div>
                                     </div>
-                                  </div>
-                                </Col>
-                              </Row>
-                              <Link to={`/classes/join/${course.id}`}>
-                                <Row className="d-flex justify-content-center bgw m-0 p-0 ">
-                                  <img
-                                    src={a[0]}
-                                    alt=""
-                                    className="ms-1"
-                                    style={{
-                                      width: "100%",
-                                    }}
-                                  />
+                                  </Col>
                                 </Row>
-                              </Link>
-                              <Row className="mt-2">
-                                {/* <Col md={1}></Col> */}
-                                {/* <Col
+                                <Link to={`/classes/join/${course.id}`}>
+                                  <Row className="d-flex justify-content-center bgw m-0 p-0 ">
+                                    <img
+                                      src={a[0]}
+                                      alt=""
+                                      className="ms-1"
+                                      style={{
+                                        width: "100%",
+                                      }}
+                                    />
+                                  </Row>
+                                </Link>
+                                <Row className="mt-2">
+                                  {/* <Col md={1}></Col> */}
+                                  {/* <Col
                                 md={5}
                                 className="d-flex justify-content-start"
                               >
@@ -333,46 +342,49 @@ const Profile = () => {
                                   Copy
                                 </Button>
                               </Col> */}
-                                <Col
-                                  md={12}
-                                  className="d-flex justify-content-between ps-4 "
-                                >
-                                  {/* <div >
+                                  <Col
+                                    md={12}
+                                    className="d-flex justify-content-between ps-4 "
+                                  >
+                                    {/* <div >
                                   {reaction.length > 0 &&
                                   reaction[index].count > 0
                                     ? reaction[index].count
                                     : " "}
                                 </div> */}
-                                  <div>
-                                    <AiFillHeart
-                                      className="cp"
-                                      onClick={() => {
-                                        triggerReaction(index, course.id);
-                                      }}
-                                      size={30}
-                                      style={{
-                                        color:
-                                          reaction.length > 0 &&
-                                          reaction[index].heart
-                                            ? "orange"
-                                            : "gray",
-                                      }}
-                                    />
-                                    <FaRegComment size={27} className=" ps-1" />
-                                  </div>
-                                  <div className="ps-2 text-muted pt-1">
-                                    {reaction.length > 0 &&
-                                    reaction[index].count > 0
-                                      ? reaction[index].count +
-                                        " likes . 0 comments"
-                                      : " "}
-                                  </div>
-                                </Col>
-                                <Col md={1}></Col>
-                              </Row>
-                            </div>
-                          );
-                                    }
+                                    <div>
+                                      <AiFillHeart
+                                        className="cp"
+                                        onClick={() => {
+                                          triggerReaction(index, course.id);
+                                        }}
+                                        size={30}
+                                        style={{
+                                          color:
+                                            reaction.length > 0 &&
+                                            reaction[index].heart
+                                              ? "orange"
+                                              : "gray",
+                                        }}
+                                      />
+                                      <FaRegComment
+                                        size={27}
+                                        className=" ps-1"
+                                      />
+                                    </div>
+                                    <div className="ps-2 text-muted pt-1">
+                                      {reaction.length > 0 &&
+                                      reaction[index].count > 0
+                                        ? reaction[index].count +
+                                          " likes . 0 comments"
+                                        : " "}
+                                    </div>
+                                  </Col>
+                                  <Col md={1}></Col>
+                                </Row>
+                              </div>
+                            );
+                          }
                         }
                       })}
                   </div>

@@ -30,13 +30,13 @@ export const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
+      : null,
   );
 
   const [user, setUser] = useState(() =>
     localStorage.getItem("authTokens")
       ? jwt_decode(localStorage.getItem("authTokens"))
-      : null
+      : null,
   );
 
   const { errorToast, successToast } = useContext(StyleContext);
@@ -100,11 +100,59 @@ export const AuthProvider = ({ children }) => {
   const [name, setName] = useState();
   const [value, setValue] = useState("");
 
-
   const [toChoose, setToChoose] = useState(false);
 
   const [signUpBatch, setSignUpBatch] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [workspaceAllow, setWorkspaceAllow] = useState(false);
+  const [workspace, setWorkspace] = useState({});
+
+  const getWorkSpaceAllow = async (email) => {
+    try {
+      const res = await axios.get(BaseUrl + "/workspaceallow/" + email);
+      console.log(res);
+      setWorkspaceAllow(res.data.status);
+      return res.data.status;
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const createWorkSpace = async (id, data) => {
+    try {
+      await axios.post(BaseUrl + "/workspace/" + id, data);
+      await getProfile();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const getWorkSpace = async () => {
+    try {
+      const res = await axios.get(BaseUrl + "/workspace", {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      const data = res.data;
+      console.log(data, "the data from the workspace");
+      setWorkspace(() => data);
+      return data
+    } catch (err) {
+      console.log(err.message, "the eoror");
+    }
+  };
+
+  const getProfile = async () => {
+    try {
+      const res = await axios.get(BaseUrl + "/profile", {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res.data, "the profile data");
+      setProfile(res.data);
+      loginProcess(res, "/classroom");
+    } catch (err) {
+      console.log(err.message, "the eroror");
+    }
+  };
 
   const signupUser = async (propic) => {
     setLoading(true);
@@ -121,8 +169,13 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         console.log(res.data);
-        standingData(values.email, values.password);
-        setLoading(false);
+        const entry = getWorkSpaceAllow(res.data.email);
+        if (entry) {
+          navigate("/classroom/register");
+        } else {
+          standingData(values.email, values.password);
+          setLoading(false);
+        }
       })
       .catch((err) => {
         console.log(err.data);
@@ -140,7 +193,7 @@ export const AuthProvider = ({ children }) => {
 
   const [userDetails, setUserDetails] = useState([]);
 
-  const loginProcess = async (res) => {
+  const loginProcess = async (res, nav = "/profile") => {
     try {
       console.log(res.data);
       var details = res.data.result;
@@ -171,11 +224,11 @@ export const AuthProvider = ({ children }) => {
       setName(name);
       setLoading(false);
 
-      if (toChoose===true) {
+      if (toChoose === true) {
         navigate("/host");
         setToChoose(false);
       } else if (toChoose === false) {
-        navigate("/profile");
+        navigate(nav);
       } else {
         navigate("/classes/join/" + toChoose);
       }
@@ -324,7 +377,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          }
+          },
         )
         .then((res) => {
           console.log(res.data);
@@ -351,7 +404,7 @@ export const AuthProvider = ({ children }) => {
           },
           {
             headers: { Authorization: `Bearer ${authTokens}` },
-          }
+          },
         )
         .then((res) => {
           console.log(res.data);
@@ -386,7 +439,7 @@ export const AuthProvider = ({ children }) => {
         try {
           const res = await axios.post(
             "https://api.cloudinary.com/v1_1/black-box/image/upload",
-            data
+            data,
           );
           console.log(res.data, "uploaded...");
           return res.data;
@@ -402,7 +455,7 @@ export const AuthProvider = ({ children }) => {
           formData.append("cloud_name", "black-box");
           const data = await uploaingImg(formData);
           return data.secure_url;
-        })
+        }),
       );
       return uploaders;
     } catch (err) {
@@ -421,7 +474,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       console.log(res.data);
       if (typeof res.data === "object") {
@@ -458,7 +511,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       successToast("Class Added Successfully");
       // setClasslist([{ ...classlist[0], ...res.data }]);
@@ -483,7 +536,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       successToast("Class Added Successfully");
       window.location.reload();
@@ -574,7 +627,7 @@ export const AuthProvider = ({ children }) => {
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       );
       console.log(result, "result");
     } catch (err) {
@@ -675,7 +728,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       )
       .then((res) => {
         console.log(res.data);
@@ -696,7 +749,7 @@ export const AuthProvider = ({ children }) => {
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
-        }
+        },
       )
       .then((res) => {
         console.log(res.data);
@@ -780,6 +833,13 @@ export const AuthProvider = ({ children }) => {
     setValue,
     batch,
     setBatch,
+    workspaceAllow,
+    workspace,
+    setWorkspaceAllow,
+    setWorkspace,
+    getWorkSpaceAllow,
+    getProfile,
+    getWorkSpace,
   };
 
   return (

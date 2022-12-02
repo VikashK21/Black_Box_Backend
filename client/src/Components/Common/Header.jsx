@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../../blackbox-logo-01.png";
@@ -18,10 +18,8 @@ const Header = () => {
   };
 
   window.addEventListener("scroll", handleNavbar);
-  const {setToChoose,
-    value,
-    setValue,
-  } = useContext(AuthContext);
+  const { setToChoose, value, setValue, workSpaceAllow, user } =
+    useContext(AuthContext);
 
   return (
     <>
@@ -34,10 +32,17 @@ const Header = () => {
             <Link to="/main">
               <img src={Logo} width={200} className="p-0 m-0 cp" />
             </Link>
-              <div className="ms-4 pt-1 d-flex searchdiv bggrey ">
-                <input type="text" className="borderless" value={value} onChange={(e)=>{setValue(e.target.value)}} />
-                <BsSearch className="mt-2 ms-2" />
-              </div>
+            <div className="ms-4 pt-1 d-flex searchdiv bggrey ">
+              <input
+                type="text"
+                className="borderless"
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+              <BsSearch className="mt-2 ms-2" />
+            </div>
           </div>
           <div className="">
             <div className="navs align-items-center">
@@ -49,8 +54,17 @@ const Header = () => {
                     </Link>
                   </li> */}
                   <li>
-                    <Link to="/classroom/login" className="link  ">
-CLASSROOM                    </Link>
+                    {user ? (
+                      (user.classroom_id || workSpaceAllow) && (
+                        <Link to="/classroom" className="link  ">
+                          CLASSROOM{" "}
+                        </Link>
+                      )
+                    ) : (
+                      <Link to="/classroom" className="link  ">
+                        CLASSROOM{" "}
+                      </Link>
+                    )}
                   </li>
                   <li>
                     <Link to="/classes" className="link px-5 ">
@@ -58,10 +72,14 @@ CLASSROOM                    </Link>
                     </Link>
                   </li>
                   <li>
-                    <Link to="/host" className="link pe-3 " onClick={()=>{
-                      setToChoose(true)
-                    }}>
-                      HOST A CLASS 
+                    <Link
+                      to="/host"
+                      className="link pe-3 "
+                      onClick={() => {
+                        setToChoose(true);
+                      }}
+                    >
+                      HOST A CLASS
                     </Link>
                   </li>
                   {/* <li>
@@ -78,10 +96,8 @@ CLASSROOM                    </Link>
                     {/* <Link to="/profile" className="link px-2 ">
                       <FaRegUser className="" size={25} />
                     </Link> */}
-                    
-                      <Avatarr />
-                      
 
+                    <Avatarr />
                   </li>
                   {/* <li>
                     <Link to="/nav" className="link px-3 pt-1 ">
@@ -96,15 +112,15 @@ CLASSROOM                    </Link>
       </nav>
       <nav className={navb ? "active w-100 navs2" : "w-100 navs2"}>
         <Container fluid className="d-flex justify-content-between w-100 p-3 ">
-            <div>
-              <Link to="/main">
-                <img src={Logo} width={150} className="p-0 m-0 cp" />
-              </Link>
-            </div>
-            <div className="">
-              <div className="navs align-items-center">
-                <b>
-                  <ul className="navul">
+          <div>
+            <Link to="/main">
+              <img src={Logo} width={150} className="p-0 m-0 cp" />
+            </Link>
+          </div>
+          <div className="">
+            <div className="navs align-items-center">
+              <b>
+                <ul className="navul">
                   {/* <li>
                     <BsSearch className="" size={25} />
                   </li> */}
@@ -115,21 +131,20 @@ CLASSROOM                    </Link>
                   </li> */}
                   <li>
                     {/* <Link to="/profile" className="link px-2 "> */}
-                      {/* <FaRegUser className="" size={25} /> */}
-                      
-                      <Avatarr />
+                    {/* <FaRegUser className="" size={25} /> */}
+
+                    <Avatarr />
                     {/* </Link> */}
                   </li>
-                    <li>
-                      <Link to="/nav" className="link px-3 pt-1 ">
-                        <GiHamburgerMenu className="" size={30} />
-                      </Link>
-                    </li>
-                  </ul>
-                </b>
-              </div>
+                  <li>
+                    <Link to="/nav" className="link px-3 pt-1 ">
+                      <GiHamburgerMenu className="" size={30} />
+                    </Link>
+                  </li>
+                </ul>
+              </b>
             </div>
-          
+          </div>
         </Container>
       </nav>
     </>

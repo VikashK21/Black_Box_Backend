@@ -11,27 +11,28 @@ datasource db {
 }
 
 model Users {
-  id            Int            @id @default(autoincrement())
-  provider      String         @default("email/phone")
-  img_thumbnail String?
-  first_name    String
-  last_name     String
-  email         String         @unique
-  phone_num     String?        @unique
-  password      String
-  about         String?
-  otp           Int            @default(0)
-  verified      Boolean        @default(false)
-  admin         Boolean        @default(false)
-  created_at    DateTime       @default(now())
-  Course        Course[]
-  Participants  Participants[]
-  Gift          Gift[]
-  Suggest       Suggest[]
-  Reactions     Reactions[]
-  Classroom     Classroom?     @relation(fields: [classroom_id], references: [id])
-  classroom_id  Int?
-  updated_at    DateTime       @default(now())
+  id               Int                @id @default(autoincrement())
+  provider         String             @default("email/phone")
+  img_thumbnail    String?
+  first_name       String
+  last_name        String
+  email            String             @unique
+  phone_num        String?            @unique
+  password         String
+  about            String?
+  otp              Int                @default(0)
+  verified         Boolean            @default(false)
+  admin            Boolean            @default(false)
+  created_at       DateTime           @default(now())
+  Course           Course[]
+  Participants     Participants[]
+  Gift             Gift[]
+  Suggest          Suggest[]
+  Reactions        Reactions[]
+  Classroom        Classroom?         @relation(fields: [classroom_id], references: [id])
+  classroom_id     Int?
+  updated_at       DateTime           @default(now())
+  Classroom_Course Classroom_Course[]
 }
 
 model Classroom {
@@ -52,6 +53,8 @@ model Classroom_Course {
   description  String?
   host_details Classroom     @relation(fields: [host], references: [id])
   host         Int
+  creator_d    Users?        @relation(fields: [creator], references: [id])
+  creator      Int?
   images       String[]
   hosted       Boolean       @default(false)
   Classes      Classes[]

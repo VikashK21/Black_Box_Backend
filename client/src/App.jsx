@@ -87,9 +87,9 @@ function App() {
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
 
-              <Route path="/classroom/login" element={<ClassroomLogin />} />
+              {/* <Route path="/classroom/login" element={<ClassroomLogin />} /> */}
               <Route path="/classroom/register" element={<ClassroomRegistration />} />
-              <Route path="/classroom/home" element={<Classroom />} />
+              <Route path="/classroom" element={<Classroom />} />
 
 
               <Route path="/login" element={<Login />} />

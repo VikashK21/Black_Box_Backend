@@ -11,13 +11,14 @@ router.get("/", (req, res) => {
     workSpaceAllow: {
       GET: {
         route: "/api/workspaceallow/:userEmail",
-        response: 'true: go and create || false: leave it.'
+        response: "true: go and create || false: leave it.",
       },
     },
     createWorkSpace: {
       POST: {
         route: "/api/workspace/:userID",
         parameters: {
+          logo: "string",
           title: "string",
           description: 'not neccessary but if there then "string"',
         },

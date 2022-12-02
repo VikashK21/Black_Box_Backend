@@ -7,8 +7,8 @@ class Classroom {
       const result = await prisma.classroom.findUnique({
         where: { email_type },
       });
-      if(result) return false
-      return true
+      if (result) return false;
+      return true;
     } catch (err) {
       return err.message;
     }
@@ -73,9 +73,10 @@ class Classroom {
     }
   }
 
-  async createClassroom(host, data) {
+  async createClassroom(host, data, creator) {
     try {
       data.host = host;
+      data.creator = creator;
       console.log(data, "the data");
       const result = await prisma.classroom_Course.create({
         data,
@@ -102,7 +103,7 @@ class Classroom {
     }
   }
 
-  async editClassroom(id, data) {
+  async editClassroom(id, data, user_id) {
     try {
       const result = await prisma.classroom_Course.update({
         where: { id },
@@ -135,6 +136,7 @@ class Classroom {
           Classes: true,
           Vid_Classes: true,
           Reactions: true,
+          creator_d: true,
         },
       });
       return result;

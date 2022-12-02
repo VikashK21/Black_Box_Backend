@@ -126,7 +126,8 @@ class Users {
   async profile(id) {
     try {
       const result = await prisma.users.findUnique({ where: { id } });
-      return result;
+      const token = await authenticationToken(result);
+      return { result, token };
     } catch (err) {
       return err.message;
     }

@@ -35,7 +35,7 @@ const Edit = () => {
   const [cropImage, setCropImage] = useState(false);
   const [changed, setChanged] = useState(false);
 
-  const { setCloud, authTokens, BaseUrl, editProfile, loading,setLoading } =
+  const { setCloud, authTokens, BaseUrl, editProfile, loading, setLoading } =
     useContext(AuthContext);
 
   const [pro, setPro] = useState({
@@ -57,14 +57,14 @@ const Edit = () => {
           headers: { Authorization: `Bearer ${authTokens}` },
         })
         .then((res) => {
-          console.log(res.data);
-          setPro(res.data);
-          if (res.data.img_thumbnail !== "{}") {
-            if (res.data.img_thumbnail.includes("{")) {
-              var i = JSON.parse(res.data.img_thumbnail);
+          console.log(res.data.result);
+          setPro(res.data.result);
+          if (res.data.result.img_thumbnail !== "{}") {
+            if (res.data.result.img_thumbnail.includes("{")) {
+              var i = JSON.parse(res.data.result.img_thumbnail);
               setImage(i.secure_url);
             } else {
-              setImage(res.data.img_thumbnail);
+              setImage(res.data.result.img_thumbnail);
             }
           }
         })
@@ -128,7 +128,6 @@ const Edit = () => {
               className="d-flex justify-content-center flex-column w-100  m-2 mt-2"
               onSubmit={uploadImage}
             >
-              
               <Box>
                 <Row className="signupform">
                   <Col md={6}>
@@ -220,7 +219,6 @@ const Edit = () => {
                       defaultValue={pro?.about}
                       //   {...register("about")}
                       placeholder="About yourself"
-                      
                       onChange={changeHandler}
                     />
                     <p className="text-danger text-start">
@@ -228,56 +226,56 @@ const Edit = () => {
                     </p>
                   </Col>
                 </Row>
-<div className="profile-img text-center my-1">
-                {!image ? (
-                  ""
-                ) : (
-                  <img width={250} src={image ? image : Default} alt="" />
-                )}
+                <div className="profile-img text-center my-1">
+                  {!image ? (
+                    ""
+                  ) : (
+                    <img width={250} src={image ? image : Default} alt="" />
+                  )}
 
-                <div className="edit-profile-pic d-flex justify-content-center">
-                  <div className="d-flex">
-                    <FormControl
-                      className="d-none"
-                      id="upload_image"
-                      type="file"
-                      onChange={(e) => {
-                        setCropImage(e.target.files[0]);
-                        setShowCropper(true);
-                      }}
-                      accept=".jpg,.jpeg,.png,"
-                    />
-                    <label htmlFor="upload_image">
-                      <span className="profilepic__icon">
-                        {!image ? (
-                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
-                            Update photo
-                          </p>
-                        ) : (
-                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
-                            Change photo
-                          </p>
-                        )}
-                      </span>
-                    </label>
+                  <div className="edit-profile-pic d-flex justify-content-center">
+                    <div className="d-flex">
+                      <FormControl
+                        className="d-none"
+                        id="upload_image"
+                        type="file"
+                        onChange={(e) => {
+                          setCropImage(e.target.files[0]);
+                          setShowCropper(true);
+                        }}
+                        accept=".jpg,.jpeg,.png,"
+                      />
+                      <label htmlFor="upload_image">
+                        <span className="profilepic__icon">
+                          {!image ? (
+                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                              Update photo
+                            </p>
+                          ) : (
+                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
+                              Change photo
+                            </p>
+                          )}
+                        </span>
+                      </label>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {showCropper && (
-                <CropImage
-                  cropRatio={{ width: 320, height: 420 }}
-                  src={cropImage}
-                  imageCallback={(image) => {
-                    setImage(image);
-                    setShowCropper(false);
-                    setChanged(true);
-                  }}
-                  closeHander={() => {
-                    setShowCropper(false);
-                  }}
-                />
-              )}
+                {showCropper && (
+                  <CropImage
+                    cropRatio={{ width: 320, height: 420 }}
+                    src={cropImage}
+                    imageCallback={(image) => {
+                      setImage(image);
+                      setShowCropper(false);
+                      setChanged(true);
+                    }}
+                    closeHander={() => {
+                      setShowCropper(false);
+                    }}
+                  />
+                )}
                 <div className=" d-flex flex-column">
                   <div className=" pt-1 w-100">
                     <Button

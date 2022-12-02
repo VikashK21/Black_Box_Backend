@@ -62,6 +62,7 @@ class Classroom_ctrl {
       const result = await Classroom.createClassroom(
         Number(req.classroom_id),
         req.body,
+        Number(req.user_id),
       );
       if (typeof result === "object") {
         return res.status(201).json(result);
@@ -92,6 +93,7 @@ class Classroom_ctrl {
       const result = await Classroom.editClassroom(
         Number(req.params.id),
         req.body,
+        Number(req.user_id),
       );
       if (typeof result === "object") {
         return res.status(202).json(result);
