@@ -52,7 +52,7 @@ router.get("/", (req, res) => {
     },
     createSession: {
       POST: {
-        route: "/api/classroom/:classroomID",
+        route: "/api/session/:classroomID",
         parameters: {
           title: "not neccessary but if there then 'string'",
           date: "string",
@@ -106,6 +106,8 @@ router.get("/", (req, res) => {
     },
   });
 });
+
+router.delete("/work")
 //workspace as a company or org...
 router.get("/workspaceallow/:email", Classroom_ctrl.workSpaceAllow);
 

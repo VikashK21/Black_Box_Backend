@@ -228,7 +228,7 @@ const LinearStepper = () => {
                             } else if (course.link === "") {
                               errorToast("Link is required");
                             } 
-                            else if (course.linksubstring(0, 8) === "https://") {
+                            else if (course.link.substring(0, 7) === "https://") {
                               errorToast("Link should start with https://");
                             }
                             else if (image.length === 0) {

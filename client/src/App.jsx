@@ -42,6 +42,8 @@ import Social from "./Pages/Login/Social";
 import ClassroomLogin from "./Components/Classroom/Login";
 import ClassroomRegistration from "./Components/Classroom/Register";
 import Classroom from "./Components/Classroom/Classroom";
+import Editclssroom from "./Components/Classroom/Editclssroom";
+import Hostclassroom from "./Components/Classroom/Hostclassroom";
 
 function App() {
   return (
@@ -75,10 +77,6 @@ function App() {
               <Route path="/host/8" element={<Host8 />} />
               <Route path="/host/9" element={<Host9 />} />
 
-
-
-
-
               <Route path="/main" element={<Main />} />
               <Route path="/nav" element={<Burger />} />
               <Route path="/classes" element={<Classes />} />
@@ -88,9 +86,13 @@ function App() {
               <Route path="/terms" element={<Terms />} />
 
               {/* <Route path="/classroom/login" element={<ClassroomLogin />} /> */}
-              <Route path="/classroom/register" element={<ClassroomRegistration />} />
+              <Route
+                path="/classroom/register"
+                element={<ClassroomRegistration />}
+              />
+              <Route path="/classroom/edit" element={<Editclssroom />} />
               <Route path="/classroom" element={<Classroom />} />
-
+              <Route path="/classroom/host" element={<Hostclassroom />} />
 
               <Route path="/login" element={<Login />} />
               <Route path="/otplogin" element={<Otp />} />

@@ -166,7 +166,7 @@ const Burger = () => {
               )}
             </Col>
             <Col md={3}>
-              <div className="py-2">
+              {/* <div className="py-2">
                 <h4
                   className={
                     show === "home"
@@ -179,7 +179,7 @@ const Burger = () => {
                 >
                   HOME
                 </h4>
-              </div>
+              </div> */}
               <div
                 className="py-2"
                 onClick={() => {
@@ -219,7 +219,9 @@ const Burger = () => {
                     setShow("");
                   }}
                 >
-                  <Link to="/host" className="text-dark">HOST A CLASS</Link>
+                  <Link to="/host" className="text-dark">
+                    HOST A CLASS
+                  </Link>
                 </h4>
               </div>
               <div className="py-2">
@@ -236,8 +238,9 @@ const Burger = () => {
                     setShow("");
                   }}
                 >
-                  <Link to="/join" className="text-dark">JOIN A CLASS</Link>
-                 
+                  <Link to="/classroom" className="text-dark">
+                    CLASSROOM
+                  </Link>
                 </h4>
               </div>
               {/* <div className="py-2">

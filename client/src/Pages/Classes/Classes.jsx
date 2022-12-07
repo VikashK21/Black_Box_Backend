@@ -124,7 +124,7 @@ const Classes = () => {
                 >
                   {courseList &&
                     courseList.length > 4 &&
-                    courseList.map((course) => {
+                    courseList.map((course, index) => {
                       const a = JSON.parse(course.images)[0];
                       //check if the course name or course description is in the search bar
                       if (
@@ -138,21 +138,26 @@ const Classes = () => {
                       ) {
                         return (
                           <div
+                            key={index}
                             className="my-4 mt-1 me-4 class "
                             onClick={() =>
                               navigate("/classes/join/" + course.id)
                             }
                           >
                             <div
+                              key={index}
                               className="boxshadow  mb-2 mb-5 cp my-4 zoom"
                               style={{
                                 width: "190px",
                               }}
                             >
                               <div className="profileclassesimg22">
-                                <img src={a} className="classesimg22" />
+                                <img src={a} className="classesimg22" alt="" />
                               </div>
-                              <Row className="profilest bw m-0 ">
+                              <Row
+                                key={course.id}
+                                className="profilest bw m-0 "
+                              >
                                 <div
                                   className="d-flex"
                                   style={{

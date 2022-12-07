@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   window.addEventListener("scroll", handleNavbar);
-  const { setToChoose, value, setValue, workSpaceAllow, user } =
+  const { setToChoose, value, setValue, workspaceAllow, user, seenavs } =
     useContext(AuthContext);
 
   return (
@@ -30,7 +30,7 @@ const Header = () => {
         >
           <div className="d-flex">
             <Link to="/main">
-              <img src={Logo} width={200} className="p-0 m-0 cp" />
+              <img src={Logo} width={200} className="p-0 m-0 cp" alt="" />
             </Link>
             <div className="ms-4 pt-1 d-flex searchdiv bggrey ">
               <input
@@ -55,7 +55,7 @@ const Header = () => {
                   </li> */}
                   <li>
                     {user ? (
-                      (user.classroom_id || workSpaceAllow) && (
+                      (user.classroom_id || workspaceAllow) && (
                         <Link to="/classroom" className="link  ">
                           CLASSROOM{" "}
                         </Link>
@@ -66,22 +66,35 @@ const Header = () => {
                       </Link>
                     )}
                   </li>
-                  <li>
-                    <Link to="/classes" className="link px-5 ">
-                      JOIN A CLASS
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/host"
-                      className="link pe-3 "
-                      onClick={() => {
-                        setToChoose(true);
-                      }}
-                    >
-                      HOST A CLASS
-                    </Link>
-                  </li>
+                  {seenavs ? (
+                    <>
+                      <li>
+                        <Link to="/classroom/host" className="link px-5">
+                          HOST A SESSION{" "}
+                        </Link>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li>
+                        <Link to="/classes" className="link px-5 ">
+                          JOIN A CLASS
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/host"
+                          className="link pe-3 "
+                          onClick={() => {
+                            setToChoose(true);
+                          }}
+                        >
+                          HOST A CLASS
+                        </Link>
+                      </li>
+                    </>
+                  )}
+
                   {/* <li>
                     <Link to='/enter' className='link px-2 '>
                     <BsSearch className="" size={25} />
@@ -114,7 +127,7 @@ const Header = () => {
         <Container fluid className="d-flex justify-content-between w-100 p-3 ">
           <div>
             <Link to="/main">
-              <img src={Logo} width={150} className="p-0 m-0 cp" />
+              <img src={Logo} width={150} className="p-0 m-0 cp" alt="" />
             </Link>
           </div>
           <div className="">

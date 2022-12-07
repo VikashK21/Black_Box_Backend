@@ -30,11 +30,13 @@ const Profile = () => {
     setNoClasses,
     value,
     getWorkSpaceAllow,
+    setSeenavs,
   } = useContext(AuthContext);
 
   const { successToast, errorToast } = useContext(StyleContext);
 
   useEffect(() => {
+    setSeenavs(false);
     if (!user.classroom_id) {
       getWorkSpaceAllow(user.email);
     }

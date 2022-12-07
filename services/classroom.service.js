@@ -165,6 +165,7 @@ class Classroom {
           Classes: true,
           Vid_Classes: true,
           Reactions: true,
+          creator_d: true
         },
       });
       return result;

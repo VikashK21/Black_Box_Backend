@@ -36,8 +36,10 @@ function Social() {
   return (
     <div className="container-fluid">
       <div className="container d-flex justify-content-end py-5">
-
-      <Button variant="contained"  onClick={profileNavigtr}> Go to Profile</Button>
+        <Button variant="contained" onClick={profileNavigtr}>
+          {" "}
+          Go to Profile
+        </Button>
       </div>
     </div>
   );

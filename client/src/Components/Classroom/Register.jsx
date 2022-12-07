@@ -19,29 +19,29 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import CropImage from "../../Components/Common/CropImage";
 
 const schema = yup.object().shape({
-  firstname: yup
+  title: yup
     .string()
-    .min(3, "Firstname should contain 3 characters")
-    .required("Firstname is required"),
+    .min(3, "Title should contain 3 characters")
+    .required("Title is required"),
 
-  lastname: yup.string(),
+  description: yup.string(),
 
-  email: yup.string().email("Invalid email").required("Email is required"),
+  // email: yup.string() .email("Invalid email").required("Email is required"),
 
-  password: yup
-    .string()
-    .min(6, "Password should contain 6 characters")
-    .required("Password is required"),
+  // password: yup
+  //   .string()
+  //   .min(6, "Password should contain 6 characters")
+  //   .required("Password is required"),
 
-  cpassword: yup
-    .string()
-    .oneOf([yup.ref("password"), "Passwords not matching"])
-    .required("Confirm password is required"),
+  // cpassword: yup
+  //   .string()
+  //   .oneOf([yup.ref("password"), "Passwords not matching"])
+  //   .required("Confirm password is required"),
 
-  about: yup
-    .string()
-    .min(10, "Should contain a minimum of 10 characters")
-    .required("About is required"),
+  // about: yup
+  //   .string()
+  //   .min(10, "Should contain a minimum of 10 characters")
+  //   .required("About is required"),
 });
 
 const Registration = () => {
@@ -51,17 +51,19 @@ const Registration = () => {
   const [thumbnail, setThumbnail] = useState("");
 
   const {
+    user,
     backendUpdate,
-    signupUser,
+    createWorkSpace,
     setValues,
     values,
-    profile,
-    cloud,
-    setCloud,
+    workspaceAllow,
+    // profile,
+    // cloud,
+    // setCloud,
     loading,
     setLoading,
-    workspace,
-    setWorkspace,
+    workdata,
+    standingData,
   } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -71,9 +73,9 @@ const Registration = () => {
       top: 0,
       behavior: "smooth",
     });
-    // if (!workspace) {
-    //   navigate("/classroom");
-    // }
+    if (!workspaceAllow) {
+      navigate("/classroom");
+    }
   }, []);
 
   const changeHandler = (e) => {
@@ -100,13 +102,20 @@ const Registration = () => {
 
           // setCloud(JSON.stringify(data.data));
           propic = data.data.secure_url;
-          signupUser(propic);
+          createWorkSpace(workdata.id, {
+            title: values.title,
+            description: values.description,
+            logo: propic,
+          });
         })
         .catch((err) => {
           alert(err);
         });
     } else {
-      signupUser(propic);
+      createWorkSpace(workdata.id, {
+        title: values.title,
+        description: values.description,
+      });
     }
   };
 
@@ -327,19 +336,28 @@ const Registration = () => {
                       // }}
                     />
                     <p className="text-danger text-start">
-                      {errors.about && errors.about.message}
+                      {errors.description && errors.description.message}
                     </p>
                   </Col>
                 </Row>
 
                 <div className="mt-3 d-flex flex-column t-3">
-                  {/* <p className="moto opacity-75">
-                    Not yet joined?
-                    <Link to="/login" className="text-decoration-none">
+                  <p className="moto opacity-75">
+                    Want to create Classroom?
+                    <Button
+                      onClick={() => {
+                        if (user) navigate("/profile");
+                        else {
+                          standingData(workdata.email, workdata.password);
+                        }
+                      }}
+                      // to={user ? "/profile" : "/login"}
+                      className="text-decoration-none"
+                    >
                       {" "}
-                      Login
-                    </Link>
-                  </p> */}
+                      Later
+                    </Button>
+                  </p>
                   {/* <center>
                     <a
                       className="underline "

@@ -9,13 +9,13 @@ import { type } from "@testing-library/user-event/dist/type";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api";
+// export const BaseUrl = "/api";
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -106,6 +106,8 @@ export const AuthProvider = ({ children }) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [workspaceAllow, setWorkspaceAllow] = useState(false);
   const [workspace, setWorkspace] = useState({});
+  const [workdata, setWorkdata] = useState({});
+  const [seenavs, setSeenavs] = useState(false);
 
   const getWorkSpaceAllow = async (email) => {
     try {
@@ -120,8 +122,41 @@ export const AuthProvider = ({ children }) => {
 
   const createWorkSpace = async (id, data) => {
     try {
+      setLoading(true);
       await axios.post(BaseUrl + "/workspace/" + id, data);
-      await getProfile();
+      if (user) {
+        await getProfile();
+      } else {
+        await standingData(workdata.email, workdata.password, "/classroom");
+      }
+      setLoading(false);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const getWorkSpaceClassroom = async () => {
+    try {
+      const res = await axios.get(BaseUrl + "/classrooms", {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res.data, "the data of the Classroom");
+      return res.data;
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const editWorkSpace = async (data) => {
+    try {
+      setLoading(true);
+      const res = await axios.patch(BaseUrl + "/workspace", data, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res.data, "edited, the workspace...");
+      navigate("/classroom");
+      setLoading(false);
+      return res.data;
     } catch (err) {
       console.log(err.message);
     }
@@ -135,7 +170,7 @@ export const AuthProvider = ({ children }) => {
       const data = res.data;
       console.log(data, "the data from the workspace");
       setWorkspace(() => data);
-      return data
+      return data;
     } catch (err) {
       console.log(err.message, "the eoror");
     }
@@ -157,6 +192,7 @@ export const AuthProvider = ({ children }) => {
   const signupUser = async (propic) => {
     setLoading(true);
 
+    const entry = await getWorkSpaceAllow(values.email);
     await axios
       .post(BaseUrl + "/signup", {
         first_name: values.firstname,
@@ -169,8 +205,12 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         console.log(res.data);
-        const entry = getWorkSpaceAllow(res.data.email);
         if (entry) {
+          setWorkdata({
+            id: res.data.id,
+            email: values.email,
+            password: values.password,
+          });
           navigate("/classroom/register");
         } else {
           standingData(values.email, values.password);
@@ -237,7 +277,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const standingData = async (email, password) => {
+  const standingData = async (email, password, nav = "/profile") => {
     setLoading(true);
     await axios
       .post(BaseUrl + "/login", {
@@ -245,7 +285,7 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then((res) => {
-        loginProcess(res);
+        loginProcess(res, nav);
       })
       .catch((err) => {
         setLoading(false);
@@ -272,6 +312,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = async () => {
+    setSeenavs(false);
     await axios
       .post(BaseUrl + "/logout", {
         headers: {
@@ -840,6 +881,13 @@ export const AuthProvider = ({ children }) => {
     getWorkSpaceAllow,
     getProfile,
     getWorkSpace,
+    getWorkSpaceClassroom,
+    editWorkSpace,
+    createWorkSpace,
+    workdata,
+    standingData,
+    setSeenavs,
+    seenavs,
   };
 
   return (

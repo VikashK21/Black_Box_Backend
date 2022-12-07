@@ -172,14 +172,14 @@ const Host = () => {
                     onKeyDown={(e) => {
                       e.key === "Enter" && e.preventDefault();
                     }}
-                    defaultValue={course.link}
+                    value={course.link}
                     placeholder="To get the google meet link, click on Link button"
                     onChange={changeHandler}
                     variant="outlined"
                     required
                   />
                   <MeetLink />
-                  <a href="https://meet.google.com/" target="_blank">
+                  <a href="https://meet.google.com/" rel="noreferrer" target="_blank">
                     <Button variant="contained" className="h-75 w-25 ms-1 my-2">
                       Link
                     </Button>
@@ -268,7 +268,7 @@ const Host = () => {
 
             {showCropper && (
               <CropImage
-                // cropRatio={{ width: 320, height: 420 }}
+                cropRatio={{ width: 320, height: 420 }}
                 src={cropImage}
                 imageCallback={(image) => {
                   // setImage(image);
