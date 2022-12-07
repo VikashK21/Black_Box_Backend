@@ -168,6 +168,7 @@ class Users {
         /// the temporary change till the app updated>>>>
         if (data.phone_num.length === 0) {
           delete data.phone_num;
+          data.provider='google'
         }
         const results2 = await prisma.users.findUnique({
           where: { phone_num: data.phone_num },
