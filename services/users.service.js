@@ -168,7 +168,8 @@ class Users {
         const results2 = await prisma.users.findUnique({
           where: { phone_num: data.phone_num },
         });
-        if (results2) return "The user already exist!!";
+        if (results2 && results2.phone_num.length > 0)
+          return "The user already exist!!";
       }
 
       if (result) {
