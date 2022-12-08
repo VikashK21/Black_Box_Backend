@@ -164,7 +164,7 @@ class Users {
       const result = await prisma.users.findUnique({
         where: { email: data.email },
       });
-      if (data.hasOwnProperty("phone_num")) {
+      if (data && data.hasOwnProperty("phone_num")) {
         /// the temporary change till the app updated>>>>
         if (data.phone_num.length === 0) {
           delete data.phone_num;
@@ -178,7 +178,7 @@ class Users {
       }
 
       if (result) {
-        if (data.hasOwnProperty("provider")) {
+        if (data && data.hasOwnProperty("provider")) {
           console.log(result);
           return this.loginWithEmailPass(data.email, password, true);
         } else {
@@ -203,7 +203,7 @@ class Users {
       const result2 = await prisma.users.create({
         data,
       });
-      if (data.hasOwnProperty("provider")) {
+      if (data && data.hasOwnProperty("provider")) {
         return this.loginWithEmailPass(data.email, password, true);
       }
       return result2;
