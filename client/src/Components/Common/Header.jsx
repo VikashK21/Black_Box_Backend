@@ -53,19 +53,19 @@ const Header = () => {
                       STREAM
                     </Link>
                   </li> */}
-                  <li>
+                  {/* <li>
                     {user ? (
-                      (user.classroom_id || workspaceAllow) && (
-                        <Link to="/classroom" className="link  ">
-                          CLASSROOM{" "}
-                        </Link>
-                      )
+                      (user.classroom_id || workspaceAllow) && ( */}
+                  <Link to="/classroom" className="link  ">
+                    CLASSROOM{" "}
+                  </Link>
+                  {/* )
                     ) : (
                       <Link to="/classroom" className="link  ">
                         CLASSROOM{" "}
                       </Link>
                     )}
-                  </li>
+                  </li> */}
                   {seenavs ? (
                     <>
                       <li>

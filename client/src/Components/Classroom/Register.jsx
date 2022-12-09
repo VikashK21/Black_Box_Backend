@@ -74,7 +74,7 @@ const Registration = () => {
       behavior: "smooth",
     });
     if (!workspaceAllow) {
-      navigate("/classroom");
+      navigate("/signup");
     }
   }, []);
 

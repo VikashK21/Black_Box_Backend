@@ -51,11 +51,12 @@ const Whatsnew = () => {
                 <div className="ps-3">
                   {prop ? (
                     propic ? (
-                      <img src={propic} className=" mb-1 mt-3 ic2 " />
+                      <img src={propic} className=" mb-1 mt-3 ic2 " alt="git st" />
                     ) : (
                       <img
                         width={100}
                         height={100}
+                        alt=""
                         style={{
                           borderRadius: "50%",
                         }}
@@ -67,6 +68,7 @@ const Whatsnew = () => {
                       src={DefaultPic}
                       width={100}
                       height={100}
+                      alt=""
                       className=" mb-1 mt-3 ic2"
                     />
                   )}

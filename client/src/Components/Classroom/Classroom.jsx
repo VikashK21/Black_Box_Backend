@@ -21,6 +21,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import StyleContext from "../../Context/StyleContext";
 import { FaRegComment } from "react-icons/fa";
+import { yellow } from "@mui/material/colors";
 
 const Classroom = () => {
   const name = localStorage.getItem("name");
@@ -39,6 +40,7 @@ const Classroom = () => {
   // var about = localStorage.getItem("userDetails");
   const [workSpace, setWorkSpace] = useState(null);
   const [courses, setCourses] = useState([]);
+  const [sub, setSub] = useState(false);
 
   const {
     user,
@@ -71,10 +73,11 @@ const Classroom = () => {
       console.log("camer here ");
       await getWorkSpaceAllow(user.email);
       if (workspaceAllow) {
-        navigate("/classroom/register");
-      }
-      else {
-        navigate('/profile')
+        // navigate("/classroom/register");
+        setSub(1);
+      } else {
+        // navigate('/profile')
+        setSub(2);
       }
     } else {
       console.log("cmaer heretoooo");
@@ -94,72 +97,134 @@ const Classroom = () => {
     <Container fluid className="m-0 p-0 bgg">
       <Header />
       <Container fluid className="white bggrey"></Container>
-      <Container
-        fluid
-        className="profilediv d-flex justify-content-center p-0 m-0 bgw boxshadow my-1"
-      >
-        <Container className="pc py-5 pb-0">
-          <Row>
-            <Col lg={1}></Col>
-            <Col lg={3}>
-              <Row className="mb-4">
-                <Col
-                  md={12}
-                  className="d-flex justify-content-start align-items-center"
+      {sub ? (
+        <Container
+          fluid
+          className="profilediv d-flex justify-content-center align-items-center bgw"
+        >
+          {/* <Container className="pc py-5 pb-0"> */}
+          <Row className="d-flex flex-column justify-content-center align-items-center">
+            {/* <Col md={2}></Col> */}
+            {/* <Col md={3}></Col> */}
+            <Col
+              md={7}
+              className="d-flex text-center align-items-center"
+              // style={{
+              //   height: "fitContent",
+              // }}
+            >
+              <div className="mb-4 abc card-title">
+                {sub === 1 ? (
+                  <p style={{ fontSize: 25 }}>
+                    {" "}
+                    Tailored classes/sessions, just for you and your team. Join
+                    as a corporate or school/college/company and experience it
+                    with exploration.{" "}
+                  </p>
+                ) : (
+                  <p style={{ fontSize: 25 }}>
+                    {" "}
+                    Tailored classes/sessions, just for you and your team. Join
+                    as a <b>corporate or school/college/company account</b> and
+                    experience it.{" "}
+                  </p>
+                )}
+              </div>
+            </Col>
+            <Col md={6} className="d-flex justify-content-center">
+              {sub === 1 ? (
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className="bgdark"
+                  onClick={() => navigate("/classroom/register")}
                 >
-                  <div className="ps-4">
-                    {workSpace && workSpace.logo.length > 0 ? (
-                      <img
-                        src={workSpace.logo}
-                        width={120}
-                        height={100}
-                        style={{
-                          borderRadius: "50%",
-                          objectFit: "cover",
-                        }}
-                        className="profilepic mb-1 mt-2"
-                        alt="logo"
-                      />
-                    ) : (
-                      <img
-                        src={DefaultPic}
-                        width={120}
-                        height={100}
-                        style={{
-                          borderRadius: "50%",
-                          objectFit: "cover",
-                        }}
-                        className="profilepic mb-1 mt-2 "
-                        alt="logo"
-                      />
-                    )}
-                  </div>
-                </Col>
-                <Col md={12}>
-                  <div className="mt-2 ps-2">
-                    {/* <h3>{workSpace && workSpace.title}</h3> */}
-                    {/* <p className="">{about}</p> */}
-                    {/* <ReadMoreReact
+                  {" "}
+                  Subscribe
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className="bgdark"
+                  onClick={() => navigate("/signup")}
+                >
+                  {" "}
+                  Join In
+                </Button>
+              )}
+            </Col>
+          </Row>
+          {/* </Container> */}
+        </Container>
+      ) : (
+        <>
+          <Container
+            fluid
+            className="profilediv d-flex justify-content-center p-0 m-0 bgw boxshadow my-1"
+          >
+            <Container className="pc py-5 pb-0">
+              <Row>
+                <Col lg={1}></Col>
+                <Col lg={3}>
+                  <Row className="mb-4">
+                    <Col
+                      md={12}
+                      className="d-flex justify-content-start align-items-center"
+                    >
+                      <div className="ps-4">
+                        {workSpace && workSpace.logo.length > 0 ? (
+                          <img
+                            src={workSpace.logo}
+                            width={120}
+                            height={100}
+                            style={{
+                              borderRadius: "50%",
+                              objectFit: "cover",
+                            }}
+                            className="profilepic mb-1 mt-2"
+                            alt="logo"
+                          />
+                        ) : (
+                          <img
+                            src={DefaultPic}
+                            width={120}
+                            height={100}
+                            style={{
+                              borderRadius: "50%",
+                              objectFit: "cover",
+                            }}
+                            className="profilepic mb-1 mt-2 "
+                            alt="logo"
+                          />
+                        )}
+                      </div>
+                    </Col>
+                    <Col md={12}>
+                      <div className="mt-2 ps-2">
+                        {/* <h3>{workSpace && workSpace.title}</h3> */}
+                        {/* <p className="">{about}</p> */}
+                        {/* <ReadMoreReact
                       text={about}
                       min={150}
                       ideal={150}
                       max={150}
                       readMoreText=".. read more"
                     /> */}
-                    <div className=" mt-2">
-                      <Link to="/classroom/edit">
-                        <Button
-                          variant="contained"
-                          className="bggrey me-1 text-dark px-4 mb-1 mt-3"
-                          style={{
-                            height: "40px",
-                            width: "160px",
-                          }}
-                        >
-                          Edit Profile
-                        </Button>
-                      </Link>
-                      {/* <Button
+                        <div className=" mt-2">
+                          <Link to="/classroom/edit">
+                            <Button
+                              variant="contained"
+                              className="bggrey me-1 text-dark px-4 mb-1 mt-3"
+                              style={{
+                                height: "40px",
+                                width: "160px",
+                              }}
+                            >
+                              Edit Profile
+                            </Button>
+                          </Link>
+                          {/* <Button
                         variant="contained"
                         className="bg-dark text-white"
                         style={{
@@ -172,26 +237,26 @@ const Classroom = () => {
                       >
                         My Classes
                       </Button> */}
-                    </div>
-                  </div>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
                 </Col>
-              </Row>
-            </Col>
-            <Col lg={1}></Col>
-            <Col lg={5} className="ps-4 mt-4 abc">
-              <h1 className="mb-2 mt-2">{workSpace && workSpace.title}</h1>
-              <p className="mb-2 mt-4 abc">
-                {workSpace && workSpace.description}{" "}
-              </p>
+                <Col lg={1}></Col>
+                <Col lg={5} className="ps-4 mt-4 abc">
+                  <h1 className="mb-2 mt-2">{workSpace && workSpace.title}</h1>
+                  <p className="mb-2 mt-4 abc">
+                    {workSpace && workSpace.description}{" "}
+                  </p>
 
-              {/* <ReadMoreReact
+                  {/* <ReadMoreReact
                 text={workSpace && workSpace.description}
                 min={150}
                 ideal={150}
                 max={150}
                 readMoreText="..."
               /> */}
-              {/* <div
+                  {/* <div
                 className="d-flex w-100 abc"
                 style={{
                   overflowX: "scroll",
@@ -276,162 +341,168 @@ const Classroom = () => {
                     })
                   : ""}
               </div> */}
-            </Col>
-          </Row>
-        </Container>
-      </Container>
-      <Container fluid className="p-1 m-1 bggrey"></Container>
-      <Container
-        className=" pt-4"
-        style={{
-          maxWidth: "1500px",
-        }}
-      >
-        <Row className="mt-2 ">
-          <Col lg={20} className="text-center mb-3">
-            <h1>UPCOMING SESSIONS</h1>
-          </Col>
-          <Col
-            lg={20}
-            className="d-flex justify-content-center align-items-center flex-wrap"
+                </Col>
+              </Row>
+            </Container>
+          </Container>
+          <Container fluid className="p-1 m-1 bggrey"></Container>
+          <Container
+            className=" pt-4"
+            style={{
+              maxWidth: "1500px",
+            }}
           >
-            {courses.length > 0 &&
-              courses.map((course, index) => {
-                let a = course.images;
-                // remember this to open while pushing on the server........
-                // if (a.length > 0) {
-                //   a = a[2];
-                // }
-                // else
-                if (workSpace.logo.length > 0) {
-                  a = workSpace.logo;
-                } else {
-                  a = DefaultPic;
-                }
-                console.log(a, "the images");
-                // a[0] = workSpace.logo;
-                // if (course.host_details.img_thumbnail.includes("{")) {
-                //   const host = course.host_details.img_thumbnail
-                //     ? course.host_details.img_thumbnail.secure_url !==
-                //       null
-                //       ? JSON.parse(course.host_details.img_thumbnail)
-                //       : null
-                //     : null;
-                // } else {
-                //   const host = course.host_details.img_thumbnail;
-                // }
-                // if (a.length !== 0 && a[0].length !== undefined) {
-                return (
-                  <div
-                    className="my-4 mt-1 me-4 class"
-                    key={index}
-
-                    // style={{ height: "320px" }}
-                  >
-                    <a
-                      href={course.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="cp"
-                    >
+            <Row className="mt-2 ">
+              <Col lg={20} className="text-center mb-3">
+                <h1>UPCOMING SESSIONS</h1>
+              </Col>
+              <Col
+                lg={20}
+                className="d-flex justify-content-center align-items-center flex-wrap"
+              >
+                {courses.length > 0 &&
+                  courses.map((course, index) => {
+                    let a = course.images;
+                    // remember this to open while pushing on the server........
+                    // if (a.length > 0) {
+                    //   a = a[2];
+                    // }
+                    // else
+                    if (workSpace.logo.length > 0) {
+                      a = workSpace.logo;
+                    } else {
+                      a = DefaultPic;
+                    }
+                    console.log(a, "the images");
+                    // a[0] = workSpace.logo;
+                    // if (course.host_details.img_thumbnail.includes("{")) {
+                    //   const host = course.host_details.img_thumbnail
+                    //     ? course.host_details.img_thumbnail.secure_url !==
+                    //       null
+                    //       ? JSON.parse(course.host_details.img_thumbnail)
+                    //       : null
+                    //     : null;
+                    // } else {
+                    //   const host = course.host_details.img_thumbnail;
+                    // }
+                    // if (a.length !== 0 && a[0].length !== undefined) {
+                    return (
                       <div
-                        className="boxshadow rounded-5 mb-2"
-                        style={{
-                          width: "220px",
-                        }}
+                        className="my-4 mt-1 me-4 class"
+                        key={index}
+
+                        // style={{ height: "320px" }}
                       >
-                        <div className="profileclassesimg">
-                          <img src={a} className="classesimg" alt="profile" />
-                        </div>
-                        <Row
-                          className="profilest bw m-0"
-                          style={{
-                            overflowY: "hidden",
-                          }}
+                        <a
+                          href={course.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="cp"
                         >
                           <div
-                            className="d-flex justify-content-center gap-2"
+                            className="boxshadow rounded-5 mb-2"
                             style={{
-                              overflowX: "hidden",
+                              width: "220px",
                             }}
                           >
-                            <div>
-                              {course.creator_d.img_thumbnail.length > 0 ? (
-                                <img
-                                  src={course.creator_d.img_thumbnail}
-                                  width={50}
-                                  height={50}
-                                  style={{
-                                    borderRadius: "50%",
-                                    objectFit: "cover",
-                                  }}
-                                  className="mb-1 mt-2"
-                                  alt="logo"
-                                />
-                              ) : (
-                                <img
-                                  src={DefaultUserPic}
-                                  width={50}
-                                  height={50}
-                                  style={{
-                                    borderRadius: "50%",
-                                    objectFit: "cover",
-                                  }}
-                                  className="mb-1 mt-2 "
-                                  alt="logo"
-                                />
-                              )}
+                            <div className="profileclassesimg">
+                              <img
+                                src={a}
+                                className="classesimg"
+                                alt="profile"
+                              />
                             </div>
-                            <div
-                              className=" w-85 ms-1 pt-2"
+                            <Row
+                              className="profilest bw m-0"
                               style={{
-                                margin: "auto",
+                                overflowY: "hidden",
                               }}
                             >
-                              <b>
-                                <p
-                                  className="gx pb-0 text-dark"
+                              <div
+                                className="d-flex justify-content-center gap-2"
+                                style={{
+                                  overflowX: "hidden",
+                                }}
+                              >
+                                <div>
+                                  {course.creator_d.img_thumbnail.length > 0 ? (
+                                    <img
+                                      src={course.creator_d.img_thumbnail}
+                                      width={50}
+                                      height={50}
+                                      style={{
+                                        borderRadius: "50%",
+                                        objectFit: "cover",
+                                      }}
+                                      className="mb-1 mt-2"
+                                      alt="logo"
+                                    />
+                                  ) : (
+                                    <img
+                                      src={DefaultUserPic}
+                                      width={50}
+                                      height={50}
+                                      style={{
+                                        borderRadius: "50%",
+                                        objectFit: "cover",
+                                      }}
+                                      className="mb-1 mt-2 "
+                                      alt="logo"
+                                    />
+                                  )}
+                                </div>
+                                <div
+                                  className=" w-85 ms-1 pt-2"
                                   style={{
                                     margin: "auto",
                                   }}
                                 >
-                                  {course.title && course.title.length > 20
-                                    ? course.title
-                                        .substring(0, 20)
-                                        .split(" ")
-                                        .slice(0, -1)
-                                        .join(" ")
-                                    : course.title}
-                                </p>
-                              </b>
-                              <p>
-                                {course.creator_d.first_name}{" "}
-                                {course.creator_d.last_name}
-                              </p>
-                            </div>
+                                  <b>
+                                    <p
+                                      className="gx pb-0 text-dark"
+                                      style={{
+                                        margin: "auto",
+                                      }}
+                                    >
+                                      {course.title && course.title.length > 20
+                                        ? course.title
+                                            .substring(0, 20)
+                                            .split(" ")
+                                            .slice(0, -1)
+                                            .join(" ")
+                                        : course.title}
+                                    </p>
+                                  </b>
+                                  <p>
+                                    {course.creator_d.first_name}{" "}
+                                    {course.creator_d.last_name}
+                                  </p>
+                                </div>
+                              </div>
+                              <div
+                                className=" w-60 pt-1 pb-3 text-dark"
+                                style={{
+                                  margin: "auto",
+                                  overflowX: "hidden",
+                                  overflowY: "hidden",
+                                }}
+                              >
+                                Date: June 21, 22, 23 <br />
+                                Time: 3:30 PM - 4:30 PM
+                              </div>
+                            </Row>
                           </div>
-                          <div
-                            className=" w-60 pt-1 pb-3 text-dark"
-                            style={{
-                              margin: "auto",
-                              overflowX: "hidden",
-                              overflowY: "hidden",
-                            }}
-                          >
-                            Date: June 21, 22, 23 <br />
-                            Time: 3:30 PM - 4:30 PM
-                          </div>
-                        </Row>
+                        </a>
                       </div>
-                    </a>
-                  </div>
-                );
-              })}
-          </Col>
-          <Col md={5} className="m-5 "></Col>
-        </Row>
-      </Container>
-      <Footer feeds="true" />
+                    );
+                  })}
+              </Col>
+              <Col md={5} className="m-5 "></Col>
+            </Row>
+          </Container>
+          <Footer feeds="true" />
+        </>
+      )}
     </Container>
   );
 };

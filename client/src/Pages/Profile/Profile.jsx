@@ -195,7 +195,7 @@ const Profile = () => {
                               <a
                                 href={classtime ? classtime.link : ""}
                                 target="_blank"
-                                className="w-50 p-0"
+                                className="w-50 p-0" rel="noreferrer"
                               >
                                 <Button
                                   variant="primary"
@@ -246,6 +246,7 @@ const Profile = () => {
                     <img
                       src={Classes}
                       className=" p-0 m-0 w-75 cp"
+                      alt=""
                       onClick={() => {
                         setShowclasses(true);
                         scollToRef.current.scrollIntoView();

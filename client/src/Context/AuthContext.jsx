@@ -9,13 +9,13 @@ import { type } from "@testing-library/user-event/dist/type";
 const AuthContext = createContext();
 export default AuthContext;
 
-// export const BaseUrl = "http://localhost:3001/api";
+export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-export const BaseUrl = "/api";
+// export const BaseUrl = "/api";
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -191,8 +191,9 @@ export const AuthProvider = ({ children }) => {
 
   const signupUser = async (propic) => {
     setLoading(true);
-
+    console.log('Came till here....');
     const entry = await getWorkSpaceAllow(values.email);
+    console.log(entry, 'the resa');
     await axios
       .post(BaseUrl + "/signup", {
         first_name: values.firstname,
