@@ -107,7 +107,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.delete("/work")
+router.delete("/workspace")
 //workspace as a company or org...
 router.get("/workspaceallow/:email", Classroom_ctrl.workSpaceAllow);
 

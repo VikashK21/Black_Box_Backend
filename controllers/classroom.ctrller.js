@@ -4,7 +4,12 @@ class Classroom_ctrl {
   workSpaceAllow = async (req, res) => {
     try {
       const email_type = req.params.email.split("@")[1];
-      if (email_type === "gmail.com") {
+      if (
+        email_type === "gmail.com" ||
+        email_type === "outlook.com" ||
+        email_type === "hotmail.com" ||
+        email_type === "yahoo.com"
+      ) {
         return res.status(200).json({ status: false });
       }
       const result = await Classroom.workSpaceAllow(email_type);
@@ -35,6 +40,7 @@ class Classroom_ctrl {
       const result = await Classroom.editWorkSpace(
         Number(req.classroom_id),
         req.body,
+        Number(req.user_id),
       );
       if (typeof result === "object") {
         return res.status(202).json(result);
@@ -109,6 +115,7 @@ class Classroom_ctrl {
       const result = await Classroom.editSession(
         Number(req.params.id),
         req.body,
+        Number(req.user_id),
       );
       if (typeof result === "object") {
         return res.status(202).json(result);

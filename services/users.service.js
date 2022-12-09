@@ -164,15 +164,15 @@ class Users {
       const result = await prisma.users.findUnique({
         where: { email: data.email },
       });
-      if (data.hasOwnProperty("phone_num")) {
-        const results2 = await prisma.users.findUnique({
-          where: { phone_num: data.phone_num },
-        });
-        if (results2) return "The user already exist!!";
-      }
+      // if (data && data.hasOwnProperty("phone_num")) {
+      //   const results2 = await prisma.users.findUnique({
+      //     where: { phone_num: data.phone_num },
+      //   });
+      //   if (results2) return "The user already exist!!";
+      // }
 
       if (result) {
-        if (data.hasOwnProperty("provider")) {
+        if (data && data.hasOwnProperty("provider")) {
           console.log(result);
           return this.loginWithEmailPass(data.email, password, true);
         } else {
@@ -197,7 +197,7 @@ class Users {
       const result2 = await prisma.users.create({
         data,
       });
-      if (data.hasOwnProperty("provider")) {
+      if (data && data.hasOwnProperty("provider")) {
         return this.loginWithEmailPass(data.email, password, true);
       }
       return result2;

@@ -17,7 +17,7 @@ model Users {
   first_name       String
   last_name        String
   email            String             @unique
-  phone_num        String?            @unique
+  phone_num        String?
   password         String
   about            String?
   otp              Int                @default(0)
@@ -38,6 +38,7 @@ model Users {
 model Classroom {
   id               Int                @id @default(autoincrement())
   logo             String?
+  host             Int?
   title            String
   description      String?
   Classroom_Course Classroom_Course[]
@@ -83,10 +84,10 @@ model Course {
   max_paticipants Int //
   images          String[]
   hosted          Boolean        @default(false)
-  duration_type   String //
+  duration_type   String? //
   Classes         Classes[]
   link            String?
-  class_structure String //
+  class_structure String? //
   structure       Json?
   Vid_Classes     Vid_Classes[]
   methodology     Json?

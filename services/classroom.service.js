@@ -30,6 +30,7 @@ class Classroom {
         data: {
           ...data,
           email_type,
+          host: id,
         },
       });
       const result3 = await prisma.users.update({
@@ -46,8 +47,12 @@ class Classroom {
     }
   }
 
-  async editWorkSpace(id, data) {
+  async editWorkSpace(id, data, host) {
     try {
+      const result2 = await prisma.classroom.findUnique({ where: { id } });
+      if (result2 && result2.host !== host) {
+        return "Not has a right access to edit!!";
+      }
       const result = await prisma.classroom.update({
         where: { id },
         data,
@@ -105,6 +110,12 @@ class Classroom {
 
   async editClassroom(id, data, user_id) {
     try {
+      const result2 = await prisma.classroom_Course.findUnique({
+        where: { id },
+      });
+      if (result2 && result2.creator !== user_id) {
+        return "Not has a right access to edit!!";
+      }
       const result = await prisma.classroom_Course.update({
         where: { id },
         data,
@@ -115,8 +126,15 @@ class Classroom {
     }
   }
 
-  async editSession(id, data) {
+  async editSession(id, data, user_id) {
     try {
+      const result2 = await prisma.classes.findUnique({
+        where: { id },
+        include: { Classroom_Course: true },
+      });
+      if (result2 && result2.Classroom_Course.creator !== user_id) {
+        return "Not has a right access to edit";
+      }
       const result = await prisma.classes.update({
         where: { id },
         data,
@@ -165,7 +183,7 @@ class Classroom {
           Classes: true,
           Vid_Classes: true,
           Reactions: true,
-          creator_d: true
+          creator_d: true,
         },
       });
       return result;
