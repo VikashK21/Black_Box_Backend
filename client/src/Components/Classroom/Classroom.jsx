@@ -44,6 +44,7 @@ const Classroom = () => {
 
   const {
     user,
+    setClsroom,
     // profile,
     // goToTop,
     // getCoursesList,
@@ -59,7 +60,11 @@ const Classroom = () => {
   } = useContext(AuthContext);
 
   const checkerGetter = async () => {
-    if (user && user.classroom_id) {
+    if (!user) {
+      setClsroom(true);
+      console.log("cmaer heretoooo");
+      navigate("/signup");
+    } else if (user && user.classroom_id) {
       const data = await getWorkSpace();
       setWorkSpace(data);
       const courseD = await getWorkSpaceClassroom();
@@ -73,15 +78,14 @@ const Classroom = () => {
       console.log("camer here ");
       await getWorkSpaceAllow(user.email);
       if (workspaceAllow) {
+        // setClsroom(true);
         // navigate("/classroom/register");
         setSub(1);
       } else {
         // navigate('/profile')
+        setClsroom(true);
         setSub(2);
       }
-    } else {
-      console.log("cmaer heretoooo");
-      navigate("/login");
     }
   };
 
@@ -100,64 +104,64 @@ const Classroom = () => {
       {sub ? (
         <Container
           fluid
-          className="profilediv d-flex justify-content-center align-items-center bgw"
+          className="profilediv d-flex flex-column justify-content-center align-items-center bgw pb-5"
         >
           {/* <Container className="pc py-5 pb-0"> */}
-          <Row className="d-flex flex-column justify-content-center align-items-center">
-            {/* <Col md={2}></Col> */}
-            {/* <Col md={3}></Col> */}
-            <Col
-              md={7}
-              className="d-flex text-center align-items-center"
-              // style={{
-              //   height: "fitContent",
-              // }}
-            >
-              <div className="mb-4 abc card-title">
-                {sub === 1 ? (
-                  <p style={{ fontSize: 25 }}>
-                    {" "}
-                    Tailored classes/sessions, just for you and your team. Join
-                    as a corporate or school/college/company and experience it
-                    with exploration.{" "}
-                  </p>
-                ) : (
-                  <p style={{ fontSize: 25 }}>
-                    {" "}
-                    Tailored classes/sessions, just for you and your team. Join
-                    as a <b>corporate or school/college/company account</b> and
-                    experience it.{" "}
-                  </p>
-                )}
-              </div>
-            </Col>
-            <Col md={6} className="d-flex justify-content-center">
+          {/* <Row className="d-flex flex-column justify-content-center align-items-center"> */}
+          {/* <Col md={2}></Col> */}
+          {/* <Col md={3}></Col> */}
+          <Col
+            md={7}
+            className="d-flex text-center align-items-center"
+            // style={{
+            //   height: "fitContent",
+            // }}
+          >
+            <div className="abc mb-4">
               {sub === 1 ? (
-                <Button
-                  variant="contained"
-                  type="submit"
-                  className="bgdark"
-                  onClick={() => navigate("/classroom/register")}
-                >
+                <p style={{ fontSize: 22 }}>
                   {" "}
-                  Subscribe
-                </Button>
+                  Tailored classes/sessions, just for you and your team. Join as
+                  a corporate or school/college and experience it with
+                  exploration.{" "}
+                </p>
               ) : (
-                <Button
-                  variant="contained"
-                  type="submit"
-                  className="bgdark"
-                  onClick={() => navigate("/signup")}
-                >
+                <p style={{ fontSize: 22 }}>
                   {" "}
-                  Join In
-                </Button>
+                  Tailored classes/sessions, just for you and your team. Join as
+                  a <b>corporate or school/college account</b> and experience it
+                  with exploration.{" "}
+                </p>
               )}
-            </Col>
-          </Row>
-          {/* </Container> */}
+            </div>
+          </Col>
+          <Col md={6} className="d-flex justify-content-center pb-5 mb-5">
+            {sub === 1 ? (
+              <Button
+                variant="contained"
+                type="submit"
+                className="bgdark"
+                onClick={() => navigate("/classroom/register")}
+              >
+                {" "}
+                Subscribe
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                type="submit"
+                className="bgdark"
+                onClick={() => navigate("/signup")}
+              >
+                {" "}
+                Join In
+              </Button>
+            )}
+          </Col>
+          {/* </Row> */}
         </Container>
       ) : (
+        // </Container>
         <>
           <Container
             fluid
@@ -173,7 +177,9 @@ const Classroom = () => {
                       className="d-flex justify-content-start align-items-center"
                     >
                       <div className="ps-4">
-                        {workSpace && workSpace.logo.length > 0 ? (
+                        {workSpace &&
+                        workSpace.logo &&
+                        workSpace.logo.length > 0 ? (
                           <img
                             src={workSpace.logo}
                             width={120}
@@ -200,31 +206,32 @@ const Classroom = () => {
                         )}
                       </div>
                     </Col>
-                    <Col md={12}>
-                      <div className="mt-2 ps-2">
-                        {/* <h3>{workSpace && workSpace.title}</h3> */}
-                        {/* <p className="">{about}</p> */}
-                        {/* <ReadMoreReact
+                    {workSpace && user && workSpace.host === user.id && (
+                      <Col md={12}>
+                        <div className="mt-2 ps-2">
+                          {/* <h3>{workSpace && workSpace.title}</h3> */}
+                          {/* <p className="">{about}</p> */}
+                          {/* <ReadMoreReact
                       text={about}
                       min={150}
                       ideal={150}
                       max={150}
                       readMoreText=".. read more"
                     /> */}
-                        <div className=" mt-2">
-                          <Link to="/classroom/edit">
-                            <Button
-                              variant="contained"
-                              className="bggrey me-1 text-dark px-4 mb-1 mt-3"
-                              style={{
-                                height: "40px",
-                                width: "160px",
-                              }}
-                            >
-                              Edit Profile
-                            </Button>
-                          </Link>
-                          {/* <Button
+                          <div className=" mt-2">
+                            <Link to="/classroom/edit">
+                              <Button
+                                variant="contained"
+                                className="bggrey me-1 text-dark px-4 mb-1 mt-3"
+                                style={{
+                                  height: "40px",
+                                  width: "160px",
+                                }}
+                              >
+                                Edit Profile
+                              </Button>
+                            </Link>
+                            {/* <Button
                         variant="contained"
                         className="bg-dark text-white"
                         style={{
@@ -237,13 +244,14 @@ const Classroom = () => {
                       >
                         My Classes
                       </Button> */}
+                          </div>
                         </div>
-                      </div>
-                    </Col>
+                      </Col>
+                    )}
                   </Row>
                 </Col>
-                <Col lg={1}></Col>
-                <Col lg={5} className="ps-4 mt-4 abc">
+                {/* <Col lg={1}></Col> */}
+                <Col lg={7} className="ps-4 mt-4 abc text-center px-4">
                   <h1 className="mb-2 mt-2">{workSpace && workSpace.title}</h1>
                   <p className="mb-2 mt-4 abc">
                     {workSpace && workSpace.description}{" "}
@@ -500,9 +508,9 @@ const Classroom = () => {
               <Col md={5} className="m-5 "></Col>
             </Row>
           </Container>
-          <Footer feeds="true" />
         </>
       )}
+      <Footer />
     </Container>
   );
 };

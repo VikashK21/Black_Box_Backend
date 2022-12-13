@@ -102,6 +102,7 @@ const Registration = () => {
 
           // setCloud(JSON.stringify(data.data));
           propic = data.data.secure_url;
+          console.log(workdata);
           createWorkSpace(workdata.id, {
             title: values.title,
             description: values.description,
@@ -130,16 +131,13 @@ const Registration = () => {
   return (
     <Container fluid className="loginpage p-0 m-0 ">
       <Header />
-      <Container
-        fluid
-        className="d-flex justify-content-center  page mb-5 m-0 p-0"
-      >
-        <Container fluid className="reg_div py-5">
+      <Container fluid className="d-flex justify-content-center page">
+        <Container fluid style={{ marginTop: "20px" }} className="reg_div py-4">
           <div>
-            <h1 className="regtitle">REGISTRATION</h1>
+            <h1 className="regtitle"> SUBSCRIPTION</h1>
           </div>
         </Container>
-        <div className=" logindiv my-5">
+        <div className=" logindiv">
           {/* <div>
             <img src={Default} width={200} />
             <Col  className="p-0" form={null}>
@@ -343,7 +341,7 @@ const Registration = () => {
 
                 <div className="mt-3 d-flex flex-column t-3">
                   <p className="moto opacity-75">
-                    Want to create Classroom?
+                    Want subscription for classroom?
                     <Button
                       onClick={() => {
                         if (user) navigate("/profile");

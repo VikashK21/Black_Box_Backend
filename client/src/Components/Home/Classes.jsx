@@ -190,7 +190,7 @@ const Classes = () => {
               }}
             >
               {courseList &&
-                courseList.length > 4 &&
+                courseList.length > 0 &&
                 courseList.map((course) => {
                   const a = JSON.parse(course.images)[0];
                   //check if the course name or course description is in the search bar

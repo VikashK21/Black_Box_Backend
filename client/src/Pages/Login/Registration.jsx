@@ -18,7 +18,7 @@ import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import CropImage from "../../Components/Common/CropImage";
 
-const schema = yup.object().shape({
+let schema = yup.object().shape({
   firstname: yup
     .string()
     .min(3, "Firstname should contain 3 characters")
@@ -49,6 +49,7 @@ const Registration = () => {
   const [showCropper, setShowCropper] = useState(false);
   const [cropImage, setCropImage] = useState(false);
   const [thumbnail, setThumbnail] = useState("");
+  const [clssroom, setClssroom] = useState(false);
 
   const {
     backendUpdate,
@@ -60,14 +61,21 @@ const Registration = () => {
     setCloud,
     loading,
     setLoading,
+    clsroom,
+    setClsroom,
   } = useContext(AuthContext);
 
   useEffect(() => {
+    if (clsroom) {
+      setClssroom(true);
+      setClsroom(false);
+    }
     setLoading(false);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+    // eslint-disable-next-line
   }, []);
 
   const changeHandler = (e) => {
@@ -75,6 +83,10 @@ const Registration = () => {
   };
 
   const uploadImage = () => {
+    if (clssroom) {
+      console.log('registrationk arerererere');
+      setClsroom(true);
+    }
     var propic = "";
     if (image !== null) {
       const data = new FormData();
@@ -122,9 +134,15 @@ const Registration = () => {
         <Container fluid className="reg_div py-5">
           <div>
             <h1 className="regtitle">REGISTRATION</h1>
+            {clssroom && (
+              <p>
+                This registration is for the Classroom subscription, please use
+                corporate email.
+              </p>
+            )}
           </div>
         </Container>
-        <div className=" logindiv my-5">
+        <div className=" logindiv">
           {/* <div>
             <img src={Default} width={200} />
             <Col  className="p-0" form={null}>
@@ -159,7 +177,6 @@ const Registration = () => {
               className="d-flex justify-content-center flex-column w-100  m-2 mt-5"
               onSubmit={handleSubmit(uploadImage)}
             >
-             
               <Box>
                 <Row className="signupform">
                   <Col md={6}>
@@ -214,7 +231,7 @@ const Registration = () => {
                       dropdownStyle={{ height: "200px" }}
                       country={"in"}
                       containerClass=" mobile m-0 p-0"
-                      required={true}
+                      // required={true}
                       // value="1425652"
                       onChange={(phone) =>
                         setValues({ ...values, mobile: phone })
@@ -274,67 +291,68 @@ const Registration = () => {
                 </Row>
 
                 <div className="profile-img text-center my-1">
-                {!image ? (
-                  // <img
-                  //   width={250}
-                  //   src={profile.avatar ? profile.avatar.url : Default }
-                  //   alt=""
-                  // />
-                  ""
-                ) : (
-                  <img width={250} src={image ? image : Default} alt="" />
-                )}
-                <div className="edit-profile-pic d-flex justify-content-center">
-                  <div className="d-flex">
-                    <FormControl
-                      className="d-none"
-                      id="upload_image"
-                      type="file"
-                      onChange={(e) => {
-                        setCropImage(e.target.files[0]);
-                        setShowCropper(true);
-                      }}
-                      accept=".jpg,.jpeg,.png,"
-                    />
-                    <label htmlFor="upload_image">
-                      <span className="profilepic__icon">
-                        {!image ? (
-                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
-                            Upload photo
-                          </p>
-                        ) : (
-                          <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
-                            Change photo
-                          </p>
-                        )}
-                      </span>
-                    </label>
+                  {!image ? (
+                    // <img
+                    //   width={250}
+                    //   src={profile.avatar ? profile.avatar.url : Default }
+                    //   alt=""
+                    // />
+                    ""
+                  ) : (
+                    <img width={250} src={image ? image : Default} alt="" />
+                  )}
+                  <div className="edit-profile-pic d-flex justify-content-center">
+                    <div className="d-flex">
+                      <FormControl
+                        className="d-none"
+                        id="upload_image"
+                        type="file"
+                        onChange={(e) => {
+                          setCropImage(e.target.files[0]);
+                          setShowCropper(true);
+                        }}
+                        accept=".jpg,.jpeg,.png,"
+                      />
+                      <label htmlFor="upload_image">
+                        <span className="profilepic__icon">
+                          {!image ? (
+                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp">
+                              Upload photo
+                            </p>
+                          ) : (
+                            <p className=" mx-auto bg-dark p-2 text-white rounded-3 px-4 cp mt-4">
+                              Change photo
+                            </p>
+                          )}
+                        </span>
+                      </label>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {showCropper && (
-                <CropImage
-                  cropRatio={{ width: 320, height: 420 }}
-                  src={cropImage}
-                  imageCallback={(image) => {
-                    setImage(image);
-                    setShowCropper(false);
-                  }}
-                  closeHander={() => {
-                    setShowCropper(false);
-                  }}
-                />
-              )}
+                {showCropper && (
+                  <CropImage
+                    cropRatio={{ width: 320, height: 420 }}
+                    src={cropImage}
+                    imageCallback={(image) => {
+                      setImage(image);
+                      setShowCropper(false);
+                    }}
+                    closeHander={() => {
+                      setShowCropper(false);
+                    }}
+                  />
+                )}
                 <div className="mt-3 d-flex flex-column t-3">
                   <p className="moto opacity-75">
                     Already logged in?
                     <Link to="/login" className="text-decoration-none">
                       {" "}
-                      Login
+                      Login {clssroom && setClsroom(true)}
                     </Link>
                   </p>
                   <center>
+                    {/* eslint-disable-next-line */}
                     <a
                       className="underline "
                       style={{
@@ -368,7 +386,6 @@ const Registration = () => {
                   </div>
                 </div>
               </Box>
-              
             </form>
           </Container>
           <hr className="my-3" />

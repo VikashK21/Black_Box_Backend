@@ -12,7 +12,7 @@ const Footer = (props) => {
     <Container fluid className="m-0 p-0 boxshadow" 
     style={{ bottom: 0, zIndex: 999 }}
     >
-      {props.feeds ? (
+      {/* {props.feeds ? (
         " "
       ) : (
         <Row className="m-0 p-0 footerrow align-items-center"
@@ -70,7 +70,7 @@ const Footer = (props) => {
         </Col>
       </Row>
       )
-      }
+      } */}
       <Container
         fluid
         className="w-100 py-1 m-0 text-light p-0 bgdark align-items-center icon2"

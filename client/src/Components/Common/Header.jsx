@@ -32,17 +32,19 @@ const Header = () => {
             <Link to="/main">
               <img src={Logo} width={200} className="p-0 m-0 cp" alt="" />
             </Link>
-            <div className="ms-4 pt-1 d-flex searchdiv bggrey ">
-              <input
-                type="text"
-                className="borderless"
-                value={value}
-                onChange={(e) => {
-                  setValue(e.target.value);
-                }}
-              />
-              <BsSearch className="mt-2 ms-2" />
-            </div>
+            {!seenavs && (
+              <div className="ms-4 pt-1 d-flex searchdiv bggrey ">
+                <input
+                  type="text"
+                  className="borderless"
+                  value={value}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                  }}
+                />
+                <BsSearch className="mt-2 ms-2" />
+              </div>
+            )}
           </div>
           <div className="">
             <div className="navs align-items-center">
@@ -56,7 +58,7 @@ const Header = () => {
                   {/* <li>
                     {user ? (
                       (user.classroom_id || workspaceAllow) && ( */}
-                  <Link to="/classroom" className="link  ">
+                  <Link to="/classroom" className="link">
                     CLASSROOM{" "}
                   </Link>
                   {/* )
@@ -67,14 +69,12 @@ const Header = () => {
                     )}
                   </li> */}
                   {seenavs ? (
-                    <>
-                      <li>
-                        <Link to="/classroom/host" className="link px-5">
-                          HOST A SESSION{" "}
-                        </Link>
-                      </li>
-                    </>
+                    // <li>
+                    <Link to="/classroom/host" className="link px-5">
+                      HOST A SESSION{" "}
+                    </Link>
                   ) : (
+                    // </li>
                     <>
                       <li>
                         <Link to="/classes" className="link px-5 ">

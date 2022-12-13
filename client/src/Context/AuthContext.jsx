@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       : null,
   );
 
-  const { errorToast, successToast } = useContext(StyleContext);
+  const { errorToast, successToast, infoToast } = useContext(StyleContext);
 
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
@@ -108,6 +108,122 @@ export const AuthProvider = ({ children }) => {
   const [workspace, setWorkspace] = useState({});
   const [workdata, setWorkdata] = useState({});
   const [seenavs, setSeenavs] = useState(false);
+  const [clsroom, setClsroom] = useState(false);
+
+  const createClassroom = async (data) => {
+    console.log(data);
+    try {
+      const res = await axios.post(BaseUrl + "/classroom", data, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res);
+      if (res.status === 201) {
+        successToast("Successfully Session Details Public");
+        return res.data;
+      } else {
+        console.log(res.data);
+        errorToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+      errorToast(err.message);
+    }
+  };
+
+  const editClassroom = async (data, clsroomID) => {
+    try {
+      const res = await axios.patch(BaseUrl + "/classroom/" + clsroomID, data, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res);
+      if (res.status === 202) {
+        successToast("Successfully Session Details updated");
+        return res.data;
+      } else {
+        console.log(res.data);
+        errorToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+      errorToast(err.message);
+    }
+  };
+
+  const createSession = async (data, clsroomID) => {
+    try {
+      const res = await axios.post(BaseUrl + "/session/" + clsroomID, data, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res);
+      if (res.status === 201) {
+        successToast("Successfully Session timings uploaded");
+        return res.data;
+      } else {
+        console.log(res.data);
+        errorToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+      errorToast(err.message);
+    }
+  };
+
+  const editSession = async (data, sessionID) => {
+    try {
+      const res = await axios.patch(BaseUrl + "/session/" + sessionID, data, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res);
+      if (res.status === 202) {
+        successToast("Successfully Session timings  updated");
+        return res.data;
+      } else {
+        console.log(res.data);
+        errorToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+      errorToast(err.message);
+    }
+  };
+
+  const getClassroomSessions = async (clsroomID) => {
+    try {
+      const res = await axios.get(BaseUrl + "/sessions/" + clsroomID, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res);
+      if (res.status === 200) {
+        successToast("Classroom sessions are presented");
+        return res.data;
+      } else {
+        console.log(res.data);
+        errorToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+      errorToast(err.message);
+    }
+  };
+
+  const getClassroomById = async (clsroomID) => {
+    try {
+      const res = await axios.get(BaseUrl + "/classroom/" + clsroomID, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res);
+      if (res.status === 200) {
+        // successToast("")
+        return res.data;
+      } else {
+        console.log(res.data);
+        errorToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+      errorToast(err.message);
+    }
+  };
 
   const getWorkSpaceAllow = async (email) => {
     try {
@@ -123,7 +239,7 @@ export const AuthProvider = ({ children }) => {
   const createWorkSpace = async (id, data) => {
     try {
       setLoading(true);
-      await axios.post(BaseUrl + "/workspace/" + id, data);
+      await axios.post(BaseUrl + "/workspace/" + user.id, data);
       if (user) {
         await getProfile();
       } else {
@@ -190,10 +306,22 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signupUser = async (propic) => {
+    if (clsroom) {
+      const email_type = values.email.split("@")[1];
+      if (
+        email_type === "gmail.com" ||
+        email_type === "outlook.com" ||
+        email_type === "hotmail.com" ||
+        email_type === "yahoo.com"
+      ) {
+        setClsroom(false);
+        return infoToast("Email should be of an official corporate");
+      }
+    }
     setLoading(true);
-    console.log('Came till here....');
+    console.log("Came till here....");
     const entry = await getWorkSpaceAllow(values.email);
-    console.log(entry, 'the resa');
+    console.log(entry, "the resa");
     await axios
       .post(BaseUrl + "/signup", {
         first_name: values.firstname,
@@ -206,17 +334,19 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         console.log(res.data);
-        if (entry) {
-          setWorkdata({
-            id: res.data.id,
-            email: values.email,
-            password: values.password,
-          });
-          navigate("/classroom/register");
-        } else {
-          standingData(values.email, values.password);
-          setLoading(false);
-        }
+        // if (entry) {
+        //   setWorkdata({
+        //     id: res.data.id,
+        //     email: values.email,
+        //     password: values.password,
+        //   });
+        //   if (user) {
+        //     navigate("/classroom/register");
+        //   }
+        // } else {
+        standingData(values.email, values.password);
+        setLoading(false);
+        // }
       })
       .catch((err) => {
         console.log(err.data);
@@ -236,6 +366,8 @@ export const AuthProvider = ({ children }) => {
 
   const loginProcess = async (res, nav = "/profile") => {
     try {
+      console.log(clsroom, "the data classroom");
+      setClsroom(false);
       console.log(res.data);
       var details = res.data.result;
       localStorage.setItem("User", JSON.stringify(details.id));
@@ -286,6 +418,10 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then((res) => {
+        if (clsroom) {
+          console.log("this is from classroom");
+          nav = "/classroom";
+        }
         loginProcess(res, nav);
       })
       .catch((err) => {
@@ -306,6 +442,7 @@ export const AuthProvider = ({ children }) => {
   const scollToRef = useRef();
   const loginUser = async (e) => {
     e.preventDefault();
+    console.log(clsroom, "the login side....");
 
     const email = values.email;
     const password = values.password;
@@ -889,6 +1026,14 @@ export const AuthProvider = ({ children }) => {
     standingData,
     setSeenavs,
     seenavs,
+    setClsroom,
+    clsroom,
+    createClassroom,
+    editClassroom,
+    createSession,
+    editSession,
+    getClassroomById,
+    getClassroomSessions,
   };
 
   return (

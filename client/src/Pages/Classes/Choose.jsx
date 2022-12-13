@@ -36,7 +36,7 @@ const Choose = () => {
       <Container className="m-0 p-0 white"></Container>
       <Container
         fluid
-        className="d-flex bggrey justify-content-center py-5 mb-5"
+        className="d-flex bggrey justify-content-center py-2 pb-2 mb-5"
       >
         <div>
           <h1 className="regtitle">Formats</h1>
@@ -59,7 +59,7 @@ const Choose = () => {
             </p>
           </Col>
         </Row>
-        <Row className="mt-3 d-flex justify-content-center w-100">
+        <Row className="mt-4 d-flex justify-content-center w-100">
           <Col className="w-100 text-end pe-5">
             <Button
               variant="contained"

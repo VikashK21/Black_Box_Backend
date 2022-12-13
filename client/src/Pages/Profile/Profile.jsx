@@ -195,7 +195,8 @@ const Profile = () => {
                               <a
                                 href={classtime ? classtime.link : ""}
                                 target="_blank"
-                                className="w-50 p-0" rel="noreferrer"
+                                className="w-50 p-0"
+                                rel="noreferrer"
                               >
                                 <Button
                                   variant="primary"

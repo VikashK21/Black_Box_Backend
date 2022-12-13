@@ -781,7 +781,7 @@ ul{
   /* min-height: 150px !important; */
   background-color: #f7f7f7 !important;
   margin-bottom: 50px !important;
-  margin-top: 100px !important;
+  margin-top: 100px;
   max-height: fit-content !important;
 }
 

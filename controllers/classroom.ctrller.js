@@ -75,7 +75,7 @@ class Classroom_ctrl {
       }
       return res.status(404).json(result);
     } catch (err) {
-      res.status(400).json(er.message);
+      res.status(400).json(err.message);
     }
   };
 

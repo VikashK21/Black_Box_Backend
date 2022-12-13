@@ -116,6 +116,7 @@ const Whatsnew = () => {
               </Col>
             </Row>
           </Col>
+          <Col></Col>
           <Col lg={7} className="ps-4 ">
             <h1 className="profilename gx">What's new</h1>
             <div

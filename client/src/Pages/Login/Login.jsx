@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
 import TextField from "@mui/material/TextField";
@@ -11,8 +11,16 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import { useEffect } from "react";
 
 const Login = () => {
-  const { loginUser, setValues, values, loading, setLoading } =
-    useContext(AuthContext);
+  const {
+    loginUser,
+    setValues,
+    values,
+    loading,
+    setLoading,
+    clsroom,
+    setClsroom,
+  } = useContext(AuthContext);
+  const [clssroom, setClssroom] = useState(false);
 
   const navigate = useNavigate();
 
@@ -31,6 +39,11 @@ const Login = () => {
 
   useEffect(() => {
     setLoading(false);
+    if (clsroom) {
+      console.log("comming to the login");
+      setClssroom(true);
+      setClsroom(false);
+    }
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -39,6 +52,15 @@ const Login = () => {
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const loginBtnj = async (e) => {
+    e.preventDefault();
+    if (clssroom) {
+      console.log("herere rererererer");
+      await setClsroom(true);
+    }
+    loginUser(e);
   };
 
   return (
@@ -55,7 +77,7 @@ const Login = () => {
               <span className="underline cp"> Register</span>
             </Link>
           </p>
-          <form className="d-flex flex-column m-2 mt-5  " onSubmit={loginUser}>
+          <form className="d-flex flex-column m-2 mt-5  " onSubmit={loginBtnj}>
             <TextField
               label="Email"
               variant="outlined"
@@ -64,8 +86,7 @@ const Login = () => {
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
-                  loginUser();
-
+                  // loginUser();
                 }
               }}
               onChange={changeHandler}
@@ -78,7 +99,7 @@ const Login = () => {
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
-                  loginUser();
+                  // loginUser();
                 }
               }}
               onChange={changeHandler}

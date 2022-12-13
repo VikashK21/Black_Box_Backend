@@ -98,17 +98,17 @@ const LinearStepper = () => {
 
       <Container fluid className="white m-0 p-0"></Container>
       <>
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <Container
           fluid
-          className="d-flex bggrey justify-content-center py-5 mb-5"
+          className="d-flex bggrey justify-content-center py-2 pb-2 mb-4"
         >
           <div>
             <h1 className="regtitle">Host your course</h1>
           </div>
         </Container>
         <Container component={Box} p={4} className="mb-5">
-          <Paper component={Box} p={3} className="pt-5">
+          <Paper component={Box} p={3} className="pt-4">
             <div className="pt-3">
               <Stepper alternativeLabel activeStep={activeStep}>
                 {steps.map((step, index) => {
