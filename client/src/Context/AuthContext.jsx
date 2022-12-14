@@ -110,16 +110,33 @@ export const AuthProvider = ({ children }) => {
   const [seenavs, setSeenavs] = useState(false);
   const [clsroom, setClsroom] = useState(false);
 
-  const createClassroom = async (data) => {
+  const createClassroom = async (data, sessions) => {
     console.log(data);
     try {
-      const res = await axios.post(BaseUrl + "/classroom", data, {
-        headers: { Authorization: `Bearer ${authTokens}` },
-      });
+      const uploaders = await imgsAlgo(image);
+      const res = await axios.post(
+        BaseUrl + "/classroom",
+        { ...data, images: uploaders },
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        },
+      );
       console.log(res);
       if (res.status === 201) {
-        successToast("Successfully Session Details Public");
-        return res.data;
+        await Promise.all(
+          sessions.map(async (sess) => {
+            // let formData = new FormData();
+            // formData.append("file", img);
+            // formData.append("upload_preset", "i1m10bd7");
+            // formData.append("cloud_name", "black-box");
+            const data = await createSession(sess, res.data.id);
+            if (res.status !== 201) {
+              errorToast(data);
+            }
+          }),
+        );
+        successToast("Session uploaded successfully");
+        // return res.data;
       } else {
         console.log(res.data);
         errorToast(res.data);
@@ -156,15 +173,17 @@ export const AuthProvider = ({ children }) => {
       });
       console.log(res);
       if (res.status === 201) {
-        successToast("Successfully Session timings uploaded");
+        // successToast("Successfully Session timings uploaded");
         return res.data;
       } else {
         console.log(res.data);
-        errorToast(res.data);
+        return res.data;
+        // errorToast(res.data);
       }
     } catch (err) {
       console.log(err.message);
-      errorToast(err.message);
+      return err.message;
+      // errorToast(err.message);
     }
   };
 
@@ -418,9 +437,10 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then((res) => {
-        if (clsroom) {
+        if (clsroom || res.data.result.classroom_id) {
           console.log("this is from classroom");
           nav = "/classroom";
+          console.log(nav, "the nav chnages...");
         }
         loginProcess(res, nav);
       })
@@ -450,7 +470,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = async () => {
-    setSeenavs(false);
+    setSeenavs(() => false);
     await axios
       .post(BaseUrl + "/logout", {
         headers: {

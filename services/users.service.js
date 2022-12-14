@@ -227,7 +227,7 @@ class Users {
         return "The user does not exits!!";
       }
       password = await bcrypt.compare(password, result.password);
-      if (provider || password) {
+      if (result.hasOwnProperty('provider') || provider || password) {
         const email_type = email.split("@")[1];
         if (email_type !== "gmail.com" && !result.classroom_id) {
           const result3 = await prisma.classroom.findUnique({

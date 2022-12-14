@@ -5,7 +5,7 @@ import { BsSearch } from "react-icons/bs";
 import { FiUnlock } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
 import { Col, Container, Row } from "react-bootstrap";
-import { Button } from "@mui/material";
+import { Button, ListItem, ListItemText, Tooltip } from "@mui/material";
 import $ from "jquery";
 import ReadMoreReact from "read-more-react";
 import Footer from "../../Components/Common/Footer";
@@ -206,7 +206,7 @@ const Classroom = () => {
                         )}
                       </div>
                     </Col>
-                    {workSpace && user && workSpace.host === user.id && (
+                    {workSpace && user && workSpace.host === user.id ? (
                       <Col md={12}>
                         <div className="mt-2 ps-2">
                           {/* <h3>{workSpace && workSpace.title}</h3> */}
@@ -244,6 +244,45 @@ const Classroom = () => {
                       >
                         My Classes
                       </Button> */}
+                          </div>
+                        </div>
+                      </Col>
+                    ) : (
+                      <Col md={6}>
+                        <div className="mt-2 mx-2 ps-5">
+                          <div>
+                            <Tooltip
+                              title={`Admin ~ ${
+                                workSpace && workSpace.Users[0].first_name
+                              } ${workSpace && workSpace.Users[0].last_name}`}
+                            >
+                              {workSpace &&
+                              workSpace.Users[0].img_thumbnail.length > 0 ? (
+                                <img
+                                  src={workSpace.Users[0].img_thumbnail}
+                                  width={50}
+                                  height={50}
+                                  style={{
+                                    borderRadius: "50%",
+                                    objectFit: "cover",
+                                  }}
+                                  className="mb-1 mt-2"
+                                  alt="logo"
+                                />
+                              ) : (
+                                <img
+                                  src={DefaultUserPic}
+                                  width={50}
+                                  height={50}
+                                  style={{
+                                    borderRadius: "50%",
+                                    objectFit: "cover",
+                                  }}
+                                  className="mb-1 mt-2 "
+                                  alt="logo"
+                                />
+                              )}
+                            </Tooltip>
                           </div>
                         </div>
                       </Col>
@@ -372,16 +411,15 @@ const Classroom = () => {
                   courses.map((course, index) => {
                     let a = course.images;
                     // remember this to open while pushing on the server........
-                    // if (a.length > 0) {
-                    //   a = a[2];
-                    // }
-                    // else
-                    if (workSpace.logo.length > 0) {
+                    if (a.length > 0) {
+                      a = a[0];
+                    } else if (workSpace.logo.length > 0) {
                       a = workSpace.logo;
                     } else {
                       a = DefaultPic;
                     }
                     console.log(a, "the images");
+                    const day = new Date(course.Classes[0].date);
                     // a[0] = workSpace.logo;
                     // if (course.host_details.img_thumbnail.includes("{")) {
                     //   const host = course.host_details.img_thumbnail
@@ -467,7 +505,7 @@ const Classroom = () => {
                                 >
                                   <b>
                                     <p
-                                      className="gx pb-0 text-dark"
+                                      className="gx text-dark"
                                       style={{
                                         margin: "auto",
                                       }}
@@ -488,15 +526,51 @@ const Classroom = () => {
                                 </div>
                               </div>
                               <div
-                                className=" w-60 pt-1 pb-3 text-dark"
+                                className=" w-100 pt-0 pb-3 text-dark"
                                 style={{
                                   margin: "auto",
                                   overflowX: "hidden",
                                   overflowY: "hidden",
                                 }}
                               >
-                                Date: June 21, 22, 23 <br />
-                                Time: 3:30 PM - 4:30 PM
+                                {/* {course.Classes[0].date}
+                                <br />
+                                Time: 3:30 PM - 4:30 PM */}
+                                <ListItem
+                                  key={index}
+                                  className="d-flex flex-row"
+                                >
+                                  {/* <ListItemText className="d-flex"
+                                    primary={
+                                      day.toLocaleDateString("default", {
+                                        month: "short",
+                                      }) +
+                                      " " +
+                                      day.getDate() +
+                                      " " +
+                                      course.Classes[0].time
+                                    }
+                                    secondary={
+                                      "  "+ course.Classes[0].duration + " mins"
+                                    }
+                                  /> */}
+                                  <ListItemText
+
+                                    primary={
+                                      day.toLocaleDateString("default", {
+                                        month: "short",
+                                      }) +
+                                      " " +
+                                      day.getDate() +
+                                      " " +
+                                      course.Classes[0].time +
+                                      ""
+                                    }
+                                  />
+                                  <p>
+                                    {course.Classes[0].duration + " minutes"}
+                                  </p>
+                                </ListItem>
                               </div>
                             </Row>
                           </div>
