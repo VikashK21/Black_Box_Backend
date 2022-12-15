@@ -259,7 +259,11 @@ export const AuthProvider = ({ children }) => {
   const createWorkSpace = async (id, data) => {
     try {
       setLoading(true);
-      await axios.post(BaseUrl + "/workspace/" + user.id, data);
+      if (user) {
+        console.log(user, 'the user id');
+        id = user.id
+      }
+      await axios.post(BaseUrl + "/workspace/" + id, data);
       if (user) {
         await getProfile();
       } else {
