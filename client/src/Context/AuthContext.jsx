@@ -9,13 +9,13 @@ import { type } from "@testing-library/user-event/dist/type";
 const AuthContext = createContext();
 export default AuthContext;
 
-export const BaseUrl = "http://localhost:3001/api";
+// export const BaseUrl = "http://localhost:3001/api";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
 // export const BaseLink = "http://localhost:3000/";
 
-// export const BaseUrl = "/api";
+export const BaseUrl = "/api";
 // process.env.NODE_ENV === "production"
 //   ? "/api"
 //   : "http://localhost:3001/api";
@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [workspaceAllow, setWorkspaceAllow] = useState(false);
   const [workspace, setWorkspace] = useState({});
-  const [workdata, setWorkdata] = useState({});
+  const [workdata, setWorkdata] = useState([]);
   const [seenavs, setSeenavs] = useState(false);
   const [clsroom, setClsroom] = useState(false);
 
@@ -136,6 +136,7 @@ export const AuthProvider = ({ children }) => {
           }),
         );
         successToast("Session uploaded successfully");
+        await getWorkSpaceClassroom();
         // return res.data;
       } else {
         console.log(res.data);
@@ -262,7 +263,8 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         await getProfile();
       } else {
-        await standingData(workdata.email, workdata.password, "/classroom");
+        // await standingData(workdata.email, workdata.password, "/classroom");
+        infoToast("Have not been logged in yet");
       }
       setLoading(false);
     } catch (err) {
@@ -276,7 +278,8 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
       console.log(res.data, "the data of the Classroom");
-      return res.data;
+      setWorkdata(() => [...res.data]);
+      // return res.data;
     } catch (err) {
       console.log(err.message);
     }
@@ -1043,6 +1046,7 @@ export const AuthProvider = ({ children }) => {
     editWorkSpace,
     createWorkSpace,
     workdata,
+    setWorkdata,
     standingData,
     setSeenavs,
     seenavs,

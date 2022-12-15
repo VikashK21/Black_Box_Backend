@@ -854,7 +854,7 @@ ul{
 
   display: flex;
   justify-content: space-between;
-  padding: 0.6rem 0.9rem;
+  padding: 0.6rem 0.5rem;
   font-size: clamp(0.4rem, 2vw, 1rem) !important;
   color: rgb(57, 57, 57) !important;
 }

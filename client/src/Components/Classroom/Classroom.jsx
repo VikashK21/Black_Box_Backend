@@ -39,12 +39,14 @@ const Classroom = () => {
   // var propic = prop.secure_url;
   // var about = localStorage.getItem("userDetails");
   const [workSpace, setWorkSpace] = useState(null);
-  const [courses, setCourses] = useState([]);
+  // const [courses, setCourses] = useState([]);
   const [sub, setSub] = useState(false);
 
   const {
     user,
     setClsroom,
+    // setWorkdata,
+    workdata,
     // profile,
     // goToTop,
     // getCoursesList,
@@ -67,13 +69,9 @@ const Classroom = () => {
     } else if (user && user.classroom_id) {
       const data = await getWorkSpace();
       setWorkSpace(data);
-      const courseD = await getWorkSpaceClassroom();
-      setCourses(courseD);
+      await getWorkSpaceClassroom();
+      // setCourses(courseD);
       setSeenavs(true);
-      // console.log(data, "the data, 2");
-      // console.log(workSpace, "the data");
-      // getProfile()
-      // console.log(profile, 'profile');
     } else if (user) {
       console.log("camer here ");
       await getWorkSpaceAllow(user.email);
@@ -212,12 +210,12 @@ const Classroom = () => {
                           {/* <h3>{workSpace && workSpace.title}</h3> */}
                           {/* <p className="">{about}</p> */}
                           {/* <ReadMoreReact
-                      text={about}
-                      min={150}
-                      ideal={150}
-                      max={150}
-                      readMoreText=".. read more"
-                    /> */}
+                            text={about}
+                            min={150}
+                            ideal={150}
+                            max={150}
+                            readMoreText=".. read more"
+                          /> */}
                           <div className=" mt-2">
                             <Link to="/classroom/edit">
                               <Button
@@ -290,7 +288,7 @@ const Classroom = () => {
                   </Row>
                 </Col>
                 {/* <Col lg={1}></Col> */}
-                <Col lg={7} className="ps-4 mt-4 abc text-center px-4">
+                <Col lg={7} className="ps-4 mt-0 abc text-center px-4">
                   <h1 className="mb-2 mt-2">{workSpace && workSpace.title}</h1>
                   <p className="mb-2 mt-4 abc">
                     {workSpace && workSpace.description}{" "}
@@ -407,13 +405,14 @@ const Classroom = () => {
                 lg={20}
                 className="d-flex justify-content-center align-items-center flex-wrap"
               >
-                {courses.length > 0 &&
-                  courses.map((course, index) => {
+                {workdata &&
+                  workdata.length > 0 &&
+                  workdata.map((course, index) => {
                     let a = course.images;
                     // remember this to open while pushing on the server........
                     if (a.length > 0) {
                       a = a[0];
-                    } else if (workSpace.logo.length > 0) {
+                    } else if (workSpace && workSpace.logo.length > 0) {
                       a = workSpace.logo;
                     } else {
                       a = DefaultPic;
@@ -437,19 +436,19 @@ const Classroom = () => {
                         className="my-4 mt-1 me-4 class"
                         key={index}
 
-                        // style={{ height: "320px" }}
+                        // style={{ height: "200px" }}
                       >
-                        <a
-                          href={course.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="cp"
+                        <div
+                          className="boxshadow rounded-5 mb-1"
+                          style={{
+                            width: "220px",
+                          }}
                         >
-                          <div
-                            className="boxshadow rounded-5 mb-2"
-                            style={{
-                              width: "220px",
-                            }}
+                          <a
+                            href={course.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="cp"
                           >
                             <div className="profileclassesimg">
                               <img
@@ -458,89 +457,90 @@ const Classroom = () => {
                                 alt="profile"
                               />
                             </div>
-                            <Row
-                              className="profilest bw m-0"
+                          </a>
+
+                          <Row
+                            className="profilest bw m-0"
+                            style={{
+                              overflowY: "hidden",
+                            }}
+                          >
+                            <div
+                              className="d-flex justify-content-center gap-2 px-1"
                               style={{
+                                overflowX: "hidden",
+                              }}
+                            >
+                              <div>
+                                {course.creator_d.img_thumbnail.length > 0 ? (
+                                  <img
+                                    src={course.creator_d.img_thumbnail}
+                                    width={50}
+                                    height={50}
+                                    style={{
+                                      borderRadius: "50%",
+                                      objectFit: "cover",
+                                    }}
+                                    className=" mt-2"
+                                    alt="logo"
+                                  />
+                                ) : (
+                                  <img
+                                    src={DefaultUserPic}
+                                    width={50}
+                                    height={50}
+                                    style={{
+                                      borderRadius: "50%",
+                                      objectFit: "cover",
+                                    }}
+                                    className=" mt-2 "
+                                    alt="logo"
+                                  />
+                                )}
+                              </div>
+                              <div
+                                className=" w-85 ms-1 pt-2"
+                                style={{
+                                  margin: "auto",
+                                }}
+                              >
+                                <b>
+                                  <p
+                                    className="gx text-dark"
+                                    style={{
+                                      margin: "auto",
+                                    }}
+                                  >
+                                    {course.title && course.title.length > 20
+                                      ? course.title
+                                          .substring(0, 20)
+                                          .split(" ")
+                                          .slice(0, -1)
+                                          .join(" ")
+                                      : course.title}
+                                  </p>
+                                </b>
+                                <p>
+                                  {course.creator_d.first_name}{" "}
+                                  {course.creator_d.last_name}
+                                </p>
+                              </div>
+                            </div>
+                            <div
+                              className=" w-100 pb-2 text-dark"
+                              style={{
+                                overflowX: "hidden",
                                 overflowY: "hidden",
                               }}
                             >
-                              <div
-                                className="d-flex justify-content-center gap-2"
-                                style={{
-                                  overflowX: "hidden",
-                                }}
-                              >
-                                <div>
-                                  {course.creator_d.img_thumbnail.length > 0 ? (
-                                    <img
-                                      src={course.creator_d.img_thumbnail}
-                                      width={50}
-                                      height={50}
-                                      style={{
-                                        borderRadius: "50%",
-                                        objectFit: "cover",
-                                      }}
-                                      className="mb-1 mt-2"
-                                      alt="logo"
-                                    />
-                                  ) : (
-                                    <img
-                                      src={DefaultUserPic}
-                                      width={50}
-                                      height={50}
-                                      style={{
-                                        borderRadius: "50%",
-                                        objectFit: "cover",
-                                      }}
-                                      className="mb-1 mt-2 "
-                                      alt="logo"
-                                    />
-                                  )}
-                                </div>
-                                <div
-                                  className=" w-85 ms-1 pt-2"
-                                  style={{
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <b>
-                                    <p
-                                      className="gx text-dark"
-                                      style={{
-                                        margin: "auto",
-                                      }}
-                                    >
-                                      {course.title && course.title.length > 20
-                                        ? course.title
-                                            .substring(0, 20)
-                                            .split(" ")
-                                            .slice(0, -1)
-                                            .join(" ")
-                                        : course.title}
-                                    </p>
-                                  </b>
-                                  <p>
-                                    {course.creator_d.first_name}{" "}
-                                    {course.creator_d.last_name}
-                                  </p>
-                                </div>
-                              </div>
-                              <div
-                                className=" w-100 pt-0 pb-3 text-dark"
-                                style={{
-                                  margin: "auto",
-                                  overflowX: "hidden",
-                                  overflowY: "hidden",
-                                }}
-                              >
-                                {/* {course.Classes[0].date}
+                              {/* {course.Classes[0].date}
                                 <br />
                                 Time: 3:30 PM - 4:30 PM */}
-                                <ListItem
+                              {/* <ListItem
                                   key={index}
                                   className="d-flex flex-row"
-                                >
-                                  {/* <ListItemText className="d-flex"
+                                > */}
+                              {/* <ListItemText className="d-flex"
                                     primary={
                                       day.toLocaleDateString("default", {
                                         month: "short",
@@ -554,8 +554,7 @@ const Classroom = () => {
                                       "  "+ course.Classes[0].duration + " mins"
                                     }
                                   /> */}
-                                  <ListItemText
-
+                              {/* <ListItemText
                                     primary={
                                       day.toLocaleDateString("default", {
                                         month: "short",
@@ -566,15 +565,22 @@ const Classroom = () => {
                                       course.Classes[0].time +
                                       ""
                                     }
-                                  />
-                                  <p>
-                                    {course.Classes[0].duration + " minutes"}
-                                  </p>
-                                </ListItem>
-                              </div>
-                            </Row>
-                          </div>
-                        </a>
+                                  /> */}
+                              {/* <p> */}
+                              {day.toLocaleDateString("default", {
+                                month: "short",
+                              }) +
+                                " " +
+                                day.getDate() +
+                                " " +
+                                course.Classes[0].time +
+                                ""}{" "}
+                              {course.Classes[0].duration + " minutes"}
+                              {/* </p> */}
+                              {/* </ListItem> */}
+                            </div>
+                          </Row>
+                        </div>
                       </div>
                     );
                   })}

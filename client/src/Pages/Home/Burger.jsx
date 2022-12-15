@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../../blackbox-logo-01.png";
 import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
+import AuthContext from "../../Context/AuthContext";
 
 const Burger = () => {
   const [navb, setNavb] = useState(false);
   const [show, setShow] = useState("");
   const navigate = useNavigate();
+  const { seenavs } = useContext(AuthContext);
 
   const handleNavbar = () => {
     window.scrollY >= 20 ? setNavb(true) : setNavb(false);
@@ -243,6 +245,27 @@ const Burger = () => {
                   </Link>
                 </h4>
               </div>
+              {seenavs && (
+                <div className="py-2">
+                  <h4
+                    className={
+                      show === "session"
+                        ? "underline cp display-6 text-bold"
+                        : "underline cp"
+                    }
+                    onMouseEnter={() => {
+                      setShow("session");
+                    }}
+                    onMouseLeave={() => {
+                      setShow("");
+                    }}
+                  >
+                    <Link to="/classroom/host" className="text-dark">
+                      HOST A SESSION
+                    </Link>
+                  </h4>
+                </div>
+              )}
               {/* <div className="py-2">
                 <h4
                   className={

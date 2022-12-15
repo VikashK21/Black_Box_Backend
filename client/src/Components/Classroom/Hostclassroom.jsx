@@ -8,6 +8,7 @@ import {
   Typography,
   Step,
   StepLabel,
+  CssBaseline,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
@@ -103,7 +104,15 @@ function Hostclassroom() {
             className="d-flex bggrey justify-content-center py-2 pb-2 mb-3"
           >
             <div>
-              <h1 className="regtitle">Host your Session</h1>
+              <h1
+                className="regtitle"
+                style={{
+                  overflowY: "hidden",
+                  overflowX: "hidden",
+                }}
+              >
+                Host your Session
+              </h1>
             </div>
           </Container>
           <Container
@@ -111,7 +120,15 @@ function Hostclassroom() {
             md={12}
             className="d-flex justify-content-center mx-4 ms-4"
           >
-            <Paper component={Box} p={4} className="pt-4 ms-5">
+            <Paper
+              component={Box}
+              p={4}
+              className="pt-4 ms-5"
+              style={{
+                overflowX: "hidden",
+                overflowY: "hidden",
+              }}
+            >
               <div className="pt-3 pb-3">
                 <Stepper
                   alternativeLabel
@@ -606,9 +623,9 @@ function Hostclassroom() {
                             totalSessons,
                             "SEssion timings",
                           );
-                          setTimeout(() => {
-                            navigate("/classroom");
-                          }, 1000);
+                          // setTimeout(() => {
+                          navigate("/classroom");
+                          // }, 1000);
                         }
                       } else {
                         setActiveStep((pre) => pre + 1);

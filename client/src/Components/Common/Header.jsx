@@ -32,19 +32,18 @@ const Header = () => {
             <Link to="/main">
               <img src={Logo} width={200} className="p-0 m-0 cp" alt="" />
             </Link>
-            {!seenavs && (
-              <div className="ms-4 pt-1 d-flex searchdiv bggrey ">
-                <input
-                  type="text"
-                  className="borderless"
-                  value={value}
-                  onChange={(e) => {
-                    setValue(e.target.value);
-                  }}
-                />
-                <BsSearch className="mt-2 ms-2" />
-              </div>
-            )}
+
+            <div className="ms-2 pt-1 d-flex searchdiv bggrey ">
+              <input
+                type="text"
+                className="borderless"
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+              <BsSearch className="mt-2" />
+            </div>
           </div>
           <div className="">
             <div className="navs align-items-center">

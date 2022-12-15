@@ -58,6 +58,10 @@ const Trainer = () => {
         });
     };
     fetchData();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, []);
 
   return (
@@ -76,11 +80,11 @@ const Trainer = () => {
                   className="img-fluid iconpic my-5 icon1"
                 />
               </div>
-              <div className="d-flex justify-content-end w-100 ">
+              <div className="d-flex justify-content-end w-85 ">
                 <img
                   src={img ? img : DefaultPic}
                   alt="class1"
-                  className="img-fluid iconpic icon2 "
+                  className="img-fluid iconpic"
                 />
               </div>
             </Col>
@@ -128,20 +132,21 @@ const Trainer = () => {
             <Row className="mb-5 px-2 d-flex justify-content-center m-0 p-0">
               {/* Map a function to display the classes list */}
               {course.Course &&
-                course.Course.map((course) => {
+                course.Course.map((course2) => {
+                  console.log(course2, 'the course');
                   // console.log(course.images);
-                  const a = JSON.parse(course.images);
+                  const a = JSON.parse(course2.images);
                   return (
                     <Col
-                      key={course.id}
-                      className="my-4 cp position-relative"
+                      key={course2.id}
+                      className="my-4 mt-1 me-4 class"
                       style={{
                         minWidth: "320px",
                         maxWidth: "320px",
                         minHeight: "400px",
                       }}
                     >
-                      <Link to={`/classes/join/${course.id}`}>
+                      <Link to={`/classes/join/${course2.id}`}>
                         <div onClick={goToTop} className="zoom">
                           <div className="imgdiv">
                             <img
@@ -152,10 +157,10 @@ const Trainer = () => {
                             {/* <img src={course.images[0].secure_url} className="classesimg p-0 m-0" /> */}
                           </div>
                           <Row className="profile m-0 p-2 pt-3">
-                            <h6 className="gx classtitlee">{course.title}</h6>
+                            <h6 className="gx classtitlee">{course2.title}</h6>
                             <p className="clsdesc">
                               <ReadMoreReact
-                                text={course.description}
+                                text={course2.description}
                                 min={100}
                                 ideal={100}
                                 max={100}
@@ -163,7 +168,7 @@ const Trainer = () => {
                               />
                             </p>
 
-                            <Col xs={8} className="p-2 pt-2 pb-0">
+                            <Col xs={8} className=" pt-0 pb-0">
                               <h6 className="gx tutorname">
                                 {course.first_name
                                   ? course.first_name
