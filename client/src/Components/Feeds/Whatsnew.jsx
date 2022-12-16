@@ -46,12 +46,12 @@ const Whatsnew = () => {
             <Row className="mb-5">
               <Col
                 md={12}
-                className="d-flex justify-content-start align-items-center"
+                className="d-flex justify-content-center align-items-center"
               >
                 <div className="ps-3">
                   {prop ? (
                     propic ? (
-                      <img src={propic} className=" mb-1 mt-3 ic2 " alt="git st" />
+                      <img src={propic} className=" mb-1 mt-3 ic2 " alt={DefaultPic} />
                     ) : (
                       <img
                         width={100}
@@ -75,7 +75,7 @@ const Whatsnew = () => {
                 </div>
               </Col>
               <Col md={12}>
-                <div className="mt-2 ps-3">
+                <div className="text-center mt-2 ps-3">
                   <h3>{name}</h3>
                   {/* <p className="">{about}</p> */}
                   <ReadMoreReact

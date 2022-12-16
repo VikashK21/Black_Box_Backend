@@ -96,7 +96,9 @@ const Classroom = () => {
   }, []);
 
   return (
-    <Container fluid className="m-0 p-0 bgg">
+    <Container fluid className="m-0 p-0 bgg"
+     style={{ overflowX: "hidden" }}
+     >
       <Header />
       <Container fluid className="white bggrey"></Container>
       {sub ? (
@@ -172,9 +174,9 @@ const Classroom = () => {
                   <Row className="mb-4">
                     <Col
                       md={12}
-                      className="d-flex justify-content-start align-items-center"
+                      className="d-flex justify-content-center align-items-center"
                     >
-                      <div className="ps-4">
+                      <div className="ps-2">
                         {workSpace &&
                         workSpace.logo &&
                         workSpace.logo.length > 0 ? (
@@ -206,7 +208,7 @@ const Classroom = () => {
                     </Col>
                     {workSpace && user && workSpace.host === user.id ? (
                       <Col md={12}>
-                        <div className="mt-2 ps-2">
+                        <div className="d-flex justify-content-center align-items-center mt-2 ps-2">
                           {/* <h3>{workSpace && workSpace.title}</h3> */}
                           {/* <p className="">{about}</p> */}
                           {/* <ReadMoreReact

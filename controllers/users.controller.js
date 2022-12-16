@@ -119,7 +119,7 @@ class User_Ctrl {
           console.log(result, "vikash");
           userData = result;
           return res
-            .status(200)
+            .status(400)
             .send(
               `Hello ${result.result.first_name} ${result.result.last_name}, you are logged in successfully. \nPlease click on the Profile button (right hand side) to visit your page.`,
             );

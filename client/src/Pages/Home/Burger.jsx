@@ -27,7 +27,7 @@ const Burger = () => {
         >
           <div className="py-2">
             <Link to="/main">
-              <img src={Logo} width={200} className="p-0 m-0 cp" />
+              <img src={Logo} width={200} alt="" className="p-0 m-0 cp" />
             </Link>
           </div>
           <div className="py-2">
@@ -50,7 +50,7 @@ const Burger = () => {
         >
           <div className="py-2">
             <Link to="/main">
-              <img src={Logo} width={200} className="p-0 m-0 cp" />
+              <img src={Logo} width={200} alt="" className="p-0 m-0 cp" />
             </Link>
           </div>
           <div className="py-2">
@@ -63,7 +63,7 @@ const Burger = () => {
                 </ul>
               </b>
             </div>
-          </div>
+          </div>  
         </Container>
       </nav>
       <Container fluid className="white"></Container>

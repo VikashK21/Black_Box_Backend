@@ -106,10 +106,10 @@ function Hostclassroom() {
             <div>
               <h1
                 className="regtitle"
-                style={{
-                  overflowY: "hidden",
-                  overflowX: "hidden",
-                }}
+                // style={{
+                //   overflowY: "hidden",
+                //   overflowX: "hidden",
+                // }}
               >
                 Host your Session
               </h1>
@@ -118,16 +118,17 @@ function Hostclassroom() {
           <Container
             component={Box}
             md={12}
-            className="d-flex justify-content-center mx-4 ms-4"
+            className="d-flex justify-content-center mx-4 ms-4 w-100"
+            // style={{ overflow: "hidden" }}
           >
             <Paper
               component={Box}
               p={4}
               className="pt-4 ms-5"
-              style={{
-                overflowX: "hidden",
-                overflowY: "hidden",
-              }}
+              // style={{
+              //   overflowX: "hidden",
+              //   overflowY: "hidden",
+              // }}
             >
               <div className="pt-3 pb-3">
                 <Stepper
