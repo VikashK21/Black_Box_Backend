@@ -165,16 +165,16 @@ class Users {
         where: { email: data.email },
       });
       // if (data && data && data.hasOwnProperty("phone_num")) {
-        /// the temporary change till the app updated>>>>
-        // if (data.phone_num.length === 0) {
-        //   delete data.phone_num;
-        //   data.provider='google'
-        // }
+      /// the temporary change till the app updated>>>>
+      // if (data.phone_num.length === 0) {
+      //   delete data.phone_num;
+      //   data.provider='google'
+      // }
       //   const results2 = await prisma.users.findUnique({
       //     where: { phone_num: data.phone_num },
       //   });
       //   if (results2 && results2.phone_num.length > 0)
-          // return "The user already exist!!";
+      // return "The user already exist!!";
       // }
 
       if (result) {
@@ -227,7 +227,7 @@ class Users {
         return "The user does not exits!!";
       }
       password = await bcrypt.compare(password, result.password);
-      if (result.hasOwnProperty('provider') || provider || password) {
+      if (provider || password) {
         const email_type = email.split("@")[1];
         if (email_type !== "gmail.com" && !result.classroom_id) {
           const result3 = await prisma.classroom.findUnique({
