@@ -180,7 +180,7 @@ class Users {
       if (result) {
         if (data && data.hasOwnProperty("provider")) {
           console.log(result);
-          return this.loginWithEmailPass(data.email, password, true);
+          return this.loginWithEmailPass(data.email, password);
         } else {
           console.log("okay the aready there...");
           return "The user already exits!!";
@@ -204,7 +204,7 @@ class Users {
         data,
       });
       if (data && data.hasOwnProperty("provider")) {
-        return this.loginWithEmailPass(data.email, password, true);
+        return this.loginWithEmailPass(data.email, password);
       }
       return result2;
     } catch (err) {
