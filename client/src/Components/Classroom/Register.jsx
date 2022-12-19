@@ -353,7 +353,7 @@ const Registration = () => {
                       className="text-decoration-none"
                     >
                       {" "}
-                      Later
+                      Skip
                     </Button>
                   </p>
                   {/* <center>

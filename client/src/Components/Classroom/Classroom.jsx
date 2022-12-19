@@ -96,9 +96,7 @@ const Classroom = () => {
   }, []);
 
   return (
-    <Container fluid className="m-0 p-0 bgg"
-     style={{ overflowX: "hidden" }}
-     >
+    <Container fluid className="m-0 p-0 bgg" style={{ overflowX: "hidden" }}>
       <Header />
       <Container fluid className="white bggrey"></Container>
       {sub ? (
@@ -165,48 +163,86 @@ const Classroom = () => {
         <>
           <Container
             fluid
-            className="profilediv d-flex justify-content-center p-0 m-0 bgw boxshadow my-1"
+            className="profilediv d-flex justify-content-center p-0 m-0 bgw my-0"
           >
             <Container className="pc py-5 pb-0">
               <Row>
                 <Col lg={1}></Col>
                 <Col lg={3}>
                   <Row className="mb-4">
-                    <Col
-                      md={12}
-                      className="d-flex justify-content-center align-items-center"
-                    >
-                      <div className="ps-2">
-                        {workSpace &&
-                        workSpace.logo &&
-                        workSpace.logo.length > 0 ? (
-                          <img
-                            src={workSpace.logo}
-                            width={120}
-                            height={100}
-                            style={{
-                              borderRadius: "50%",
-                              objectFit: "cover",
-                            }}
-                            className="profilepic mb-1 mt-2"
-                            alt="logo"
-                          />
-                        ) : (
-                          <img
-                            src={DefaultPic}
-                            width={120}
-                            height={100}
-                            style={{
-                              borderRadius: "50%",
-                              objectFit: "cover",
-                            }}
-                            className="profilepic mb-1 mt-2 "
-                            alt="logo"
-                          />
-                        )}
-                      </div>
-                    </Col>
                     {workSpace && user && workSpace.host === user.id ? (
+                      <Col
+                        md={12}
+                        className="d-flex justify-content-center align-items-center"
+                      >
+                        <div className="ps-2">
+                          {workSpace &&
+                          workSpace.logo &&
+                          workSpace.logo.length > 0 ? (
+                            <img
+                              src={workSpace.logo}
+                              width={120}
+                              height={100}
+                              style={{
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                              className="profilepic mb-1 mt-2"
+                              alt="logo"
+                            />
+                          ) : (
+                            <img
+                              src={DefaultPic}
+                              width={120}
+                              height={100}
+                              style={{
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                              className="profilepic mb-1 mt-2 "
+                              alt="logo"
+                            />
+                          )}
+                        </div>
+                      </Col>
+                    ) : (
+                      <Col
+                        md={12}
+                        className="d-flex justify-content-center align-items-center"
+                      >
+                        <div className="ps-2 pt-4">
+                          {workSpace &&
+                          workSpace.logo &&
+                          workSpace.logo.length > 0 ? (
+                            <img
+                              src={workSpace.logo}
+                              width={150}
+                              height={150}
+                              style={{
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                              // className="profilepic mb-1 mt-2"
+                              alt="logo"
+                            />
+                          ) : (
+                            <img
+                              src={DefaultPic}
+                              width={150}
+                              height={150}
+                              style={{
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                              // className="profilepic mb-1 mt-2 "
+                              alt="logo"
+                            />
+                          )}
+                        </div>
+                      </Col>
+                    )}
+
+                    {workSpace && user && workSpace.host === user.id && (
                       <Col md={12}>
                         <div className="d-flex justify-content-center align-items-center mt-2 ps-2">
                           {/* <h3>{workSpace && workSpace.title}</h3> */}
@@ -218,100 +254,108 @@ const Classroom = () => {
                             max={150}
                             readMoreText=".. read more"
                           /> */}
-                          <div className=" mt-2">
-                            <Link to="/classroom/edit">
-                              <Button
-                                variant="contained"
-                                className="bggrey me-1 text-dark px-4 mb-1 mt-3"
-                                style={{
-                                  height: "40px",
-                                  width: "160px",
-                                }}
-                              >
-                                Edit Profile
-                              </Button>
-                            </Link>
-                            {/* <Button
-                        variant="contained"
-                        className="bg-dark text-white"
-                        style={{
-                          height: "40px",
-                          width: "160px",
-                        }}
-                        onClick={() => {
-                          setShowclasses(true);
-                        }}
-                      >
-                        My Classes
-                      </Button> */}
-                          </div>
-                        </div>
-                      </Col>
-                    ) : (
-                      <Col md={6}>
-                        <div className="mt-2 mx-2 ps-5">
-                          <div>
-                            <Tooltip
-                              title={`Admin ~ ${
-                                workSpace && workSpace.Users[0].first_name
-                              } ${workSpace && workSpace.Users[0].last_name}`}
-                            >
-                              {workSpace &&
-                              workSpace.Users[0].img_thumbnail.length > 0 ? (
-                                <img
-                                  src={workSpace.Users[0].img_thumbnail}
-                                  width={50}
-                                  height={50}
+                          {
+                            <div className=" mt-2">
+                              <Link to="/classroom/edit">
+                                <Button
+                                  variant="contained"
+                                  className="bggrey me-1 text-dark px-4 mb-1 mt-3"
                                   style={{
-                                    borderRadius: "50%",
-                                    objectFit: "cover",
+                                    height: "40px",
+                                    width: "160px",
                                   }}
-                                  className="mb-1 mt-2"
-                                  alt="logo"
-                                />
-                              ) : (
-                                <img
-                                  src={DefaultUserPic}
-                                  width={50}
-                                  height={50}
+                                >
+                                  Edit Profile
+                                </Button>
+                              </Link>
+                            </div>
+                          }
+                          {/* {workSpace && user && workSpace.host === user.id && (
+                            <div className=" mt-2">
+                              <Link to="/classroom/edit">
+                                <Button
+                                  variant="contained"
+                                  className="bggrey me-1 text-dark px-4 mb-1 mt-3"
                                   style={{
-                                    borderRadius: "50%",
-                                    objectFit: "cover",
+                                    height: "40px",
+                                    width: "160px",
                                   }}
-                                  className="mb-1 mt-2 "
-                                  alt="logo"
-                                />
-                              )}
-                            </Tooltip>
-                          </div>
+                                >
+                                  Edit Profile
+                                </Button>
+                              </Link>
+                            </div>
+                            // <Tooltip
+                            //   title={`Admin ~ ${
+                            //     workSpace && workSpace.Users[0].first_name
+                            //   } ${workSpace && workSpace.Users[0].last_name}`}
+                            // >
+                            //   {workSpace &&
+                            //   workSpace.Users[0].img_thumbnail.length > 0 ? (
+                            //     <img
+                            //       src={workSpace.Users[0].img_thumbnail}
+                            //       width={50}
+                            //       height={50}
+                            //       style={{
+                            //         borderRadius: "50%",
+                            //         objectFit: "cover",
+                            //       }}
+                            //       className="mb-1 mt-2"
+                            //       alt="logo"
+                            //     />
+                            //   ) : (
+                            //     <img
+                            //       src={DefaultUserPic}
+                            //       width={50}
+                            //       height={50}
+                            //       style={{
+                            //         borderRadius: "50%",
+                            //         objectFit: "cover",
+                            //       }}
+                            //       className="mb-1 mt-2 "
+                            //       alt="logo"
+                            //     />
+                            //   )}
+                            // </Tooltip>
+                          )} */}
                         </div>
                       </Col>
                     )}
+
+                    {/* <Col md={6}>
+                      <div className="d-flex justify-content-center align-items-center mt-2 ms-4 ps-5">
+                        <div className="ms-5 ps-5"></div>
+                      </div>
+                    </Col> */}
                   </Row>
                 </Col>
                 {/* <Col lg={1}></Col> */}
-                <Col lg={7} className="ps-4 mt-0 abc text-center px-4">
-                  <h1 className="mb-2 mt-2">{workSpace && workSpace.title}</h1>
-                  <p className="mb-2 mt-4 abc">
-                    {workSpace && workSpace.description}{" "}
-                  </p>
-
+                {/* <Col>
+                  <Row className="mb-4"> */}
+                <Col
+                  lg={7}
+                  className=" ps-4 mt-0 abc text-center px-0 d-flex row align-items-center"
+                >
+                  <h1 className="mt-4">{workSpace && workSpace.title}</h1>
+                  {workSpace && workSpace.description}{" "}
+                  <p className="pt-1 abc"></p>
+                  {/* <div>People you know</div> */}
                   {/* <ReadMoreReact
-                text={workSpace && workSpace.description}
-                min={150}
-                ideal={150}
-                max={150}
-                readMoreText="..."
-              /> */}
+                          text={workSpace && workSpace.description}
+                          min={150}
+                          ideal={150}
+                          max={150}
+                          readMoreText="..."
+                        /> */}
                   {/* <div
-                className="d-flex w-100 abc"
-                style={{
-                  overflowX: "scroll",
-                }}
-              >
-                {workSpace && workSpace.description}
-                {workSpace && workSpace.Users.length > 0
-                  ? workSpace.Classroom_Course.map((course, index) => {
+                          className="d-flex w-100 abc"
+                          style={{
+                            overflowX: "scroll",
+                          }}
+                        >
+                        {workSpace && workSpace.description}
+                        {workSpace && workSpace.Users.length > 0
+                          ? workSpace.Classroom_Course.map((course, index) => {
                       const a = course.images;
                       // if (course.host_details.img_thumbnail.includes("{")) {
                       //   const host = course.host_details.img_thumbnail
@@ -385,12 +429,95 @@ const Classroom = () => {
                           </div>
                         );
                       }
-                    })
-                  : ""}
-              </div> */}
+                        })
+                      : ""}
+                    </div> */}
                 </Col>
+                {/* </Row>
+                </Col> */}
               </Row>
             </Container>
+          </Container>
+          <Container
+            fluid
+            className=" d-flex justify-content-start align-items-center gap-3 pb-2 pt-0 mt-0 abc"
+            style={{
+              // boxShadow: "0px 5px #f7f7f7",
+              maxWidth: "62%",
+              overflowX: "scroll",
+              position: "relative",
+            }}
+          >
+            {/* <Tooltip
+              title={`Admin ~ ${workSpace && workSpace.Users[0].first_name} ${
+                workSpace && workSpace.Users[0].last_name
+              }`}
+            > */}
+            <div className="m-0 mb-0 text-center">
+              {workSpace && user && user.img_thumbnail.length > 0 ? (
+                <img
+                  src={user.img_thumbnail}
+                  width={70}
+                  height={70}
+                  style={{
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                  // className="mb-1 mt-2"
+                  alt="logo"
+                />
+              ) : (
+                <img
+                  src={DefaultUserPic}
+                  width={70}
+                  height={70}
+                  style={{
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                  // className="mb-1 mt-2 "
+                  alt="logo"
+                />
+              )}
+              <p className="mb-0 pt-2">You</p>
+            </div>
+            {workSpace &&
+              workSpace.Users.length > 1 &&
+              workSpace.Users.map((ele, ind) => (
+                <div className="m-0 mb-0 text-center" key={ind}>
+                  {user.id !== ele.id &&
+                    (ele.img_thumbnail.length > 0 ? (
+                      <img
+                        src={ele.img_thumbnail}
+                        width={70}
+                        height={70}
+                        style={{
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                        }}
+                        // className="mb-1 mt-2"
+                        alt="logo"
+                      />
+                    ) : (
+                      <img
+                        src={DefaultUserPic}
+                        width={70}
+                        height={70}
+                        style={{
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                        }}
+                        // className="mb-1 mt-2 "
+                        alt="logo"
+                      />
+                    ))}
+
+                  {user.id !== ele.id && (
+                    <p className="mb-0 pt-2">{ele.first_name}</p>
+                  )}
+                </div>
+              ))}
+            {/* </Tooltip> */}
           </Container>
           <Container fluid className="p-1 m-1 bggrey"></Container>
           <Container
