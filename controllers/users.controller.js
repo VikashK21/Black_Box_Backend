@@ -113,6 +113,9 @@ class User_Ctrl {
           password: req.user.id,
         };
       }
+      if (data.hasOwnProperty("provider")) {
+        delete data.provider;
+      }
       const result = await Users.signup(data);
       if (typeof result === "object") {
         if (result.hasOwnProperty("token")) {
