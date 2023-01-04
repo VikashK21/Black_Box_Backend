@@ -361,7 +361,8 @@ class Courses_Classes {
       const result2 = await prisma.participants.findFirst({
         where: { participant_id },
       });
-      if (result2) return "Already registered as Participant.";
+      if (result2 && result2.course_id === course_id)
+        return "Already registered as Participant.";
       const result = await prisma.participants.create({
         data: { participant_id, course_id },
       });
