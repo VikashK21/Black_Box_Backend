@@ -102,6 +102,9 @@ class User_Ctrl {
   signup = async (req, res) => {
     try {
       let data = req.body;
+      if (data.hasOwnProperty("provider")) {
+        delete data.provider;
+      }
       if (req.hasOwnProperty("user")) {
         // console.log(req.user, "facebook/google");
         data = {
@@ -112,9 +115,6 @@ class User_Ctrl {
           email: req.user.emails[0].value,
           password: req.user.id,
         };
-      }
-      if (data.hasOwnProperty("provider")) {
-        delete data.provider;
       }
       const result = await Users.signup(data);
       if (typeof result === "object") {
