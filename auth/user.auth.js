@@ -1,6 +1,7 @@
 "use strict";
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const fs = require('fs')
 
 //// This is was just for the secrete key...
 // const secrete = require("crypto").randomBytes(64).toString("hex");
@@ -11,9 +12,12 @@ require("dotenv").config();
  * public.pem -->   openssl rsa -pubout -in private_key.pem -out public_key.pem
  */
 
+const SECRET_KEY_TOKEN = fs.readFileSync('./keys/private_key.pem', 'utf8')
+const PUBLIC_KEY_TOKEN = fs.readFileSync('./keys/public_key.pem', 'utf8')
+
 const authenticationToken = async (data) => {
-  console.log("Private_Key: ", process.env.SECRET_KEY_TOKEN);
-  const result = jwt.sign(data, process.env.SECRET_KEY_TOKEN, {
+  console.log("Private_Key: ", SECRET_KEY_TOKEN);
+  const result = jwt.sign(data, SECRET_KEY_TOKEN, {
     issuer: "blackboxnow.com",
     subject: "blackboxdigital22@gmail.com",
     audience: "https://www.blackboxnow.com",
@@ -34,8 +38,8 @@ const authorizationToken = async (req, res, next) => {
   if (token) {
     //and this too
     // token = token.split("=")[1];
-    console.log("Public_Key: ", process.env.PUBLIC_KEY_TOKEN);
-    const decodedToken = jwt.verify(token, process.env.PUBLIC_KEY_TOKEN, {
+    console.log("Public_Key: ", PUBLIC_KEY_TOKEN);
+    const decodedToken = jwt.verify(token, PUBLIC_KEY_TOKEN, {
       issuer: "blackboxnow.com",
       subject: "blackboxdigital22@gmail.com",
       audience: "https://www.blackboxnow.com",
