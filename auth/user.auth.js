@@ -1,74 +1,51 @@
+"use strict";
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 //// This is was just for the secrete key...
 // const secrete = require("crypto").randomBytes(64).toString("hex");
 // console.log(secrete);
-
 /**
- * Just few lines to test the behavior.
+ * The openssl method to create the private and public keys
+ * private.pem -->  openssl genrsa -out private_key.pem 4096
+ * public.pem -->   openssl rsa -pubout -in private_key.pem -out public_key.pem
  */
-const TokenGenerator = require("./token-generator");
 
-//  setTimeout(function () {
-//  token2 = tokenGenerator.refresh(token, { verify: { audience: 'myaud', issuer: 'myissuer' }, jwtid: '2' })
-//    console.log(jwt.decode(token, { complete: true }))
-//    console.log(jwt.decode(token2, { complete: true }))
-//  }, 3000)
-const tokenGenerator = new TokenGenerator(
-  process.env.SECRET_KEY_TOKEN,
-  process.env.PUBLIC_KEY_TOKEN,
-  {
-    algorithm: "HS256",
-    keyid: "1",
-    noTimestamp: false,
-    // expiresIn: "2m",
-    // notBefore: "2s",
-  },
-);
-
-authenticationToken = (data) => {
-  console.log(tokenGenerator, "tokenGenerator");
-  token = tokenGenerator.sign(data, {
-    audience: "myaud",
-    issuer: "myissuer",
-    jwtid: "1",
-    subject: "user",
+const authenticationToken = (data) => {
+  console.log("Private_Key: ", process.env.SECRET_KEY_TOKEN);
+  const result = jwt.sign(data, process.env.SECRET_KEY_TOKEN, {
+    issuer: "blackboxnow.com",
+    subject: "blackboxdigital22@gmail.com",
+    audience: "https://www.blackboxnow.com",
+    // expiresIn: exp,
+    algorithm: "RS256",
   });
-  //my...
-  // const result = jwt.sign(`${data.id}`, process.env.SECRET_KEY_TOKEN, {
-  //   algorithm: "RS256",
-  // });
-  // return result;
-  console.log(token, "token");
-  return token;
+  console.log("Token: ", result);
+  return result;
 };
 
-authorizationToken = (req, res, next) => {
+const authorizationToken = (req, res, next) => {
   console.log(req.headers);
   const cookie = req.headers.authorization;
   //remeber this
   // const cookie = req.headers.cookie;
-  console.log(cookie, "cookiedasdasds");
+  // console.log(cookie, "cookiedasdasds");
   let token = cookie.split(" ")[1];
   if (token) {
     //and this too
     // token = token.split("=")[1];
-    const decodedToken = tokenGenerator.verify(token, {
-      verify: {
-        audience: "myaud",
-        issuer: "myissuer",
-        jwtid: "1",
-        subject: "user",
-      },
+    console.log("Public_Key: ", process.env.PUBLIC_KEY_TOKEN);
+    const decodedToken = jwt.verify(token, process.env.PUBLIC_KEY_TOKEN, {
+      issuer: "blackboxnow.com",
+      subject: "blackboxdigital22@gmail.com",
+      audience: "https://www.blackboxnow.com",
+      // expiresIn: exp,
+      algorithm: ["RS256"],
     });
-    // console.log(decodedToken, "the data when it comes here");
+    console.log("Decoded Token: ", decodedToken);
     if (decodedToken && decodedToken.admin) {
       req.user_id = decodedToken;
-    }
-    // const id = jwt.verify(token, process.env.SECRET_KEY_TOKEN);
-    // console.log(decodedToken.id, "id");
-    else if (decodedToken) {
+    } else if (decodedToken) {
       req.user_id = Number(decodedToken.id);
       req.classroom_id =
         decodedToken.classroom_id && Number(decodedToken.classroom_id);
@@ -80,7 +57,7 @@ authorizationToken = (req, res, next) => {
   }
 };
 
-forLogout = (req, res, next) => {
+const forLogout = (req, res, next) => {
   let cookie = req.headers.cookie;
   if (cookie) {
     cookie = cookie.split("=");
