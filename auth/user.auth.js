@@ -11,7 +11,7 @@ require("dotenv").config();
  * public.pem -->   openssl rsa -pubout -in private_key.pem -out public_key.pem
  */
 
-const authenticationToken = (data) => {
+const authenticationToken = async (data) => {
   console.log("Private_Key: ", process.env.SECRET_KEY_TOKEN);
   const result = jwt.sign(data, process.env.SECRET_KEY_TOKEN, {
     issuer: "blackboxnow.com",
@@ -24,7 +24,7 @@ const authenticationToken = (data) => {
   return result;
 };
 
-const authorizationToken = (req, res, next) => {
+const authorizationToken = async (req, res, next) => {
   console.log(req.headers);
   const cookie = req.headers.authorization;
   //remeber this
