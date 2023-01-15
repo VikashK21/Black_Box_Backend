@@ -1,8 +1,8 @@
 "use strict";
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const fs = require('fs')
-
+const fs = require("fs");
+const path = require("path");
 //// This is was just for the secrete key...
 // const secrete = require("crypto").randomBytes(64).toString("hex");
 // console.log(secrete);
@@ -11,9 +11,16 @@ const fs = require('fs')
  * private.pem -->  openssl genrsa -out private_key.pem 4096
  * public.pem -->   openssl rsa -pubout -in private_key.pem -out public_key.pem
  */
-
-const SECRET_KEY_TOKEN = fs.readFileSync('./keys/private_key.pem', 'utf8')
-const PUBLIC_KEY_TOKEN = fs.readFileSync('./keys/public_key.pem', 'utf8')
+// /home/vikash/Desktop/BASK/black_box/auth/keys/private_key.pem
+const SECRET_KEY_TOKEN = fs.readFileSync(
+  path.join(__dirname, "./keys/private_key.pem"),
+  "utf8",
+);
+const PUBLIC_KEY_TOKEN = fs.readFileSync(
+  path.join(__dirname, "./keys/public_key.pem"),
+  "utf8",
+);
+console.log(SECRET_KEY_TOKEN);
 
 const authenticationToken = async (data) => {
   console.log("Private_Key: ", SECRET_KEY_TOKEN);
