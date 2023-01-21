@@ -19,12 +19,11 @@ function UIjoinmeeting() {
     }
     const startVideoV = async () => {
       try {
-        co++;
         console.log(meeting_id);
         setLoading(false);
         const data = await callJoinMeeting(meeting_id);
         setStartMeeting(data);
-        if (data && co === 1) {
+        if (data) {
           const videoView = new window.DvcExternalAPI(
             `${data.web_client_uri}`,
             {
@@ -50,6 +49,7 @@ function UIjoinmeeting() {
     };
     if (co === 0) startVideoV();
     console.log(startMeeting, "the useState");
+    co++;
     // eslint-disable-next-line
   }, []);
   return (
