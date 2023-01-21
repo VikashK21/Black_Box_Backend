@@ -60,6 +60,7 @@ model Classroom_Course {
   hosted       Boolean       @default(false)
   Classes      Classes[]
   link         String?
+  dolphin      Json?
   // class_structure String? //
   // structure       Json?
   Vid_Classes  Vid_Classes[]
@@ -87,6 +88,7 @@ model Course {
   duration_type   String? //
   Classes         Classes[]
   link            String?
+  dolphin         Json?
   class_structure String? //
   structure       Json?
   Vid_Classes     Vid_Classes[]

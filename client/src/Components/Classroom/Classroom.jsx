@@ -573,21 +573,36 @@ const Classroom = () => {
                             width: "220px",
                           }}
                         >
-                          <a
-                            href={course.link}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="cp"
-                          >
-                            <div className="profileclassesimg">
-                              <img
-                                src={a}
-                                className="classesimg"
-                                alt="profile"
-                              />
-                            </div>
-                          </a>
-
+                          {course.link && course.link.length > 0 ? (
+                            <a
+                              href={course.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="cp"
+                            >
+                              <div className="profileclassesimg">
+                                <img
+                                  src={a}
+                                  className="classesimg"
+                                  alt="profile"
+                                />
+                              </div>
+                            </a>
+                          ) : (
+                            course.dolphin && (
+                              <Link
+                                to={`/joinmeeting/${course.dolphin.meeting_id}`}
+                              >
+                                <div className="profileclassesimg">
+                                  <img
+                                    src={a}
+                                    className="classesimg"
+                                    alt="profile"
+                                  />
+                                </div>
+                              </Link>
+                            )
+                          )}
                           <Row
                             className="profilest bw m-0"
                             style={{

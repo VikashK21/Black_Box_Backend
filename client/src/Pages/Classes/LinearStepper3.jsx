@@ -225,12 +225,13 @@ const LinearStepper3 = () => {
                               errorToast("Course price is required");
                             } else if (course.max_students === "") {
                               errorToast("Max_students is required");
-                            } else if (course.link === "") {
-                              errorToast("Link is required");
-                            } 
-                            else if (course.linksubstring(0, 8) === "https://") {
-                              errorToast("Link should start with https://");
                             }
+                            //  else if (course.link === "") {
+                            //   errorToast("Link is required");
+                            // } 
+                            // else if (course.linksubstring(0, 8) === "https://") {
+                            //   errorToast("Link should start with https://");
+                            // }
                             else if (image.length === 0) {
                               errorToast(
                                 "Upload any one image. It is required"

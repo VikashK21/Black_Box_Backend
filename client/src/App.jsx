@@ -44,6 +44,8 @@ import ClassroomRegistration from "./Components/Classroom/Register";
 import Classroom from "./Components/Classroom/Classroom";
 import Editclssroom from "./Components/Classroom/Editclssroom";
 import Hostclassroom from "./Components/Classroom/Hostclassroom";
+import UImeeting from "./integration/UImeeting";
+import UIjoinmeeting from "./integration/UIjoinmeeting";
 
 function App() {
   return (
@@ -101,6 +103,8 @@ function App() {
 
               <Route path="/signup" element={<Registration />} />
               <Route path="/social/:subUrl" element={<Social />} />
+              {/* <Route path="/meeting" element={<UImeeting />} /> */}
+              <Route path="/joinmeeting/:meeting_id" element={<UIjoinmeeting />} />
             </Routes>
           </AuthProvider>
         </StyleProvider>

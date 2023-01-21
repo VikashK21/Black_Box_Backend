@@ -10,6 +10,7 @@ const AuthContext = createContext();
 export default AuthContext;
 
 // export const BaseUrl = "http://localhost:3001/api";
+export const dDomain = "https://test-blackis.dolphinvc.com/";
 // export const BaseUrl = "http://localhost:3001";
 // export const BaseLink = "https://brotocamp.space/";
 // export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
@@ -69,7 +70,6 @@ export const AuthProvider = ({ children }) => {
     description: "",
     price: "",
     max_students: "",
-    link: "",
     images: [""],
     type: "",
     structure: "",
@@ -110,13 +110,194 @@ export const AuthProvider = ({ children }) => {
   const [seenavs, setSeenavs] = useState(false);
   const [clsroom, setClsroom] = useState(false);
 
+  const [startMeeting, setStartMeeting] = useState();
+  const [meetingAuth, setMeetingAuth] = useState();
+
+  //Dolphin>>>
+  const dvc = new window.DvcSDK();
+  dvc.setDomain("https://test-blackis.dolphinvc.com");
+  // dvc.getReconcileJwt(authTokens);
+
+  const reconcileJWT = async () => {
+    try {
+      const res = await axios.post(
+        dDomain + "auth/api/v1/reconcile-jwt",
+        { token: authTokens },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        },
+      );
+      console.log(res.data);
+      setMeetingAuth(() => res.data);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const refreshJWT = async () => {
+    try {
+      if (!meetingAuth) {
+        console.log("Token not found!!");
+        return;
+      }
+
+      const res = await axios.post(dDomain + "auth/api/v1/refresh-token", {
+        refreshToken: meetingAuth.refreshToken,
+      });
+      console.log(res.data);
+      setMeetingAuth(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const callStartMeetingApi = async (meeting_name) => {
+    try {
+      const data = {
+        default: true,
+        audio_only: true,
+        include_video: true,
+        include_audio: true,
+        mute_audio_on_start: true,
+        meeting_name,
+        // moderator_info: {
+        //   username: "string",
+        //   user_id: "string",
+        // },
+        password: "12345",
+        redirect_url: "https://blackboxnow.com/profile",
+        // water_mark_image_png:
+        //   "https://res.cloudinary.com/black-box/image/upload/v1672752016/buqwsbiz9lp2rezinn5t.jpg",
+        water_mark_image_link: "https://blackboxnow.com/",
+        // redirect_url: "string",
+        // water_mark_image_png: "string",
+        // water_mark_image_link: "string",
+      };
+      const token = await reconcileJWT();
+      const res = await axios.post(dDomain + "meeting/api/v1/meeting", data, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token.token}`,
+        },
+      });
+      console.log(res.data, "the startMeeting D");
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const callJoinMeetingApi = async (id) => {
+    try {
+      // console.log(token.token);
+      const token = await reconcileJWT();
+      console.log("meeting token", meetingAuth);
+      let config = {
+        method: "get",
+        url: `${dDomain}meeting/api/v1/join/${id}?passcode=12345&end_meeting_redirect_url=https://blackboxnow.com/profile&display_name=${user.first_name}%20${user.last_name}&mute_audio_on_start=true&include_video=true&include_audio=true&water_mark_image_png=https://res.cloudinary.com/black-box/image/upload/v1672752016/buqwsbiz9lp2rezinn5t.jpg&water_mark_image_link=https://blackboxnow.com/`,
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token.token}`,
+        },
+      };
+      const res = await axios(config);
+      console.log(res.data, "the data fromt he join");
+      setLoading(true);
+      return res.data;
+    } catch (err) {
+      // console.log("something went wrong");
+      console.log(err.response);
+    }
+  };
+
+  const callStartMeeting = async (meeting_name) => {
+    try {
+      dvc.getReconcileJwt(authTokens);
+      dvc.setShowFeedback(false);
+      let config = {
+        default: false,
+        audio_only: false,
+        include_video: true,
+        include_audio: true,
+        mute_audio_on_start: true,
+        moderator_incoming_call: true,
+        redirect_url: "https://blackboxnow.com/profile",
+        water_mark_image_png:
+          "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
+        water_mark_image_link: "https://blackboxnow.com/",
+        meeting_name,
+        password: "12345",
+        meeting_call_type: "video",
+        // moderator_info: {
+        //   username: "someuser@gmail.com",
+        //   user_id: "123e4567-e89b-12d3-a456-426614174000",
+        // },
+        dvc_users: [],
+        telephony_users: [],
+      };
+      const res = await dvc // this variable represents the instance of the DvcSDK class
+        .startMeeting(config); // instance method to start meeting taking in config as object
+      console.log(res.data, "the meeting de");
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const callJoinMeeting = async (meeting_id) => {
+    try {
+      console.log(authTokens, "the token");
+      dvc.getReconcileJwt(authTokens);
+      dvc.setShowFeedback(false);
+      // dvc.setWaterMarkImagePng(
+      //   "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
+      // );
+      // dvc.setWaterMarkImageLink("https://blackboxnow.com/");
+      // dvc.setRedirectUrl("https://blackboxnow.com/profile");
+      console.log(dvc);
+      console.log(startMeeting);
+      let params = {
+        include_audio: true,
+        include_video: true,
+        mute_audio_on_start: true,
+        meeting_id,
+        passcode: "12345",
+        display_name: `${user.first_name} ${user.last_name}`,
+        redirect_url: "https://blackboxnow.com/profile",
+        end_meeting_redirect_url: "https://blackboxnow.com/profile",
+        water_mark_image_png:
+          "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
+        water_mark_image_link: "https://blackboxnow.com/",
+      };
+      const res = await dvc // this variable represents the instance of the DvcSDK class
+        .joinMeeting(params);
+      console.log(res);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      errorToast(err);
+    }
+  };
+
+  // callStartMeeting();
+
   const createClassroom = async (data, sessions) => {
     console.log(data);
     try {
       const uploaders = await imgsAlgo(image);
+      let dolphin = await callStartMeeting(data.title);
+      console.log(dolphin, "from the classroom");
+      // if (!dolphin.hasOwnProperty("web_client_uri")) {
+      //   dolphin = await callStartMeeting(data.title);
+      // }
       const res = await axios.post(
         BaseUrl + "/classroom",
-        { ...data, images: uploaders },
+        { ...data, images: uploaders, dolphin },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
         },
@@ -260,8 +441,8 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       if (user) {
-        console.log(user, 'the user id');
-        id = user.id
+        console.log(user, "the user id");
+        id = user.id;
       }
       await axios.post(BaseUrl + "/workspace/" + id, data);
       if (user) {
@@ -673,10 +854,15 @@ export const AuthProvider = ({ children }) => {
     try {
       const uploaders = await imgsAlgo(image);
       console.log(uploaders, "res is here.");
+      let dolphin = await callStartMeeting(course.title);
+      console.log(dolphin, "the Host course");
+      // if (!dolphin.hasOwnProperty("web_client_uri")) {
+      //   dolphin = await callStartMeeting(course.title);
+      // }
       const res = await axios.post(
         BaseUrl + "/host/course",
         {
-          course: { ...course, images: uploaders },
+          course: { ...course, images: uploaders, dolphin },
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
@@ -926,11 +1112,12 @@ export const AuthProvider = ({ children }) => {
     let uploaders = await imgsAlgo(updatedImgs);
     uploaders = [...uploaders, ...image];
     console.log(uploaders, "after");
+    const dolphin = await callStartMeeting(course.title);
     await axios
       .patch(
         BaseUrl + "/course/" + id,
         {
-          course: { ...course, images: uploaders },
+          course: { ...course, images: uploaders, dolphin },
         },
         {
           headers: { Authorization: `Bearer ${authTokens}` },
@@ -939,9 +1126,11 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         console.log(res.data);
         successToast("Course Updated Successfully");
+        navigate("/profile");
       })
       .catch((err) => {
         console.log(err.message);
+        errorToast("Please try again");
       });
   };
 
@@ -1062,6 +1251,16 @@ export const AuthProvider = ({ children }) => {
     editSession,
     getClassroomById,
     getClassroomSessions,
+    callStartMeeting,
+    startMeeting,
+    setStartMeeting,
+    meetingAuth,
+    setMeetingAuth,
+    reconcileJWT,
+    refreshJWT,
+    callJoinMeeting,
+    callJoinMeetingApi,
+    callStartMeetingApi,
   };
 
   return (

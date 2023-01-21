@@ -132,7 +132,7 @@ const Host4 = () => {
                     required
                   />
                 </Col>
-                <Col md={12} className="mx-0 d-flex ">
+                {/* <Col md={12} className="mx-0 d-flex ">
                   <TextField
                     className="my-2 w-100"
                     label="Google meet"
@@ -150,7 +150,7 @@ const Host4 = () => {
                       Link
                     </Button>
                   </a>
-                </Col>
+                </Col> */}
               </Row>
             </div>
             <div className="profile-img text-center my-1">

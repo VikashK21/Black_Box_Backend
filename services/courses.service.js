@@ -520,6 +520,7 @@ class Courses_Classes {
         methodology: data.course.methodology,
         content: data.course.content,
         requirements: data.course.requirements,
+        dolphin: data.course.dolphin,
       };
       const result = await prisma.course.update({
         where: { id },
@@ -595,6 +596,7 @@ class Courses_Classes {
       methodology: data.course.methodology,
       content: data.course.content,
       requirements: data.course.requirements,
+      dolphin: data.course.dolphin || undefined,
     };
     try {
       const result = await prisma.course.create({

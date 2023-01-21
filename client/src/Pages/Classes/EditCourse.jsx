@@ -248,7 +248,7 @@ const EditCourse = () => {
                             required
                           />
                         </Col>
-                        <Col md={12} className="mx-0 d-flex ">
+                        {/* <Col md={12} className="mx-0 d-flex ">
                           <TextField
                             className="my-2 w-100"
                             label="Google meet"
@@ -270,7 +270,7 @@ const EditCourse = () => {
                               Link
                             </Button>
                           </a>
-                        </Col>
+                        </Col> */}
                       </Row>
                     </div>
                     <div
@@ -699,6 +699,7 @@ const EditCourse = () => {
                       className="bgy text-dark w-50 rounded-2 me-2"
                       onClick={() => {
                         editCourse(id);
+                          // navigate("/profile");
                       }}
                     >
                       Update

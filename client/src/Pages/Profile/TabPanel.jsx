@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 import { useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
 import AlertDialog from "./AlertDialog";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, setShowclasses, value, index, ...other } = props;
@@ -63,7 +63,10 @@ export default function BasicTabs() {
     showclasses,
     setShowclasses,
     scollToRef,
+    callJoinMeeting,
   } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     hostedClasses();
@@ -157,7 +160,7 @@ export default function BasicTabs() {
                             <div className=" h-75 my-1 ">
                               <AlertDialog title={item.title} id={item.id} />
 
-                              <a
+                              {/* <a
                                 href={item.link}
                                 target="_blank"
                                 className="w-100"
@@ -168,7 +171,35 @@ export default function BasicTabs() {
                                 >
                                   Join
                                 </Button>
-                              </a>
+                              </a> */}
+                              {item.link && item.link.length > 0 ? (
+                                <a
+                                  href={item.link}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="w-100"
+                                >
+                                  <Button
+                                    variant="contained"
+                                    className="bgy text-dark w-100 my-2 px-2"
+                                  >
+                                    Join
+                                  </Button>
+                                </a>
+                              ) : (
+                                item.dolphin && (
+                                  <Link
+                                    to={`/joinmeeting/${item.dolphin.meeting_id}`}
+                                  >
+                                    <Button
+                                      variant="contained"
+                                      className="bgy text-dark w-100 my-2 px-2"
+                                    >
+                                      Join
+                                    </Button>
+                                  </Link>
+                                )
+                              )}
                               <Link to={`/edit/course/${item.id}`}>
                                 <Button
                                   variant="contained"
@@ -228,7 +259,55 @@ export default function BasicTabs() {
                           <h6 className="p-0">
                             The wait is over. Join the class!
                           </h6>
-                          <a
+                          {item.course.link.length > 0 ? (
+                            <>
+                              <a
+                                href={item.course.link}
+                                target="_blank"
+                                className="w-50 p-0"
+                                rel="noreferrer"
+                              >
+                                <Button
+                                  variant="primary"
+                                  className="mt-2  w-100 bgy border-0 text-dark"
+                                  style={{
+                                    height: "40px",
+                                    width: "180px",
+                                  }}
+                                  onClick={() => {
+                                    // callJoinMeeting(item.course.dolphin.meeting_id);
+                                  }}
+                                >
+                                  Enter room
+                                </Button>
+                              </a>
+                            </>
+                          ) : (
+                            <>
+                              <Button
+                                variant="primary"
+                                className="mt-2  w-100 bgy border-0 text-dark"
+                                style={{
+                                  height: "40px",
+                                  width: "180px",
+                                }}
+                                onClick={() => {
+                                  // callJoinMeeting(item.course.dolphin.meeting_id);
+                                  if (
+                                    item.dolphin &&
+                                    item.dolphin.hasOwnProperty("meeting_id")
+                                  )
+                                    navigate(
+                                      "/joinmeeting/" +
+                                        item.course.dolphin.meeting_id,
+                                    );
+                                }}
+                              >
+                                Enter room
+                              </Button>
+                            </>
+                          )}
+                          {/* <a
                             href={item.course.link}
                             target="_blank"
                             className="w-50 p-0"
@@ -240,10 +319,13 @@ export default function BasicTabs() {
                                 height: "40px",
                                 width: "180px",
                               }}
+                              onClick={() => {
+                                // callJoinMeeting(item.course.dolphin.meeting_id);
+                              }}
                             >
                               Enter room
                             </Button>
-                          </a>
+                          </a> */}
                         </Row>
                       </Col>
                     </Row>

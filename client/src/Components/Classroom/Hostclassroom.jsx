@@ -32,7 +32,6 @@ function Hostclassroom() {
   const [clsCourse, setClsCourse] = useState({
     title: "",
     description: "",
-    link: "",
     requirements: [""],
   });
   const [clsSession, setClsSessison] = useState({
@@ -240,7 +239,7 @@ function Hostclassroom() {
                             </div>
                           ))}
                         </Col>
-                        <Col md={12} className="mx-0 d-flex ">
+                        {/* <Col md={12} className="mx-0 d-flex ">
                           <TextField
                             className="my-2 w-100"
                             label="Google meet"
@@ -272,11 +271,11 @@ function Hostclassroom() {
                               Link
                             </Button>
                           </a>
-                        </Col>
+                        </Col> */}
                       </Row>
                     </div>
                     <div
-                      className="profile-img text-center my-1 "
+                      className="profile-img text-center "
                       style={{
                         height: "fit-content",
                       }}
@@ -596,8 +595,6 @@ function Hostclassroom() {
                       if (
                         clsCourse.title !== "" &&
                         clsCourse.description !== "" &&
-                        clsCourse.link !== "" &&
-                        clsCourse.link.substring(0, 8) === "https://" &&
                         image.length !== 0
                       ) {
                         setMarkdone(() => true);
@@ -607,13 +604,16 @@ function Hostclassroom() {
                           errorToast("Title is required");
                         } else if (clsCourse.description === "") {
                           errorToast("Description is required");
-                        } else if (clsCourse.link === "") {
-                          errorToast("Link is required");
-                        } else if (
-                          clsCourse.link.substring(0, 8) !== "https://"
-                        ) {
-                          errorToast("Link should start with https://");
-                        } else if (image.length === 0) {
+                        }
+                        // else if (clsCourse.link === "") {
+                        //   errorToast("Link is required");
+                        // }
+                        //  else if (
+                        //   clsCourse.link.substring(0, 8) !== "https://"
+                        // ) {
+                        //   errorToast("Link should start with https://");
+                        // }
+                        else if (image.length === 0) {
                           errorToast("Upload any one image. It is required");
                         } else {
                           // HandleNext();

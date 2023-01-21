@@ -18,7 +18,6 @@ const Choose = () => {
       price: "",
       max_students: "",
       type: "",
-      link: "",
       images: [""],
       structure: "",
       classes: "",

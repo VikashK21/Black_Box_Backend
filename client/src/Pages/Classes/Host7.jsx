@@ -161,7 +161,7 @@ const Host = () => {
                     required
                   />
                 </Col>
-                <Col md={12} className="mx-0 d-flex ">
+                {/* <Col md={12} className="mx-0 d-flex ">
                   <TextField
                     className="my-2 w-100"
                     label="Google meet"
@@ -181,7 +181,7 @@ const Host = () => {
                       Link
                     </Button>
                   </a>
-                </Col>
+                </Col> */}
               </Row>
             </div>
             <div
