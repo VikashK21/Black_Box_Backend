@@ -9,7 +9,7 @@ function UIjoinmeeting() {
     useContext(AuthContext);
   const navigate = useNavigate();
   const { meeting_id } = useParams();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   let co = 0;
 
   useEffect(() => {
@@ -19,11 +19,12 @@ function UIjoinmeeting() {
     }
     const startVideoV = async () => {
       try {
+        co++;
         console.log(meeting_id);
-        const data = await callJoinMeeting(meeting_id);
         setLoading(false);
+        const data = await callJoinMeeting(meeting_id);
         setStartMeeting(data);
-        if (data) {
+        if (data && co === 0) {
           const videoView = new window.DvcExternalAPI(
             `${data.web_client_uri}`,
             {
@@ -32,23 +33,22 @@ function UIjoinmeeting() {
             },
           );
           console.log(videoView, "the ans");
-          videoView.addListener(
-            "ready-to-close",
-            () => console.log("Ready to close"),
-            // prompt('Ready to close')
-          );
-          videoView.addListener(
-            "video-conference-joined",
-            () => console.log("People are in the conference."),
-            // prompt('People are in the conference.')
-          );
+          // videoView.addListener(
+          //   "ready-to-close",
+          //   () => console.log("Ready to close"),
+          //   // prompt('Ready to close')
+          // );
+          // videoView.addListener(
+          //   "video-conference-joined",
+          //   () => console.log("People are in the conference."),
+          //   // prompt('People are in the conference.')
+          // );
         }
       } catch (error) {
         console.log(error);
       }
     };
     if (co === 0) startVideoV();
-    co++;
     console.log(startMeeting, "the useState");
     // eslint-disable-next-line
   }, []);
