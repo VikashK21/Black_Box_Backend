@@ -21,8 +21,8 @@ function UIjoinmeeting() {
       try {
         console.log(meeting_id);
         const data = await callJoinMeeting(meeting_id);
-        setStartMeeting(data);
         setLoading(false);
+        setStartMeeting(data);
         if (data) {
           const videoView = new window.DvcExternalAPI(
             `${data.web_client_uri}`,
