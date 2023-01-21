@@ -588,20 +588,26 @@ const Classroom = () => {
                                 />
                               </div>
                             </a>
+                          ) : course.dolphin ? (
+                            <Link
+                              to={`/joinmeeting/${course.dolphin.meeting_id}`}
+                            >
+                              <div className="profileclassesimg">
+                                <img
+                                  src={a}
+                                  className="classesimg"
+                                  alt="profile"
+                                />
+                              </div>
+                            </Link>
                           ) : (
-                            course.dolphin && (
-                              <Link
-                                to={`/joinmeeting/${course.dolphin.meeting_id}`}
-                              >
-                                <div className="profileclassesimg">
-                                  <img
-                                    src={a}
-                                    className="classesimg"
-                                    alt="profile"
-                                  />
-                                </div>
-                              </Link>
-                            )
+                            <div className="profileclassesimg">
+                              <img
+                                src={a}
+                                className="classesimg"
+                                alt="profile"
+                              />
+                            </div>
                           )}
                           <Row
                             className="profilest bw m-0"

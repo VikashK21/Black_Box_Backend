@@ -233,13 +233,13 @@ export const AuthProvider = ({ children }) => {
         meeting_name,
         password: "12345",
         meeting_call_type: "video",
-        // moderator_info: {
-        //   username: "someuser@gmail.com",
-        //   user_id: "123e4567-e89b-12d3-a456-426614174000",
-        // },
         dvc_users: [],
         telephony_users: [],
       };
+      // moderator_info: {
+      //   username: "someuser@gmail.com",
+      //   user_id: "123e4567-e89b-12d3-a456-426614174000",
+      // },
       const res = await dvc // this variable represents the instance of the DvcSDK class
         .startMeeting(config); // instance method to start meeting taking in config as object
       console.log(res.data, "the meeting de");
@@ -268,12 +268,12 @@ export const AuthProvider = ({ children }) => {
         meeting_id,
         passcode: "12345",
         display_name: `${user.first_name} ${user.last_name}`,
-        redirect_url: "https://blackboxnow.com/profile",
-        end_meeting_redirect_url: "https://blackboxnow.com/profile",
-        water_mark_image_png:
-          "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
-        water_mark_image_link: "https://blackboxnow.com/",
       };
+      // redirect_url: "https://blackboxnow.com/profile",
+      // end_meeting_redirect_url: "https://blackboxnow.com/profile",
+      // water_mark_image_png:
+      //   "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
+      // water_mark_image_link: "https://blackboxnow.com/",
       const res = await dvc // this variable represents the instance of the DvcSDK class
         .joinMeeting(params);
       console.log(res);
@@ -292,9 +292,9 @@ export const AuthProvider = ({ children }) => {
       const uploaders = await imgsAlgo(image);
       let dolphin = await callStartMeeting(data.title);
       console.log(dolphin, "from the classroom");
-      // if (!dolphin.hasOwnProperty("web_client_uri")) {
-      //   dolphin = await callStartMeeting(data.title);
-      // }
+      if (!dolphin.hasOwnProperty("web_client_uri")) {
+        dolphin = await callStartMeeting(data.title);
+      }
       const res = await axios.post(
         BaseUrl + "/classroom",
         { ...data, images: uploaders, dolphin },
@@ -856,9 +856,9 @@ export const AuthProvider = ({ children }) => {
       console.log(uploaders, "res is here.");
       let dolphin = await callStartMeeting(course.title);
       console.log(dolphin, "the Host course");
-      // if (!dolphin.hasOwnProperty("web_client_uri")) {
-      //   dolphin = await callStartMeeting(course.title);
-      // }
+      if (!dolphin.hasOwnProperty("web_client_uri")) {
+        dolphin = await callStartMeeting(course.title);
+      }
       const res = await axios.post(
         BaseUrl + "/host/course",
         {
