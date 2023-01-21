@@ -33,16 +33,16 @@ function UIjoinmeeting() {
             },
           );
           console.log(videoView, "the ans");
-          // videoView.addListener(
-          //   "ready-to-close",
-          //   () => console.log("Ready to close"),
-          //   // prompt('Ready to close')
-          // );
-          // videoView.addListener(
-          //   "video-conference-joined",
-          //   () => console.log("People are in the conference."),
-          //   // prompt('People are in the conference.')
-          // );
+          videoView.addListener(
+            "ready-to-close",
+            () => console.log("Ready to close"),
+            // prompt('Ready to close')
+          );
+          videoView.addListener(
+            "video-conference-joined",
+            () => console.log("People are in the conference."),
+            // prompt('People are in the conference.')
+          );
         }
       } catch (error) {
         console.log(error);
