@@ -169,9 +169,9 @@ export const AuthProvider = ({ children }) => {
         //   user_id: "string",
         // },
         password: "12345",
-        redirect_url: "https://blackboxnow.com/profile",
-        // water_mark_image_png:
-        //   "https://res.cloudinary.com/black-box/image/upload/v1672752016/buqwsbiz9lp2rezinn5t.jpg",
+        redirect_url: "https://blackboxnow.com/",
+        water_mark_image_png:
+          "https://res.cloudinary.com/black-box/image/upload/v1672752016/buqwsbiz9lp2rezinn5t.jpg",
         water_mark_image_link: "https://blackboxnow.com/",
         // redirect_url: "string",
         // water_mark_image_png: "string",
@@ -226,7 +226,7 @@ export const AuthProvider = ({ children }) => {
         include_audio: true,
         mute_audio_on_start: true,
         moderator_incoming_call: true,
-        redirect_url: "https://blackboxnow.com/profile",
+        redirect_url: "https://blackboxnow.com/",
         water_mark_image_png:
           "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
         water_mark_image_link: "https://blackboxnow.com/",
@@ -249,35 +249,74 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const callJoinMeeting = async (meeting_id) => {
+  const getParticipant = async (course_id) => {
     try {
-      console.log(authTokens, "the token");
-      dvc.getReconcileJwt(authTokens);
-      dvc.setShowFeedback(false);
-      // dvc.setWaterMarkImagePng(
-      //   "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
-      // );
-      // dvc.setWaterMarkImageLink("https://blackboxnow.com/");
-      // dvc.setRedirectUrl("https://blackboxnow.com/profile");
-      console.log(dvc);
-      console.log(startMeeting);
-      let params = {
-        include_audio: true,
-        include_video: true,
-        mute_audio_on_start: true,
-        meeting_id,
-        passcode: "12345",
-        display_name: `${user.first_name} ${user.last_name}`,
-      };
-      // redirect_url: "https://blackboxnow.com/profile",
-      // end_meeting_redirect_url: "https://blackboxnow.com/profile",
-      // water_mark_image_png:
-      //   "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
-      // water_mark_image_link: "https://blackboxnow.com/",
-      const res = await dvc // this variable represents the instance of the DvcSDK class
-        .joinMeeting(params);
-      console.log(res);
-      return res.data;
+      const res = await axios.get(BaseUrl + `/participant/${course_id}`, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      if (res) {
+        if (res.status) {
+          return true;
+        } else if (!res.status) {
+          errorToast("You have not registered this course");
+          return false;
+        }
+      }
+      return false;
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const callJoinMeeting = async (meeting_id, course_id, type) => {
+    try {
+      let allow = false;
+      if (type === "ses" && user.classroom_id) {
+        const data = await getClassroomById(course_id);
+        if (data && data.dolphin && data.dolphin.meeting_id === meeting_id) {
+          allow = true;
+        }
+      } else if (type === "cls") {
+        allow = await getParticipant(course_id);
+        if (typeof allow !== "boolean") {
+          allow = false;
+        }
+      }
+      if (allow) {
+        console.log(authTokens, "the token");
+        dvc.getReconcileJwt(authTokens);
+        dvc.setShowFeedback(false);
+        // dvc.setWaterMarkImagePng(
+        //   "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
+        // );
+        // dvc.setWaterMarkImageLink("https://blackboxnow.com/");
+        // dvc.setRedirectUrl("https://blackboxnow.com/profile");
+        console.log(dvc);
+        console.log(startMeeting);
+        let params = {
+          include_audio: true,
+          include_video: true,
+          mute_audio_on_start: true,
+          end_meeting_redirect_url: "https://blackboxnow.com/",
+          water_mark_image_png:
+            "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
+          water_mark_image_link: "https://blackboxnow.com/",
+          passcode: "12345",
+          display_name: `${user.first_name} ${user.last_name}`,
+          meeting_id,
+        };
+        // redirect_url: "https://blackboxnow.com/profile",
+        // end_meeting_redirect_url: "https://blackboxnow.com/profile",
+        // water_mark_image_png:
+        //   "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
+        // water_mark_image_link: "https://blackboxnow.com/",
+        const res = await dvc.joinMeeting(params);
+        console.log(res);
+        return res.data;
+      }
+      if (type !== "ses" || type !== "cls" || course_id === 0) {
+        errorToast("Invalid url");
+      }
     } catch (err) {
       console.log(err);
       errorToast(err);
@@ -318,6 +357,7 @@ export const AuthProvider = ({ children }) => {
         );
         successToast("Session uploaded successfully");
         await getWorkSpaceClassroom();
+        setImage([]);
         // return res.data;
       } else {
         console.log(res.data);
@@ -871,6 +911,7 @@ export const AuthProvider = ({ children }) => {
       console.log(res.data);
       if (typeof res.data === "object") {
         setCourseId(res.data);
+        setImage([]);
       }
     } catch (err) {
       console.log(err.message);
@@ -1261,6 +1302,8 @@ export const AuthProvider = ({ children }) => {
     callJoinMeeting,
     callJoinMeetingApi,
     callStartMeetingApi,
+    infoToast,
+    getParticipant,
   };
 
   return (
@@ -1271,3 +1314,8 @@ export const AuthProvider = ({ children }) => {
 {
   /* <iframe width="1520" height="553" src="https://www.youtube.com/embed/zE-a5eqvlv8" title="Dua Lipa, Coldplay, Martin Garrix & Kygo, The Chainsmokers Style - Feeling Me" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */
 }
+
+// Creating an optimized production build...
+// Browserslist: caniuse-lite is outdated. Please run:
+//   npx update-browserslist-db@latest
+//   Why you should do it regularly: https://github.com/browserslist/update-db#readme

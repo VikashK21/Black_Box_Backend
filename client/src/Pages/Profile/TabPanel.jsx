@@ -64,6 +64,7 @@ export default function BasicTabs() {
     setShowclasses,
     scollToRef,
     callJoinMeeting,
+    infoToast,
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -259,7 +260,7 @@ export default function BasicTabs() {
                           <h6 className="p-0">
                             The wait is over. Join the class!
                           </h6>
-                          {item.course.link.length > 0 ? (
+                          {item.course.link && item.course.link.length > 0 ? (
                             <>
                               <a
                                 href={item.course.link}
@@ -298,9 +299,13 @@ export default function BasicTabs() {
                                     item.dolphin.hasOwnProperty("meeting_id")
                                   )
                                     navigate(
-                                      "/joinmeeting/" +
-                                        item.course.dolphin.meeting_id,
+                                      `/joinmeeting/cls/${item.course.id}/${item.course.dolphin.meeting_id}`,
                                     );
+                                  else {
+                                    infoToast(
+                                      "Please edit the course to be updated.",
+                                    );
+                                  }
                                 }}
                               >
                                 Enter room

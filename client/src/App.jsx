@@ -104,7 +104,10 @@ function App() {
               <Route path="/signup" element={<Registration />} />
               <Route path="/social/:subUrl" element={<Social />} />
               {/* <Route path="/meeting" element={<UImeeting />} /> */}
-              <Route path="/joinmeeting/:meeting_id" element={<UIjoinmeeting />} />
+              <Route
+                path="/joinmeeting/:type/:course_id/:meeting_id/"
+                element={<UIjoinmeeting />}
+              />
             </Routes>
           </AuthProvider>
         </StyleProvider>

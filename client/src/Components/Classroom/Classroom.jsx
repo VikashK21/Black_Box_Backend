@@ -88,6 +88,7 @@ const Classroom = () => {
   };
 
   useEffect(() => {
+    console.log(user.classroom_id, "the user from the classroom");
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -590,7 +591,7 @@ const Classroom = () => {
                             </a>
                           ) : course.dolphin ? (
                             <Link
-                              to={`/joinmeeting/${course.dolphin.meeting_id}`}
+                              to={`/joinmeeting/ses/${course.id}/${course.dolphin.meeting_id}`}
                             >
                               <div className="profileclassesimg">
                                 <img

@@ -372,6 +372,29 @@ class Courses_Classes {
     }
   }
 
+  async getParticipant(participant_id, course_id) {
+    try {
+      const result = await prisma.participants.findMany({
+        where: { participant_id },
+      });
+      if (result && result.length > 1) {
+        for (let eachC of result) {
+          if (eachC.course_id === course_id) return true;
+        }
+      } else if (result && result.length === 1) {
+        if (result[0].course_id === course_id) return true;
+      } else {
+        const result2 = await prisma.course.findUnique({
+          where: { id: course_id },
+        });
+        if (result2.host === participant_id) return true;
+      }
+      return false;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   async addToGifted(gifted_by, email_id, course_id) {
     try {
       const result2 = await prisma.users.findUnique({

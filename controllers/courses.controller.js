@@ -139,6 +139,25 @@ class Course_inf {
     }
   };
 
+  getParticipant = async (req, res) => {
+    try {
+      const result = await Courses.getParticipant(
+        req.user_id,
+        Number(req.params.courseID),
+      );
+      if (result) {
+        return res
+          .status(200)
+          .json({ status: result, msg: "The participant exist." });
+      }
+      res
+        .status(404)
+        .json({ status: result, msg: "The participant does not exist!" });
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   parallelClasses = async (req, res) => {
     try {
       const result = await Courses.parallelClasses(

@@ -8,7 +8,7 @@ function UIjoinmeeting() {
   const { startMeeting, setStartMeeting, callJoinMeeting, user } =
     useContext(AuthContext);
   const navigate = useNavigate();
-  const { meeting_id } = useParams();
+  const { meeting_id, course_id, type } = useParams();
   const [loading, setLoading] = useState(false);
   let co = 0;
 
@@ -21,7 +21,7 @@ function UIjoinmeeting() {
       try {
         console.log(meeting_id);
         setLoading(false);
-        const data = await callJoinMeeting(meeting_id);
+        const data = await callJoinMeeting(meeting_id, course_id, type);
         setStartMeeting(data);
         if (data) {
           const videoView = new window.DvcExternalAPI(
