@@ -295,8 +295,10 @@ export default function BasicTabs() {
                                 onClick={() => {
                                   // callJoinMeeting(item.course.dolphin.meeting_id);
                                   if (
-                                    item.dolphin &&
-                                    item.dolphin.hasOwnProperty("meeting_id")
+                                    item.course.dolphin &&
+                                    item.course.dolphin.hasOwnProperty(
+                                      "meeting_id",
+                                    )
                                   )
                                     navigate(
                                       `/joinmeeting/cls/${item.course.id}/${item.course.dolphin.meeting_id}`,

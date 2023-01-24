@@ -74,7 +74,10 @@ class Course_inf {
   attendingCls = async (req, res) => {
     try {
       const result = await Courses.attendingCls(req.body);
-      res.status(200).json(result);
+      if (typeof result === "object") res.status(200).json(result);
+      else {
+        res.status(400).json(result);
+      }
     } catch (err) {
       res.status(400).json(err.message);
     }
@@ -83,7 +86,10 @@ class Course_inf {
   nextClass = async (req, res) => {
     try {
       const result = await Courses.nextClass(req.user_id);
-      res.status(200).json(result);
+      if (typeof result === "object") res.status(200).json(result);
+      else {
+        res.status(400).json(result);
+      }
     } catch (err) {
       res.status(400).json(err.message);
     }

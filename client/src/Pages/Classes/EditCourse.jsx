@@ -162,9 +162,7 @@ const EditCourse = () => {
             <Container className="d-flex justify-content-center bgw rounded-3 boxshadow py-5 pb-2 m-0">
               <Row className="m-0 p-0 pb-5">
                 <Col md={6} sm={12} className="m-0 p-0">
-                  <div className="d-flex justify-content-center flex-column w-100  m-2 me-0  "
-                   
-                  >
+                  <div className="d-flex justify-content-center flex-column w-100  m-2 me-0  ">
                     <div className="d-flex justify-content-center w-100 mb-5">
                       <Row
                         className=" w-100 px-3"
@@ -183,7 +181,6 @@ const EditCourse = () => {
                                 e.preventDefault();
                               }
                             }}
-                           
                             defaultValue={course.title}
                             onChange={changeHandler}
                             variant="outlined"
@@ -197,7 +194,6 @@ const EditCourse = () => {
                             label="Description"
                             placeholder="i.e. You can talk about what you will be teaching in this course in short"
                             name="description"
-                            
                             minRows={3}
                             value={course.description}
                             defaultValue={course.description}
@@ -212,7 +208,6 @@ const EditCourse = () => {
                             className="my-2 w-100"
                             label="Maximum Students"
                             type="number"
-                           
                             name="max_students"
                             // defaultValue={course.max_paticipants}
                             value={
@@ -232,8 +227,6 @@ const EditCourse = () => {
                             label="Price"
                             name="price"
                             placeholder="Fee e.g. 1400"
-                           
-
                             value={course.price}
                             defaultValue={course.price}
                             onChange={changeHandler}
@@ -374,9 +367,7 @@ const EditCourse = () => {
                   </div>
                 </Col>
                 <Col md={6} sm={12} className="m-0 p-0 pt-2">
-                  <div className="d-flex justify-content-center w-100 pe-3 ps-3 "
-                 
-                  >
+                  <div className="d-flex justify-content-center w-100 pe-3 ps-3 ">
                     <Box>
                       <Row className="signupform">
                         <h5 className="text-start my-3">Course Structure</h5>
@@ -413,7 +404,6 @@ const EditCourse = () => {
                                                 multiline
                                                 // rows={3}
                                                 variant="outlined"
-                                                
                                                 placeholder="e.g :  Lectures / Demonstration / Q&A Sessions"
                                                 value={
                                                   course.methodology[index]
@@ -425,7 +415,7 @@ const EditCourse = () => {
                                                 onChange={(e) => {
                                                   handleMethodologyChange(
                                                     e,
-                                                    index
+                                                    index,
                                                   );
                                                   console.log(method);
                                                 }}
@@ -437,7 +427,7 @@ const EditCourse = () => {
                                                   <Button
                                                     onClick={() =>
                                                       handleMethodologyRemove(
-                                                        index
+                                                        index,
                                                       )
                                                     }
                                                     color="error"
@@ -466,7 +456,7 @@ const EditCourse = () => {
                                               )}
                                             </div>
                                           </div>
-                                        )
+                                        ),
                                       )
                                     : ""}
                                 </Col>
@@ -494,7 +484,6 @@ const EditCourse = () => {
                                       placeholder="e.g: Introduction to Calligraphy"
                                       multiline
                                       variant="outlined"
-                                     
                                       value={
                                         course.content[index].content
                                           ? course.content[index].content
@@ -547,7 +536,6 @@ const EditCourse = () => {
                                     <TextField
                                       label="Enter a requirement"
                                       name="requirements"
-                                     
                                       multiline
                                       variant="outlined"
                                       placeholder="e.g: Basic knowledge of Cooking"
@@ -644,7 +632,7 @@ const EditCourse = () => {
                                           ? classes.description.length > 50
                                             ? classes.description.substring(
                                                 0,
-                                                50
+                                                50,
                                               ) + "..."
                                             : classes.description
                                           : ""}
@@ -699,12 +687,17 @@ const EditCourse = () => {
                       className="bgy text-dark w-50 rounded-2 me-2"
                       onClick={() => {
                         editCourse(id);
-                          // navigate("/profile");
+                        // navigate("/profile");
                       }}
                     >
                       Update
                     </Button>
-                    <Button className="bg-dark text-white w-50 rounded-2">
+                    <Button
+                      className="bg-dark text-white w-50 rounded-2"
+                      onClick={() => {
+                        navigate("/profile");
+                      }}
+                    >
                       Cancel
                     </Button>
                   </div>

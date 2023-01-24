@@ -143,6 +143,7 @@ const Join = () => {
       .then((res) => {
         console.log(res.data);
         displayRazorpay();
+        // addingparticipant();
       })
       .catch((err) => {
         console.log(err);
@@ -196,8 +197,11 @@ const Join = () => {
         <Container className="px-5 pt-2  d-flex justify-content-center">
           <div className="text-center">
             <h1 className="gx classtitle mt-3">
-              {course.title ? course.title : <div className="skeleton skeleton-id">
-                </div>}
+              {course.title ? (
+                course.title
+              ) : (
+                <div className="skeleton skeleton-id"></div>
+              )}
             </h1>
             {/* <h5>Course Type: {course.duration_type}</h5> */}
             <h5>

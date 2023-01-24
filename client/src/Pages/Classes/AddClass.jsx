@@ -32,6 +32,14 @@ export default function AddClass(props) {
 
   const handleClose = () => {
     setOpen(false);
+    setClasses({
+      title: "",
+      description: "",
+      fee: "",
+      date: "",
+      time: "",
+      duration: "",
+    });
   };
 
   const handleSuccess = () => {
@@ -65,7 +73,7 @@ export default function AddClass(props) {
                   label="Title"
                   name="title"
                   onChange={(e) =>
-                    setClasses({ ...classes, title: e.target.value })
+                    setClasses(() => ({ ...classes, title: e.target.value }))
                   }
                   multiline
                   variant="outlined"
@@ -97,8 +105,8 @@ export default function AddClass(props) {
                   type="date"
                   className="w-100 p-2 rounded-2 timefield border-1"
                   onChange={(e) => {
-                    setClasses({ ...classes, date: e.target.value });
-                    console.log(classes.date);
+                    setClasses(() => ({ ...classes, date: e.target.value }));
+                    console.log(classes.date, "date of classes");
                     console.log(e);
                   }}
                 />
@@ -108,8 +116,8 @@ export default function AddClass(props) {
               <input
                 type="time"
                 onChange={(e) => {
-                  setClasses({ ...classes, time: e.target.value });
-                  console.log(e.target.value);
+                  setClasses(() => ({ ...classes, time: e.target.value }));
+                  console.log(e.target.value, "time of the classes");
                 }}
                 className="w-100 p-2 rounded-2 timefield border-1"
               />
@@ -122,7 +130,7 @@ export default function AddClass(props) {
                 placeholder="e.g : 45 minutes"
                 variant="outlined"
                 onChange={(e) =>
-                  setClasses({ ...classes, duration: e.target.value })
+                  setClasses(() => ({ ...classes, duration: e.target.value }))
                 }
                 className=" mb-3 w-100"
               />

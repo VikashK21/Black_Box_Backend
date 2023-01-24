@@ -33,8 +33,14 @@ function UIjoinmeeting() {
           );
           console.log(videoView, "the ans");
           videoView.addListener(
-            "ready-to-close",
-            () => console.log("Ready to close"),
+            "readyToClose",
+            () => {
+              console.log("Ready to close");
+              if (type === "ses") navigate("/classroom");
+              else {
+                navigate("/profile");
+              }
+            },
             // prompt('Ready to close')
           );
           videoView.addListener(

@@ -295,7 +295,7 @@ export const AuthProvider = ({ children }) => {
         console.log(startMeeting);
         let params = {
           include_audio: true,
-          include_video: true,
+          include_video: false,
           mute_audio_on_start: true,
           end_meeting_redirect_url: "https://blackboxnow.com/",
           water_mark_image_png:
@@ -988,6 +988,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         setClasstime(res.data);
+        console.log(res.data, "the next class");
         console.log(typeof classtime);
       })
       .catch((err) => {
