@@ -88,7 +88,7 @@ const Classroom = () => {
   };
 
   useEffect(() => {
-    console.log(user.classroom_id, "the user from the classroom");
+    // console.log(user.classroom_id, "the user from the classroom");
     window.scrollTo({
       top: 0,
       behavior: "smooth",

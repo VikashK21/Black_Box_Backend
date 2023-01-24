@@ -255,7 +255,7 @@ const Profile = () => {
                       style={{
                         borderRadius: "15px",
                       }}
-                      reactCourse
+                      // reactCourse
                     />
                   </div>
                 </Col>
