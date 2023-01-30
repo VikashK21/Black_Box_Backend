@@ -60,7 +60,7 @@ function Hostclassroom() {
       ...pre,
       requirements: [...pre.requirements, ""],
     }));
-    console.log(clsCourse);
+    // console.log(clsCourse);
   }; //done
 
   const handleRequirementChange = (e, index) => {
@@ -202,7 +202,7 @@ function Hostclassroom() {
                                   value={requirements}
                                   onChange={(e) => {
                                     handleRequirementChange(e, index);
-                                    console.log(e.target.value);
+                                    // console.log(e.target.value);
                                   }}
                                   className=" mb-3 w-100"
                                 />
@@ -468,7 +468,7 @@ function Hostclassroom() {
                                         ...pre,
                                         date: e.target.value,
                                       }));
-                                      console.log(clsSession.date);
+                                      // console.log(clsSession.date);
                                     }}
                                   />
                                 </>
@@ -482,7 +482,7 @@ function Hostclassroom() {
                                       ...pre,
                                       time: e.target.value,
                                     }));
-                                    console.log(clsSession);
+                                    // console.log(clsSession);
                                   }}
                                   onKeyDown={(e) => {
                                     e.key === "Enter" && e.preventDefault();
@@ -504,7 +504,7 @@ function Hostclassroom() {
                                       ...pre,
                                       duration: e.target.value,
                                     }));
-                                    console.log(clsSession.duration);
+                                    // console.log(clsSession.duration);
                                   }}
                                   className=" mb-3 w-100"
                                 />
@@ -516,7 +516,7 @@ function Hostclassroom() {
                                     variant="contained"
                                     className="w-25"
                                     onClick={() => {
-                                      console.log(clsSession);
+                                      // console.log(clsSession);
                                       setClsSessison({
                                         title: "",
                                         date: "",
@@ -540,7 +540,7 @@ function Hostclassroom() {
                                         errorToast("Minutes is required");
                                       } else {
                                         // setMarkdone(() => true)
-                                        console.log(clsSession);
+                                        // console.log(clsSession);
                                         // HostClasses();
                                         setTotalSessons((pre) => [
                                           ...pre,
@@ -618,12 +618,12 @@ function Hostclassroom() {
                         } else {
                           // HandleNext();
                           createClassroom(clsCourse, totalSessons);
-                          console.log(
-                            clsCourse,
-                            "Sesssion details",
-                            totalSessons,
-                            "SEssion timings",
-                          );
+                          // console.log(
+                          //   clsCourse,
+                          //   "Sesssion details",
+                          //   totalSessons,
+                          //   "SEssion timings",
+                          // );
                           // setTimeout(() => {
                           navigate("/classroom");
                           // }, 1000);

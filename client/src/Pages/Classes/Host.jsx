@@ -76,7 +76,7 @@ const Host = () => {
 
   const changeHandler = (e) => {
     setCourse({ ...course, [e.target.name]: e.target.value });
-    console.log(course);
+    // console.log(course);
   };
 
   return (
@@ -261,7 +261,7 @@ const Host = () => {
                       </p>
                     </span>
                   </label> */}
-                  <FormDialog />
+                  {/* <FormDialog /> */}
                 </div>
               </div>
             </div>

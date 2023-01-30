@@ -64,7 +64,7 @@ const Classroom = () => {
   const checkerGetter = async () => {
     if (!user) {
       setClsroom(true);
-      console.log("cmaer heretoooo");
+      // console.log("cmaer heretoooo");
       navigate("/signup");
     } else if (user && user.classroom_id) {
       const data = await getWorkSpace();
@@ -73,7 +73,7 @@ const Classroom = () => {
       // setCourses(courseD);
       setSeenavs(true);
     } else if (user) {
-      console.log("camer here ");
+      // console.log("camer here ");
       await getWorkSpaceAllow(user.email);
       if (workspaceAllow) {
         // setClsroom(true);
@@ -547,7 +547,7 @@ const Classroom = () => {
                     } else {
                       a = DefaultPic;
                     }
-                    console.log(a, "the images");
+                    // console.log(a, "the images");
                     const day = new Date(course.Classes[0].date);
                     // a[0] = workSpace.logo;
                     // if (course.host_details.img_thumbnail.includes("{")) {

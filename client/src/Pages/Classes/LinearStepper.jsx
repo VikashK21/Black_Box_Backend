@@ -24,9 +24,9 @@ import StyleContext from "../../Context/StyleContext";
 
 function getSteps() {
   return [
-    "Course details",
-    "Course description",
-    "Class timings and description",
+    "Course Details",
+    "Course Description",
+    "Class Timings & Description",
   ];
 }
 
@@ -50,8 +50,17 @@ const LinearStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
-  const { HostCourse, HostClasses, image, course } = useContext(AuthContext);
+  const {
+    HostCourse,
+    classlist,
+    image,
+    course,
+    courseId,
+    setClasslist,
+    setCourseId,
+  } = useContext(AuthContext);
   const { errorToast } = useContext(StyleContext);
+  const [markdone, setMarkdone] = useState(false);
   const navigate = useNavigate();
 
   const isStepOptional = (step) => {
@@ -65,7 +74,7 @@ const LinearStepper = () => {
   const HandleNext = () => {
     setActiveStep(activeStep + 1);
     setSkippedSteps(skippedSteps.filter((skipItem) => skipItem !== activeStep));
-    if (activeStep === 1) {
+    if (markdone && activeStep === 1) {
       alert("Course details saved");
       HostCourse();
     }
@@ -78,7 +87,7 @@ const LinearStepper = () => {
   const handleBack = () => {
     if (activeStep === 2) {
       alert(
-        "You have already entered course data \n You can edit it later!\nContinue with adding the class data :)"
+        "You have already entered course data \n You can edit it later!\nContinue with adding the class data :)",
       );
     } else {
       setActiveStep(activeStep - 1);
@@ -104,7 +113,7 @@ const LinearStepper = () => {
           className="d-flex bggrey justify-content-center py-2 pb-2 mb-4"
         >
           <div>
-            <h1 className="regtitle">Host your course</h1>
+            <h1 className="regtitle">Host your Course</h1>
           </div>
         </Container>
         <Container component={Box} p={4} className="mb-5">
@@ -113,7 +122,13 @@ const LinearStepper = () => {
               <Stepper alternativeLabel activeStep={activeStep}>
                 {steps.map((step, index) => {
                   const labelProps = {};
-                  const stepProps = {};
+                  let completed =
+                    (markdone && index === 0) ||
+                    (index === 1 && courseId) ||
+                    (index === 2 && classlist.length !== 0);
+                  const stepProps = {
+                    completed,
+                  };
                   if (isStepOptional(index)) {
                     labelProps.optional = (
                       <Typography
@@ -147,6 +162,8 @@ const LinearStepper = () => {
                       className="bg-dark text-white w-25 mb-5"
                       onClick={() => {
                         navigate("/profile");
+                        setCourseId();
+                        setClasslist([]);
                       }}
                     >
                       Go Home
@@ -192,57 +209,49 @@ const LinearStepper = () => {
                         width: "200px",
                         minWidth: "100px",
                       }}
+                      disabled={
+                        activeStep === steps.length - 1 &&
+                        classlist.length === 0
+                      }
                       onClick={() => {
-                        if (activeStep === 0) {
-                          console.log(course);
-                          if (course) {
-                            // var count = 0;
-                            // var err = false;
-                            // for (let i in course) {
-                            //   console.log(i);
-                            //   if (course[i] === "" && count <= 4) {
-                            //     err = true;
-                            //     const a = capitalizeFirstLetter(i);
-                            //     errorToast(a + " is required");
-                            //   }
-
-                            //   count++;
-                            // }
-                            // if (err === false) {
-                            //   if (image) {
-                            //     HandleNext();
-                            //   } else {
-                            //     errorToast("Image is required");
-                            //   }
-                            // } else {
-                            //   console.log("error");
-                            // }
-                            if (course.title === "") {
-                              errorToast("Course name is required");
-                            } else if (course.description === "") {
-                              errorToast("Course description is required");
-                            } else if (course.price === "") {
-                              errorToast("Course price is required");
-                            } else if (course.max_students === "") {
-                              errorToast("Max_students is required");
-                            }
-                            //  else if (course.link === "") {
-                            //   errorToast("Link is required");
-                            // } 
-                            // else if (course.link.substring(0, 7) === "https://") {
-                            //   errorToast("Link should start with https://");
-                            // }
-                            else if (image.length === 0) {
-                              errorToast(
-                                "Upload any one image. It is required"
-                              );
-                            } else {
-                              HandleNext();
-                            }
-                          } else {
-                            errorToast("Course data is required");
+                        if (
+                          course &&
+                          course.title !== "" &&
+                          course.description !== "" &&
+                          course.price !== "" &&
+                          course.max_students !== "" &&
+                          image.length !== 0
+                        ) {
+                          // console.log(course, "filled data");
+                          setMarkdone(() => true);
+                        }
+                        if (activeStep === 1 && course) {
+                          if (course.title === "") {
+                            errorToast("Course Title is required");
+                          } else if (course.description === "") {
+                            errorToast("Course Description is required");
+                          } else if (course.price === "") {
+                            errorToast("Course Price is required");
+                          } else if (course.max_students === "") {
+                            errorToast("Course Max_students is required");
                           }
-                        } else {
+                          //  else if (course.link === "") {
+                          //   errorToast("Link is required");
+                          // }
+                          // else if (course.link.substring(0, 7) === "https://") {
+                          //   errorToast("Link should start with https://");
+                          // }
+                          else if (image.length === 0) {
+                            errorToast("Upload any one Image, it is required");
+                          } else {
+                            HandleNext();
+                          }
+                        }
+                        // else {
+                        //   errorToast("Course data is required");
+                        // }
+                        // }
+                        else {
                           HandleNext();
                         }
                       }}

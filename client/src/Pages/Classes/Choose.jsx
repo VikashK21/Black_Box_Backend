@@ -68,6 +68,7 @@ const Choose = () => {
                 navigate("/hosting");
               }}
             >
+              
               Course
             </Button>
           </Col>

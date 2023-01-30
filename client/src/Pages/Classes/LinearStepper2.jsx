@@ -18,11 +18,7 @@ import AuthContext from "../../Context/AuthContext";
 import StyleContext from "../../Context/StyleContext";
 
 function getSteps() {
-  return [
-    "Class details",
-    "Class description",
-    "Class timings",
-  ];
+  return ["Class Details", "Class Description", "Class Timings"];
 }
 
 function getStepContent(step) {
@@ -44,8 +40,17 @@ const LinearStepper2 = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
-  const { HostCourse, HostClasses, image, course } = useContext(AuthContext);
+  const {
+    HostCourse,
+    image,
+    course,
+    courseId,
+    classlist,
+    setClasslist,
+    setCourseId,
+  } = useContext(AuthContext);
   const { errorToast } = useContext(StyleContext);
+  const [markdone, setMarkdone] = useState(false);
   const navigate = useNavigate();
 
   const isStepOptional = (step) => {
@@ -59,7 +64,7 @@ const LinearStepper2 = () => {
   const HandleNext = () => {
     setActiveStep(activeStep + 1);
     setSkippedSteps(skippedSteps.filter((skipItem) => skipItem !== activeStep));
-    if (activeStep === 1) {
+    if (activeStep === 1 && markdone) {
       HostCourse();
     }
   };
@@ -71,7 +76,7 @@ const LinearStepper2 = () => {
   const handleBack = () => {
     if (activeStep === 2) {
       alert(
-        "You have already entered course data \n You can edit it later!\nContinue with adding the class data :)"
+        "You have already entered course data \n You can edit it later!\nContinue with adding the class data :)",
       );
     } else {
       setActiveStep(activeStep - 1);
@@ -96,7 +101,7 @@ const LinearStepper2 = () => {
           className="d-flex bggrey justify-content-center py-2 pb-2 mb-4"
         >
           <div>
-            <h1 className="regtitle">Host your class</h1>
+            <h1 className="regtitle">Host your Class</h1>
           </div>
         </Container>
         <Container component={Box} p={4} className="mb-5">
@@ -104,8 +109,12 @@ const LinearStepper2 = () => {
             <div className="pt-3">
               <Stepper alternativeLabel activeStep={activeStep}>
                 {steps.map((step, index) => {
+                  let completed =
+                    (markdone && index === 0) ||
+                    (index === 1 && courseId) ||
+                    (index === 2 && classlist.length !== 0);
                   const labelProps = {};
-                  const stepProps = {};
+                  const stepProps = { completed };
                   if (isStepOptional(index)) {
                     labelProps.optional = (
                       <Typography
@@ -139,6 +148,8 @@ const LinearStepper2 = () => {
                       className="bg-dark text-white w-25 mb-5"
                       onClick={() => {
                         navigate("/profile");
+                        setCourseId();
+                        setClasslist([]);
                       }}
                     >
                       Go Home
@@ -162,7 +173,7 @@ const LinearStepper2 = () => {
                     >
                       back
                     </Button>
-                    {isStepOptional(activeStep) && (
+                    {/* {isStepOptional(activeStep) && (
                       <Button
                         variant="contained"
                         color="primary"
@@ -175,7 +186,7 @@ const LinearStepper2 = () => {
                       >
                         skip
                       </Button>
-                    )}
+                    )} */}
                     <Button
                       variant="contained"
                       color="primary"
@@ -184,30 +195,49 @@ const LinearStepper2 = () => {
                         width: "200px",
                         minWidth: "100px",
                       }}
+                      disabled={
+                        activeStep === steps.length - 1 &&
+                        classlist.length === 0
+                      }
                       onClick={() => {
-                        if (activeStep === 0) {
-                          console.log(course);
-                          if (course) {
-                            var count = 0;
-                            var err = false;
-                            for (let i in course) {
-                              if (course[i] === "" && count <= 5) {
-                                err = true;
-                                const a = capitalizeFirstLetter(i);
-                                errorToast(a + " is required");
-                              }
-
-                              count++;
+                        if (
+                          course &&
+                          course.title !== "" &&
+                          course.description !== "" &&
+                          course.price !== "" &&
+                          course.max_students !== "" &&
+                          image.length !== 0
+                        ) {
+                          // console.log(course, "filled data");
+                          setMarkdone(() => true);
+                        }
+                        // if () {
+                        // console.log(course);
+                        if (course && activeStep === 1) {
+                          var count = 0;
+                          var err = false;
+                          for (let i in course) {
+                            const a = capitalizeFirstLetter(i);
+                            if (course[i] === "" && count < 5) {
+                              err = true;
+                              errorToast(a + " is required");
+                            } else if (count === 5 && image.length === 0) {
+                              err = true;
+                              errorToast(
+                                "Upload any one Image, it is required",
+                              );
                             }
-                            if (err === false) {
-                              HandleNext();
-                            }
-                          } else {
+                            count++;
+                          }
+                          if (err === false) {
                             HandleNext();
                           }
                         } else {
                           HandleNext();
                         }
+                        // } else {
+                        //   HandleNext();
+                        // }
                       }}
                     >
                       {activeStep === steps.length - 1 ? "Finish" : "Next"}

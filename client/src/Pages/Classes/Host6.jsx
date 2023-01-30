@@ -17,10 +17,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DatePicker from "react-multi-date-picker";
+import StyleContext from "../../Context/StyleContext";
 
 const Host6 = () => {
   const { classes, setClasses, HostClasses, course, classlist, setClasslist } =
     useContext(AuthContext);
+  const { errorToast } = useContext(StyleContext);
 
   const navigate = useNavigate();
 
@@ -50,7 +52,7 @@ const Host6 = () => {
           )}
           {classlist.length > 0 &&
             classlist.map((item, index) => (
-              <Row className="w-100 ">
+              <Row className="w-100 " key={index}>
                 <Col md={2}>#{index + 1}</Col>
                 <Col md={2}>{item.title}</Col>
                 <Col md={2}>{item.date}</Col>
@@ -114,8 +116,8 @@ const Host6 = () => {
                       className="w-100 p-2 rounded-2 timefield border-1"
                       onChange={(e) => {
                         setClasses({ ...classes, date: e.target.value });
-                        console.log(classes.date);
-                        console.log(e);
+                        // console.log(classes.date);
+                        // console.log(e);
                       }}
                       onKeyDown={(e) => {
                         e.key === "Enter" && e.preventDefault();
@@ -129,7 +131,7 @@ const Host6 = () => {
                     value={classes.time}
                     onChange={(e) => {
                       setClasses({ ...classes, time: e.target.value });
-                      console.log(e.target.value);
+                      // console.log(e.target.value);
                     }}
                     onKeyDown={(e) => {
                       e.key === "Enter" && e.preventDefault();
@@ -166,7 +168,7 @@ const Host6 = () => {
                         e.key === "Enter" && e.preventDefault();
                       }}
                       onClick={() => {
-                        console.log(classes);
+                        // console.log(classes);
                         setClasses({
                           title: "",
                           fee: "",
@@ -184,16 +186,33 @@ const Host6 = () => {
                       variant="contained"
                       className="w-25"
                       onClick={() => {
-                        console.log(classes);
-                        HostClasses();
-                        setClasses({
-                          title: "",
-                          description: "",
-                          fee: "",
-                          date: "",
-                          time: "",
-                          duration: "",
-                        });
+                        if (
+                          (classes && classes.date === "") ||
+                          classes.time === "" ||
+                          classes.duration === ""
+                        )
+                          errorToast("The class timing infos are required");
+                        else {
+                          HostClasses();
+                          setClasses({
+                            title: "",
+                            description: "",
+                            fee: "",
+                            date: "",
+                            time: "",
+                            duration: "",
+                          });
+                        }
+                        // console.log(classes);
+                        // HostClasses();
+                        // setClasses({
+                        //   title: "",
+                        //   description: "",
+                        //   fee: "",
+                        //   date: "",
+                        //   time: "",
+                        //   duration: "",
+                        // });
                       }}
                     >
                       Add

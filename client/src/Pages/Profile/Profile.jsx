@@ -42,9 +42,9 @@ const Profile = () => {
     }
     getCoursesList();
     DynamicTimer();
-    console.log(typeof classtime);
+    // console.log(typeof classtime);
     if (typeof classtime === "string") {
-      console.log("stringggg");
+      // console.log("stringggg");
       setNoClasses(false);
     }
     setShowclasses(false);

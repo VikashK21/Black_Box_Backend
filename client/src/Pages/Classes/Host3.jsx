@@ -19,6 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DatePicker from "react-multi-date-picker";
 import { useEffect } from "react";
+import StyleContext from "../../Context/StyleContext";
 
 const Host3 = () => {
   const {
@@ -29,16 +30,17 @@ const Host3 = () => {
     setClasslist,
     setHostClasses,
   } = useContext(AuthContext);
+  const { errorToast } = useContext(StyleContext);
 
   useEffect(() => {
     setClasslist([]);
-    console.log(classlist);
+    // console.log(classlist);
   }, []);
 
   return (
     <Container fluid className=" p-0 m-0 ">
       <Container className="d-flex justify-content-center mt-3">
-      <div className="w-75 text-center mt-3">
+        <div className="w-75 text-center mt-3">
           {classlist.length > 0 && <h4>Added classes</h4>}
           {classlist.length > 0 && (
             <b>
@@ -54,7 +56,7 @@ const Host3 = () => {
           )}
           {classlist.length > 0 &&
             classlist.map((item, index) => (
-              <Row className="w-100 ">
+              <Row className="w-100 " key={index}>
                 <Col md={2}>#{index + 1}</Col>
                 <Col md={2}>{item.title}</Col>
                 <Col md={2}>{item.date}</Col>
@@ -100,9 +102,7 @@ const Host3 = () => {
                       value={classes.title}
                       onChange={(e) =>
                         setClasses({ ...classes, title: e.target.value })
-                        
                       }
-                      
                       multiline
                       variant="outlined"
                       placeholder="e.g :  Day 1: Intro to React"
@@ -139,7 +139,6 @@ const Host3 = () => {
                       multiline
                       rows={3}
                       value={classes.description}
-                      
                       onChange={(e) =>
                         setClasses({ ...classes, description: e.target.value })
                       }
@@ -169,8 +168,8 @@ const Host3 = () => {
                       }}
                       onChange={(e) => {
                         setClasses({ ...classes, date: e.target.value });
-                        console.log(classes.date);
-                        console.log(e);
+                        // console.log(classes.date);
+                        // console.log(e);
                       }}
                     />
                   </>
@@ -181,7 +180,7 @@ const Host3 = () => {
                     value={classes.time}
                     onChange={(e) => {
                       setClasses({ ...classes, time: e.target.value });
-                      console.log(e.target.value);
+                      // console.log(e.target.value);
                     }}
                     onKeyDown={(e) => {
                       e.key === "Enter" && e.preventDefault();
@@ -195,7 +194,6 @@ const Host3 = () => {
                     name="duration"
                     type="number"
                     InputProps={{ inputProps: { min: 1 } }}
-                    
                     placeholder="e.g : 45 minutes"
                     variant="outlined"
                     value={classes.duration}
@@ -212,7 +210,7 @@ const Host3 = () => {
                       variant="contained"
                       className="w-25"
                       onClick={() => {
-                        console.log(classes);
+                        // console.log(classes);
                         setClasses({
                           title: "",
                           fee: "",
@@ -230,16 +228,28 @@ const Host3 = () => {
                       variant="contained"
                       className="w-25"
                       onClick={() => {
-                        console.log(classes);
-                        HostClasses();
-                        setClasses({
-                          title: "",
-                          description: "",
-                          fee: "",
-                          date: "",
-                          time: "",
-                          duration: "",
-                        });
+                        // console.log(classes);
+                        if (classes && classes.title === "")
+                          errorToast("Class Title is required");
+                        if (classes && classes.description === "")
+                          errorToast("Class Description is required");
+                        if (
+                          (classes && classes.date === "") ||
+                          classes.time === "" ||
+                          classes.duration === ""
+                        )
+                          errorToast("The class timing infos are required");
+                        else {
+                          HostClasses();
+                          setClasses({
+                            title: "",
+                            description: "",
+                            fee: "",
+                            date: "",
+                            time: "",
+                            duration: "",
+                          });
+                        }
                       }}
                     >
                       Add

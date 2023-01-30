@@ -24,6 +24,7 @@ const Host2 = () => {
   //   const [serviceList, setServiceList] = useState([{ service: "" }]);
 
   const navigate = useNavigate();
+  const { course, setCourse } = useContext(AuthContext);
 
   useEffect(() => {
     if (course.type === "") {
@@ -31,7 +32,6 @@ const Host2 = () => {
     }
   }, []);
 
-  const { course, setCourse } = useContext(AuthContext);
 
   const handleContentChange = (e, index) => {
     const { name, value } = e.target;
@@ -48,7 +48,7 @@ const Host2 = () => {
 
   const handleContentAdd = () => {
     setCourse({ ...course, content: [...course.content, { content: "" }] });
-    console.log(course);
+    // console.log(course);
   };
 
   const handleMethodologyChange = (e, index) => {
@@ -69,7 +69,7 @@ const Host2 = () => {
       ...course,
       methodology: [...course.methodology, { methodology: "" }],
     });
-    console.log(course);
+    // console.log(course);
   };
 
   const handleRequirementChange = (e, index) => {
@@ -81,7 +81,7 @@ const Host2 = () => {
 
   const changeHandler = (e) => {
     setCourse({ ...course, [e.target.name]: e.target.value });
-    console.log(course);
+    // console.log(course);
   };
 
   const handleRequirementRemove = (index) => {
@@ -94,7 +94,7 @@ const Host2 = () => {
       ...course,
       requirements: [...course.requirements, { requirements: "" }],
     });
-    console.log(course);
+    // console.log(course);
   };
 
   return (

@@ -43,7 +43,7 @@ const Host5 = () => {
 
   const handleContentAdd = () => {
     setCourse({ ...course, content: [...course.content, { content: "" }] });
-    console.log(course);
+    // console.log(course);
   };
 
   const handleMethodologyChange = (e, index) => {
@@ -64,7 +64,7 @@ const Host5 = () => {
       ...course,
       methodology: [...course.methodology, { methodology: "" }],
     });
-    console.log(course);
+    // console.log(course);
   };
 
   const handleRequirementChange = (e, index) => {
@@ -76,7 +76,7 @@ const Host5 = () => {
 
   const changeHandler = (e) => {
     setCourse({ ...course, [e.target.name]: e.target.value });
-    console.log(course);
+    // console.log(course);
   };
 
   const handleRequirementRemove = (index) => {
@@ -89,7 +89,7 @@ const Host5 = () => {
       ...course,
       requirements: [...course.requirements, { requirements: "" }],
     });
-    console.log(course);
+    // console.log(course);
   };
   return (
     <div>

@@ -130,7 +130,7 @@ export const AuthProvider = ({ children }) => {
           },
         },
       );
-      console.log(res.data);
+      // console.log(res.data);
       setMeetingAuth(() => res.data);
       return res.data;
     } catch (err) {
@@ -141,14 +141,14 @@ export const AuthProvider = ({ children }) => {
   const refreshJWT = async () => {
     try {
       if (!meetingAuth) {
-        console.log("Token not found!!");
+        // console.log("Token not found!!");
         return;
       }
 
       const res = await axios.post(dDomain + "auth/api/v1/refresh-token", {
         refreshToken: meetingAuth.refreshToken,
       });
-      console.log(res.data);
+      // console.log(res.data);
       setMeetingAuth(res.data);
     } catch (err) {
       console.log(err);
@@ -185,7 +185,7 @@ export const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${token.token}`,
         },
       });
-      console.log(res.data, "the startMeeting D");
+      // console.log(res.data, "the startMeeting D");
       return res.data;
     } catch (err) {
       console.log(err);
@@ -196,7 +196,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // console.log(token.token);
       const token = await reconcileJWT();
-      console.log("meeting token", meetingAuth);
+      // console.log("meeting token", meetingAuth);
       let config = {
         method: "get",
         url: `${dDomain}meeting/api/v1/join/${id}?passcode=12345&end_meeting_redirect_url=https://blackboxnow.com/profile&display_name=${user.first_name}%20${user.last_name}&mute_audio_on_start=true&include_video=true&include_audio=true&water_mark_image_png=https://res.cloudinary.com/black-box/image/upload/v1672752016/buqwsbiz9lp2rezinn5t.jpg&water_mark_image_link=https://blackboxnow.com/`,
@@ -206,7 +206,7 @@ export const AuthProvider = ({ children }) => {
         },
       };
       const res = await axios(config);
-      console.log(res.data, "the data fromt he join");
+      // console.log(res.data, "the data fromt he join");
       setLoading(true);
       return res.data;
     } catch (err) {
@@ -242,7 +242,7 @@ export const AuthProvider = ({ children }) => {
       // },
       const res = await dvc // this variable represents the instance of the DvcSDK class
         .startMeeting(config); // instance method to start meeting taking in config as object
-      console.log(res.data, "the meeting de");
+      // console.log(res.data, "the meeting de");
       return res.data;
     } catch (err) {
       console.log(err);
@@ -283,7 +283,7 @@ export const AuthProvider = ({ children }) => {
         }
       }
       if (allow) {
-        console.log(authTokens, "the token");
+        // console.log(authTokens, "the token");
         dvc.getReconcileJwt(authTokens);
         dvc.setShowFeedback(false);
         // dvc.setWaterMarkImagePng(
@@ -291,8 +291,8 @@ export const AuthProvider = ({ children }) => {
         // );
         // dvc.setWaterMarkImageLink("https://blackboxnow.com/");
         // dvc.setRedirectUrl("https://blackboxnow.com/profile");
-        console.log(dvc);
-        console.log(startMeeting);
+        // console.log(dvc);
+        // console.log(startMeeting);
         let params = {
           include_audio: true,
           include_video: false,
@@ -311,7 +311,7 @@ export const AuthProvider = ({ children }) => {
         //   "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
         // water_mark_image_link: "https://blackboxnow.com/",
         const res = await dvc.joinMeeting(params);
-        console.log(res);
+        // console.log(res);
         return res.data;
       }
       if (type !== "ses" || type !== "cls" || course_id === 0) {
@@ -326,11 +326,11 @@ export const AuthProvider = ({ children }) => {
   // callStartMeeting();
 
   const createClassroom = async (data, sessions) => {
-    console.log(data);
+    // console.log(data);
     try {
       const uploaders = await imgsAlgo(image);
       let dolphin = await callStartMeeting(data.title);
-      console.log(dolphin, "from the classroom");
+      // console.log(dolphin, "from the classroom");
       if (!dolphin.hasOwnProperty("web_client_uri")) {
         dolphin = await callStartMeeting(data.title);
       }
@@ -341,7 +341,7 @@ export const AuthProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${authTokens}` },
         },
       );
-      console.log(res);
+      // console.log(res);
       if (res.status === 201) {
         await Promise.all(
           sessions.map(async (sess) => {
@@ -374,7 +374,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.patch(BaseUrl + "/classroom/" + clsroomID, data, {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 202) {
         successToast("Successfully Session Details updated");
         return res.data;
@@ -393,7 +393,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.post(BaseUrl + "/session/" + clsroomID, data, {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 201) {
         // successToast("Successfully Session timings uploaded");
         return res.data;
@@ -414,7 +414,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.patch(BaseUrl + "/session/" + sessionID, data, {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 202) {
         successToast("Successfully Session timings  updated");
         return res.data;
@@ -433,7 +433,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get(BaseUrl + "/sessions/" + clsroomID, {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         successToast("Classroom sessions are presented");
         return res.data;
@@ -452,7 +452,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get(BaseUrl + "/classroom/" + clsroomID, {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         // successToast("")
         return res.data;
@@ -469,7 +469,7 @@ export const AuthProvider = ({ children }) => {
   const getWorkSpaceAllow = async (email) => {
     try {
       const res = await axios.get(BaseUrl + "/workspaceallow/" + email);
-      console.log(res);
+      // console.log(res);
       setWorkspaceAllow(res.data.status);
       return res.data.status;
     } catch (err) {
@@ -481,7 +481,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       if (user) {
-        console.log(user, "the user id");
+        // console.log(user, "the user id");
         id = user.id;
       }
       await axios.post(BaseUrl + "/workspace/" + id, data);
@@ -502,7 +502,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get(BaseUrl + "/classrooms", {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res.data, "the data of the Classroom");
+      // console.log(res.data, "the data of the Classroom");
       setWorkdata(() => [...res.data]);
       // return res.data;
     } catch (err) {
@@ -516,7 +516,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.patch(BaseUrl + "/workspace", data, {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res.data, "edited, the workspace...");
+      // console.log(res.data, "edited, the workspace...");
       navigate("/classroom");
       setLoading(false);
       return res.data;
@@ -531,7 +531,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
       const data = res.data;
-      console.log(data, "the data from the workspace");
+      // console.log(data, "the data from the workspace");
       setWorkspace(() => data);
       return data;
     } catch (err) {
@@ -544,7 +544,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get(BaseUrl + "/profile", {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res.data, "the profile data");
+      // console.log(res.data, "the profile data");
       setProfile(res.data);
       loginProcess(res, "/classroom");
     } catch (err) {
@@ -579,8 +579,8 @@ export const AuthProvider = ({ children }) => {
         about: values.about,
         img_thumbnail: propic,
       })
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
+        // console.log(res.data);
         // if (entry) {
         //   setWorkdata({
         //     id: res.data.id,
@@ -613,21 +613,21 @@ export const AuthProvider = ({ children }) => {
 
   const loginProcess = async (res, nav = "/profile") => {
     try {
-      console.log(clsroom, "the data classroom");
+      // console.log(clsroom, "the data classroom");
       setClsroom(false);
-      console.log(res.data);
+      // console.log(res.data);
       var details = res.data.result;
       localStorage.setItem("User", JSON.stringify(details.id));
       // const propic = "";
-      console.log("details.id");
+      // console.log("details.id");
       if (res.data.result.img_thumbnail.includes("{")) {
-        console.log("yes");
-        console.log(res.data.result.img_thumbnail);
+        // console.log("yes");
+        // console.log(res.data.result.img_thumbnail);
         const propic =
           res.data.result.img_thumbnail.length > 0
             ? JSON.parse(res.data.result.img_thumbnail)
             : "";
-        console.log(propic);
+        // console.log(propic);
         localStorage.setItem("propic", JSON.stringify(propic));
       } else {
         const propic2 = res.data.result.img_thumbnail;
@@ -668,7 +668,7 @@ export const AuthProvider = ({ children }) => {
         if (clsroom || res.data.result.classroom_id) {
           console.log("this is from classroom");
           nav = "/classroom";
-          console.log(nav, "the nav chnages...");
+          // console.log(nav, "the nav chnages...");
         }
         loginProcess(res, nav);
       })
@@ -690,7 +690,7 @@ export const AuthProvider = ({ children }) => {
   const scollToRef = useRef();
   const loginUser = async (e) => {
     e.preventDefault();
-    console.log(clsroom, "the login side....");
+    // console.log(clsroom, "the login side....");
 
     const email = values.email;
     const password = values.password;
@@ -706,7 +706,7 @@ export const AuthProvider = ({ children }) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setAuthTokens(null);
         setUser(null);
         localStorage.removeItem("authTokens");
@@ -728,14 +728,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const OtpLogin = async (e) => {
-    console.log(values.email, "Heyyy");
+    // console.log(values.email, "Heyyy");
     e.preventDefault();
     await axios
       .post(BaseUrl + "/sendotp", {
         email: values.email,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         navigate("/otpverify");
       })
       .catch((err) => {
@@ -744,13 +744,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const OtpVerify = async (e) => {
-    console.log(values.otp, "Heyyy");
-    console.log(values.email, "Email");
+    // console.log(values.otp, "Heyyy");
+    // console.log(values.email, "Email");
     e.preventDefault();
     let em = values.email;
-    console.log(em, "em");
+    // console.log(em, "em");
     let otpp = values.otp;
-    console.log(otpp, "otpp");
+    // console.log(otpp, "otpp");
 
     await axios
       .post(BaseUrl + "/verification", {
@@ -758,7 +758,7 @@ export const AuthProvider = ({ children }) => {
         email: em,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         navigate("/change-password");
       })
       .catch((err) => {
@@ -767,9 +767,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const changePass = async (e) => {
-    console.log(values.password, "Password");
-    console.log(values.cpassword, "Confirm Password");
-    console.log(values.email, "Email");
+    // console.log(values.password, "Password");
+    // console.log(values.cpassword, "Confirm Password");
+    // console.log(values.email, "Email");
     e.preventDefault();
     if (values.password !== values.cpassword) {
       errorToast("Password does not match");
@@ -780,7 +780,7 @@ export const AuthProvider = ({ children }) => {
           email: values.email,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           loginProcess(res);
         })
         .catch((err) => {
@@ -807,7 +807,7 @@ export const AuthProvider = ({ children }) => {
           },
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setProfile(res.data.result);
 
           setLoading(false);
@@ -834,7 +834,7 @@ export const AuthProvider = ({ children }) => {
           },
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           localStorage.setItem("propic", res.data.img_thumbnail);
           console.log("Successs");
           setProfile(res.data.result);
@@ -852,7 +852,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setProfile(res.data);
       })
       .catch((err) => {
@@ -868,7 +868,7 @@ export const AuthProvider = ({ children }) => {
             "https://api.cloudinary.com/v1_1/black-box/image/upload",
             data,
           );
-          console.log(res.data, "uploaded...");
+          // console.log(res.data, "uploaded...");
           return res.data;
         } catch (err) {
           console.log(err.message, "the error");
@@ -893,9 +893,9 @@ export const AuthProvider = ({ children }) => {
   const HostCourse = async (e) => {
     try {
       const uploaders = await imgsAlgo(image);
-      console.log(uploaders, "res is here.");
+      // console.log(uploaders, "res is here.");
       let dolphin = await callStartMeeting(course.title);
-      console.log(dolphin, "the Host course");
+      // console.log(dolphin, "the Host course");
       if (!dolphin.hasOwnProperty("web_client_uri")) {
         dolphin = await callStartMeeting(course.title);
       }
@@ -908,7 +908,7 @@ export const AuthProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${authTokens}` },
         },
       );
-      console.log(res.data);
+      // console.log(res.data);
       if (typeof res.data === "object") {
         setCourseId(res.data);
         setImage([]);
@@ -919,15 +919,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const editClass = async (id, id2) => {
-    console.log(id, id2);
-    console.log(classes);
+    // console.log(id, id2);
+    // console.log(classes);
 
     await axios
       .patch(BaseUrl + "/class/" + id2, classes, {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -952,14 +952,14 @@ export const AuthProvider = ({ children }) => {
       // setClasslist.push(res.data);
 
       setClasslist([...classlist, res.data]);
-      console.log(classlist);
+      // console.log(classlist);
     } catch (err) {
       console.log(err.message);
     }
   };
 
   const HostClasses2 = async (id) => {
-    console.log(classes);
+    // console.log(classes);
     try {
       const res = await axios.post(
         BaseUrl + "/host/classes",
@@ -988,8 +988,8 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         setClasstime(res.data);
-        console.log(res.data, "the next class");
-        console.log(typeof classtime);
+        //  (res.data, "the next class");
+        // console.log(typeof classtime);
       })
       .catch((err) => {
         console.log(err.data);
@@ -1006,8 +1006,8 @@ export const AuthProvider = ({ children }) => {
 
     axios
       .post(BaseUrl + "/upload", videoData)
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
     console.log(videoData, "videoData");
@@ -1017,7 +1017,7 @@ export const AuthProvider = ({ children }) => {
     await axios
       .get(BaseUrl + "/courses")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setCourseList(res.data);
         let reactArray = [];
         let heart = false;
@@ -1046,7 +1046,7 @@ export const AuthProvider = ({ children }) => {
 
   const triggerReaction = async (i, course_id) => {
     let update = reaction;
-    console.log(reaction);
+    // console.log(reaction);
     if (update[i].heart) {
       update[i].heart = false;
       update[i].count -= 1;
@@ -1056,14 +1056,15 @@ export const AuthProvider = ({ children }) => {
     }
     try {
       setReaction(update);
-      const result = await axios.post(
+      // const result =
+       await axios.post(
         BaseUrl + "/react/" + course_id,
         {},
         {
           headers: { Authorization: `Bearer ${authTokens}` },
         },
       );
-      console.log(result, "result");
+      // console.log(result, "result");
     } catch (err) {
       console.log(err.message);
     }
@@ -1073,7 +1074,7 @@ export const AuthProvider = ({ children }) => {
     await axios
       .get(BaseUrl + "/courses/" + id)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setCourseDetails(res.data);
       })
       .catch((err) => {
@@ -1089,7 +1090,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setHcl(res.data);
         scollToRef.current.scrollIntoView();
       })
@@ -1106,7 +1107,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setJcl(res.data);
         scollToRef.current.scrollIntoView();
       })
@@ -1128,7 +1129,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         hostedClasses();
         successToast("Course Deleted Successfully");
       })
@@ -1142,8 +1143,8 @@ export const AuthProvider = ({ children }) => {
       .delete(BaseUrl + "/class/" + id, {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -1153,7 +1154,7 @@ export const AuthProvider = ({ children }) => {
   const editCourse = async (id) => {
     let uploaders = await imgsAlgo(updatedImgs);
     uploaders = [...uploaders, ...image];
-    console.log(uploaders, "after");
+    // console.log(uploaders, "after");
     const dolphin = await callStartMeeting(course.title);
     await axios
       .patch(
@@ -1165,8 +1166,8 @@ export const AuthProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${authTokens}` },
         },
       )
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
+        // console.log(res.data);
         successToast("Course Updated Successfully");
         navigate("/profile");
       })
@@ -1188,8 +1189,8 @@ export const AuthProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${authTokens}` },
         },
       )
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err.message);

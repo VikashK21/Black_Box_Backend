@@ -52,7 +52,7 @@ const Host4 = () => {
 
   const changeHandler = (e) => {
     setCourse({ ...course, [e.target.name]: e.target.value });
-    console.log(course);
+    // console.log(course);
   };
   return (
     <Container fluid className="p-0 m-0 ">
@@ -202,7 +202,7 @@ const Host4 = () => {
                       </p>
                     </span>
                   </label>
-                  <FormDialog />
+                  {/* <FormDialog /> */}
                 </div>
               </div>
             </div>
