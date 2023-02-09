@@ -94,10 +94,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    expiryTime.current =
-      classtime && classtime.hasOwnProperty("time")
-        ? classtime.time
-        : setTimer(false);
+    expiryTime.current = classtime.time;
     // console.log(classtime);
     // expiryTime.current = 0
     CountdownTimer();
