@@ -65,6 +65,8 @@ export default function BasicTabs() {
     scollToRef,
     callJoinMeeting,
     infoToast,
+    enterR,
+    setEnterR,
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -257,9 +259,7 @@ export default function BasicTabs() {
                       </Col>
                       <Col xs={6}>
                         <Row className=" m-0 ">
-                          <h6 className="p-0">
-                            The wait is over. Join the class!
-                          </h6>
+                          <h6 className="p-0">Join the class</h6>
                           {item.course.link && item.course.link.length > 0 ? (
                             <>
                               <a
@@ -283,14 +283,14 @@ export default function BasicTabs() {
                                 </Button>
                               </a>
                             </>
-                          ) : (
+                          ) : enterR ? (
                             <>
                               <Button
                                 variant="primary"
-                                className="mt-2  w-100 bgy border-0 text-dark"
+                                className="mt-2  w-75 bgy border-0 text-dark"
                                 style={{
                                   height: "40px",
-                                  width: "180px",
+                                  width: "120px",
                                 }}
                                 onClick={() => {
                                   // callJoinMeeting(item.course.dolphin.meeting_id);
@@ -311,6 +311,23 @@ export default function BasicTabs() {
                                 }}
                               >
                                 Enter room
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <Button
+                                variant="primary"
+                                className="mt-2  w-75 bgy border-0 text-dark"
+                                style={{
+                                  height: "40px",
+                                  width: "120px",
+                                }}
+                                onClick={() => {
+                                  // callJoinMeeting(item.course.dolphin.meeting_id);
+                                  navigate(`/classes/join/${item.course.id}`);
+                                }}
+                              >
+                                Details
                               </Button>
                             </>
                           )}

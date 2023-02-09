@@ -101,6 +101,7 @@ export const AuthProvider = ({ children }) => {
   const [value, setValue] = useState("");
 
   const [toChoose, setToChoose] = useState(false);
+  const [enterR, setEnterR] = useState(false);
 
   const [signUpBatch, setSignUpBatch] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -270,6 +271,7 @@ export const AuthProvider = ({ children }) => {
 
   const callJoinMeeting = async (meeting_id, course_id, type) => {
     try {
+      setLoading(true);
       let allow = false;
       if (type === "ses" && user.classroom_id) {
         const data = await getClassroomById(course_id);
@@ -312,6 +314,7 @@ export const AuthProvider = ({ children }) => {
         // water_mark_image_link: "https://blackboxnow.com/",
         const res = await dvc.joinMeeting(params);
         // console.log(res);
+        setLoading((pre) => !pre);
         return res.data;
       }
       if (type !== "ses" || type !== "cls" || course_id === 0) {
@@ -978,7 +981,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const [classtime, setClasstime] = useState("");
+  const [classtime, setClasstime] = useState({});
   const [noClasses, setNoClasses] = useState(true);
 
   const DynamicTimer = async () => {
@@ -987,7 +990,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
-        setClasstime(res.data);
+        setClasstime((prev) => ({ ...prev, ...res.data }));
         //  (res.data, "the next class");
         // console.log(typeof classtime);
       })
@@ -995,6 +998,19 @@ export const AuthProvider = ({ children }) => {
         console.log(err.data);
         setNoClasses(false);
       });
+  };
+
+  const attendingCls = async (data) => {
+    try {
+      const res = await axios.patch(BaseUrl + "/attending", data, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      console.log(res.data);
+      setEnterR((pre) => !pre);
+      infoToast(res.data.msg);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   function letSee(e) {
@@ -1057,7 +1073,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setReaction(update);
       // const result =
-       await axios.post(
+      await axios.post(
         BaseUrl + "/react/" + course_id,
         {},
         {
@@ -1306,6 +1322,9 @@ export const AuthProvider = ({ children }) => {
     callStartMeetingApi,
     infoToast,
     getParticipant,
+    attendingCls,
+    setEnterR,
+    enterR,
   };
 
   return (

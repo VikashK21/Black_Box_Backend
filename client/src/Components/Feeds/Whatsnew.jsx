@@ -51,7 +51,11 @@ const Whatsnew = () => {
                 <div className="ps-3">
                   {prop ? (
                     propic ? (
-                      <img src={propic} className=" mb-1 mt-3 ic2 " alt={DefaultPic} />
+                      <img
+                        src={propic}
+                        className=" mb-1 mt-3 ic2 "
+                        alt={DefaultPic}
+                      />
                     ) : (
                       <img
                         width={100}
@@ -156,7 +160,7 @@ const Whatsnew = () => {
                               }}
                             >
                               <div className="profileclassesimg">
-                                <img src={a[0]} className="classesimg" />
+                                <img src={a[0]} className="classesimg" alt="" />
                               </div>
                               <Row
                                 className="profilest bw m-0 "

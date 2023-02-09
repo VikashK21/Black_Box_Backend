@@ -153,7 +153,7 @@ class Courses_Classes {
       return err.message;
     }
   }
-  async attendingCls(data) {
+  async attendingCls(data, id) {
     try {
       // {
       //   link: sendingClass.link,
@@ -163,12 +163,29 @@ class Courses_Classes {
       // };
 
       ///if you have time, just look, you can add some effect.
-      const result = await prisma.classes.update({
-        where: { id: data.class_id },
-        data: { over: true },
+      const result2 = await prisma.course.findUnique({
+        where: { id: data.course_id },
+        include: { Classes: true },
       });
-      return result;
+      if (result2 && result2.Classes.length > 0) {
+        let lastClass = result2.Classes[result2.Classes.length - 1];
+        if (lastClass.id === data.class_id && result2.host === id) {
+          await prisma.course.update({
+            where: { id: data.course_id },
+            data: { completion: true },
+          });
+        }
+        const result = await prisma.classes.update({
+          where: { id: data.class_id },
+          data: { over: true },
+        });
+        return {
+          msg: `You are attending ${result2.title} of ${result.title}.`,
+        };
+      }
+      return { msg: "The course is no longer!" };
     } catch (err) {
+      console.log(err.message);
       return err.message;
     }
   }
@@ -351,6 +368,7 @@ class Courses_Classes {
               crs.course.Classes.length > 0)
           ) {
             let Cls = crs.course.Classes;
+            console.log(Cls, "the Classes");
             function addingCls(
               date,
               time,
@@ -366,6 +384,7 @@ class Courses_Classes {
               if (check) {
                 if (Number(date.split("-")[1]) === new Date().getMonth() + 1) {
                   num = Number(date.split("-")[1]) + Number(date.split("-")[2]);
+                  console.log(num, "from the first month");
                 } else if (
                   Number(date.split("-")[1]) ===
                   new Date().getMonth() + 2
@@ -374,6 +393,7 @@ class Courses_Classes {
                     Number(date.split("-")[1]) +
                     Number(date.split("-")[2]) +
                     31;
+                  console.log(num, "from the 2nd month");
                   console.log("coming here right????", num);
                 }
               }
@@ -452,6 +472,7 @@ class Courses_Classes {
           return nextClassGroupt;
         }
         // The locha of TIME...but gave Success.
+        console.log(nextClassGroupt, "the nextGroup");
         if (JSON.stringify(nextClassGroupt).length === 2) {
           return "No classes for now.";
         }

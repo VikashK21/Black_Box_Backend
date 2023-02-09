@@ -10,7 +10,7 @@ import DefaultPic from "../../Images/defualtProPic.jpg";
 import { AiFillHeart } from "react-icons/ai";
 import TabPanel from "./TabPanel";
 // import ReadMoreReact from "read-more-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StyleContext from "../../Context/StyleContext";
 import { FaRegComment } from "react-icons/fa";
 
@@ -31,40 +31,40 @@ const Profile = () => {
     value,
     getWorkSpaceAllow,
     setSeenavs,
+    attendingCls,
   } = useContext(AuthContext);
-
   const { successToast, errorToast } = useContext(StyleContext);
-
-  useEffect(() => {
-    setSeenavs(false);
-    if (!user.classroom_id) {
-      getWorkSpaceAllow(user.email);
-    }
-    getCoursesList();
-    DynamicTimer();
-    // console.log(typeof classtime);
-    if (typeof classtime === "string") {
-      // console.log("stringggg");
-      setNoClasses(false);
-    }
-    setShowclasses(false);
-  }, []);
 
   const [timer, setTimer] = useState(true);
 
-  const [expiryTime, setExpiryTime] = useState(
-    classtime ? (classtime.time ? classtime.time : 0) : 0,
-  );
+  const expiryTime = useRef();
   const [countdownTime, setCountdownTime] = useState({
     countdownDays: "",
     countdownHours: "",
     countdownMinutes: "",
     countdownSeconds: "",
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      setSeenavs(false);
+      if (!user.classroom_id) {
+        await getWorkSpaceAllow(user.email);
+      }
+      await getCoursesList();
+      await DynamicTimer();
+      if (!classtime) {
+        setNoClasses(false);
+      }
+      setShowclasses(false);
+    })();
+  }, []);
 
   const CountdownTimer = () => {
     const timeInterval = setInterval(() => {
-      const countdownDateTime = new Date(expiryTime).getTime();
+      // console.log(expiryTime, "the expiryTime", classtime);
+      const countdownDateTime = new Date(expiryTime.current).getTime();
       const currentTime = new Date().getTime();
       const remainingDayTime = countdownDateTime - currentTime;
       const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
@@ -87,13 +87,17 @@ const Profile = () => {
 
       if (remainingDayTime < 0) {
         clearInterval(timeInterval);
-        setExpiryTime(false);
+        expiryTime.current = false;
         setTimer(false);
       }
     }, 1000);
   };
 
   useEffect(() => {
+    expiryTime.current =
+      classtime && classtime.hasOwnProperty("time") ? classtime.time : false;
+    // console.log(classtime);
+    // expiryTime.current = 0
     CountdownTimer();
   });
 
@@ -192,19 +196,25 @@ const Profile = () => {
                             <Row className="mt-2 m-0 ">
                               <h5 className="p-0">It’s on.</h5>
                               <h5 className="p-0">Join your class here.</h5>
-                              <a
+                              {/* <a
                                 href={classtime ? classtime.link : ""}
                                 target="_blank"
                                 className="w-50 p-0"
                                 rel="noreferrer"
+                              > */}
+                              <Button
+                                variant="primary"
+                                className="mt-2  w-100 bgy border-0"
+                                onClick={() => {
+                                  attendingCls(classtime);
+                                  navigate(
+                                    `/joinmeeting/cls/${classtime.course_id}/${classtime.dolphin.meeting_id}/`,
+                                  );
+                                }}
                               >
-                                <Button
-                                  variant="primary"
-                                  className="mt-2  w-100 bgy border-0"
-                                >
-                                  Enter room
-                                </Button>
-                              </a>
+                                Enter room
+                              </Button>
+                              {/* </a> */}
                             </Row>
                           )}
 

@@ -5,25 +5,22 @@ import { Col, Container } from "react-bootstrap";
 import { Button } from "@mui/material";
 
 function UIjoinmeeting() {
-  const { startMeeting, setStartMeeting, callJoinMeeting, user } =
+  const { startMeeting, setStartMeeting, callJoinMeeting, user, loading } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const { meeting_id, course_id, type } = useParams();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(true);
   let co = 0;
 
   useEffect(() => {
-    console.log(user);
     if (!user) {
       navigate("/login");
     }
     const startVideoV = async () => {
       try {
-        console.log(meeting_id);
-        setLoading(false);
         const data = await callJoinMeeting(meeting_id, course_id, type);
         setStartMeeting(data);
-        if (data) {
+        if (!loading && data) {
           const videoView = new window.DvcExternalAPI(
             `${data.web_client_uri}`,
             {
@@ -31,11 +28,11 @@ function UIjoinmeeting() {
               lang: "enGB", // language ( enGB represent UK English )
             },
           );
-          console.log(videoView, "the ans");
+          // let objDiv = document.querySelector("#join-234-dad2342-23");
+          // objDiv.scrollTop = objDiv.scrollHeight;
           videoView.addListener(
             "readyToClose",
             () => {
-              console.log("Ready to close");
               if (type === "ses") navigate("/classroom");
               else {
                 navigate("/profile");
@@ -54,13 +51,13 @@ function UIjoinmeeting() {
       }
     };
     if (co === 0) startVideoV();
-    console.log(startMeeting, "the useState");
+    // console.log(startMeeting, "the useState");
     co++;
     // eslint-disable-next-line
   }, []);
   return (
     <>
-      {loading ? (
+      {loading && (
         <Container
           fluid
           className="profilediv d-flex flex-column justify-content-center align-items-center bgw pb-5"
@@ -76,18 +73,6 @@ function UIjoinmeeting() {
               className="bgdark"
               onClick={() => {
                 setEnable((pre) => true);
-                joinVideoV();
-              }}
-            >
-              {" "}
-              Join
-            </Button>
-            <Button
-              variant="contained"
-              type="submit"
-              className="bgdark"
-              onClick={() => {
-                setEnable((pre) => true);
                 startVideoV();
               }}
             >
@@ -95,13 +80,28 @@ function UIjoinmeeting() {
               Start
             </Button> */}
           </Col>
+          <Button
+            variant="contained"
+            type="submit"
+            className="bgdark"
+            onClick={() => {
+              navigate("/profile");
+            }}
+          >
+            {" "}
+            Back
+          </Button>
         </Container>
-      ) : (
-        <div
-          id="join-234-dad2342-23"
-          style={{ width: "100vw", height: "100vh", overflow: "hidden" }}
-        ></div>
       )}
+      <div
+        id="join-234-dad2342-23"
+        style={{
+          width: "100vw",
+          height: "100vh",
+          overflow: "hidden",
+          display: !loading ? "block" : "none",
+        }}
+      ></div>
     </>
   );
 }

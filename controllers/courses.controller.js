@@ -73,7 +73,7 @@ class Course_inf {
   };
   attendingCls = async (req, res) => {
     try {
-      const result = await Courses.attendingCls(req.body);
+      const result = await Courses.attendingCls(req.body, Number(req.user_id));
       if (typeof result === "object") res.status(200).json(result);
       else {
         res.status(400).json(result);
@@ -85,7 +85,8 @@ class Course_inf {
 
   nextClass = async (req, res) => {
     try {
-      const result = await Courses.nextClass(req.user_id);
+      const result = await Courses.nextClass(Number(req.user_id));
+      console.log(result);
       if (typeof result === "object") res.status(200).json(result);
       else {
         res.status(400).json(result);

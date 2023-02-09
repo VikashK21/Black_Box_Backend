@@ -53,8 +53,9 @@ const Join = () => {
     toChoose,
     setToChoose,
   } = useContext(AuthContext);
-  const { successToast, errorToast } = useContext(StyleContext);
+  const { successToast, infoToast } = useContext(StyleContext);
   const name = localStorage.getItem("name");
+  const [mine, setMine] = useState(true);
   const [course, setCourse] = useState({
     host_details: {
       first_name: "",
@@ -69,6 +70,16 @@ const Join = () => {
     images: [],
   });
 
+  const amPartcpnt = (participants) => {
+    for (let each of participants) {
+      console.log(each.participant_id === user.id, "the id");
+      if (each.participant_id === user.id) {
+        setMine(false);
+        break;
+      }
+    }
+  };
+
   useEffect(() => {
     setLoading(false);
     const fetchData = async () => {
@@ -76,6 +87,7 @@ const Join = () => {
         .get(BaseUrl + "/courses/" + id)
         .then((res) => {
           console.log(res.data);
+          amPartcpnt(res.data.Participants);
           const data = res.data;
           console.log(data);
           if (data.host_details.img_thumbnail.includes("{")) {
@@ -141,8 +153,12 @@ const Join = () => {
         headers: { Authorization: `Bearer ${authTokens}` },
       })
       .then((res) => {
-        console.log(res.data);
-        displayRazorpay();
+        // console.log(res.data);
+        if (res.data.length > 0) {
+          infoToast("You already have Class/es running on parallel timing/s.");
+        } else {
+          displayRazorpay();
+        }
         // addingparticipant();
       })
       .catch((err) => {
@@ -624,34 +640,36 @@ const Join = () => {
                 </h4>
                 <p>{course.description ? course.description : ""}</p>
                 <div className="d-flex">
-                  <div className="w-50 mt-3">
-                    <Button
-                      className="bgdark text-light w-100 rounded-3 border border-1"
-                      onClick={() => {
-                        if (user) {
-                          console.log(course.id);
-                          checkBeforeJoining(course.id);
-                          setLoading(true);
-                        } else {
-                          setToChoose(course.id);
-                          navigate("/login");
-                        }
-                      }}
-                    >
-                      {loading ? (
-                        <>
-                          <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
-                            <div className="ldio-cqj9sf9mcdj">
-                              <div></div>
+                  {!course.completion && mine && (
+                    <div className="w-50 mt-3">
+                      <Button
+                        className="bgdark text-light w-100 rounded-3 border border-1"
+                        onClick={() => {
+                          if (user) {
+                            console.log(course.id);
+                            checkBeforeJoining(course.id);
+                            setLoading(true);
+                          } else {
+                            setToChoose(course.id);
+                            navigate("/login");
+                          }
+                        }}
+                      >
+                        {loading ? (
+                          <>
+                            <div className="loadingio-spinner-rolling-jm01qv7mmak mx-2">
+                              <div className="ldio-cqj9sf9mcdj">
+                                <div></div>
+                              </div>
                             </div>
-                          </div>
-                        </>
-                      ) : (
-                        " "
-                      )}
-                      Book your class
-                    </Button>
-                  </div>
+                          </>
+                        ) : (
+                          " "
+                        )}
+                        Book your class
+                      </Button>
+                    </div>
+                  )}
                   <div className="mt-3 w-50 ms-2">
                     <Button
                       className="bgy border border-1  text-dark w-100 rounded-3"
@@ -680,6 +698,7 @@ const Join = () => {
                   <img
                     src={course.images[0]}
                     className="w-100 classimage my-4 "
+                    alt=""
                   />
                 )}
 
