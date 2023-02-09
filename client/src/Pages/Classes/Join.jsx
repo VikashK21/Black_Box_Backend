@@ -157,8 +157,8 @@ const Join = () => {
         if (res.data.length > 0) {
           infoToast("You already have Class/es running on parallel timing/s.");
         } else {
-          // displayRazorpay();
-          addingparticipant();
+          displayRazorpay();
+          // addingparticipant();
         }
       })
       .catch((err) => {
