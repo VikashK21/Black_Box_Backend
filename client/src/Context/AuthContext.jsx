@@ -991,8 +991,13 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         setClasstime((prev) => ({ ...prev, ...res.data }));
+        if (res.data.length < 1) {
+          setNoClasses(false);
+        }
+        setShowclasses(false);
         //  (res.data, "the next class");
         // console.log(typeof classtime);
+        return res.data;
       })
       .catch((err) => {
         console.log(err.data);
