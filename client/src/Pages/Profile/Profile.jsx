@@ -54,7 +54,7 @@ const Profile = () => {
       }
       await getCoursesList();
       await DynamicTimer();
-      if (!classtime) {
+      if (!classtime.hasOwnProperty("time")) {
         setNoClasses(false);
       }
       setShowclasses(false);
