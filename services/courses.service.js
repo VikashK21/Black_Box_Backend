@@ -174,11 +174,11 @@ class Courses_Classes {
             where: { id: data.course_id },
             data: { completion: true },
           });
+          await prisma.classes.update({
+            where: { id: data.class_id },
+            data: { over: true },
+          });
         }
-        const result = await prisma.classes.update({
-          where: { id: data.class_id },
-          data: { over: true },
-        });
         return {
           msg: `You are attending ${result2.title} of ${result.title}.`,
         };
@@ -587,32 +587,45 @@ class Courses_Classes {
       console.log(result3, "the data");
       if (result3 && !result3.completion) {
         let isParti = false;
+        let c_parti;
         let notYetParti = true;
         for (let participant of result3.Participants) {
+          console.log(participant.participant, "each participants");
           if (participant.participant_id === gifted_by) {
+            console.log("is he coming here");
             isParti = true;
+            c_parti = participant.id;
           }
           if (participant.participant.email === email_id) {
-            notYetParti = false;
+            console.log(participant.participant, "the not");
+            notYetParti = true;
           }
         }
-        if (!isParti) return "You are not the participant of the course yet!!";
+        if (!isParti) return "You are not the participant yet!";
         if (isParti && notYetParti) {
-          const result = this.addParticipants(result2.id, course_id);
-          if (typeof result === "object") {
-            return await prisma.gift.create({
-              data: {
-                gifted_by,
-                email_id,
-                course_id,
-                participant_id: result.id,
-              },
-              include: { gifted: true },
-            });
+          console.log("is it coming here");
+          const result7 = await this.parallelClasses(result2.id, course_id);
+          console.log(result7, "the parallel");
+          if (result7.length === 0) {
+            const result = await this.addParticipants(result2.id, course_id);
+            console.log(result, "the addP");
+            if (typeof result === "object") {
+              await prisma.gift.create({
+                data: {
+                  gifted_by,
+                  email_id,
+                  course_id,
+                  participant_id: result.id,
+                },
+              });
+              await prisma.participants.delete({
+                where: { id: c_parti },
+              });
+              return `${result2.first_name} is the participant of ${result3.title} now`;
+            }
           }
-          return result;
         }
-        return "Already a participant!";
+        return `${result2.first_name} ${result2.last_name} is already the participant!`;
       }
       return "The course is not live now!!";
     } catch (err) {
@@ -638,6 +651,8 @@ class Courses_Classes {
         ...result,
         suggeter_email: result3.email,
         suggester_name: `${result3.first_name} ${result3.last_name}`,
+        suggested_parti: result2.email,
+        suggested_name: `${result2.first_name} ${result2.last_name}`,
       };
     } catch (err) {
       return err.message;

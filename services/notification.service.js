@@ -29,11 +29,11 @@ const notify = (email, courseID, suggested_by, suggester_email) => {
     if (err) throw err;
     else {
       console.log(info);
-    //   const forgetPass = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
-    //   forgetPass["passCode"] = otp;
-    //   forgetPass["passEmail"] = email;
-    //   console.log(forgetPass);
-    //   fs.writeFileSync("./youtube.json", JSON.stringify(forgetPass, null, 4));
+      //   const forgetPass = JSON.parse(fs.readFileSync("./youtube.json", "utf-8"));
+      //   forgetPass["passCode"] = otp;
+      //   forgetPass["passEmail"] = email;
+      //   console.log(forgetPass);
+      //   fs.writeFileSync("./youtube.json", JSON.stringify(forgetPass, null, 4));
     }
   });
   // return true;

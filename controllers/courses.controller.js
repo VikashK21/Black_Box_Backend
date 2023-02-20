@@ -119,6 +119,7 @@ class Course_inf {
       res.status(400).json(err.message);
     }
   };
+
   addToGifted = async (req, res) => {
     console.log(req.body, "the data coming from the client");
     try {
@@ -127,8 +128,7 @@ class Course_inf {
         req.body.email,
         Number(req.body.course_id),
       );
-      if (typeof result === "object") res.status(200).json(result);
-      return res.status(400).json(result);
+      return res.status(200).json(result);
     } catch (err) {
       res.status(400).json(err.message);
     }
