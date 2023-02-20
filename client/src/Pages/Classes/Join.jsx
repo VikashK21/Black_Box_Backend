@@ -38,9 +38,11 @@ import Loader from "../../Components/Common/Loader";
 const Join = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { suggest, setSuggest } = useState("");
+  const [suggest, setSuggest] = useState("");
+  const [gift, setGift] = useState("");
   const handleChange = (e) => {
     setSuggest(e.target.value);
+    console.log(e.target.value, "the suggest");
   };
 
   const {
@@ -52,6 +54,7 @@ const Join = () => {
     getSuggest,
     toChoose,
     setToChoose,
+    getGift,
   } = useContext(AuthContext);
   const { successToast, infoToast } = useContext(StyleContext);
   const name = localStorage.getItem("name");
@@ -72,7 +75,6 @@ const Join = () => {
 
   const amPartcpnt = (participants) => {
     for (let each of participants) {
-      console.log(each.participant_id === user.id, "the id");
       if (each.participant_id === user.id) {
         setMine(false);
         break;
@@ -86,10 +88,8 @@ const Join = () => {
       await axios
         .get(BaseUrl + "/courses/" + id)
         .then((res) => {
-          console.log(res.data);
           amPartcpnt(res.data.Participants);
           const data = res.data;
-          console.log(data);
           if (data.host_details.img_thumbnail.includes("{")) {
             data.host_details.img_thumbnail =
               data.host_details.img_thumbnail.length > 0
@@ -100,7 +100,6 @@ const Join = () => {
               data.host_details.img_thumbnail.secure_url;
           }
 
-          console.log(data);
           setCourse(data);
         })
         .catch((err) => {
@@ -706,9 +705,10 @@ const Join = () => {
                   <h6>Suggest to friends</h6>
                   <div className="searchdiv mt-2">
                     <input
-                      type="text"
+                      type="email"
                       onChange={handleChange}
                       className="borderlessinput"
+                      value={suggest}
                       placeholder="Friend's email address"
                     />
                     <div className="icondiv">
@@ -716,7 +716,19 @@ const Join = () => {
                         className="profilesearch p-2"
                         size={35}
                         onClick={() => {
-                          getSuggest(course.id, suggest);
+                          if (user) {
+                            if (suggest.length > 11) {
+                              getSuggest(course.id, suggest);
+                              setTimeout(() => {
+                                setSuggest("");
+                              }, 5000);
+                            } else {
+                              infoToast("Please enter an email address");
+                            }
+                          } else {
+                            setToChoose(course.id);
+                            navigate("/login");
+                          }
                         }}
                       />
                     </div>
@@ -726,8 +738,10 @@ const Join = () => {
                   <h6>Gift to friends</h6>
                   <div className="searchdiv mt-2">
                     <input
-                      type="text"
+                      type="email"
                       className="borderlessinput"
+                      onChange={(e) => setGift(e.target.value)}
+                      value={gift}
                       placeholder="Friend's email address"
                     />
                     <div className="icondiv">
@@ -736,9 +750,20 @@ const Join = () => {
                         size={35}
                         onClick={() => {
                           if (user) {
-                            console.log(course.id);
-                            checkBeforeJoining(course.id);
-                            setLoading(true);
+                            if (!course.completion && !mine) {
+                              console.log(course.id);
+                              if (gift.length > 11) {
+                                getGift(course.id, gift);
+                                setTimeout(() => {
+                                  setGift("");
+                                }, 5000);
+                              } else {
+                                infoToast("Please enter an email address");
+                              }
+                            } else {
+                              checkBeforeJoining(course.id);
+                              setLoading(true);
+                            }
                           } else {
                             setToChoose(course.id);
                             navigate("/login");

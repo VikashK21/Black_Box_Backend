@@ -50,14 +50,12 @@ const Edit = () => {
 
   useEffect(() => {
     setLoading(false);
-    console.log("profile");
     const getMyProfile = async () => {
       await axios
         .get(BaseUrl + "/profile", {
           headers: { Authorization: `Bearer ${authTokens}` },
         })
         .then((res) => {
-          console.log(res.data.result);
           setPro(res.data.result);
           if (res.data.result.img_thumbnail !== "{}") {
             if (res.data.result.img_thumbnail.includes("{")) {

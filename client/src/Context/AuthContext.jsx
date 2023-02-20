@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
   const [value, setValue] = useState("");
 
   const [toChoose, setToChoose] = useState(false);
-  const [enterR, setEnterR] = useState(false);
+  const [enterR, setEnterR] = useState(true);
 
   const [signUpBatch, setSignUpBatch] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -993,14 +993,19 @@ export const AuthProvider = ({ children }) => {
         setClasstime((prev) => ({ ...prev, ...res.data }));
         if (res.data.length < 1) {
           setNoClasses(false);
+        } else {
+          setEnterR(false);
         }
         setShowclasses(false);
+        if (res.status === 400) {
+          setEnterR(true);
+        }
         //  (res.data, "the next class");
         // console.log(typeof classtime);
         return res.data;
       })
       .catch((err) => {
-        console.log(err.data);
+        // console.log(err.data);
         setNoClasses(false);
       });
   };
@@ -1193,9 +1198,28 @@ export const AuthProvider = ({ children }) => {
         navigate("/profile");
       })
       .catch((err) => {
-        console.log(err.message);
         errorToast("Please try again");
       });
+  };
+
+  const getGift = async (id, email) => {
+    try {
+      const res = await axios.post(
+        BaseUrl + "/gift",
+        {
+          course_id: id,
+          email: email,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        },
+      );
+      if (res.status === 200) {
+        infoToast(res.data);
+      }
+    } catch (err) {
+      errorToast(err.message);
+    }
   };
 
   const getSuggest = async (id, email) => {
@@ -1210,11 +1234,15 @@ export const AuthProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${authTokens}` },
         },
       )
-      .then(() => {
-        // console.log(res.data);
+      .then((res) => {
+        if (res.status === 200) {
+          successToast(
+            `Successfully suggested your friend ${res.data.suggested_name}`,
+          );
+        }
       })
       .catch((err) => {
-        console.log(err.message);
+        infoToast("The suggesting email does not exist!");
       });
   };
 
@@ -1330,6 +1358,7 @@ export const AuthProvider = ({ children }) => {
     attendingCls,
     setEnterR,
     enterR,
+    getGift,
   };
 
   return (

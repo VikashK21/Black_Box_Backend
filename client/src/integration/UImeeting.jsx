@@ -38,7 +38,7 @@ function UImeeting() {
 
   const joinVideoV = async () => {
     try {
-      const data = await callJoinMeeting("55453166420");
+      const data = await callJoinMeeting("49732829129");
       // setStartMeeting(data);
       // const data = await callJoinMeetingApi("4369800980");
       console.log(data.web_client_uri, 'the meeting link');
