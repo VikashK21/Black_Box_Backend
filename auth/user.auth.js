@@ -40,7 +40,9 @@ const authorizationToken = async (req, res, next) => {
   const cookie = req.headers.authorization;
   //remeber this
   // const cookie = req.headers.cookie;
-  // console.log(cookie, "cookiedasdasds");
+  if (!cookie) {
+    return res.status(403).send("Cookies not found!!");
+  }
   let token = cookie.split(" ")[1];
   if (token) {
     //and this too

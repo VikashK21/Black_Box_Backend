@@ -33,6 +33,8 @@ model Users {
   classroom_id     Int?
   updated_at       DateTime           @default(now())
   Classroom_Course Classroom_Course[]
+  Friends          Friends[]
+  Friends_Peer     Friends_Peer[]
 }
 
 model Classroom {
@@ -167,4 +169,22 @@ model Reactions {
   heartful            Int               @default(1)
   Classroom_Course    Classroom_Course? @relation(fields: [classroom_course_id], references: [id])
   classroom_course_id Int?
+}
+
+model Friends {
+  id           Int            @id @default(autoincrement())
+  accepted     Boolean        @default(false)
+  friend_id    Int
+  my_id        Int
+  friend       Users          @relation(fields: [friend_id], references: [id])
+  created_at   DateTime       @default(now())
+  Friends_Peer Friends_Peer[]
+}
+
+model Friends_Peer {
+  id           Int     @id @default(autoincrement())
+  my_id        Int
+  peer_id      Int
+  my_details   Users   @relation(fields: [my_id], references: [id])
+  connect_frnd Friends @relation(fields: [peer_id], references: [id])
 }

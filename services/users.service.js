@@ -44,7 +44,103 @@ class Users {
     }
   }
 
-  async allUsers() {
+  async AddFriend(my_id, friend_id) {
+    try {
+      const searchR = await prisma.friends.findMany({
+        where: { my_id, friend_id },
+      });
+      if (searchR && searchR.length === 0) {
+        const result = await prisma.friends.create({
+          data: { my_id, friend_id },
+        });
+        await prisma.friends_Peer.create({
+          data: { my_id, peer_id: result.id },
+        });
+        return result;
+      }
+      console.log(searchR, "already");
+      return "Already in Frienship";
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async AcceptFriend(id) {
+    try {
+      const searchR = await prisma.friends.findUnique({
+        where: { id },
+      });
+      const result = async (id) => {
+        return await prisma.friends.update({
+          where: { id },
+          data: { accepted: true },
+        });
+      };
+      if (searchR) {
+        await result(id);
+        const result2 = await prisma.friends.findFirst({
+          where: { my_id: searchR.friend_id, friend_id: searchR.my_id },
+        });
+        if (result2 && !result2.accepted) {
+          return await result(result2.id);
+        } else if (result2 && result2.accepted) {
+          return result2;
+        }
+        const peerId = await this.AddFriend(searchR.friend_id, searchR.my_id);
+        return await result(peerId.id);
+      }
+      return "User not found";
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async DismissFriend(my_id, friend_id) {
+    try {
+      const result = await prisma.friends.delete({
+        where: { my_id, friend_id },
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async FriendRequests(my_id) {
+    try {
+      const result = await prisma.friends.findMany({
+        where: { friend_id: my_id, accepted: false },
+        include: {
+          Friends_Peer: {
+            include: {
+              my_details: true,
+            },
+          },
+        },
+        orderBy: { id: "desc" },
+      });
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async areFriends(my_id) {
+    try {
+      console.log(my_id, "my_id");
+      const result = await prisma.friends.findMany({
+        where: { my_id },
+        include: { friend: true },
+        orderBy: { id: "desc" },
+      });
+      console.log(result, "the list");
+      return result;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async allUsers(go = false) {
     try {
       const result = await prisma.users.findMany({
         include: {
@@ -52,18 +148,37 @@ class Users {
           Participants: true,
         },
       });
-      let numU_T = { Students: 0, Teachers: 0, Users: result };
-      if (result.length > 0) {
-        for (let eachU of result) {
-          if (eachU.Course.length > 0) {
-            numU_T.Teachers += 1;
-          }
-          if (eachU.Participants.length > 0) {
-            numU_T.Students += 1;
+      // working for the purpose of Friendship >>>
+      if (go) {
+        const friendsRes = await prisma.friends.findMany({
+          where: { my_id: go },
+          select: { friend_id: true },
+        });
+        friendsRes.push({ friend_id: go });
+        const friendsRes2 = friendsRes.map((ele) => ele.friend_id);
+        for (let pF = 0; result.length > pF; pF++) {
+          if (friendsRes2.length === 0) {
+            break;
+          } else if (friendsRes2.includes(result[pF].id)) {
+            friendsRes2.splice(friendsRes2.indexOf(result[pF].id));
+            result.splice(pF, 1);
           }
         }
+        return result;
+      } else {
+        let numU_T = { Students: 0, Teachers: 0, Users: result };
+        if (result.length > 0) {
+          for (let eachU of result) {
+            if (eachU.Course.length > 0) {
+              numU_T.Teachers += 1;
+            }
+            if (eachU.Participants.length > 0) {
+              numU_T.Students += 1;
+            }
+          }
+        }
+        return numU_T;
       }
-      return numU_T;
     } catch (err) {
       return err.message;
     }

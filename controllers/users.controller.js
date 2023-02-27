@@ -30,6 +30,68 @@ class User_Ctrl {
     }
   };
 
+  blackboxusers = async (req, res) => {
+    try {
+      const result = await Users.allUsers(Number(req.user_id));
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
+  addFriend = async (req, res) => {
+    try {
+      const result = await Users.AddFriend(
+        Number(req.user_id),
+        Number(req.params.id),
+      );
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
+  acceptFriend = async (req, res) => {
+    try {
+      const result = await Users.AcceptFriend(
+        Number(req.params.id),
+      );
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
+  dismissFriend = async (req, res) => {
+    try {
+      const result = await Users.DismissFriend(
+        Number(req.user_id),
+        Number(req.params.id),
+      );
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
+  allFriendReqs = async (req, res) => {
+    try {
+      const result = await Users.FriendRequests(Number(req.user_id));
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
+  allFriends = async (req, res) => {
+    try {
+      const result = await Users.areFriends(Number(req.user_id));
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(400).json(err.message);
+    }
+  };
+
   verification = async (req, res) => {
     try {
       //email
