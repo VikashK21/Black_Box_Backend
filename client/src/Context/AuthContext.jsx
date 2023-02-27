@@ -114,6 +114,119 @@ export const AuthProvider = ({ children }) => {
   const [startMeeting, setStartMeeting] = useState();
   const [meetingAuth, setMeetingAuth] = useState();
 
+  const [willBeFrnd, setWillBeFrnd] = useState([]);
+  const [areFriends, setAreFriends] = useState([]);
+  const [acceptngFrnd, setAcceptngFrn] = useState([]);
+
+  //Friendship>>>
+  const willFrnd = async () => {
+    try {
+      const res = await axios.get(BaseUrl + `/blackboxusers`, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      if (res.status === 200) {
+        setWillBeFrnd(() => [...res.data]);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const saveFrnd = async (id, ind) => {
+    try {
+      const res = await axios.post(
+        BaseUrl + `/friends/add/${id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        },
+      );
+      if (typeof res.data === "object") {
+        let users = willBeFrnd;
+        users.splice(ind, 1);
+        setWillBeFrnd(() => [...users]);
+        successToast("Request sent successfully");
+      } else {
+        infoToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const allAcceptingFrnds = async () => {
+    try {
+      const res = await axios.get(BaseUrl + `/friends/requests`, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      if (typeof res.data === "object") {
+        setAcceptngFrn(() => [...res.data]);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const acceptFrnd = async (id, ind) => {
+    try {
+      const res = await axios.patch(
+        BaseUrl + `/friends/accept/${id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        },
+      );
+      if (typeof res.data === "object") {
+        let users = acceptngFrnd;
+        users.splice(ind, 1);
+        setAcceptngFrn(() => [...users]);
+        successToast("Saved in your Friends list");
+        await allFriends();
+      } else {
+        infoToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const dismissFrnd = async (id, ind) => {
+    try {
+      const res = await axios.delete(
+        BaseUrl + `/friends/dismiss/${id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens}` },
+        },
+      );
+      if (typeof res.data === "object") {
+        const users = areFriends;
+        users.splice(ind, 1);
+        setAreFriends(() => [...users]);
+        successToast("Removed from the box list");
+      } else {
+        errorToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const allFriends = async () => {
+    try {
+      const res = await axios.get(BaseUrl + `/friends`, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
+      if (typeof res.data === "object") {
+        setAreFriends(() => [...res.data]);
+      } else {
+        infoToast(res.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   //Dolphin>>>
   const dvc = new window.DvcSDK();
   dvc.setDomain("https://test-blackis.dolphinvc.com");
@@ -1359,6 +1472,18 @@ export const AuthProvider = ({ children }) => {
     setEnterR,
     enterR,
     getGift,
+    willFrnd,
+    setWillBeFrnd,
+    willBeFrnd,
+    areFriends,
+    setAreFriends,
+    acceptngFrnd,
+    setAcceptngFrn,
+    saveFrnd,
+    allAcceptingFrnds,
+    acceptFrnd,
+    dismissFrnd,
+    allFriends,
   };
 
   return (

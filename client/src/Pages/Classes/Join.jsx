@@ -763,6 +763,9 @@ const Join = () => {
                             } else {
                               checkBeforeJoining(course.id);
                               setLoading(true);
+                              setTimeout(() => {
+                                setGift("");
+                              }, 5000);
                             }
                           } else {
                             setToChoose(course.id);

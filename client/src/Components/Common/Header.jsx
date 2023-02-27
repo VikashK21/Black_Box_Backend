@@ -38,6 +38,7 @@ const Header = () => {
                 type="text"
                 className="borderless"
                 value={value}
+                title="Search Course or Class"
                 onChange={(e) => {
                   setValue(e.target.value);
                 }}

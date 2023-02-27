@@ -5,11 +5,21 @@ import Pradeesh from "../../Images/Profile/pradeesh.jpeg";
 import { BsSearch } from "react-icons/bs";
 import { FiUnlock } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
-import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
-import { Button } from "@mui/material";
+import {
+  Autocomplete,
+  AutocompleteChangeDetails,
+  Box,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  TextField,
+  Typography,
+} from "@mui/material";
 import $ from "jquery";
 import ReadMoreReact from "read-more-react";
 
@@ -26,12 +36,22 @@ const Whatsnew = () => {
   // const prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
   // const propic = prop.secure_url;
   const about = localStorage.getItem("userDetails");
+  const navigate = useNavigate();
 
-  const { goToTop, getCoursesList, courseList, setShowclasses, scollToRef } =
-    useContext(AuthContext);
+  const {
+    goToTop,
+    getCoursesList,
+    courseList,
+    setShowclasses,
+    scollToRef,
+    willFrnd,
+    willBeFrnd,
+    saveFrnd,
+  } = useContext(AuthContext);
 
   useEffect(() => {
     getCoursesList();
+    willFrnd();
   }, []);
 
   return (
@@ -81,7 +101,6 @@ const Whatsnew = () => {
               <Col md={12}>
                 <div className="text-center mt-2 ps-3">
                   <h3>{name}</h3>
-                  {/* <p className="">{about}</p> */}
                   <ReadMoreReact
                     text={about}
                     min={150}
@@ -89,32 +108,81 @@ const Whatsnew = () => {
                     max={150}
                     readMoreText=".. read more"
                   />
-                  <div className=" mt-2">
-                    <Link to="/edit/profile">
-                      <Button
-                        variant="contained"
-                        className="bggrey me-1 text-dark px-4 mb-1 mt-3"
-                        style={{
-                          height: "40px",
-                          width: "160px",
-                        }}
-                      >
-                        Edit Profile
-                      </Button>
-                    </Link>
-                    <Button
-                      variant="contained"
-                      className="bg-dark text-white"
-                      style={{
-                        height: "40px",
-                        width: "160px",
-                      }}
-                      onClick={() => {
-                        setShowclasses(true);
-                      }}
-                    >
-                      My Classes
-                    </Button>
+                  <div className="mt-4 pt-1 d-flex justify-content-center align-items-center">
+                    <Autocomplete
+                      id="country-select-demo"
+                      sx={{ width: 300 }}
+                      options={willBeFrnd}
+                      autoHighlight
+                      getOptionLabel={(option) =>
+                        `${option.first_name} ${option.last_name}`
+                      }
+                      renderOption={(props, option) => (
+                        <div className="d-flex p-1" key={option.id}>
+                          <Box
+                            component="li"
+                            sx={{
+                              "& > img": { mr: 2, flexShrink: 0 },
+                            }}
+                            {...props}
+                            onClick={() => {
+                              navigate(`/trainer/${option.id}`);
+                            }}
+                          >
+                            {option.img_thumbnail.length > 0 ? (
+                              <img
+                                src={option.img_thumbnail}
+                                width={40}
+                                height={40}
+                                style={{
+                                  borderRadius: "50%",
+                                  objectFit: "cover",
+                                }}
+                                alt="logo"
+                              />
+                            ) : (
+                              <img
+                                src={DefaultPic}
+                                width={40}
+                                height={40}
+                                style={{
+                                  borderRadius: "50%",
+                                  objectFit: "cover",
+                                }}
+                                alt="logo"
+                              />
+                            )}
+                            <Typography>
+                              {option.first_name} {option.last_name}
+                            </Typography>
+                          </Box>
+                          <button
+                            style={{
+                              border: 0,
+                              borderRadius: 2,
+                              marginLeft: "auto",
+                            }}
+                            className="bgy mt-1 mb-1"
+                            onClick={() => {
+                              let ind = willBeFrnd.indexOf(option);
+                              saveFrnd(option.id, ind);
+                            }}
+                          >
+                            {" "}
+                            Save
+                          </button>
+                        </div>
+                      )}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Search Friends"
+                          inputProps={{
+                            ...params.inputProps,
+                          }}
+                        />
+                      )}
+                    />
                   </div>
                 </div>
               </Col>

@@ -7,12 +7,39 @@ import Classes from "../../Images/Classes/classes.jpg";
 import Class2 from "../../Images/Classes/class2.jpg";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
-import { AiFillHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineUserDelete } from "react-icons/ai";
 import TabPanel from "./TabPanel";
 // import ReadMoreReact from "read-more-react";
 import { Link, useNavigate } from "react-router-dom";
 import StyleContext from "../../Context/StyleContext";
-import { FaRegComment } from "react-icons/fa";
+import { FaRegComment, FaUserFriends } from "react-icons/fa";
+import { styled } from "@mui/material/styles";
+import Collapse from "@mui/material/Collapse";
+import Typography from "@mui/material/Typography";
+
+import {
+  Autocomplete,
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  IconButton,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { GiShakingHands, GiThreeFriends } from "react-icons/gi";
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
 
 const Profile = () => {
   const {
@@ -32,8 +59,27 @@ const Profile = () => {
     getWorkSpaceAllow,
     setSeenavs,
     attendingCls,
+    willBeFrnd,
+    allFriends,
+    areFriends,
+    allAcceptingFrnds,
+    acceptngFrnd,
+    acceptFrnd,
   } = useContext(AuthContext);
   const { successToast, errorToast } = useContext(StyleContext);
+
+  const [expanded, setExpanded] = useState(false);
+  const [expanded2, setExpanded2] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded2(false);
+    setExpanded(!expanded);
+  };
+
+  const handleExpandClick2 = () => {
+    setExpanded(false);
+    setExpanded2(!expanded2);
+  };
 
   const [timer, setTimer] = useState(true);
 
@@ -54,6 +100,8 @@ const Profile = () => {
       }
       await getCoursesList();
       await DynamicTimer();
+      await allFriends();
+      await allAcceptingFrnds();
     })();
   }, []);
 
@@ -263,6 +311,178 @@ const Profile = () => {
                       // reactCourse
                     />
                   </div>
+                  <div className="mt-2 rounded-3 bgw p-3 pe-0 boxshadow mx-2">
+                    <h2 className="gl">My Friends</h2>
+                    <CardMedia
+                      component="img"
+                      // height="194"
+                      image={Class2}
+                      alt="My Friends"
+                      className=" p-0 m-0 w-75"
+                      style={{
+                        borderRadius: "15px",
+                      }}
+                    />
+                    <CardActions
+                      disableSpacing
+                      className="d-flex justify-content-between p-4 pb-2"
+                    >
+                      <GiShakingHands
+                        title="Accept Friends"
+                        className="cp"
+                        size={30}
+                        expand={expanded2.toString()}
+                        onClick={handleExpandClick2}
+                        aria-expanded={expanded2}
+                        aria-label="show more"
+                      ></GiShakingHands>
+                      <GiThreeFriends
+                        title="Friends List"
+                        size={30}
+                        className="cp"
+                        expand={expanded.toString()}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                      ></GiThreeFriends>
+                    </CardActions>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                      <CardContent>
+                        {areFriends.length > 0 &&
+                          areFriends.map((option2) => {
+                            let option = option2.friend;
+                            // willBeFrnd.length > 0 &&
+                            //   willBeFrnd.map((option) => {
+                            return (
+                              option2.accepted && (
+                                <div
+                                  className="d-flex p-1 align-items-center"
+                                  key={option2.id}
+                                >
+                                  {option.img_thumbnail.length > 0 ? (
+                                    <img
+                                      src={option.img_thumbnail}
+                                      width={40}
+                                      height={40}
+                                      style={{
+                                        borderRadius: "50%",
+                                        objectFit: "cover",
+                                      }}
+                                      alt="logo"
+                                    />
+                                  ) : (
+                                    <img
+                                      src={DefaultPic}
+                                      width={40}
+                                      height={40}
+                                      style={{
+                                        borderRadius: "50%",
+                                        objectFit: "cover",
+                                      }}
+                                      alt="logo"
+                                    />
+                                  )}
+                                  <Typography style={{ marginLeft: "3%" }}>
+                                    {option.first_name} {option.last_name}
+                                  </Typography>
+                                  <div
+                                    style={{
+                                      border: 0,
+                                      borderRadius: 2,
+                                      marginLeft: "auto",
+                                    }}
+                                    className="d-flex align-items-center gap-3"
+                                  >
+                                    <FaRegComment
+                                      title="Start Chatting"
+                                      size={27}
+                                      className="cp ps-1"
+                                    />
+                                    <AiOutlineUserDelete
+                                      title="Remove from List"
+                                      size={27}
+                                      className="cp"
+                                    />
+                                  </div>
+                                </div>
+                              )
+                            );
+                          })}
+                      </CardContent>
+                    </Collapse>
+                    <Collapse in={expanded2} timeout="auto" unmountOnExit>
+                      <CardContent>
+                        {acceptngFrnd.length > 0 &&
+                          acceptngFrnd.map((option2) => {
+                            let option = option2.Friends_Peer[0].my_details;
+                            // willBeFrnd.length > 0 &&
+                            //   willBeFrnd.map((option) => {
+                            return (
+                              <div
+                                className="d-flex p-1 align-items-center"
+                                key={option2.id}
+                              >
+                                {option.img_thumbnail.length > 0 ? (
+                                  <img
+                                    src={option.img_thumbnail}
+                                    width={40}
+                                    height={40}
+                                    style={{
+                                      borderRadius: "50%",
+                                      objectFit: "cover",
+                                    }}
+                                    alt="logo"
+                                  />
+                                ) : (
+                                  <img
+                                    src={DefaultPic}
+                                    width={40}
+                                    height={40}
+                                    style={{
+                                      borderRadius: "50%",
+                                      objectFit: "cover",
+                                    }}
+                                    alt="logo"
+                                  />
+                                )}
+                                <Typography style={{ marginLeft: "3%" }}>
+                                  {option.first_name} {option.last_name}
+                                </Typography>
+                                <div
+                                  style={{
+                                    border: 0,
+                                    borderRadius: 2,
+                                    marginLeft: "auto",
+                                  }}
+                                  className="d-flex align-items-center gap-3"
+                                >
+                                  <GiShakingHands
+                                    title="Accept Friends"
+                                    size={28}
+                                    className="cp ps-1 pt-1"
+                                    onClick={() => {
+                                      console.log("Accepted");
+                                      let ind = acceptngFrnd.indexOf(option2);
+                                      console.log(ind);
+                                      console.log(option2);
+                                      acceptFrnd(option2.id, ind);
+                                    }}
+                                  />
+                                  <AiOutlineUserDelete
+                                    title="Remove from List"
+                                    size={27}
+                                    className="cp"
+                                    onClick={() => {
+                                      console.log("Removed");
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </CardContent>
+                    </Collapse>
+                  </div>
                 </Col>
                 <Col md={5} className="p-0  mb-4">
                   {/* <h1 className="profilename gx p-3 pb-1 ps-4">Feeds Section</h1> */}
@@ -378,7 +598,7 @@ const Profile = () => {
                                       />
                                       <FaRegComment
                                         size={27}
-                                        className=" ps-1"
+                                        className="cp ps-1"
                                       />
                                     </div>
                                     <div className="ps-2 text-muted pt-1">

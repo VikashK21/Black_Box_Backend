@@ -14,6 +14,7 @@ import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 
 const Trainer = () => {
   const { id } = useParams();
+  const [rndr, setRndr] = useState(false);
 
   const { BaseUrl, goToTop, getCoursesList, courseList } =
     useContext(AuthContext);
@@ -84,7 +85,7 @@ const Trainer = () => {
                 <img
                   src={img ? img : DefaultPic}
                   alt="class1"
-                  className="img-fluid iconpic"
+                  className="img-fluid iconpic icon2"
                 />
               </div>
             </Col>
@@ -133,7 +134,7 @@ const Trainer = () => {
               {/* Map a function to display the classes list */}
               {course.Course &&
                 course.Course.map((course2) => {
-                  console.log(course2, 'the course');
+                  console.log(course2, "the course");
                   // console.log(course.images);
                   const a = JSON.parse(course2.images);
                   return (
