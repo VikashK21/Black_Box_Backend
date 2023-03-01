@@ -53,9 +53,7 @@ class User_Ctrl {
 
   acceptFriend = async (req, res) => {
     try {
-      const result = await Users.AcceptFriend(
-        Number(req.params.id),
-      );
+      const result = await Users.AcceptFriend(Number(req.params.id));
       res.status(200).json(result);
     } catch (err) {
       res.status(400).json(err.message);
@@ -64,10 +62,7 @@ class User_Ctrl {
 
   dismissFriend = async (req, res) => {
     try {
-      const result = await Users.DismissFriend(
-        Number(req.user_id),
-        Number(req.params.id),
-      );
+      const result = await Users.DismissFriend(Number(req.params.id));
       res.status(200).json(result);
     } catch (err) {
       res.status(400).json(err.message);

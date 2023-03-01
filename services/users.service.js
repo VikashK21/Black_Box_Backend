@@ -95,12 +95,44 @@ class Users {
     }
   }
 
-  async DismissFriend(my_id, friend_id) {
+  async DismissFriend(id) {
     try {
-      const result = await prisma.friends.delete({
-        where: { my_id, friend_id },
+      const searchF = await prisma.friends.findUnique({
+        where: { id },
+        include: {
+          Friends_Peer: true,
+        },
       });
-      return result;
+      const dUser = async (id, peerId) => {
+        try {
+          await prisma.friends_Peer.delete({
+            where: { id: peerId },
+          });
+          return await prisma.friends.delete({
+            where: { id },
+          });
+        } catch (err) {
+          return err.message;
+        }
+      };
+      if (searchF) {
+        const result = await dUser(searchF.id, searchF.Friends_Peer[0].id);
+        console.log(result, "primary deleted");
+        const searchF2 = await prisma.friends.findMany({
+          where: { my_id: searchF.friend_id, friend_id: searchF.my_id },
+          include: { Friends_Peer: true },
+        });
+        if (searchF2 && searchF2.length > 0) {
+          const result2 = await dUser(
+            searchF2[0].id,
+            searchF2[0].Friends_Peer[0].id,
+          );
+          console.log(result2, "secondary deleted");
+          return result2;
+        }
+        return result;
+      }
+      return "The user not part of the group";
     } catch (err) {
       return err.message;
     }
