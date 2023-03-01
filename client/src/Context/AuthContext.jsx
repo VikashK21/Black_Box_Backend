@@ -11,17 +11,8 @@ export default AuthContext;
 
 // export const BaseUrl = "http://localhost:3001/api";
 export const dDomain = "https://test-blackis.dolphinvc.com/";
-// export const BaseUrl = "http://localhost:3001";
-// export const BaseLink = "https://brotocamp.space/";
-// export const BaseUrl = "https://creative-black-box.herokuapp.com/api";
-// export const BaseLink = "http://localhost:3000/";
 
 export const BaseUrl = "/api";
-// process.env.NODE_ENV === "production"
-//   ? "/api"
-//   : "http://localhost:3001/api";
-
-// export const BaseLink = "http://localhost:3000/";
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -190,20 +181,23 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const dismissFrnd = async (id, ind) => {
+  const dismissFrnd = async (id, ind, type) => {
     try {
-      const res = await axios.delete(
-        BaseUrl + `/friends/dismiss/${id}`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${authTokens}` },
-        },
-      );
+      const res = await axios.delete(BaseUrl + `/friends/dismiss/${id}`, {
+        headers: { Authorization: `Bearer ${authTokens}` },
+      });
       if (typeof res.data === "object") {
-        const users = areFriends;
-        users.splice(ind, 1);
-        setAreFriends(() => [...users]);
-        successToast("Removed from the box list");
+        if (type === "frnd") {
+          const users = areFriends;
+          users.splice(ind, 1);
+          setAreFriends(() => [...users]);
+          successToast("Removed from the friends list");
+        } else {
+          const users = acceptngFrnd;
+          users.splice(ind, 1);
+          setAcceptngFrn(() => [...users]);
+          successToast("Removed from the requests list");
+        }
       } else {
         errorToast(res.data);
       }

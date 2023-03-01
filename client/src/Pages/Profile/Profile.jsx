@@ -65,11 +65,13 @@ const Profile = () => {
     allAcceptingFrnds,
     acceptngFrnd,
     acceptFrnd,
+    dismissFrnd,
   } = useContext(AuthContext);
   const { successToast, errorToast } = useContext(StyleContext);
 
   const [expanded, setExpanded] = useState(false);
   const [expanded2, setExpanded2] = useState(false);
+  let noFrnds = true;
 
   const handleExpandClick = () => {
     setExpanded2(false);
@@ -316,7 +318,7 @@ const Profile = () => {
                     <CardMedia
                       component="img"
                       // height="194"
-                      image={Class2}
+                      image={Classes}
                       alt="My Friends"
                       className=" p-0 m-0 w-75"
                       style={{
@@ -353,6 +355,9 @@ const Profile = () => {
                             let option = option2.friend;
                             // willBeFrnd.length > 0 &&
                             //   willBeFrnd.map((option) => {
+                            if (option2.accepted) {
+                              noFrnds = false;
+                            }
                             return (
                               option2.accepted && (
                                 <div
@@ -408,11 +413,16 @@ const Profile = () => {
                               )
                             );
                           })}
+                        {noFrnds && (
+                          <p className="text-center text-muted mb-0">
+                            No Friends
+                          </p>
+                        )}
                       </CardContent>
                     </Collapse>
                     <Collapse in={expanded2} timeout="auto" unmountOnExit>
                       <CardContent>
-                        {acceptngFrnd.length > 0 &&
+                        {acceptngFrnd.length > 0 ? (
                           acceptngFrnd.map((option2) => {
                             let option = option2.Friends_Peer[0].my_details;
                             // willBeFrnd.length > 0 &&
@@ -474,12 +484,21 @@ const Profile = () => {
                                     className="cp"
                                     onClick={() => {
                                       console.log("Removed");
+                                      let ind = acceptngFrnd.indexOf(option2);
+                                      console.log(ind);
+                                      console.log(option2);
+                                      dismissFrnd(option2.id, ind, "reqs");
                                     }}
                                   />
                                 </div>
                               </div>
                             );
-                          })}
+                          })
+                        ) : (
+                          <p className="text-center text-muted mb-0">
+                            No Requests
+                          </p>
+                        )}
                       </CardContent>
                     </Collapse>
                   </div>
