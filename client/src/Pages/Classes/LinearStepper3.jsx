@@ -50,7 +50,7 @@ const LinearStepper3 = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
-  const { HostCourse, HostClasses, image, course } = useContext(AuthContext);
+  const { HostCourse, image, course } = useContext(AuthContext);
   const { errorToast } = useContext(StyleContext);
   const navigate = useNavigate();
 
@@ -71,14 +71,14 @@ const LinearStepper3 = () => {
     }
   };
 
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  // function capitalizeFirstLetter(string) {
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // }
 
   const handleBack = () => {
     if (activeStep === 2) {
       alert(
-        "You have already entered course data \n You can edit it later!\nContinue with adding the class data :)"
+        "You have already entered course data \n You can edit it later!\nContinue with adding the class data :)",
       );
     } else {
       setActiveStep(activeStep - 1);
@@ -228,13 +228,13 @@ const LinearStepper3 = () => {
                             }
                             //  else if (course.link === "") {
                             //   errorToast("Link is required");
-                            // } 
+                            // }
                             // else if (course.linksubstring(0, 8) === "https://") {
                             //   errorToast("Link should start with https://");
                             // }
                             else if (image.length === 0) {
                               errorToast(
-                                "Upload any one image. It is required"
+                                "Upload any one image. It is required",
                               );
                             } else {
                               HandleNext();

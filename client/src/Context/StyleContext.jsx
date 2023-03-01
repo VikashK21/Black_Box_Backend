@@ -6,6 +6,7 @@ const StyleContext = createContext();
 export default StyleContext;
 
 export const StyleProvider = ({ children }) => {
+  // eslint-disable-next-line
   const [active, setActive] = useState("Home");
   const [darkmode, setDarkmode] = useState(false);
 

@@ -1,11 +1,11 @@
 import { Box, Button, TextField } from "@mui/material";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
+// import TextareaAutosize from "@mui/material/TextareaAutosize";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import Default from "../../Images/defualtProPic.jpg";
-import ProfilePic from "../../Components/Common/Crop";
+// import ProfilePic from "../../Components/Common/Crop";
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
 import PhoneInput from "react-phone-input-2";
@@ -48,17 +48,17 @@ const Registration = () => {
   const [image, setImage] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
   const [cropImage, setCropImage] = useState(false);
-  const [thumbnail, setThumbnail] = useState("");
+  // const [thumbnail, setThumbnail] = useState("");
   const [clssroom, setClssroom] = useState(false);
 
   const {
-    backendUpdate,
+    // backendUpdate,
     signupUser,
     setValues,
     values,
-    profile,
-    cloud,
-    setCloud,
+    // profile,
+    // cloud,
+    // setCloud,
     loading,
     setLoading,
     clsroom,
@@ -84,7 +84,7 @@ const Registration = () => {
 
   const uploadImage = () => {
     if (clssroom) {
-      console.log('registrationk arerererere');
+      console.log("registrationk arerererere");
       setClsroom(true);
     }
     var propic = "";

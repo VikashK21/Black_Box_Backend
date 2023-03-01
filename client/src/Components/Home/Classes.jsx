@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
-import ReadMoreReact from "read-more-react";
-import $ from "jquery";
+// import ReadMoreReact from "read-more-react";
+// import $ from "jquery";
 
 // import HoverVideoPlayer from 'react-hover-video-player';
-import Class2 from "../../Images/Classes/class2.jpg";
+// import Class2 from "../../Images/Classes/class2.jpg";
 // import Class3 from "../../Images/Classes/class3.jpg";
 // import Class4 from "../../Images/Classes/class4.jpeg";
 
@@ -16,11 +16,11 @@ import Class2 from "../../Images/Classes/class2.jpg";
 // import Icon4 from "../../Images/Classes/icon4.png";
 
 const Classes = () => {
-  const { goToTop, getCoursesList, courseList, value } =
-    useContext(AuthContext);
+  const { getCoursesList, courseList, value } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
     getCoursesList();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -191,6 +191,7 @@ const Classes = () => {
             >
               {courseList &&
                 courseList.length > 0 &&
+                // eslint-disable-next-line
                 courseList.map((course) => {
                   const a = JSON.parse(course.images)[0];
                   //check if the course name or course description is in the search bar
@@ -214,7 +215,11 @@ const Classes = () => {
                           }}
                         >
                           <div className="profileclassesimg22">
-                            <img src={a} className="classesimg22" />
+                            <img
+                              src={a}
+                              className="classesimg22"
+                              alt="classImg"
+                            />
                           </div>
                           <Row className="profilest bw m-0 ">
                             <div

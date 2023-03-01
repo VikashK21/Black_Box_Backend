@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
+// import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import AuthContext from "../../Context/AuthContext";
@@ -20,9 +20,9 @@ export default function AddClass(props) {
   const {
     classes,
     setClasses,
-    classlist,
-    setClasslist,
-    setHostClasses,
+    // classlist,
+    // setClasslist,
+    // setHostClasses,
     HostClasses2,
   } = React.useContext(AuthContext);
 

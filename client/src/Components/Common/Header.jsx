@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo from "../../blackbox-logo-01.png";
 import { BsSearch } from "react-icons/bs";
-import { BsGlobe } from "react-icons/bs";
-import { FaRegUser } from "react-icons/fa";
+// import { BsGlobe } from "react-icons/bs";
+// import { FaRegUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Avatarr from "./Avatarr";
 import AuthContext from "../../Context/AuthContext";
@@ -18,8 +18,7 @@ const Header = () => {
   };
 
   window.addEventListener("scroll", handleNavbar);
-  const { setToChoose, value, setValue, workspaceAllow, user, seenavs } =
-    useContext(AuthContext);
+  const { setToChoose, value, setValue, seenavs } = useContext(AuthContext);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
 
-import CssBaseline from "@mui/material/CssBaseline";
+// import CssBaseline from "@mui/material/CssBaseline";
 // import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -80,9 +80,9 @@ const LinearStepper = () => {
     }
   };
 
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  // function capitalizeFirstLetter(string) {
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // }
 
   const handleBack = () => {
     if (activeStep === 2) {

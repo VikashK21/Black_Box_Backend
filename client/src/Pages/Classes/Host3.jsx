@@ -2,22 +2,22 @@
 import {
   Box,
   Button,
-  ButtonBase,
-  InputAdornment,
+  // ButtonBase,
+  // InputAdornment,
   TextField,
 } from "@mui/material";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import React, { useContext, useState } from "react";
+// import TextareaAutosize from "@mui/material/TextareaAutosize";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Footer from "../../Components/Common/Footer";
-import Header from "../../Components/Common/Header";
+// import Footer from "../../Components/Common/Footer";
+// import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
 import "react-phone-input-2/lib/bootstrap.css";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import DatePicker from "react-multi-date-picker";
+// import { Link } from "react-router-dom";
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as yup from "yup";
+// import DatePicker from "react-multi-date-picker";
 import { useEffect } from "react";
 import StyleContext from "../../Context/StyleContext";
 
@@ -28,13 +28,14 @@ const Host3 = () => {
     HostClasses,
     classlist,
     setClasslist,
-    setHostClasses,
+    // setHostClasses,
   } = useContext(AuthContext);
   const { errorToast } = useContext(StyleContext);
 
   useEffect(() => {
     setClasslist([]);
     // console.log(classlist);
+    // eslint-disable-next-line
   }, []);
 
   return (

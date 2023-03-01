@@ -1,6 +1,6 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import Logo from "../../blackbox-logo-01.png";
+import { Col, Container } from "react-bootstrap";
+// import Logo from "../../blackbox-logo-01.png";
 import { GrFacebookOption } from "react-icons/gr";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { AiOutlineTwitter } from "react-icons/ai";
@@ -9,8 +9,10 @@ import { Link } from "react-router-dom";
 
 const Footer = (props) => {
   return (
-    <Container fluid className="m-0 p-0 boxshadow" 
-    style={{ bottom: 0, zIndex: 999 }}
+    <Container
+      fluid
+      className="m-0 p-0 boxshadow"
+      style={{ bottom: 0, zIndex: 999 }}
     >
       {/* {props.feeds ? (
         " "

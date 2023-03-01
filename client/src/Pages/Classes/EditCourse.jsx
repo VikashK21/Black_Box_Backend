@@ -12,18 +12,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import AuthContext from "../../Context/AuthContext";
-import Default from "../../Images/defualtProPic.jpg";
-import ProfilePic from "../../Components/Common/Crop";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControll from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import Default from "../../Images/defualtProPic.jpg";
+// import ProfilePic from "../../Components/Common/Crop";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
+// import FormControll from "@mui/material/FormControl";
+// import Select from "@mui/material/Select";
 import { useNavigate, useParams } from "react-router-dom";
 
 import CropImage from "../../Components/Common/CropImage";
 import axios from "axios";
 import FormDialog from "../../Components/Common/FormDialog";
-import MeetLink from "./MeetLink";
+// import MeetLink from "./MeetLink";
 import EditClass from "./EditClass";
 import AddClass from "./AddClass";
 
@@ -33,16 +33,15 @@ const EditCourse = () => {
     course,
     image,
     setImage,
-    classes,
-    setClasses,
-    HostClasses,
-    classlist,
-    setClasslist,
-    setHostClasses,
+    // classes,
+    // setClasses,
+    // HostClasses,
+    // classlist,
+    // setClasslist,
+    // setHostClasses,
     BaseUrl,
     setUpdatedImgs,
     editCourse,
-    deleteClass,
   } = useContext(AuthContext);
 
   const [imgs, setImgs] = useState([]);
@@ -65,6 +64,7 @@ const EditCourse = () => {
         console.log(err);
       });
     // }, [clss]); ----> this is for making the chnages occur, but it will make the whole things in continues process...
+    // eslint-disable-next-line
   }, []);
 
   const [showCropper, setShowCropper] = useState(false);
@@ -79,11 +79,11 @@ const EditCourse = () => {
     setCourse({ ...course, index: list });
   };
 
-  const handleRemove = (index) => {
-    const list = [...course.content];
-    list.splice(index, 1);
-    setCourse({ ...course, content: list });
-  };
+  // const handleRemove = (index) => {
+  //   const list = [...course.content];
+  //   list.splice(index, 1);
+  //   setCourse({ ...course, content: list });
+  // };
 
   const handleContentChange = (e, index) => {
     const { name, value } = e.target;

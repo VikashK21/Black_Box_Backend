@@ -27,6 +27,7 @@ const Choose = () => {
     });
 
     setImage([]);
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -50,11 +51,11 @@ const Choose = () => {
         <Row className="d-flex justify-content-center text-center">
           <Col md={8}>
             <p className="description">
-            There are two formats in which classes are conducted on Black Box.
-            One as a single class. And the other as a course conducted as a
-            series of classes over time. You can choose the format you want to
-            host your class based on whether it is a single class or a course.
-            Click on the appropriate button below to host your class/ course.
+              There are two formats in which classes are conducted on Black Box.
+              One as a single class. And the other as a course conducted as a
+              series of classes over time. You can choose the format you want to
+              host your class based on whether it is a single class or a course.
+              Click on the appropriate button below to host your class/ course.
             </p>
           </Col>
         </Row>
@@ -68,7 +69,6 @@ const Choose = () => {
                 navigate("/hosting");
               }}
             >
-              
               Course
             </Button>
           </Col>

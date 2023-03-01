@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
-import AuthContext from "../../Context/AuthContext";
+// import AuthContext from "../../Context/AuthContext";
 
-import Carousel1 from "../../Images/Carousel/carousel1.jpg";
-import Carousel2 from "../../Images/Carousel/carousel2.jpg";
+// import Carousel1 from "../../Images/Carousel/carousel1.jpg";
+// import Carousel2 from "../../Images/Carousel/carousel2.jpg";
 import Carousel3 from "../../Images/Carousel/carousel3.jpg";
 import Carousel4 from "../../Images/Carousel/carousel4.jpg";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ const ImageSlider = () => {
             </button>
           </Carousel.Caption>
         </Carousel.Item>
-        {/* <Carousel.Item>
+        <Carousel.Item>
           <img className="slideimg " src={Carousel3} alt="Third slide" />
           <Carousel.Caption className="c3">
             <h5>VIRTUAL</h5>
@@ -76,7 +76,7 @@ const ImageSlider = () => {
             <h5>STREAMING</h5>
             <button>WATCH NOW</button>
           </Carousel.Caption>
-        </Carousel.Item> */}
+        </Carousel.Item>
       </Carousel>
     </Container>
   );

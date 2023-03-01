@@ -1,23 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 import { Button } from "@mui/material";
 import Header from "../Components/Common/Header";
 
 function UImeeting() {
   const {
     startMeeting,
-    setStartMeeting,
+    // setStartMeeting,
     callStartMeeting,
     callJoinMeeting,
     user,
-    callJoinMeetingApi,
-    callStartMeetingApi,
+    // callJoinMeetingApi,
+    // callStartMeetingApi,
   } = useContext(AuthContext);
   const [enable, setEnable] = useState(false);
   const navigate = useNavigate();
-  let co = 0;
+  // let co = 0;
   const startVideoV = async () => {
     try {
       const data = await callStartMeeting("Black Box Meeting");
@@ -41,7 +41,7 @@ function UImeeting() {
       const data = await callJoinMeeting("49732829129");
       // setStartMeeting(data);
       // const data = await callJoinMeetingApi("4369800980");
-      console.log(data.web_client_uri, 'the meeting link');
+      console.log(data.web_client_uri, "the meeting link");
       if (data) {
         const videoView = new window.DvcExternalAPI(`${data.web_client_uri}`, {
           parentNode: document.querySelector("#meeting-234-dad2342-23"), // container id to mount UI
@@ -60,7 +60,7 @@ function UImeeting() {
       navigate("/login");
     }
     // if (co === 0) startVideoV();
-    co++;
+    // co++;
     console.log(startMeeting, "the useState");
     // eslint-disable-next-line
   }, []);

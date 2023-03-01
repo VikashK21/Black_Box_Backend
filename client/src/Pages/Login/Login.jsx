@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Footer from "../../Components/Common/Footer";
-import AuthContext, { BaseUrl } from "../../Context/AuthContext";
+import AuthContext from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
@@ -48,6 +48,7 @@ const Login = () => {
       top: 0,
       behavior: "smooth",
     });
+    // eslint-disable-next-line
   }, []);
 
   const changeHandler = (e) => {

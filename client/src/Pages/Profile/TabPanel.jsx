@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useEffect } from "react";
-import Class2 from "../../Images/Classes/class2.jpg";
+// import Class2 from "../../Images/Classes/class2.jpg";
 import { Col, Row } from "react-bootstrap";
 import { Button } from "@mui/material";
 import { useContext } from "react";
@@ -54,19 +54,19 @@ export default function BasicTabs() {
   };
 
   const {
-    user,
+    // user,
     hostedClasses,
     joinedClasses,
     hcl,
     jcl,
-    deleteCourse,
-    showclasses,
+    // deleteCourse,
+    // showclasses,
     setShowclasses,
     scollToRef,
-    callJoinMeeting,
+    // callJoinMeeting,
     infoToast,
     enterR,
-    setEnterR,
+    // setEnterR,
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -74,6 +74,7 @@ export default function BasicTabs() {
   useEffect(() => {
     hostedClasses();
     joinedClasses();
+    // eslint-disable-next-line
   }, []);
 
   return (

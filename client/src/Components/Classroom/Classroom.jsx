@@ -1,31 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
-import Icon2 from "../../Images/Classes/icon2.png";
-import Pradeesh from "../../Images/Profile/pradeesh.jpeg";
-import { BsSearch } from "react-icons/bs";
-import { FiUnlock } from "react-icons/fi";
-import { FiLock } from "react-icons/fi";
 import { Col, Container, Row } from "react-bootstrap";
-import { Button, ListItem, ListItemText, Tooltip } from "@mui/material";
-import $ from "jquery";
-import ReadMoreReact from "read-more-react";
+import { Button } from "@mui/material";
+// import $ from "jquery";
+// import ReadMoreReact from "read-more-react";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
-import Whatsnew from "../../Components/Feeds/Whatsnew";
-import Classes from "../../Images/Classes/classes.jpg";
-import Class2 from "../../Images/Classes/class2.jpg";
+// import Whatsnew from "../../Components/Feeds/Whatsnew";
+// import Classes from "../../Images/Classes/classes.jpg";
+// import Class2 from "../../Images/Classes/class2.jpg";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/classroomDefault.jpeg";
 import DefaultUserPic from "../../Images/defualtProPic.jpg";
-import { AiFillHeart } from "react-icons/ai";
+// import { AiFillHeart } from "react-icons/ai";
 // import ReadMoreReact from "read-more-react";
 import { Link, useNavigate } from "react-router-dom";
-import StyleContext from "../../Context/StyleContext";
-import { FaRegComment } from "react-icons/fa";
-import { yellow } from "@mui/material/colors";
+// import StyleContext from "../../Context/StyleContext";
+// import { FaRegComment } from "react-icons/fa";
+// import { yellow } from "@mui/material/colors";
 
 const Classroom = () => {
-  const name = localStorage.getItem("name");
-  const pro = localStorage.getItem("propic");
+  // const name = localStorage.getItem("name");
+  // const pro = localStorage.getItem("propic");
   const navigate = useNavigate();
   // if (pro.includes("{")) {
   //   var prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
@@ -94,6 +89,7 @@ const Classroom = () => {
       behavior: "smooth",
     });
     checkerGetter();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -549,18 +545,6 @@ const Classroom = () => {
                     }
                     // console.log(a, "the images");
                     const day = new Date(course.Classes[0].date);
-                    // a[0] = workSpace.logo;
-                    // if (course.host_details.img_thumbnail.includes("{")) {
-                    //   const host = course.host_details.img_thumbnail
-                    //     ? course.host_details.img_thumbnail.secure_url !==
-                    //       null
-                    //       ? JSON.parse(course.host_details.img_thumbnail)
-                    //       : null
-                    //     : null;
-                    // } else {
-                    //   const host = course.host_details.img_thumbnail;
-                    // }
-                    // if (a.length !== 0 && a[0].length !== undefined) {
                     return (
                       <div
                         className="my-4 mt-1 me-4 class"

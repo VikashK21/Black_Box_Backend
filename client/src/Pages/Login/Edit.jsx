@@ -8,9 +8,9 @@ import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as yup from "yup";
 import CropImage from "../../Components/Common/CropImage";
 
 // const schema = yup.object().shape({
@@ -35,7 +35,7 @@ const Edit = () => {
   const [cropImage, setCropImage] = useState(false);
   const [changed, setChanged] = useState(false);
 
-  const { setCloud, authTokens, BaseUrl, editProfile, loading, setLoading } =
+  const { authTokens, BaseUrl, editProfile, loading, setLoading } =
     useContext(AuthContext);
 
   const [pro, setPro] = useState({
@@ -71,6 +71,7 @@ const Edit = () => {
         });
     };
     getMyProfile();
+    // eslint-disable-next-line
   }, []);
 
   const changeHandler = (e) => {

@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
-import CssBaseline from "@mui/material/CssBaseline";
+// import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stepper from "@mui/material/Stepper";
@@ -83,12 +83,12 @@ const LinearStepper2 = () => {
     }
   };
 
-  const handleSkip = () => {
-    if (!isStepSkipped(activeStep)) {
-      setSkippedSteps([...skippedSteps, activeStep]);
-    }
-    setActiveStep(activeStep + 1);
-  };
+  // const handleSkip = () => {
+  //   if (!isStepSkipped(activeStep)) {
+  //     setSkippedSteps([...skippedSteps, activeStep]);
+  //   }
+  //   setActiveStep(activeStep + 1);
+  // };
   return (
     <Container fluid className="p-0 m-0">
       <Header />

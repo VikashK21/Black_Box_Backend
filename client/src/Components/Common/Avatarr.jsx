@@ -10,7 +10,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import AuthContext from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const Avatarr = () => {
   const navigate = useNavigate();
@@ -38,9 +37,11 @@ const Avatarr = () => {
       var prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
       var propic = prop.secure_url;
     } else {
+      // eslint-disable-next-line
       var propic = pro;
     }
   } else {
+    // eslint-disable-next-line
     var propic = "";
   }
 

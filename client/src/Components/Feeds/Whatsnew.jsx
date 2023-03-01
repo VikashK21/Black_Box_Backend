@@ -1,57 +1,35 @@
 import React, { useContext, useEffect } from "react";
-import Class2 from "../../Images/Classes/class2.jpg";
-import Icon2 from "../../Images/Classes/icon2.png";
-import Pradeesh from "../../Images/Profile/pradeesh.jpeg";
-import { BsSearch } from "react-icons/bs";
-import { FiUnlock } from "react-icons/fi";
-import { FiLock } from "react-icons/fi";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
-import {
-  Autocomplete,
-  AutocompleteChangeDetails,
-  Box,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  TextField,
-  Typography,
-} from "@mui/material";
-import $ from "jquery";
+import { Autocomplete, Box, TextField, Typography } from "@mui/material";
 import ReadMoreReact from "read-more-react";
 
 const Whatsnew = () => {
   const name = localStorage.getItem("name");
   const pro = localStorage.getItem("propic");
+  let prop;
+  let propic;
   if (pro.includes("{")) {
-    var prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
-    var propic = prop.secure_url;
+    prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
+    propic = prop.secure_url;
   } else {
-    var prop = pro;
-    var propic = pro;
+    prop = pro;
+    propic = pro;
   }
   // const prop = pro ? (pro.length > 0 ? JSON.parse(pro) : "") : "";
   // const propic = prop.secure_url;
   const about = localStorage.getItem("userDetails");
   const navigate = useNavigate();
 
-  const {
-    goToTop,
-    getCoursesList,
-    courseList,
-    setShowclasses,
-    scollToRef,
-    willFrnd,
-    willBeFrnd,
-    saveFrnd,
-  } = useContext(AuthContext);
+  const { getCoursesList, courseList, willFrnd, willBeFrnd, saveFrnd } =
+    useContext(AuthContext);
 
   useEffect(() => {
     getCoursesList();
     willFrnd();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -112,7 +90,9 @@ const Whatsnew = () => {
                     <Autocomplete
                       id="country-select-demo"
                       sx={{ width: 300 }}
-                      options={willBeFrnd}
+                      options={
+                        willBeFrnd && willBeFrnd.length > 0 ? willBeFrnd : []
+                      }
                       autoHighlight
                       getOptionLabel={(option) =>
                         `${option.first_name} ${option.last_name}`
@@ -198,17 +178,19 @@ const Whatsnew = () => {
               }}
             >
               {courseList
-                ? courseList.slice(0, 5).map((course, index) => {
+                ? // eslint-disable-next-line
+                  courseList.slice(0, 5).map((course, index) => {
                     const a = JSON.parse(course.images);
-                    if (course.host_details.img_thumbnail.includes("{")) {
-                      const host = course.host_details.img_thumbnail
-                        ? course.host_details.img_thumbnail.secure_url !== null
-                          ? JSON.parse(course.host_details.img_thumbnail)
-                          : null
-                        : null;
-                    } else {
-                      const host = course.host_details.img_thumbnail;
-                    }
+                    // let host;
+                    // if (course.host_details.img_thumbnail.includes("{")) {
+                    //   host = course.host_details.img_thumbnail
+                    //     ? course.host_details.img_thumbnail.secure_url !== null
+                    //       ? JSON.parse(course.host_details.img_thumbnail)
+                    //       : null
+                    //     : null;
+                    // } else {
+                    //   host = course.host_details.img_thumbnail;
+                    // }
                     if (a.length !== 0 && a[0].length !== undefined) {
                       return (
                         <div

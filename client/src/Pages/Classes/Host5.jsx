@@ -1,21 +1,21 @@
-import { Box, Button, ButtonBase, TextField } from "@mui/material";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import React, { useContext, useEffect, useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
+// import TextareaAutosize from "@mui/material/TextareaAutosize";
+import React, { useContext, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Footer from "../../Components/Common/Footer";
-import Header from "../../Components/Common/Header";
-import Default from "../../Images/defualtProPic.jpg";
-import ProfilePic from "../../Components/Common/Crop";
-import axios from "axios";
+// import Footer from "../../Components/Common/Footer";
+// import Header from "../../Components/Common/Header";
+// import Default from "../../Images/defualtProPic.jpg";
+// import ProfilePic from "../../Components/Common/Crop";
+// import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/bootstrap.css";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { FacebookLoginButton } from "react-social-login-buttons";
-import { GoogleLoginButton } from "react-social-login-buttons";
+// import PhoneInput from "react-phone-input-2";
+// import "react-phone-input-2/lib/bootstrap.css";
+// import { Link } from "react-router-dom";
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as yup from "yup";
+// import { FacebookLoginButton } from "react-social-login-buttons";
+// import { GoogleLoginButton } from "react-social-login-buttons";
 import { useNavigate } from "react-router-dom";
 
 const Host5 = () => {
@@ -26,6 +26,7 @@ const Host5 = () => {
     if (course.type === "") {
       navigate("/host");
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleContentChange = (e, index) => {
@@ -46,26 +47,26 @@ const Host5 = () => {
     // console.log(course);
   };
 
-  const handleMethodologyChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...course.methodology];
-    list[index][name] = value;
-    setCourse({ ...course, index: list });
-  };
+  // const handleMethodologyChange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   const list = [...course.methodology];
+  //   list[index][name] = value;
+  //   setCourse({ ...course, index: list });
+  // };
 
-  const handleMethodologyRemove = (index) => {
-    const list = [...course.methodology];
-    list.splice(index, 1);
-    setCourse({ ...course, methodology: list });
-  };
+  // const handleMethodologyRemove = (index) => {
+  //   const list = [...course.methodology];
+  //   list.splice(index, 1);
+  //   setCourse({ ...course, methodology: list });
+  // };
 
-  const handleMethodologyAdd = () => {
-    setCourse({
-      ...course,
-      methodology: [...course.methodology, { methodology: "" }],
-    });
-    // console.log(course);
-  };
+  // const handleMethodologyAdd = () => {
+  //   setCourse({
+  //     ...course,
+  //     methodology: [...course.methodology, { methodology: "" }],
+  //   });
+  //   // console.log(course);
+  // };
 
   const handleRequirementChange = (e, index) => {
     const { name, value } = e.target;
@@ -113,7 +114,6 @@ const Host5 = () => {
                         multiline
                         name="structure"
                         defaultValue={course.structure}
-                        
                         rows={3}
                         onChange={changeHandler}
                         variant="outlined"
@@ -184,7 +184,6 @@ const Host5 = () => {
                               multiline
                               // rows={3}
                               variant="outlined"
-                             
                               value={course.content[index].content}
                               onChange={(e) => handleContentChange(e, index)}
                               className=" mb-3 w-100"
@@ -226,7 +225,6 @@ const Host5 = () => {
                           <div className="d-flex">
                             <TextField
                               label="Enter a requirement"
-                              
                               name="requirements"
                               multiline
                               variant="outlined"

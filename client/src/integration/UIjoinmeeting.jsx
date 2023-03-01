@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../Context/AuthContext";
 import { Col, Container } from "react-bootstrap";
 import { Button } from "@mui/material";
 
 function UIjoinmeeting() {
-  const { startMeeting, setStartMeeting, callJoinMeeting, user, loading } =
+  const { setStartMeeting, callJoinMeeting, user, loading } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const { meeting_id, course_id, type } = useParams();

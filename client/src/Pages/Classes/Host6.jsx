@@ -1,22 +1,22 @@
 import {
   Box,
   Button,
-  ButtonBase,
-  InputAdornment,
+  // ButtonBase,
+  // InputAdornment,
   TextField,
 } from "@mui/material";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import React, { useContext, useEffect, useState } from "react";
+// import TextareaAutosize from "@mui/material/TextareaAutosize";
+import React, { useContext, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Footer from "../../Components/Common/Footer";
-import Header from "../../Components/Common/Header";
+// import Footer from "../../Components/Common/Footer";
+// import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
 import "react-phone-input-2/lib/bootstrap.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import DatePicker from "react-multi-date-picker";
+import { useNavigate } from "react-router-dom";
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as yup from "yup";
+// import DatePicker from "react-multi-date-picker";
 import StyleContext from "../../Context/StyleContext";
 
 const Host6 = () => {
@@ -30,6 +30,7 @@ const Host6 = () => {
     if (course.type === "") {
       navigate("/host");
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

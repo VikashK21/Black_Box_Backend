@@ -1,31 +1,31 @@
 import { Button, InputAdornment, TextField } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
-import Footer from "../../Components/Common/Footer";
-import Header from "../../Components/Common/Header";
+// import Footer from "../../Components/Common/Footer";
+// import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
-import Default from "../../Images/defualtProPic.jpg";
-import ProfilePic from "../../Components/Common/Crop";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControll from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import Default from "../../Images/defualtProPic.jpg";
+// import ProfilePic from "../../Components/Common/Crop";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
+// import FormControll from "@mui/material/FormControl";
+// import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
 
 import CropImage from "../../Components/Common/CropImage";
-import axios from "axios";
-import FormDialog from "../../Components/Common/FormDialog";
-import MeetLink from "./MeetLink";
+// import axios from "axios";
+// import FormDialog from "../../Components/Common/FormDialog";
+// import MeetLink from "./MeetLink";
 
 const Host = () => {
   const {
-    backendUpdate,
-    signupUser,
+    // backendUpdate,
+    // signupUser,
     setCourse,
     course,
     image,
     setImage,
-    uploadImage,
+    // uploadImage,
   } = useContext(AuthContext);
 
   const [showCropper, setShowCropper] = useState(false);
@@ -54,24 +54,25 @@ const Host = () => {
   //     });
   // };
 
-  const handleMethodologyChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...course.methodology];
-    list[index][name] = value;
-    setCourse({ ...course, index: list });
-  };
+  // const handleMethodologyChange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   const list = [...course.methodology];
+  //   list[index][name] = value;
+  //   setCourse({ ...course, index: list });
+  // };
 
-  const handleRemove = (index) => {
-    const list = [...course.content];
-    list.splice(index, 1);
-    setCourse({ ...course, content: list });
-  };
+  // const handleRemove = (index) => {
+  //   const list = [...course.content];
+  //   list.splice(index, 1);
+  //   setCourse({ ...course, content: list });
+  // };
 
   useEffect(() => {
     // setImage([]);
     if (course.type === "") {
       navigate("/host");
     }
+    // eslint-disable-next-line
   }, []);
 
   const changeHandler = (e) => {

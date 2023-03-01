@@ -6,10 +6,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import axios from "axios";
-import { useState } from "react";
+// import axios from "axios";
+// import { useState } from "react";
 import AuthContext from "../../Context/AuthContext";
 import Youtube from "./youtube.svg";
+import { Link } from "react-router-dom";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -22,7 +23,7 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  const { letSee, form, setForm } = React.useContext(AuthContext);
+  const { letSee, setForm } = React.useContext(AuthContext);
 
   function handleChange(e) {
     const inputValue =
@@ -35,13 +36,10 @@ export default function FormDialog() {
     <div>
       <div className="mx-3" onClick={handleClickOpen}>
         <p className="mx-auto bg-dark p-2 text-white rounded-3 cp px-4">
-          
           Upload Video
         </p>
       </div>
-      <Dialog open={open} onClose={handleClose}
-      maxWidth="md"
-      >
+      <Dialog open={open} onClose={handleClose} maxWidth="md">
         <DialogTitle>
           <h3
             className="pt-4"
@@ -49,34 +47,36 @@ export default function FormDialog() {
               lineHeight: "0",
             }}
           >
-            <img src={Youtube} width={39} /> Upload video
+            <img src={Youtube} width={39} alt="youtube" /> Upload video
           </h3>
         </DialogTitle>
         <form onSubmit={letSee}>
           <DialogContent>
             <DialogContentText>
-             
               <p>
-                Please note : You must have a <b>Youtube Channel</b> for uploading the
-                video<br/>
-                <a href="">Learn more</a>
+                Please note : You must have a <b>Youtube Channel</b> for
+                uploading the video
+                <br />
+                <Link href="https://studio.youtube.com/channel/">
+                  Learn more
+                </Link>
               </p>
-              
 
               <p>
-                You will be uploading the video in your youtube channel as  
-                <b> unlisted</b>. Meaning that the video wont be available for the
-                public as per the <b>respecting the privacy concerns</b> of the teachers.
+                You will be uploading the video in your youtube channel as
+                <b> unlisted</b>. Meaning that the video wont be available for
+                the public as per the <b>respecting the privacy concerns</b> of
+                the teachers.
               </p>
               <p>
                 You can delete the video after you think you are done with the
-                classes or make it public so that you can <b> attract more students</b>. We will be uploading to youtube behalf of you, you just need to enter the details asked below.
+                classes or make it public so that you can{" "}
+                <b> attract more students</b>. We will be uploading to youtube
+                behalf of you, you just need to enter the details asked below.
               </p>
-              <p>
-                Thankyou for your cooperation. 
-              </p>
+              <p>Thankyou for your cooperation.</p>
             </DialogContentText>
-           
+
             <TextField
               autoFocus
               margin="dense"

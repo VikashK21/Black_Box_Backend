@@ -1,10 +1,11 @@
+/*eslint no-lone-blocks: "error"*/
+/*eslint-env es6*/
 import { createContext, useContext, useRef, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
-// import { imageListItemClasses } from "@mui/material";
 import StyleContext from "./StyleContext";
-import { type } from "@testing-library/user-event/dist/type";
+import {} from "@testing-library/user-event/dist/type";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -33,6 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const { errorToast, successToast, infoToast } = useContext(StyleContext);
 
+  // eslint-disable-next-line
   const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState();
   const [cloud, setCloud] = useState("");
@@ -84,18 +86,18 @@ export const AuthProvider = ({ children }) => {
     description: "",
     file: null,
   });
+  // eslint-disable-next-line
   const [cldimages, setCldimages] = useState([]);
   const [courseList, setCourseList] = useState([]);
   const [courseDetails, setCourseDetails] = useState([]);
   const [courseId, setCourseId] = useState();
+  // eslint-disable-next-line
   const [name, setName] = useState();
   const [value, setValue] = useState("");
 
   const [toChoose, setToChoose] = useState(false);
   const [enterR, setEnterR] = useState(true);
 
-  const [signUpBatch, setSignUpBatch] = useState(null);
-  const [selectedPlace, setSelectedPlace] = useState(null);
   const [workspaceAllow, setWorkspaceAllow] = useState(false);
   const [workspace, setWorkspace] = useState({});
   const [workdata, setWorkdata] = useState([]);
@@ -187,17 +189,23 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
       if (typeof res.data === "object") {
+        // let users2 = willBeFrnd;
         if (type === "frnd") {
           const users = areFriends;
+          // friend
+          // users2.splice(0, 0, users[ind].friend);
           users.splice(ind, 1);
           setAreFriends(() => [...users]);
           successToast("Removed from the friends list");
         } else {
           const users = acceptngFrnd;
+          // Friends_Peer[0]
+          // users2.splice(0, 0, users[ind].Friends_Peer[0]);
           users.splice(ind, 1);
           setAcceptngFrn(() => [...users]);
           successToast("Removed from the requests list");
         }
+        // setWillBeFrnd(() => [...users2]);
       } else {
         errorToast(res.data);
       }
@@ -1071,6 +1079,7 @@ export const AuthProvider = ({ children }) => {
   const HostClasses2 = async (id) => {
     // console.log(classes);
     try {
+      // eslint-disable-next-line
       const res = await axios.post(
         BaseUrl + "/host/classes",
         {
@@ -1484,10 +1493,6 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
   );
 };
-
-{
-  /* <iframe width="1520" height="553" src="https://www.youtube.com/embed/zE-a5eqvlv8" title="Dua Lipa, Coldplay, Martin Garrix & Kygo, The Chainsmokers Style - Feeling Me" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */
-}
 
 // Creating an optimized production build...
 // Browserslist: caniuse-lite is outdated. Please run:

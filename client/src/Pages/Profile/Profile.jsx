@@ -4,42 +4,21 @@ import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import Whatsnew from "../../Components/Feeds/Whatsnew";
 import Classes from "../../Images/Classes/classes.jpg";
-import Class2 from "../../Images/Classes/class2.jpg";
+// import Class2 from "../../Images/Classes/class2.jpg";
 import AuthContext from "../../Context/AuthContext";
 import DefaultPic from "../../Images/defualtProPic.jpg";
 import { AiFillHeart, AiOutlineUserDelete } from "react-icons/ai";
 import TabPanel from "./TabPanel";
 // import ReadMoreReact from "read-more-react";
 import { Link, useNavigate } from "react-router-dom";
-import StyleContext from "../../Context/StyleContext";
-import { FaRegComment, FaUserFriends } from "react-icons/fa";
-import { styled } from "@mui/material/styles";
+// import StyleContext from "../../Context/StyleContext";
+import { FaRegComment } from "react-icons/fa";
+import {} from "@mui/material/styles";
 import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
 
-import {
-  Autocomplete,
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { CardActions, CardContent, CardMedia } from "@mui/material";
 import { GiShakingHands, GiThreeFriends } from "react-icons/gi";
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 const Profile = () => {
   const {
@@ -54,12 +33,12 @@ const Profile = () => {
     scollToRef,
     classtime,
     noClasses,
-    setNoClasses,
+    // setNoClasses,
     value,
     getWorkSpaceAllow,
     setSeenavs,
     attendingCls,
-    willBeFrnd,
+    // willBeFrnd,
     allFriends,
     areFriends,
     allAcceptingFrnds,
@@ -67,7 +46,7 @@ const Profile = () => {
     acceptFrnd,
     dismissFrnd,
   } = useContext(AuthContext);
-  const { successToast, errorToast } = useContext(StyleContext);
+  // const { successToast, errorToast } = useContext(StyleContext);
 
   const [expanded, setExpanded] = useState(false);
   const [expanded2, setExpanded2] = useState(false);
@@ -105,6 +84,7 @@ const Profile = () => {
       await allFriends();
       await allAcceptingFrnds();
     })();
+    // eslint-disable-next-line
   }, []);
 
   const CountdownTimer = () => {
@@ -353,8 +333,6 @@ const Profile = () => {
                         {areFriends.length > 0 &&
                           areFriends.map((option2) => {
                             let option = option2.friend;
-                            // willBeFrnd.length > 0 &&
-                            //   willBeFrnd.map((option) => {
                             if (option2.accepted) {
                               noFrnds = false;
                             }
@@ -407,6 +385,13 @@ const Profile = () => {
                                       title="Remove from List"
                                       size={27}
                                       className="cp"
+                                      onClick={() => {
+                                        console.log("remove friends");
+                                        let ind = areFriends.indexOf(option2);
+                                        console.log(ind);
+                                        console.log(option2);
+                                        dismissFrnd(option2.id, ind, "frnd");
+                                      }}
                                     />
                                   </div>
                                 </div>
@@ -508,8 +493,10 @@ const Profile = () => {
 
                   <div className=" pt-1 ">
                     {courseList.length > 0 &&
+                      // eslint-disable-next-line
                       courseList.map((course, index) => {
                         if (course.host_details.img_thumbnail.includes("{")) {
+                          // eslint-disable-next-line
                           const host = course.host_details.img_thumbnail
                             ? course.host_details.img_thumbnail.secure_url !==
                               null
@@ -517,6 +504,7 @@ const Profile = () => {
                               : null
                             : null;
                         } else {
+                          // eslint-disable-next-line
                           const host = course.host_details.img_thumbnail;
                         }
 

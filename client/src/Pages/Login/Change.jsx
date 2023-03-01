@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Header from "../../Components/Common/Header";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -7,16 +7,11 @@ import Footer from "../../Components/Common/Footer";
 import AuthContext from "../../Context/AuthContext";
 
 const Change = () => {
+  const { changePass, setValues, values } = useContext(AuthContext);
 
-    const {
-        changePass,
-        setValues,
-        values,
-      } = useContext(AuthContext);
-    
-      const changeHandler = e => {
-        setValues({ ...values, [e.target.name]: e.target.value });
-      }
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   return (
     <Container fluid className="loginpage p-0 m-0 ">
@@ -28,21 +23,18 @@ const Change = () => {
             We've sent an OTP to <br/> +91 9207404868.
           </p> */}
 
-          <form className="d-flex flex-column m-2 mt-5  " 
-          onSubmit={changePass}>
+          <form className="d-flex flex-column m-2 mt-5  " onSubmit={changePass}>
             <TextField
               label="Password"
               placeholder=" Enter your password"
               variant="outlined"
-              onKeyDown={
-                (e) => {
-                  if (e.key === "Enter") {
-                    changePass();
-                  }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  changePass();
                 }
-              }
+              }}
               className=" mb-3"
-              name='password'
+              name="password"
               type="password"
               onChange={changeHandler}
             />
@@ -50,23 +42,24 @@ const Change = () => {
               label="Confirm password"
               placeholder="Confirm your password"
               variant="outlined"
-              onKeyDown={
-                (e) => {
-                  if (e.key === "Enter") {
-                    changePass();
-                  }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  changePass();
                 }
-              }
+              }}
               className=" mb-3"
-              name='cpassword'
+              name="cpassword"
               type="password"
               onChange={changeHandler}
             />
-        
+
             <div className=" d-flex flex-column">
-              
               <div className=" pt-2 w-100">
-                <Button variant="contained" type="submit" className="bgdark w-100 ">
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className="bgdark w-100 "
+                >
                   Submit
                 </Button>
               </div>
@@ -76,7 +69,7 @@ const Change = () => {
       </Container>
       <Footer />
     </Container>
-  )
-}
+  );
+};
 
-export default Change
+export default Change;

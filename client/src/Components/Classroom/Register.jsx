@@ -1,21 +1,21 @@
 import { Box, Button, TextField } from "@mui/material";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
+// import TextareaAutosize from "@mui/material/TextareaAutosize";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import Default from "../../Images/defualtProPic.jpg";
-import ProfilePic from "../../Components/Common/Crop";
+// import ProfilePic from "../../Components/Common/Crop";
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
-import PhoneInput from "react-phone-input-2";
+// import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { FacebookLoginButton } from "react-social-login-buttons";
-import { GoogleLoginButton } from "react-social-login-buttons";
+// import { FacebookLoginButton } from "react-social-login-buttons";
+// import { GoogleLoginButton } from "react-social-login-buttons";
 import CropImage from "../../Components/Common/CropImage";
 
 const schema = yup.object().shape({
@@ -48,11 +48,11 @@ const Registration = () => {
   const [image, setImage] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
   const [cropImage, setCropImage] = useState(false);
-  const [thumbnail, setThumbnail] = useState("");
+  // const [thumbnail, setThumbnail] = useState("");
 
   const {
     user,
-    backendUpdate,
+    // backendUpdate,
     createWorkSpace,
     setValues,
     values,
@@ -76,6 +76,7 @@ const Registration = () => {
     if (!workspaceAllow) {
       navigate("/signup");
     }
+    // eslint-disable-next-line
   }, []);
 
   const changeHandler = (e) => {

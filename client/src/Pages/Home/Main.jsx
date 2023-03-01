@@ -15,6 +15,7 @@ const Main = () => {
     if (user) {
       navigate("/profile");
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

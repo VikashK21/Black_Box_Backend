@@ -14,11 +14,10 @@ import ReadMoreReact from "read-more-react/dist/components/ReadMoreReact";
 
 const Trainer = () => {
   const { id } = useParams();
-  const [rndr, setRndr] = useState(false);
+  // const [rndr, setRndr] = useState(false);
 
-  const { BaseUrl, goToTop, getCoursesList, courseList } =
-    useContext(AuthContext);
-  const name = localStorage.getItem("name");
+  const { BaseUrl, goToTop, getCoursesList } = useContext(AuthContext);
+  // const name = localStorage.getItem("name");
   const [course, setCourse] = useState({
     host_details: {
       first_name: "",
@@ -63,6 +62,7 @@ const Trainer = () => {
       top: 0,
       behavior: "smooth",
     });
+    // eslint-disable-next-line
   }, []);
 
   return (

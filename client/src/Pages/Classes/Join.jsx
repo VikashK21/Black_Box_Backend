@@ -3,11 +3,11 @@ import { Col, Container, Row } from "react-bootstrap";
 // import { BsSearch } from "react-icons/bs";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
-import Class1 from "../../Images/Classes/class2.jpg";
+// import Class1 from "../../Images/Classes/class2.jpg";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Button from "@mui/material/Button";
-import { BsCalendarDate } from "react-icons/bs";
-import Icon2 from "../../Images/Classes/icon2.png";
+// import { BsCalendarDate } from "react-icons/bs";
+// import Icon2 from "../../Images/Classes/icon2.png";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import YtVid from "./YtVid";
@@ -19,7 +19,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import Img from "./Img";
 import DefaultPic from "../../Images/defualtProPic.jpg";
-import View from "./View";
+// import View from "./View";
 
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -28,12 +28,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+// import ImageIcon from "@mui/icons-material/Image";
+// import WorkIcon from "@mui/icons-material/Work";
+// import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import StyleContext from "../../Context/StyleContext";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../Components/Common/Loader";
+// import Loader from "../../Components/Common/Loader";
 
 const Join = () => {
   const { id } = useParams();
@@ -52,12 +52,12 @@ const Join = () => {
     setLoading,
     loading,
     getSuggest,
-    toChoose,
+    // toChoose,
     setToChoose,
     getGift,
   } = useContext(AuthContext);
   const { successToast, infoToast } = useContext(StyleContext);
-  const name = localStorage.getItem("name");
+  // const name = localStorage.getItem("name");
   const [mine, setMine] = useState(true);
   const [course, setCourse] = useState({
     host_details: {
@@ -107,6 +107,7 @@ const Join = () => {
         });
     };
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -328,7 +329,8 @@ const Join = () => {
                   </div>
                   <div>
                     {course.Classes
-                      ? course.Classes.map((item, index) => {
+                      ? // eslint-disable-next-line
+                        course.Classes.map((item, index) => {
                           if (item.title) {
                             return (
                               <div key={index}>
@@ -353,7 +355,8 @@ const Join = () => {
                     )}
                     <ul>
                       {course.content && course.content.length > 1
-                        ? course.content.map((item, index) => {
+                        ? // eslint-disable-next-line
+                          course.content.map((item, index) => {
                             if (item.content) {
                               return (
                                 <li key={index} className="gl fn">
@@ -374,7 +377,8 @@ const Join = () => {
                     )}
                     <ul>
                       {course.requirements && course.requirements.length > 1
-                        ? course.requirements.map((item, index) => {
+                        ? // eslint-disable-next-line
+                          course.requirements.map((item, index) => {
                             if (item.requirements) {
                               return (
                                 <li key={index} className="gl fn">
@@ -422,7 +426,8 @@ const Join = () => {
                     )}
                   </div>
                   {course.Classes
-                    ? course.Classes.map((item, index) => {
+                    ? // eslint-disable-next-line
+                      course.Classes.map((item, index) => {
                         if (item.title) {
                           return (
                             <div key={index}>
@@ -448,7 +453,8 @@ const Join = () => {
                   {/* Check if the course structure is there in the course and map it */}
                   <ul>
                     {course.content && course.content.length > 1
-                      ? course.content.map((item, index) => {
+                      ? // eslint-disable-next-line
+                        course.content.map((item, index) => {
                           if (item.content) {
                             return (
                               <li key={index} className="gl fn">
@@ -469,7 +475,8 @@ const Join = () => {
                   )}
                   <ul>
                     {course.requirements && course.requirements.length > 1
-                      ? course.requirements.map((item, index) => {
+                      ? // eslint-disable-next-line
+                        course.requirements.map((item, index) => {
                           if (item.requirements) {
                             return (
                               <li key={index} className="gl fn">

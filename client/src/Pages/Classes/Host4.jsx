@@ -1,21 +1,21 @@
 import { Button, InputAdornment, TextField } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, FormControl, Row } from "react-bootstrap";
-import Footer from "../../Components/Common/Footer";
-import Header from "../../Components/Common/Header";
+// import Footer from "../../Components/Common/Footer";
+// import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
-import Default from "../../Images/defualtProPic.jpg";
-import ProfilePic from "../../Components/Common/Crop";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControll from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import Default from "../../Images/defualtProPic.jpg";
+// import ProfilePic from "../../Components/Common/Crop";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
+// import FormControll from "@mui/material/FormControl";
+// import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
 
 import CropImage from "../../Components/Common/CropImage";
-import axios from "axios";
-import FormDialog from "../../Components/Common/FormDialog";
-import MeetLink from "./MeetLink";
+// import axios from "axios";
+// import FormDialog from "../../Components/Common/FormDialog";
+// import MeetLink from "./MeetLink";
 
 const Host4 = () => {
   const { setCourse, course, image, setImage } = useContext(AuthContext);
@@ -24,31 +24,32 @@ const Host4 = () => {
     if (course.type === "") {
       navigate("/host");
     }
+    // eslint-disable-next-line
   }, []);
 
-  const [name, setName] = useState(false);
-  const [email, setEmail] = useState(false);
-  const [password, setPassword] = useState(false);
-  const [profile, setProfile] = useState(false);
+  // const [name, setName] = useState(false);
+  // const [email, setEmail] = useState(false);
+  // const [password, setPassword] = useState(false);
+  // const [profile, setProfile] = useState(false);
   const [showCropper, setShowCropper] = useState(false);
   // const [cropImage, setCropImage] = useState([]);
   const [cropImage, setCropImage] = useState(false);
-  const [thumbnail, setThumbnail] = useState(true);
+  // const [thumbnail, setThumbnail] = useState(true);
 
   const navigate = useNavigate();
 
-  const handleMethodologyChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...course.methodology];
-    list[index][name] = value;
-    setCourse({ ...course, index: list });
-  };
+  // const handleMethodologyChange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   const list = [...course.methodology];
+  //   list[index][name] = value;
+  //   setCourse({ ...course, index: list });
+  // };
 
-  const handleRemove = (index) => {
-    const list = [...course.content];
-    list.splice(index, 1);
-    setCourse({ ...course, content: list });
-  };
+  // const handleRemove = (index) => {
+  //   const list = [...course.content];
+  //   list.splice(index, 1);
+  //   setCourse({ ...course, content: list });
+  // };
 
   const changeHandler = (e) => {
     setCourse({ ...course, [e.target.name]: e.target.value });
@@ -77,7 +78,6 @@ const Host4 = () => {
                     defaultValue={course.title}
                     onChange={changeHandler}
                     variant="outlined"
-                   
                     required
                   />
                 </Col>
@@ -92,7 +92,6 @@ const Host4 = () => {
                     defaultValue={course.description}
                     onChange={changeHandler}
                     multiline
-                  
                     variant="outlined"
                     required
                   />
@@ -102,10 +101,8 @@ const Host4 = () => {
                     className="my-2 w-100"
                     label="Maximum Students"
                     type="number"
-                   
                     name="max_students"
                     InputProps={{ inputProps: { min: 1 } }}
-
                     defaultValue={course.max_students}
                     placeholder="Maximum number of students"
                     onChange={changeHandler}
@@ -121,7 +118,6 @@ const Host4 = () => {
                     type="number"
                     placeholder="Fee e.g. 1400"
                     defaultValue={course.price}
-                    
                     onChange={changeHandler}
                     InputProps={{
                       startAdornment: (
@@ -154,33 +150,34 @@ const Host4 = () => {
               </Row>
             </div>
             <div className="profile-img text-center my-1">
-            <div className="d-flex my-3 imgscroll" style={{
-                overflowX: "auto",
-                overflowY: "hidden",
-                height: "fit-content",
-              }}>
+              <div
+                className="d-flex my-3 imgscroll"
+                style={{
+                  overflowX: "auto",
+                  overflowY: "hidden",
+                  height: "fit-content",
+                }}
+              >
                 {image.length > 0 &&
-                image.map((ele, index) => (
-                  <div key={index} className=" mx-2 p-2">
-                    <img width={250} src={ele} alt="" className="imghover" />
-                    <div>
-                      <Button
-                        variant="contained"
-                        color="error"
-                        className="my-2 imgdlt"
-                        onClick={() => {
-                          const list = [...image];
-                          list.splice(index, 1);
-                          setImage(list);
-                        }}
-                      >
-                        Delete
-                      </Button>
-
+                  image.map((ele, index) => (
+                    <div key={index} className=" mx-2 p-2">
+                      <img width={250} src={ele} alt="" className="imghover" />
+                      <div>
+                        <Button
+                          variant="contained"
+                          color="error"
+                          className="my-2 imgdlt"
+                          onClick={() => {
+                            const list = [...image];
+                            list.splice(index, 1);
+                            setImage(list);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
                     </div>
-
-                  </div>
-                ))}
+                  ))}
               </div>
               <div className="edit-profile-pic d-flex justify-content-center">
                 <div className="d-flex">

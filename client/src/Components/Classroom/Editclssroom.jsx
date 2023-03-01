@@ -5,17 +5,17 @@ import { Col, Container, FormControl, Row } from "react-bootstrap";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import Default from "../../Images/classroomDefault.jpeg";
-import ProfilePic from "../../Components/Common/Crop";
+// import ProfilePic from "../../Components/Common/Crop";
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
-import PhoneInput from "react-phone-input-2";
+// import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/bootstrap.css";
-import { Link, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { FacebookLoginButton } from "react-social-login-buttons";
-import { GoogleLoginButton } from "react-social-login-buttons";
+// import { FacebookLoginButton } from "react-social-login-buttons";
+// import { GoogleLoginButton } from "react-social-login-buttons";
 import CropImage from "../../Components/Common/CropImage";
 
 const schema = yup.object().shape({
@@ -50,16 +50,16 @@ const Editclssroom = () => {
   });
 
   const {
-    backendUpdate,
-    signupUser,
-    setValues,
-    values,
+    // backendUpdate,
+    // signupUser,
+    // setValues,
+    // values,
     loading,
     setLoading,
     getWorkSpace,
     editWorkSpace,
   } = useContext(AuthContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(false);
@@ -71,6 +71,7 @@ const Editclssroom = () => {
       setPro(res);
       setImage(res.logo);
     });
+    // eslint-disable-next-line
   }, []);
 
   const changeHandler = (e) => {

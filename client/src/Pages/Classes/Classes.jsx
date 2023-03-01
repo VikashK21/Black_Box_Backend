@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { BsArrowRight } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
+// import { BsArrowRight } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Common/Footer";
 import Header from "../../Components/Common/Header";
 import AuthContext from "../../Context/AuthContext";
-import ReadMoreReact from "read-more-react";
+// import ReadMoreReact from "read-more-react";
 
 const Classes = () => {
   const { goToTop, getCoursesList, courseList, value } =
@@ -16,6 +16,7 @@ const Classes = () => {
   useEffect(() => {
     goToTop();
     getCoursesList();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -124,6 +125,7 @@ const Classes = () => {
                 >
                   {courseList &&
                     courseList.length > 0 &&
+                    // eslint-disable-next-line
                     courseList.map((course, index) => {
                       const a = JSON.parse(course.images)[0];
                       //check if the course name or course description is in the search bar

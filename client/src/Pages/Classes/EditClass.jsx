@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
+// import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import AuthContext from "../../Context/AuthContext";
@@ -17,13 +17,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function EditClass(props) {
   const [open, setOpen] = React.useState(false);
 
-  const { classes, setClasses, HostClasses, editClass } =
-    React.useContext(AuthContext);
+  const { classes, setClasses, editClass } = React.useContext(AuthContext);
 
   React.useEffect(() => {
     setClasses(props.classes);
     console.log(props.classes, "the useeffect..");
     // console.log(classes, 'the usestate');
+    // eslint-disable-next-line
   }, []);
 
   const handleChange = (e) => {

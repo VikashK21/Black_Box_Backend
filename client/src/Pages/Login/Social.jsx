@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import axios from "axios";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useContext, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import AuthContext, { BaseUrl } from "../../Context/AuthContext";
 
 function Social() {
@@ -10,7 +10,7 @@ function Social() {
   url = url + subUrl;
 
   const windowsProp = useRef();
-  const [url2, setUrl2] = useState();
+  // const [url2, setUrl2] = useState();
   const { loginProcess } = useContext(AuthContext);
 
   const profileNavigtr = (e) => {

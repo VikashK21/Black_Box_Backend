@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import React, { useRef } from "react";
+import { Button, Col, Container } from "react-bootstrap";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { getCroppedImg } from "./getCroppedImg";
