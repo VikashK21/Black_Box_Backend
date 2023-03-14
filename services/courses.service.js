@@ -664,7 +664,7 @@ class Courses_Classes {
         data,
       });
       console.log(result, "course data");
-      await this.course_Video(result.id);
+      // await this.course_Video(result.id);
       return { id: result.id };
     } catch (err) {
       console.log(err.message, "the course erroro");

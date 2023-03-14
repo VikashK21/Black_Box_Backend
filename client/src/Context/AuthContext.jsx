@@ -358,7 +358,7 @@ export const AuthProvider = ({ children }) => {
       // },
       const res = await dvc // this variable represents the instance of the DvcSDK class
         .startMeeting(config); // instance method to start meeting taking in config as object
-      // console.log(res.data, "the meeting de");
+      console.log(res.data, "the meeting de");
       return res.data;
     } catch (err) {
       console.log(err);
@@ -386,6 +386,7 @@ export const AuthProvider = ({ children }) => {
 
   const callJoinMeeting = async (meeting_id, course_id, type) => {
     try {
+      console.log(meeting_id, "the meeting id");
       setLoading(true);
       let allow = false;
       if (type === "ses" && user.classroom_id) {
@@ -398,6 +399,7 @@ export const AuthProvider = ({ children }) => {
         if (typeof allow !== "boolean") {
           allow = false;
         }
+        allow = true;
       }
       if (allow) {
         // console.log(authTokens, "the token");

@@ -193,7 +193,7 @@ export default function BasicTabs() {
                               ) : (
                                 item.dolphin && (
                                   <Link
-                                    to={`/joinmeeting/${item.dolphin.meeting_id}`}
+                                    to={`/joinmeeting/cls/${item.id}/${item.dolphin.meeting_id}`}
                                   >
                                     <Button
                                       variant="contained"
