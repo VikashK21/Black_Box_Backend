@@ -15,7 +15,7 @@ export const StyleProvider = ({ children }) => {
   };
 
   const successToast = (msg) => {
-    console.log(msg);
+    // console.log(msg);
     if (darkmode) {
       toast.success(msg, {
         position: "top-right",
@@ -42,7 +42,7 @@ export const StyleProvider = ({ children }) => {
   };
 
   const infoToast = (msg) => {
-    console.log(msg);
+    // console.log(msg);
     if (darkmode) {
       toast.info(msg, {
         position: "top-right",
@@ -69,7 +69,7 @@ export const StyleProvider = ({ children }) => {
   };
 
   const errorToast = (msg) => {
-    console.log(msg);
+    // console.log(msg);
     if (darkmode) {
       toast.error(msg, {
         position: "top-right",
@@ -96,7 +96,7 @@ export const StyleProvider = ({ children }) => {
   };
 
   const warningToast = (msg) => {
-    console.log(msg);
+    // console.log(msg);
     if (darkmode) {
       toast.warning(msg, {
         position: "top-right",
