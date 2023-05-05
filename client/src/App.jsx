@@ -46,6 +46,7 @@ import Editclssroom from "./Components/Classroom/Editclssroom";
 import Hostclassroom from "./Components/Classroom/Hostclassroom";
 import UImeeting from "./integration/UImeeting";
 import UIjoinmeeting from "./integration/UIjoinmeeting";
+import AdminLogin from "./Pages/Admin/Login";
 
 function App() {
   return (
@@ -108,6 +109,7 @@ function App() {
                 path="/joinmeeting/:type/:course_id/:meeting_id/"
                 element={<UIjoinmeeting />}
               />
+              <Route path="/api" element={<AdminLogin />} />
             </Routes>
           </AuthProvider>
         </StyleProvider>
