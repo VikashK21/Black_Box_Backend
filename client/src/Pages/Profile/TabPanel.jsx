@@ -261,77 +261,81 @@ export default function BasicTabs() {
                       <Col xs={6}>
                         <Row className=" m-0 ">
                           <h6 className="p-0">Join the class</h6>
-                          {item.course.link && item.course.link.length > 0 ? (
-                            <>
-                              <a
-                                href={item.course.link}
-                                target="_blank"
-                                className="w-50 p-0"
-                                rel="noreferrer"
-                              >
+                          {
+                            item.course.link && item.course.link.length > 0 ? (
+                              <>
+                                <a
+                                  href={item.course.link}
+                                  target="_blank"
+                                  className="w-50 p-0"
+                                  rel="noreferrer"
+                                >
+                                  <Button
+                                    variant="primary"
+                                    className="mt-2  w-100 bgy border-0 text-dark"
+                                    style={{
+                                      height: "40px",
+                                      width: "180px",
+                                    }}
+                                    onClick={() => {
+                                      // callJoinMeeting(item.course.dolphin.meeting_id);
+                                    }}
+                                  >
+                                    Enter room
+                                  </Button>
+                                </a>
+                              </>
+                            ) : (
+                              //  enterR ?
+                              <>
                                 <Button
                                   variant="primary"
-                                  className="mt-2  w-100 bgy border-0 text-dark"
+                                  className="mt-2  w-75 bgy border-0 text-dark"
                                   style={{
                                     height: "40px",
-                                    width: "180px",
+                                    width: "120px",
                                   }}
                                   onClick={() => {
                                     // callJoinMeeting(item.course.dolphin.meeting_id);
+                                    if (
+                                      item.course.dolphin &&
+                                      item.course.dolphin.hasOwnProperty(
+                                        "meeting_id",
+                                      )
+                                    )
+                                      navigate(
+                                        `/joinmeeting/cls/${item.course.id}/${item.course.dolphin.meeting_id}`,
+                                      );
+                                    else {
+                                      infoToast(
+                                        "Please edit the course to be updated.",
+                                      );
+                                    }
                                   }}
                                 >
                                   Enter room
                                 </Button>
-                              </a>
-                            </>
-                          ) : enterR ? (
-                            <>
-                              <Button
-                                variant="primary"
-                                className="mt-2  w-75 bgy border-0 text-dark"
-                                style={{
-                                  height: "40px",
-                                  width: "120px",
-                                }}
-                                onClick={() => {
-                                  // callJoinMeeting(item.course.dolphin.meeting_id);
-                                  if (
-                                    item.course.dolphin &&
-                                    item.course.dolphin.hasOwnProperty(
-                                      "meeting_id",
-                                    )
-                                  )
-                                    navigate(
-                                      `/joinmeeting/cls/${item.course.id}/${item.course.dolphin.meeting_id}`,
-                                    );
-                                  else {
-                                    infoToast(
-                                      "Please edit the course to be updated.",
-                                    );
-                                  }
-                                }}
-                              >
-                                Enter room
-                              </Button>
-                            </>
-                          ) : (
-                            <>
-                              <Button
-                                variant="primary"
-                                className="mt-2  w-75 bgy border-0 text-dark"
-                                style={{
-                                  height: "40px",
-                                  width: "120px",
-                                }}
-                                onClick={() => {
-                                  // callJoinMeeting(item.course.dolphin.meeting_id);
-                                  navigate(`/classes/join/${item.course.id}`);
-                                }}
-                              >
-                                Details
-                              </Button>
-                            </>
-                          )}
+                              </>
+                            )
+                            // : (
+                            //   <>
+                            //     <Button
+                            //       variant="primary"
+                            //       className="mt-2  w-75 bgy border-0 text-dark"
+                            //       style={{
+                            //         height: "40px",
+                            //         width: "120px",
+                            //       }}
+                            //       onClick={() => {
+                            //         // callJoinMeeting(item.course.dolphin.meeting_id);
+                            //         navigate(`/classes/join/${item.course.id}`);
+                            //       }}
+                            //     >
+                            //       Details
+                            //     </Button>
+                            //   </>
+                            // )
+                          }
                           {/* <a
                             href={item.course.link}
                             target="_blank"
