@@ -39,6 +39,7 @@ const EditCourse = () => {
     // classlist,
     // setClasslist,
     // setHostClasses,
+    deleteClass,
     BaseUrl,
     setUpdatedImgs,
     editCourse,
@@ -245,7 +246,7 @@ const EditCourse = () => {
                           <TextField
                             className="my-2 w-100"
                             label="Google meet"
-                            name="link"
+                            name=imgsAlgo"link"
                            
                             defaultValue={course.link}
                             value={course.link}
@@ -342,7 +343,7 @@ const EditCourse = () => {
                             </label>
                           )}
 
-                          <FormDialog />
+                          {/* <FormDialog /> */}
                         </div>
                       </div>
                     </div>
@@ -657,12 +658,10 @@ const EditCourse = () => {
                                         variant="contained"
                                         className="h-25 ms-2 w-100 mt-2 px-2"
                                         onClick={() => {
-                                          setClss((pre) => {
-                                            let updatePro = pre;
-                                            updatePro.slice(index, 1);
-                                            return updatePro;
-                                          });
-                                          // deleteClass(classes.id);
+                                          let updatePro = clss;
+                                          updatePro.splice(index, 1);
+                                          setClss((pre) => [...updatePro]);
+                                          deleteClass(classes.id);
                                         }}
                                       >
                                         Remove
@@ -688,6 +687,7 @@ const EditCourse = () => {
                       onClick={() => {
                         editCourse(id);
                         // navigate("/profile");
+                        console.log('what is going on');
                       }}
                     >
                       Update

@@ -676,6 +676,9 @@ class Courses_Classes {
   async course_Classes(data) {
     try {
       data = { ...data.classes, course_id: data.course_id };
+      if (data.hasOwnProperty("id")) {
+        delete data.id;
+      }
       const result = await prisma.classes.create({
         data,
       });

@@ -20,7 +20,7 @@ export default function EditClass(props) {
   const { classes, setClasses, editClass } = React.useContext(AuthContext);
 
   React.useEffect(() => {
-    setClasses(props.classes);
+    setClasses((prev) => ({ ...prev, ...props.classes }));
     console.log(props.classes, "the useeffect..");
     // console.log(classes, 'the usestate');
     // eslint-disable-next-line
@@ -45,7 +45,7 @@ export default function EditClass(props) {
     props.setClss((pre) => {
       let updatePro = pre;
       updatePro[props.index] = classes;
-      return updatePro;
+      return [...updatePro];
     });
   };
 

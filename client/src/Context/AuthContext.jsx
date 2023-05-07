@@ -1082,6 +1082,7 @@ export const AuthProvider = ({ children }) => {
     // console.log(classes);
     try {
       // eslint-disable-next-line
+      console.log(id, 'the id');
       const res = await axios.post(
         BaseUrl + "/host/classes",
         {
@@ -1298,8 +1299,9 @@ export const AuthProvider = ({ children }) => {
   const editCourse = async (id) => {
     let uploaders = await imgsAlgo(updatedImgs);
     uploaders = [...uploaders, ...image];
-    // console.log(uploaders, "after");
+    console.log(uploaders, "after");
     const dolphin = await callStartMeeting(course.title);
+    console.log(dolphin, 'the step');
     await axios
       .patch(
         BaseUrl + "/course/" + id,
@@ -1310,8 +1312,8 @@ export const AuthProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${authTokens}` },
         },
       )
-      .then(() => {
-        // console.log(res.data);
+      .then((res) => {
+        console.log(res.data, 'data');
         successToast("Course Updated Successfully");
         navigate("/profile");
       })

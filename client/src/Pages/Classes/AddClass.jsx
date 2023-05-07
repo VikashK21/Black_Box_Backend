@@ -44,6 +44,7 @@ export default function AddClass(props) {
 
   const handleSuccess = () => {
     setOpen(false);
+    console.log(props.id, 'the props');
     HostClasses2(props.id);
   };
 
