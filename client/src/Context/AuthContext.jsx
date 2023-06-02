@@ -336,21 +336,21 @@ export const AuthProvider = ({ children }) => {
       dvc.getReconcileJwt(authTokens);
       dvc.setShowFeedback(false);
       let config = {
-        default: false,
+        // default: false,
         audio_only: false,
         include_video: true,
         include_audio: true,
         mute_audio_on_start: true,
-        moderator_incoming_call: true,
+        // moderator_incoming_call: true,
         redirect_url: "https://blackboxnow.com/",
         water_mark_image_png:
           "https://blackboxnow.com/static/media/blackbox-logo-01.86234ed62aef14383960.png",
         water_mark_image_link: "https://blackboxnow.com/",
         meeting_name,
-        password: "12345",
-        meeting_call_type: "video",
-        dvc_users: [],
-        telephony_users: [],
+        passcode: "12345",
+        // meeting_call_type: "video",
+        // dvc_users: [],
+        // telephony_users: [],
       };
       // moderator_info: {
       //   username: "someuser@gmail.com",
@@ -358,7 +358,7 @@ export const AuthProvider = ({ children }) => {
       // },
       const res = await dvc // this variable represents the instance of the DvcSDK class
         .startMeeting(config); // instance method to start meeting taking in config as object
-      console.log(res.data, "the meeting de");
+      // console.log(res.data, "the meeting de");
       return res.data;
     } catch (err) {
       console.log(err);
@@ -386,7 +386,7 @@ export const AuthProvider = ({ children }) => {
 
   const callJoinMeeting = async (meeting_id, course_id, type) => {
     try {
-      console.log(meeting_id, "the meeting id");
+      // console.log(meeting_id, "the meeting id");
       setLoading(true);
       let allow = false;
       if (type === "ses" && user.classroom_id) {
@@ -716,7 +716,7 @@ export const AuthProvider = ({ children }) => {
         // }
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log(err);
         setLoading(false);
 
         if (err.response.status === 400) {
@@ -794,7 +794,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.data);
+        console.log(err);
         if (err.response.status === 400) {
           errorToast("Invalid Username or password");
           setLoading(false);
@@ -1014,9 +1014,10 @@ export const AuthProvider = ({ children }) => {
     try {
       const uploaders = await imgsAlgo(image);
       // console.log(uploaders, "res is here.");
+      // **** the dolphin apis not working
       let dolphin = await callStartMeeting(course.title);
       // console.log(dolphin, "the Host course");
-      if (!dolphin.hasOwnProperty("web_client_uri")) {
+      if (dolphin && !dolphin.hasOwnProperty("web_client_uri")) {
         dolphin = await callStartMeeting(course.title);
       }
       const res = await axios.post(
@@ -1034,6 +1035,8 @@ export const AuthProvider = ({ children }) => {
         setImage([]);
       }
     } catch (err) {
+      navigate("/host");
+      infoToast("Please try again, something went wrong!");
       console.log(err.message);
     }
   };
@@ -1082,8 +1085,8 @@ export const AuthProvider = ({ children }) => {
     // console.log(classes);
     try {
       // eslint-disable-next-line
-      console.log(id, 'the id');
-      const res = await axios.post(
+      // console.log(id, "the id");
+      await axios.post(
         BaseUrl + "/host/classes",
         {
           classes: classes,
@@ -1134,7 +1137,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.patch(BaseUrl + "/attending", data, {
         headers: { Authorization: `Bearer ${authTokens}` },
       });
-      console.log(res.data);
+      // console.log(res.data);
       setEnterR((pre) => !pre);
       infoToast(res.data.msg);
     } catch (err) {
@@ -1155,7 +1158,7 @@ export const AuthProvider = ({ children }) => {
         // console.log(res.data);
       })
       .catch((err) => console.log(err));
-    console.log(videoData, "videoData");
+    // console.log(videoData, "videoData");
   }
 
   const getCoursesList = async () => {
@@ -1299,9 +1302,9 @@ export const AuthProvider = ({ children }) => {
   const editCourse = async (id) => {
     let uploaders = await imgsAlgo(updatedImgs);
     uploaders = [...uploaders, ...image];
-    console.log(uploaders, "after");
+    // console.log(uploaders, "after");
     const dolphin = await callStartMeeting(course.title);
-    console.log(dolphin, 'the step');
+    // console.log(dolphin, "the dolphine step");
     await axios
       .patch(
         BaseUrl + "/course/" + id,
@@ -1313,7 +1316,7 @@ export const AuthProvider = ({ children }) => {
         },
       )
       .then((res) => {
-        console.log(res.data, 'data');
+        // console.log(res.data, "data");
         successToast("Course Updated Successfully");
         navigate("/profile");
       })
@@ -1339,6 +1342,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (err) {
       errorToast(err.message);
+      console.log(err.message);
     }
   };
 
@@ -1363,6 +1367,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((err) => {
         infoToast("The suggesting email does not exist!");
+        console.log(err.message);
       });
   };
 

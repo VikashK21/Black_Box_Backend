@@ -42,7 +42,7 @@ const Join = () => {
   const [gift, setGift] = useState("");
   const handleChange = (e) => {
     setSuggest(e.target.value);
-    console.log(e.target.value, "the suggest");
+    // console.log(e.target.value, "the suggest");
   };
 
   const {
@@ -90,6 +90,8 @@ const Join = () => {
         .then((res) => {
           amPartcpnt(res.data.Participants);
           const data = res.data;
+          // console.log(data, "the data");
+          // console.log(user, "the user data");
           if (data.host_details.img_thumbnail.includes("{")) {
             data.host_details.img_thumbnail =
               data.host_details.img_thumbnail.length > 0
@@ -139,7 +141,7 @@ const Join = () => {
         },
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         navigate("/profile");
       })
       .catch((err) => {
@@ -157,8 +159,8 @@ const Join = () => {
         if (res.data.length > 0) {
           infoToast("You already have Class/es running on parallel timing/s.");
         } else {
-          // displayRazorpay();
-          addingparticipant();
+          displayRazorpay();
+          // addingparticipant();
         }
       })
       .catch((err) => {
@@ -194,9 +196,9 @@ const Join = () => {
       },
 
       prefill: {
-        name: "Michu",
-        email: "m4michu123@gmail.com",
-        contact: "9207404868",
+        name: "Black Box",
+        email: "sampath@blackis.in",
+        contact: "9900027097",
       },
     };
 
@@ -646,13 +648,18 @@ const Join = () => {
                 </h4>
                 <p>{course.description ? course.description : ""}</p>
                 <div className="d-flex">
-                  {!course.completion && mine && (
+                  {((user &&
+                    user.id !== course.host &&
+                    !course.completion &&
+                    mine) ||
+                    (!user && !course.completion && mine)) && (
                     <div className="w-50 mt-3">
                       <Button
                         className="bgdark text-light w-100 rounded-3 border border-1"
                         onClick={() => {
+                          // console.log(course, "the course");
                           if (user) {
-                            console.log(course.id);
+                            // console.log(course.id);
                             checkBeforeJoining(course.id);
                             setLoading(true);
                           } else {
@@ -758,7 +765,7 @@ const Join = () => {
                         onClick={() => {
                           if (user) {
                             if (!course.completion && !mine) {
-                              console.log(course.id);
+                              // console.log(course.id);
                               if (gift.length > 11) {
                                 getGift(course.id, gift);
                                 setTimeout(() => {

@@ -65,7 +65,7 @@ export default function BasicTabs() {
     scollToRef,
     // callJoinMeeting,
     infoToast,
-    enterR,
+    // enterR,
     // setEnterR,
   } = useContext(AuthContext);
 

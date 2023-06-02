@@ -22,7 +22,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import CropImage from "../../Components/Common/CropImage";
 import axios from "axios";
-import FormDialog from "../../Components/Common/FormDialog";
+// import FormDialog from "../../Components/Common/FormDialog";
 // import MeetLink from "./MeetLink";
 import EditClass from "./EditClass";
 import AddClass from "./AddClass";

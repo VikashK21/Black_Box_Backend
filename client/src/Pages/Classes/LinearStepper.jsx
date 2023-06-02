@@ -124,8 +124,9 @@ const LinearStepper = () => {
                   const labelProps = {};
                   let completed =
                     (markdone && index === 0) ||
-                    (index === 1 && courseId) ||
+                    (index === 1 && typeof courseId === "object") ||
                     (index === 2 && classlist.length !== 0);
+                  // console.log(completed, "this is boolean only");
                   const stepProps = {
                     completed,
                   };

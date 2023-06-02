@@ -30,7 +30,7 @@ const Profile = () => {
     DynamicTimer,
     showclasses,
     setShowclasses,
-    scollToRef,
+    // scollToRef,
     classtime,
     noClasses,
     // setNoClasses,
@@ -285,7 +285,7 @@ const Profile = () => {
                       alt=""
                       onClick={() => {
                         setShowclasses(true);
-                        scollToRef.current.scrollIntoView();
+                        // scollToRef.current.scrollIntoView();
                       }}
                       style={{
                         borderRadius: "15px",
